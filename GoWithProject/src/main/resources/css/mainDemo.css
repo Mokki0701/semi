@@ -1,0 +1,45 @@
+*{
+  border: 1px dotted orchid;
+}
+
+.side{
+  border: 1px solid black;
+  width: 300px;
+  margin: 5px;
+  padding: 5px;
+  
+}
+
+.side * {
+  margin: 2px;
+}
+
+.all{
+  display: flex;
+  flex-direction: row;
+}
+
+.profileBox{
+  display: flex;
+  flex-direction: row;
+}
+
+#profile{
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.info{
+  display: flex;
+  flex-direction: row;
+}
+
+.info * {
+  border: 1px solid black;
+}
