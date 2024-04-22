@@ -1,5 +1,14 @@
+@font-face {
+  font-family: 'Freesentation-9Black';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+}
+
 *{
   border: 1px dotted orchid;
+  font-family: Freesentation-9Black;
+  font-weight: 200;
 }
 
 .side{
@@ -7,7 +16,6 @@
   width: 300px;
   margin: 5px;
   padding: 5px;
-  
 }
 
 .side * {
@@ -19,12 +27,34 @@
   flex-direction: row;
 }
 
+.info{
+  display: flex;
+  justify-content: center;
+}
+
+.info div{
+  width: 45%;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.info a{
+  text-decoration: none;
+  text-align: center;
+}
+
 .profileBox{
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
-#profile{
+
+
+#profileImage{
   border-radius: 50%;
   width: 100px;
   height: 100px;
@@ -32,9 +62,91 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* 프로필 테이블 꾸미기 */
+.profileTable {
+  display: flex;
+  flex-direction: column;
+}
+
+.profileTable th,
+.profileTable td {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.loginInfo{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginInfo div {
+  width: 80%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.loginInfo div li {
+  list-style-type: square;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+
+/* 카페 가입 버튼 */
+.joinCafe{
+  width: 80%;
+  height: 50px;
+  text-align: center;
+  background-color: black;
+  color: white;
+  border-radius: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 20px;
+
+  text-decoration: none;
 
 }
 
+.contextHead{
+  font-size: 20px;
+}
+
+/* 홈 */
+.room{
+  height: 33%;
+  width: 80vw
+}
+
+#room1{
+  background-color: gray;
+}
+
+#room2{
+  background-color: rgb(65, 62, 62);
+}
+
+#room3{
+  background-color: gray;
+}
+
+
+
+
+
+
+
+
+
+
+/* 헤더, 푸터 */
 .info{
   display: flex;
   flex-direction: row;
@@ -42,4 +154,10 @@
 
 .info * {
   border: 1px solid black;
+
 }
+
+
+
+
+
