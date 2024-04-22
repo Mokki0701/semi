@@ -1,2 +1,5 @@
 강찬혁의 코드(팀원코드)
 방 안 온도 올리는 코드
+teacher.addEventListner("handsup", e => {
+	clg("너무 추워요");
+});
