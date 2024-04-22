@@ -8,70 +8,44 @@
 </head>
 <body>
 
-  <th:block class="header">헤더</th:block>
+  <th:block>
+    헤더
+  </th:block>
   <div class="all">
     
       <div class="side"> <!-- 사이드 메뉴 -->
         
         <div class="info">
-          <div><a href="#">카페정보</a></div>
-          <div><a href="#">정보수정</a></div>
+          <div>카페정보</div>
+          <div>정보수정</div>
         </div>
     
         <div>
           <div class="profileBox">
-
-            <div id="profileImage">profile Image</div>
-
+            <div id="profile">profile Image</div>
             <div>
-              <table class="profileTable">
-
-                <tr>
-                  <th>닉네임</th>
-                  <td>ddk9595</td>
-                </tr>
-
-                <tr>
-                  <th>가입일</th>
-                  <td>sysdate</td>
-                </tr>
-
-                <tr>
-                  <th>선호여행지</th>
-                  <td>pull</td>
-                </tr>
-
-              </table>
+              <div>닉네임</div>
+              <div>가입일</div>
+              <div>선호 여행지</div>
             </div>
           </div>
           <hr>
+    
           
-          <div class="loginInfo">
-            <div>
-              <li>게시글 수</li>
-              <li>회원 수</li>
-            </div>
-            <a class="joinCafe" href="#">
-              <th:block>카페 가입하기</th:block>
-            </a>
+    
+          <div>
+            <li>게시글 수</li>
+            <li>회원 수</li>
+            <button>카페 가입하기</button>
           </div>
     
           <div>
-            <div class="contextHead">전체글</div> <br>
+            <div class="">전체글</div> <br>
             <hr>
-            <div class="contextHead">인기글</div> <br>
+            <div>인기글</div> <br>
             <hr>
             <div>
-              <div class="contextHead">동행 구해요</div>
-              <li>중국</li>
-              <li>일본</li>
-              <li>동남아</li>
-              <li>유럽</li>
-              <li>그 외</li>
-            </div> <br>
-            <hr>
-            <div >
-              <div class="contextHead">후기(추천/지역)</div>
+              <div>동행 구해요</div>
               <li>중국</li>
               <li>일본</li>
               <li>동남아</li>
@@ -80,7 +54,7 @@
             </div> <br>
             <hr>
             <div>
-              <div class="contextHead">광고(여행사, 숙박시설, 식당)</div>
+              <div>후기(추천/지역)</div>
               <li>중국</li>
               <li>일본</li>
               <li>동남아</li>
@@ -88,9 +62,18 @@
               <li>그 외</li>
             </div> <br>
             <hr>
-            <div class="contextHead">여행 꿀팁</div> <br>
+            <div>
+              <div>광고(여행사, 숙박시설, 식당)</div>
+              <li>중국</li>
+              <li>일본</li>
+              <li>동남아</li>
+              <li>유럽</li>
+              <li>그 외</li>
+            </div> <br>
             <hr>
-            <div class="contextHead">키워드</div> <br>
+            <div>여행 꿀팁</div> <br>
+            <hr>
+            <div>키워드</div> <br>
             <hr>
     
           </div>
@@ -100,21 +83,10 @@
       </div>
     
       <div class="home"> <!-- 홈 메뉴 -->
-        <div class="room" id="room1">
-          
-        </div>
-
-        <div class="room" id="room2">
-          
-        </div>
-
-        <div class="room" id="room3">
-          
-        </div>
+        
       </div>
 
-      
+      <div class="footer"></div>
   </div>
-  <div th:block class="footer">푸터</div>
 </body>
 </html>
