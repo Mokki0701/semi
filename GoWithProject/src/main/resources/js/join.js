@@ -67,7 +67,7 @@ if (join != null) {
       countdownValue -= 1 ;
       document.querySelector("#count").innerText = countdownValue; 
       if(countdownValue == 0 ){
-        alert("이 거북이 자식");
+        alert("이 거북이 녀석");
         clearInterval(countDownInterval);
       }
     }
