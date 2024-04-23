@@ -1,0 +1,44 @@
+*{
+  justify-content: center;
+  align-items: center
+  ;
+}
+
+#mainLogo{
+  border: 1px solid black;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+#mainLogo a{
+  width: 90%;
+  height: 90%;
+  text-decoration: none;
+  text-align: center;
+}
+
+#join table tr{
+  width: 300px;
+  height: 50px;
+
+  border: 1px solid black;
+}
+
+/* 모든 input 요소에 적용되는 기본 스타일 */
+input {
+  padding: 8px; /* 안쪽 여백 설정 */
+  border: 1px solid #ccc; /* 테두리 설정 */
+  border-radius: 4px; /* 테두리 둥글기 설정 */
+}
+
+/* input 요소에 포커스될 때의 스타일 */
+input:focus {
+  border-color: #007bff; /* 포커스 시 테두리 색상 변경 */
+  outline: none; /* 포커스 테두리 제거 */
+  box-shadow: 0 0 5px #007bff; /* 포커스 시 그림자 효과 추가 */
+}
