@@ -80,3 +80,28 @@ if (join != null) {
 }
 
 /* ↑ 회원가입페이지에서 사용합니다 ↑ */
+
+
+/* ↓ 메인페이지에서 사용합니다 ↓ */
+
+// 빠른 로그인
+const quickLoginBtn = document.querySelectorAll(".quickLogin");
+if (quickLoginBtn != null) {
+
+  quickLoginBtn.forEach((item, index) => {
+
+    item.addEventListener("click", e => {
+
+      const email = item.innerText;
+
+      // get방식 요청
+      location.href = "/member/quickLogin?memberEmail=" + email;
+
+    })
+
+  });
+
+
+}
+
+/* ↑ 메인페이지에서 사용합니다 ↑ */

@@ -47,8 +47,11 @@
             <table class="profileTable">
 
               <tr>
-                <th>닉네임</th>
-                <td>ddk9595</td>
+                <th>이메일</th>
+                
+                <th:block th:if="${session.loginMember != null}">
+                  <td th:text="${session.loginMember.memberEmail}">현재 로그인한 회원 이메일</td>
+                </th:block>
               </tr>
 
               <tr>
@@ -148,9 +151,12 @@
 
 
         <!-- 임시계정 로그인 페이지 -->
-        <button>temp01</button>
-        <button>temp02</button>
-        <button>temp03</button>
+        <button class="quickLogin">temp01@naver.com</button>
+        <button class="quickLogin">temp02naver.com</button>
+        <button class="quickLogin">temp03naver.com</button>
+        <br>
+
+        </p>
 
       </div>
 
@@ -168,5 +174,6 @@
   </div>
   <!-- <th:block th:replace="~{footer}" class="footer">푸터</th:block> -->
 </body>
+<script src="/js/mainJoinLogin.js"></script>
 
 </html>
