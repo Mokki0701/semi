@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원가입 페이지</title>
+  <link rel="stylesheet" href="/src/main/resources/css/login.css">
+</head>
+
+<body>
+  <!-- 이메일, 아이디, pw 입력 칸 -->
+
+  <div id="mainLogo">
+    <a href="#" th:replace="메인로고">메인페이지로 ㄱㄱ</a>
+  </div>
+
+
+  <form action="#" id="join">
+
+    <table>
+      <tr>
+        <td>이메일 : </td>
+        <td><input name="inputEmail" id="inputEmail" 
+          placeholder="naver, hanmail, gmail입력 가능"></input></td>
+      </tr>
+
+      <tr>
+        <td>아이디 : </td>
+        <td><input name="inputId" id="inputId" 
+          placeholder="영문,한글,숫자 최대 8자리"
+          maxlength="8"></input></td>
+      </tr>
+
+      <tr>
+        <td>비밀번호 : </td>
+        <td><input type="password" name="inputPw" id="inputPw"
+          placeholder="최대 11자리"
+          maxlength="11"></input></td>
+      </tr>
+
+    </table>
+
+    <button id="joinBtn"> 회원가입 </button>
+     
+
+    <!-- 전부 통과 시 나타내기-->
+    <div class="hide">
+      <input type="text"
+      placeholder="확인 번호를 입력하세요">
+      <div>아래의 시간 내에 입력해 주세요</div>
+      <p id="countdown">카운트 다운: <span id="count">300</span> 초</p>
+    </div>
+
+  </form>
+</body>
+
+<script src="/src/main/resources/js/mainJoinLogin.js"></script>
+
+</html>
