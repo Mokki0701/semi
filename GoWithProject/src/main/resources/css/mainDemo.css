@@ -1,17 +1,74 @@
+@font-face {
+  font-family: 'Freesentation-9Black';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* 임시 경계선 및 폰트 */
 *{
   border: 1px dotted orchid;
+  font-family: Freesentation-9Black;
+  font-weight: 200;
 }
+
+/* 임시 헤더 */
+/* 메인페이지, 로그인 버튼 */
+.highest{
+  width: 97.3vw;
+  height: 25px;
+  background-color: gray;
+  display: flex;
+  flex-direction: row-reverse;
+
+  /* 포지션 최상단에 고정 */
+  position: fixed;
+  top: 0;
+  left: 0.3vw;
+  right: 0;
+  padding: 5px;
+  z-index: 1000;
+}
+
+.highest div{
+  display: flex;
+  align-items: center;
+}
+
+.highest div a{
+  text-decoration: none;
+  color: rgb(61, 60, 60);
+  margin : 0 10px 0 10px ;
+  transition: color 0.4s;
+}
+.highest div a:hover{
+  color: orange;
+}
+
+/* 임시 로고 */
+.header{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#mainLogo{
+  background-color: black;
+  height: 200px;
+  width: 97.3vw;
+}
+
+
 
 .side{
   border: 1px solid black;
-  width: 300px;
+  width: 400px;
   margin: 5px;
   padding: 5px;
-  
 }
 
 .side * {
-  margin: 2px;
+  /* margin: 1px; */
 }
 
 .all{
@@ -19,12 +76,33 @@
   flex-direction: row;
 }
 
+.info{
+  display: flex;
+  justify-content: center;
+}
+
+.infoChild{
+  width: 80%;
+  height: 30px;
+}
+
+
+.info a{
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+
 .profileBox{
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
-#profile{
+#profileImage{
   border-radius: 50%;
   width: 100px;
   height: 100px;
@@ -33,8 +111,100 @@
   justify-content: center;
   align-items: center;
 
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
+/* 프로필 테이블 꾸미기 */
+.profileTable {
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+}
+
+.profileTable th,
+.profileTable td {
+  border: 1px solid black;
+}
+
+.loginInfo{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginInfo table{
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+
+
+
+
+/* 카페 가입 버튼 */
+.joinCafe{
+  width: 80%;
+  height: 50px;
+  text-align: center;
+  background-color: black;
+  color: white;
+  border-radius: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 25px;
+
+  text-decoration: none;
+
+  margin-bottom: 10px;
+
+}
+
+.contextHead{
+  margin-left: 5px;
+  font-size: 25px;
+}
+
+.menuList * {
+  margin-left: 5px;
+}
+
+.menuList li {
+  font-size: 20px;
+}
+
+/* 홈 */
+.room{
+  height: 33%;
+  width: 75vw
+}
+
+#room1{
+  background-color: gray;
+}
+
+#room2{
+  background-color: rgb(65, 62, 62);
+}
+
+#room3{
+  background-color: gray;
+}
+
+
+
+
+
+
+
+
+
+
+/* 헤더, 푸터 */
 .info{
   display: flex;
   flex-direction: row;
@@ -42,4 +212,11 @@
 
 .info * {
   border: 1px solid black;
+
 }
+
+
+
+
+/* ---------------------------------------------------------------------------- */
+/* 로그인 페이지에 사용되는 CSS */

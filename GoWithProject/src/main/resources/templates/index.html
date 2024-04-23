@@ -1,19 +1,168 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>테스트 페이지</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>임시 메인</title>
+  <!-- <link rel="stylesheet" href="/mainDemo.css"> -->
+  <link rel="stylesheet" href="/src/main/resources/css/mainDemo.css">
 </head>
+
 <body>
+
+  <!-- <th:block th:replace="~{header}">헤더</th:block> -->
+
+  <!-- 임시 헤더 --> 
+  <div class="header">
+    <div class="highest">
+      <div><a href="#">로그인</a></div>
+      <div><a href="#">메인페이지</a></div>
+    </div>
+
+    <a href="#">
+      <div id="mainLogo">
+      </div>
+    </a>
+
+  </div>
+
+  <div class="all">
+
     
-    <h1>테스트 페이지</h1>
+    <!-- 사이드 메뉴 -->
+    <!-- 로그인 화면 구성하기 / 세션에서 로그인 되어있다면 아래 화면대로 표현 -->
+    <div class="side">
 
-    <h2>sdaf</h2>
-	
-	<h2>sdaf</h2>
-	
-	<h2>sdaf</h2>	
+      <div class="info">
+        <a href="#" class="infoChild"><p>정보수정</p></a>
+      </div>
 
+      <div>
+        <div class="profileBox">
+
+          <div id="profileImage">profile Image</div>
+
+          <div>
+            <table class="profileTable">
+
+              <tr>
+                <th>닉네임</th>
+                <td>ddk9595</td>
+              </tr>
+
+              <tr>
+                <th>가입일</th>
+                <td>sysdate</td>
+              </tr>
+
+              <tr>
+                <th>선호여행지</th>
+                <td>pull</td>
+              </tr>
+
+            </table>
+          </div>
+        </div>
+        <hr>
+
+        <div class="loginInfo">
+          <table>
+            <tr>
+              <th>게시글 수</th>
+              <br>
+              <td>000개</td>
+            </tr>
+
+            <tr>
+              <th>댓글 수</th>
+              <td>000개</td>
+            </tr>
+
+            
+          </table>
+          <a class="joinCafe" href="#">
+            <th:block>카페 가입하기</th:block>
+          </a>
+        </div>
+
+        <!-- 각 링크 클릭 시 해당 게시판으로 이동하기 -->
+        <div>
+          <div class="contextHead">전체글</div> <br>
+          <hr>
+          <div class="contextHead">나의 관심게시판
+            <li>01</li>
+            <li>02</li>
+            <li>03</li>
+
+          </div> <br>
+          <hr>
+          <div class="contextHead">인기글</div> <br>
+            <p>좋아요, 댓글 수 상위 10개 표시</p>
+          <hr>
+          <div class="menuList">
+            <div class="contextHead">동행 구해요</div>
+            <li>중국</li>
+            <li>일본</li>
+            <li>동남아</li>
+            <li>유럽</li>
+            <li>그 외</li>
+          </div> <br>
+          <hr>
+          <div class="menuList">
+            <div class="contextHead">후기(추천/지역)</div>
+            <li>중국</li>
+            <li>일본</li>
+            <li>동남아</li>
+            <li>유럽</li>
+            <li>그 외</li>
+          </div> <br>
+          <hr>
+          <div class="menuList">
+            <div class="contextHead">광고(여행사, 숙박시설, 식당)</div>
+            <li>중국</li>
+            <li>일본</li>
+            <li>동남아</li>
+            <li>유럽</li>
+            <li>그 외</li>
+          </div> <br>
+          <hr>
+          <div class="contextHead">여행 꿀팁</div> <br>
+          <hr>
+          <div class="contextHead">키워드(가장많이쓴태그)</div><br>
+          <hr>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- 홈 메뉴 -->
+    <!-- 리스트 자동 생성 (몇개까지 할 것인지?) -->
+    <div class="home">
+      <div class="room" id="room1">
+        <a href="#">공지사항</a>
+
+        <!-- 임시계정 로그인 페이지 -->
+        <button>temp01</button>
+        <button>temp02</button>
+        <button>temp03</button>
+      </div>
+
+      <div class="room" id="room2">
+        <a href="#">인기글</a>
+        <p>좋아요 + 댓글 수 상위 20개 표시</p>
+      </div>
+
+      <div class="room" id="room3">
+        <a href="#">최신글</a>
+      </div>
+    </div>
+
+
+  </div>
+  <th:block th:replace="~{footer}" class="footer">푸터</th:block>
 </body>
+
 </html>
