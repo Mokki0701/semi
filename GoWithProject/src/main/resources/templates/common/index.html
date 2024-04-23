@@ -95,12 +95,20 @@
         <div>
           <div class="contextHead">전체글</div> <br>
           <hr>
-          <div class="contextHead">나의 관심게시판
-            <li>01</li>
-            <li>02</li>
-            <li>03</li>
 
-          </div> <br>
+          <th:block th:if="${session.loginMember != null}">
+            <div class="contextHead">
+              나의 관심게시판 <br>
+              <tr>
+                <th>게시판 이름</th>
+                <td th:text="${board.boardName}"></td>
+              </tr>
+  
+            </div> 
+          </th:block>
+          
+          <br>
+          
           <hr>
           <div class="contextHead">인기글</div> <br>
             <p>좋아요, 댓글 수 상위 10개 표시</p>
