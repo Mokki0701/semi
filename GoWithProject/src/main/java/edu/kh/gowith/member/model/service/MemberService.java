@@ -6,6 +6,8 @@ public interface MemberService {
 
 	Member loginMember(Member member);
 
-	Member quickLogin(Member member);
+	// 빠른 로그인
+
+	Member quickLogin(String memberEmail);
 
 }
