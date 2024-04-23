@@ -1,0 +1,21 @@
+#search-form > fieldset{
+  width: 250px;
+  height: 30px;
+  border-radius: 5px;
+  display: flex;
+  border: 2px solid darkcyan;
+}
+
+#query{
+  border: none;
+  outline: none;
+  font-weight: bold;
+  width: 80%;
+}
+
+#seach-btn{
+  width: 20%;
+  background-color: lightgray;
+  cursor: pointer;
+  border: none;
+}

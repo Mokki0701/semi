@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>boardWrite</title>
+  <link rel="stylesheet" href="/css/boardWrite.css">
+</head>
+<body>
+  <section>
+
+    <form action="#" class="boardWrite">
+
+      <h1>게시판 이름</h1>
+
+      <!-- 게시판 제목-->
+      <h2 class="boardTitle">
+        <input type="text" name="boardTitle" placeholder="제목을 입력하세요">
+      </h2>
+
+      <!-- 업로드 이미지 -->
+      <div class="image-wrapper">
+
+        <!-- 이미지 1 -->
+        <div class="img-box">
+          <label for="imageFile0">
+            <img class="preview" src="">
+          </label>
+          <input type="file" name="images" class="inputImg" id="imageFile0" accept="image/*">
+          <!-- 이미지 X표시 -->
+          <span class="del-img">&times;</span>
+        </div>
+
+        <!-- 이미지 2 -->
+        <div class="img-box">
+          <label for="imageFile1">
+            <img class="preview" src="">
+          </label>
+          <input type="file" name="images" class="inputImg" id="imageFile1" accept="image/*">
+          <!-- 이미지 X표시 -->
+          <span class="del-img">&times;</span>
+        </div>
+
+        <!-- 이미지 3 -->
+        <div class="img-box">
+          <label for="imageFile2">
+            <img class="preview" src="">
+          </label>
+          <input type="file" name="images" class="inputImg" id="imageFile2" accept="image/*">
+          <!-- 이미지 X표시 -->
+          <span class="del-img">&times;</span>
+        </div>
+
+        <!-- 이미지 4 -->
+        <div class="img-box">
+          <label for="imageFile3">
+            <img class="preview" src="">
+          </label>
+          <input type="file" name="images" class="inputImg" id="imageFile3" accept="image/*">
+          <!-- 이미지 X표시 -->
+          <span class="del-img">&times;</span>
+        </div>
+      </div>
+      
+      <hr>
+
+      <!-- 양식 세팅 -->
+      <select name="" id="selectForm">
+        <option value="notice">공지</option>
+        <option value="goWith">동행</option>
+        <option value="review">후기</option>
+        <option value="advertisement">광고</option>
+      </select>
+
+      <div>
+        <textarea name="" id="" cols="30" rows="10"></textarea>
+      </div>
+
+      <!-- 버튼 영역 -->
+      <div class="submit-area">
+        <input type="checkbox" id="managerCheck"> 관리자입니다
+        <button type="submit" id="boardBtn">등록</button> 
+      </div>
+
+    </form>
+  </section>
+</body>
+</html>
