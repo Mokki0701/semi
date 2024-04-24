@@ -1,16 +1,16 @@
 const favoriteBtn = document.querySelectorAll(".favoriteBtn");
-const bottomName = document.querySelector("#bottomName");
+// const bottomName = document.querySelector("#bottomName");
 
 
 for(let i = 0; i < favoriteBtn.length; i++){
 
     favoriteBtn.addEventListener("click", e=>{
     
-        const bottomMenuName = bottomName.innerText;
+        // const bottomMenuName = bottomName.innerText; 
     
         const param = {
-            "bottomMenuName" : bottomMenuName,
-            "loginMemberEmail" : loginMemberEmail,
+            // "bottomMenuName" : bottomMenuName,  이게 아니라 bottomMenuCode 가 와야한다.
+            "loginMemberNo" : loginMemberNo,
             "myFavorite" : myFavorite
         }
     
@@ -39,7 +39,20 @@ for(let i = 0; i < favoriteBtn.length; i++){
 
 }
 
+const numberUnit = document.querySelector("#numberUnit");
 
+numberUnit.addEventListener("change", e=>{
+
+    const selectNumber = numberUnit.options[numberUnit.selectedIndex].innerText;
+
+    const params = new URL(location.href).searchParams;
+    
+    const topMenuCode = params.get("topMenuCode");
+    const bottomMenuCode = params.get("bottomMenuCode");
+    
+    location.href = `/` + topMenuCode + `/` + bottomMenuCode + `?limit=` + selectNumber;
+
+})
 
 
 

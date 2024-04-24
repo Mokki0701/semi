@@ -4,6 +4,8 @@ import java.util.Map;
 
 public interface BoardService {
 
-	String boardFavorite(Map<String, String> paramMap);
+	int boardFavorite(Map<String, String> paramMap);
+
+	Map<String, Object> boardList(int bottomMenuCode, int cp, int limit, int memberNo);
 
 }

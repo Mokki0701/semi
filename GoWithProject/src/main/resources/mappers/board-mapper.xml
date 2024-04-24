@@ -3,13 +3,69 @@
 <mapper namespace="edu.kh.gowith.board.model.mapper.BoardMapper">
 	
 	<update id="boardFavortie">
-		UPDATE FROM "MEMBER_MENU"
+		UPDATE "MEMBER_MENU"
 		SET FAVORITE = 
-		<if test='myFavorite == "Y"'>N</if>
-		<if test='myFavorite == "N"'>Y</if>
-		WHERE MEMBER_NO = #{loginMemberEmail}
+		<if test='myFavorite == "Y"'>'N'</if>
+		<if test='myFavorite == "N"'>'Y'</if>
+		WHERE MEMBER_NO = #{loginMemberNo}
 		AND BOTTOM_MENU_CODE = #{bottomMenuName}
 	</update>
+	
+	
+	<select id="getBoardList">
+		SELECT BOARD_NO, BOARD_TITLE , MEMBER_NICKNAME, READ_COUNT, BOARD_NOTIFICATION ,BOARD_LIKE_COUNT,
+				(SELECT COUNT(*) 
+				FROM "COMMENT" C
+				WHERE C.BOARD_NO = B.BOARD_NO
+				AND COMMENT_DEL_FL = 'N') COMMENT_COUNT,X
+				BOARD_LIKE_COUNT,
+				
+				<![CDATA[
+				CASE 
+					WHEN SYSDATE - BOARD_WRITE_DATE < 1 / 24 / 60
+					THEN FLOOR((SYSDATE - BOARD_WRITE_DATE) * 24 * 60 * 60) || '초 전'
+					
+					WHEN SYSDATE - BOARD_WRITE_DATE < 1 / 24 
+					THEN FLOOR((SYSDATE - BOARD_WRITE_DATE) * 24 * 60) || '분 전'
+					
+					WHEN SYSDATE - BOARD_WRITE_DATE < 1  
+					THEN FLOOR((SYSDATE - BOARD_WRITE_DATE) * 24) || '시간 전'
+					
+					ELSE TO_CHAR(BOARD_WRITE_DATE, 'YYYY-MM-DD')
+					
+				END BOARD_WRITE_DATE
+				]]>
+				
+		FROM "BOARD" B
+		JOIN "MEMBER" USING(MEMBER_NO)
+		WHERE BOTTOM_MENU_CODE = #{bottomMenuCode}
+		AND BOARD_DEL_FL = 'N'
+		ORDER BY CASE WHEN BOARD_NOTIFICATION  = 'Y' THEN 1 ELSE 2 END, BOARD_NO ASC
+	</select>
+	
+	<select id="getListCount">
+		SELECT COUNT(*)
+		FROM "BOARD"
+		WHERE BOTTOM_MENU_CODE = #{bottomMenuCode}
+		AND BOARD_DEL_FL = 'N'
+	</select>
+	
+	<select id="getFavorite">
+		SELECT FAVORITE, BOTTOM_MENU_NAME
+		FROM MEMBER_MENU
+		JOIN BOTTOM_MENU USING(BOTTOM_MENU_CODE)
+		WHERE MEMBER_NO = #{memberNo}
+		AND BOTTOM_MENU_CODE = #{bottomMenuCode}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 
