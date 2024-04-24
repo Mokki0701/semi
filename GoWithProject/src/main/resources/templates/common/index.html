@@ -13,7 +13,7 @@
 
   <!-- <th:block th:replace="~{header}">헤더</th:block> -->
 
-  <!-- 임시 헤더 --> 
+  <!-- 임시 헤더 -->
   <div class="header">
     <div class="highest">
       <div><a href="#">로그인</a></div>
@@ -29,81 +29,133 @@
 
   <div class="all">
 
-    
-    <!-- 사이드 메뉴 -->
-    <!-- 로그인 화면 구성하기 / 세션에서 로그인 되어있다면 아래 화면대로 표현 -->
-    <div class="side">
 
-      <div class="info">
-        <a href="#" class="infoChild"><p>정보수정</p></a>
-      </div>
+    <!-- 사이드 메뉴 -->
+    <!-- 로그인 전 로그인 입력칸, 로그인후 회원 정보 칸 -->
+    <!-- 로그인 여부는 loginMember session에 기록 -->
+    <div class="side">
 
       <div>
         <div class="profileBox">
 
-          <div id="profileImage">profile Image</div>
+
 
           <div>
-            <table class="profileTable">
 
-              <tr>
-                <th>이메일</th>
-                
-                <th:block th:if="${session.loginMember != null}">
+
+            <!-- 로그인이 되어있지 않은 경우 -->
+            <th:block th:if="${session.loginMember == null}">
+
+              <!-- 로그인 박스 -->
+              <form action="/member/login" method="POST" id="loginForm">
+                <fieldset class="id-pw-area">
+
+                  <!-- 아이디/비밀번호 입력 -->
+                  <section>
+                    <input type="text" name="memberEmail" placeholder="이메일">
+                    <input type="password" name="memberPw" placeholder="비밀번호">
+                  </section>
+
+                  <!-- 로그인 버튼 -->
+                  <section>
+                    <button>로그인</button>
+                  </section>
+                </fieldset>
+
+                <label>
+                  <label for="saveId" id="rememberId">이메일 기억하기</label>
+                  <input type="checkbox" name="saveId" id="saveId">
+                </label>
+
+                <article class="signup-find-area">
+                  <a href="/member/signup">회원가입</a>
+                  <span> / </span>
+                  <a href="#">ID/PW 찾기</a>
+                </article>
+
+              </form>
+
+
+            </th:block>
+
+
+            <!-- 로그인 되어있는 경우 -->
+            <th:block th:if="${session.loginMember != null}">
+
+              <table class="profileTable">
+
+                <div class="info">
+                  <a href="#" class="infoChild"> <!-- 회원 정보 수정으로 -->
+                    <p>정보수정</p>
+                  </a>
+                </div>
+
+                <div id="profileImage">profile Image</div>
+                <tr>
+                  <th>이메일</th>
                   <td th:text="${session.loginMember.memberEmail}">현재 로그인한 회원 이메일</td>
-                </th:block>
-              </tr>
+                </tr>
+                <tr>
+                  <th>가입일</th>
+                  <td th:text="${session.loginMember.enrollDate}">가입일</td>
+                </tr>
+                <tr>
+                  <th>선호여행지</th>
+                  <td th:text="${session.loginMember.favorPlace}">선호여행지</td>
+                </tr>
 
-              <tr>
-                <th>가입일</th>
-                <td>sysdate</td>
-              </tr>
+              </table>
 
+              <a class="logoutBtn" href="/member/logout">
+                <th:block>로그아웃 버튼</th:block>
+              </a>
 
-              <tr>
-                <th>선호여행지</th>
-                <td>pull</td>
-              </tr>
+              <div class="loginInfo">
+                <table>
+                  <tr>
+                    <th>회원 등급</th>
+                    <td th:text="${session.loginMember.memberRank}"></td>
+                  </tr>
+                  <tr>
+                    <th>작성한 게시글 수</th>
+                    <td th:text="|${session.postCounter} 개|">000개</td>
+                  </tr>
+                  <tr>
+                    <th>댓글 수</th>
+                    <td>000개</td>
+                  </tr>
+                </table>
+              </div>
 
-            </table>
+              <div class="contextHead">나의 관심게시판
+                <table>
+                  <tr>
+                    <th>게시판 :</th>
+                  </tr>
+                  <tr th:each="board : ${favorBoard}">
+                    <td th:text="${board.bottomMenuName}"></td>
+                  </tr>
+                </table>
+              </div>
+
+            </th:block>
+
           </div>
         </div>
         <hr>
 
 
-        <div class="loginInfo">
-          <table>
-            <tr>
-              <th>게시글 수</th>
-              <br>
-              <td>000개</td>
-            </tr>
 
-            <tr>
-              <th>댓글 수</th>
-              <td>000개</td>
-            </tr>
-
-            
-          </table>
-          <a class="joinCafe" href="#">
-            <th:block>카페 가입하기</th:block>
-          </a>
-        </div>
 
         <!-- 각 링크 클릭 시 해당 게시판으로 이동하기 -->
         <div>
           <div class="contextHead">전체글</div> <br>
           <hr>
-          <div class="contextHead">나의 관심게시판
-            <li>01</li>
-            <li>02</li>
-            <li>03</li>
 
-          </div> <br>
+          <br>
           <hr>
           <div class="contextHead">인기글</div> <br>
-            <p>좋아요, 댓글 수 상위 10개 표시</p>
+          <p>좋아요, 댓글 수 상위 10개 표시</p>
           <hr>
           <div class="menuList">
             <div class="contextHead">동행 구해요</div>
@@ -150,10 +202,10 @@
         <a href="#">공지사항</a>
 
 
-        <!-- 임시계정 로그인 페이지 -->
+        <!-- 임시계정 로그인 버튼 -->
+        <button class="quickLogin">temp00@naver.com</button>
         <button class="quickLogin">temp01@naver.com</button>
-        <button class="quickLogin">temp02naver.com</button>
-        <button class="quickLogin">temp03naver.com</button>
+        <button class="quickLogin">temp02@naver.com</button>
         <br>
 
         </p>
@@ -173,6 +225,29 @@
 
   </div>
   <!-- <th:block th:replace="~{footer}" class="footer">푸터</th:block> -->
+  <!-- 임시 푸터 -->
+  <footer>
+    <p>Copyright &copy; KH Information Educational Institute A-Class</p>
+
+    <article>
+      <a href="#">프로젝트 소개</a>
+      <span>|</span>
+      <a href="#">이용약관</a>
+      <span>|</span>
+      <a href="#">개인정보처리방침</a>
+      <span>|</span>
+      <a href="#">고객센터</a>
+    </article>
+  </footer>
+
+
+  <script th:inline="javascript">
+    const message =  /*[[${message}]]*/ "전달 받은 message";
+
+    if (message != null) alert(message);
+  </script>
+
+
 </body>
 <script src="/js/mainJoinLogin.js"></script>
 
