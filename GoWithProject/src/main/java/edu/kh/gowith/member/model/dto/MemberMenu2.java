@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MemberMenu {
+public class MemberMenu2 {
 	
 	private int memberNo;
 	private int bottomMenuCode;

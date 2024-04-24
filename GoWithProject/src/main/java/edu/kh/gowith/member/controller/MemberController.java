@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.gowith.board.model.dto.BottomMenu;
 import edu.kh.gowith.member.model.dto.Member;
-import edu.kh.gowith.member.model.dto.MemberMenu;
+import edu.kh.gowith.member.model.dto.MemberMenu2;
 import edu.kh.gowith.member.model.service.MemberService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -45,10 +45,10 @@ public class MemberController {
 		} else {
 			int postCounter = service.postCounter(loginMember.getMemberNo());
 			
-			List<MemberMenu> favorBoard = service.favorBoard(loginMember.getMemberNo());
+			List<MemberMenu2> favorBoard = service.favorBoard(loginMember.getMemberNo());
 
 			// 콘솔로 확인
-			MemberMenu[] favorBoardArray = new MemberMenu[favorBoard.size()];
+			MemberMenu2[] favorBoardArray = new MemberMenu2[favorBoard.size()];
 			favorBoard.toArray(favorBoardArray);
 			System.out.println("favorBoardArray" + favorBoardArray);
 

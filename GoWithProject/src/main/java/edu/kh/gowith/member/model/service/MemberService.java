@@ -3,7 +3,7 @@ package edu.kh.gowith.member.model.service;
 import java.util.List;
 
 import edu.kh.gowith.member.model.dto.Member;
-import edu.kh.gowith.member.model.dto.MemberMenu;
+import edu.kh.gowith.member.model.dto.MemberMenu2;
 
 public interface MemberService {
 
@@ -17,7 +17,7 @@ public interface MemberService {
 	Member quickLogin(String memberEmail);
 
 	// 좋아하는 하위 게시판
-	List<MemberMenu> favorBoard(int memberNo);
+	List<MemberMenu2> favorBoard(int memberNo);
 
 	
 

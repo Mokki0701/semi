@@ -1,6 +1,6 @@
 package edu.kh.gowith.board.controller;
 
-import java.util.List;
+import java.beans.JavaBean;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -21,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("board")
+@JavaBean
 public class BoardController {
 
 	private final BoardService service;

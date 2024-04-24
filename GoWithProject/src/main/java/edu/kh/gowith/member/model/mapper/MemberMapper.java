@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import edu.kh.gowith.member.model.dto.Member;
-import edu.kh.gowith.member.model.dto.MemberMenu;
+import edu.kh.gowith.member.model.dto.MemberMenu2;
 
 @Mapper
 public interface MemberMapper {
@@ -17,7 +17,7 @@ public interface MemberMapper {
 	int postCounter(int memberNo);
 
 	// 좋아하는 하위 게시판
-	List<MemberMenu> favorBoard(int memberNo);
+	List<MemberMenu2> favorBoard(int memberNo);
 
 	
 	
