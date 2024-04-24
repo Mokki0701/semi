@@ -95,6 +95,70 @@
   align-items: center;
 }
 
+/* 로그인 전 이메일, PW 입력 칸 */
+#loginForm{
+  height: 150px;
+  padding: 10px;
+  margin-top: 10px;
+
+  display: flex;
+  flex-direction: column;  /* 중심축을 컬럼(세로)로 지정 */
+  text-align: center;
+}
+
+/* id/pw 입력 영역 */
+.id-pw-area{
+  border: 1px solid #ccc;
+  display: flex;
+  flex-basis: 60%; /* 중심축(세로) 방향 60% (== height:60%) */
+}
+
+.id-pw-area > section:first-of-type{
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* id/pw input태그 */
+.id-pw-area > section:first-of-type > input{
+  border: none;
+  outline: none;
+  height: 50%;
+  padding: 5px;
+  border-right: 1px solid #ccc;
+}
+
+/* id/pw input태그에 초점이 맞춰졌을 때 */
+.id-pw-area > section:first-of-type > input:focus{
+  border : 2px solid  #007bff !important;
+  outline: none; /* 포커스 테두리 제거 */
+  box-shadow: 0 0 5px #007bff; /* 포커스 시 그림자 효과 추가 */
+}
+
+/* 로그인 버튼 영역 */
+.id-pw-area > section:last-of-type{
+  width: 25%;
+  display: flex;
+  justify-content: center;
+}
+
+/* 로그인 버튼 */
+.id-pw-area > section:last-of-type > button{
+  width: 100%;
+  background-color: white;
+  cursor: pointer;
+  border: none;
+  font-weight: bold;
+}
+
+.id-pw-area > section:last-of-type > button:hover{
+  color : white;
+  background-color: gray;
+}
+
+#rememberId{
+  user-select: none;
+}
 
 .profileBox{
   display: flex;
@@ -104,8 +168,8 @@
 
 #profileImage{
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
+  width: 75px;
+  height: 75px;
   border: 1px solid black;
   display: flex;
   justify-content: center;
@@ -115,7 +179,7 @@
   margin-right: 20px;
 }
 
-/* 프로필 테이블 꾸미기 */
+/* 로그인 시 프로필 테이블 꾸미기 */
 .profileTable {
   display: flex;
   flex-direction: column;
@@ -125,6 +189,10 @@
 .profileTable th,
 .profileTable td {
   border: 1px solid black;
+}
+
+.profileTable tr td{
+  text-align: center;
 }
 
 .loginInfo{
@@ -139,12 +207,8 @@
   margin-bottom: 10px;
 }
 
-
-
-
-
-/* 카페 가입 버튼 */
-.joinCafe{
+/* 로그아웃 버튼 */
+.logoutBtn{
   width: 80%;
   height: 50px;
   text-align: center;
@@ -161,8 +225,10 @@
   text-decoration: none;
 
   margin-bottom: 10px;
-
 }
+
+
+
 
 .contextHead{
   margin-left: 5px;
@@ -215,6 +281,34 @@
 
 }
 
+/* *********** footer ************ */
+footer {
+  width: 100%;
+  height: 200px;
+  background-color: #00000042;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+footer>p {
+  font-weight: bold;
+  margin: 16px 0;
+}
+
+footer>article>* {
+  font-size: 14px;
+}
+
+footer a {
+  color: black;
+  text-decoration: none;
+}
+
+footer span {
+  padding: 0 10px;
+}
 
 
 

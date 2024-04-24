@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN " "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="edu.kh.gowith.member.model.mapper.MemberMapper">
+<mapper
+	namespace="edu.kh.gowith.member.model.mapper.MemberMapper">
 
 	<select id="loginMember">
 		SELECT * FROM "MEMBER"
-		WHERE MEMBER_EMAIL = #{memberEmail}
+		WHERE MEMBER_EMAIL =
+		#{memberEmail}
+		AND MEMBER_DEL_FL = 'N'
 	</select>
-	
+
+	<!-- 작성한 글 갯수 -->
+	<select id="postCounter">
+		SELECT COUNT(*) FROM BOARD b
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+
+	<!-- 좋아하는 하위 게시판 -->
+	<!-- resultType="bottomMenu" -->
+	<select id="favorBoard">
+		SELECT BOTTOM_MENU_NAME
+		FROM BOTTOM_MENU bm
+		JOIN MEMBER_MENU mm USING (BOTTOM_MENU_CODE)
+		WHERE mm.MEMBER_NO = #{memberNo}
+	</select>
 
 </mapper>
