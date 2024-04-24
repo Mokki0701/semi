@@ -5,19 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원정보수정</title>
 
-   <!-- 공용 css/js 추가 -->
-  <th:block th:replace="~{common/common}"></th:block>
 
   <!-- myPage 전용 CSS -->
-  <link rel="stylesheet" href="/src/main/resources/static/css/profileupdate.css">
+  <link rel="stylesheet" href="/css/update.css">
 </head>
 
-<body>
-    
+
+<body>    
   <main>
 
     <!-- 헤더 추가 -->
-     <th:block th:replace="~{common/header}"></th:block>  
+     <!-- <th:block th:replace="~{common/header}"></th:block>   -->
   
 
 
@@ -110,13 +108,12 @@
           <button class="myPage-submit">수정</button>
         </div>
 
+      </form>
       <br><br> 
 
-        <div>
+        <div class="delete-btn">
           <button class="delete-submit">회원탈퇴</button>
         </div>
-
-      </form>
 
     </section>
 
@@ -127,10 +124,10 @@
 
   
   <!-- 푸터 추가 -->
-  <th:block th:replace="~{common/footer}"></th:block>
+  <!-- <th:block th:replace="~{common/footer}"></th:block> -->
 
 
-  <script src="/js/myPage/myPage.js"></script>
+  <script src="/js/update.js"></script>
 
 </body>
 </html>

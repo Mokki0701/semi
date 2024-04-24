@@ -218,4 +218,17 @@
     font-size: 14px;
     cursor: pointer;
     text-align: center;
+  
   }
+
+  .delete-btn{
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    font-weight: normal;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+  
