@@ -6,8 +6,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.kh.gowith.board.model.dto.BottomMenu;
+import edu.kh.gowith.board.model.dto.MemberMenu;
 import edu.kh.gowith.member.model.dto.Member;
-import edu.kh.gowith.member.model.dto.MemberMenu2;
 import edu.kh.gowith.member.model.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -81,10 +82,29 @@ public class MemberServiceImpl implements MemberService {
 
 	// 좋아하는 하위 게시판
 	@Override
-	public List<MemberMenu2> favorBoard(int memberNo) {
+	public List<BottomMenu> favorBoard(int memberNo) {
 		
 		
 		return mapper.favorBoard(memberNo);
+	}
+	
+	// 회원가입
+	@Override
+	public int signup(Member inputMember, String[] memberAddress) {
+		
+		if(!inputMember.getMemberAddress().equals(",,")) {
+			String address = String.join("^^^", memberAddress);
+			inputMember.setMemberAddress(address);
+		} else {
+			inputMember.setMemberAddress(null);
+		}
+		
+		// 비밀번호 암호화
+		String encPw = bcrypt.encode(inputMember.getMemberPw());
+		inputMember.setMemberPw(encPw);
+		
+		return mapper.signup(inputMember);
+		
 	}
 	
 }

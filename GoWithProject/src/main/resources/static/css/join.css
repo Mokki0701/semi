@@ -1,44 +1,93 @@
-*{
+.signup-content{
+  display: flex;
   justify-content: center;
-  align-items: center
-  ;
+  height: auto;
 }
 
-#mainLogo{
-  border: 1px solid black;
-  width: 300px;
-  height: 300px;
+#signupForm{
+  margin-top: 30px;
+}
+
+#signupForm > label{
+  display: block;
+  margin-top: 40px;
+  font-size: 18px;
+}
+
+#signupForm > span{
+  display: block;
+  height: 20px;
+}
+
+/* 필수 작성 */
+.required{
+  color: red;
+  padding: 0 5px;
+}
+
+/* input 태그를 감싸고 있는 div 태그 */
+.signup-input-area{
+  width: 500px;
+  height: 50px;
+
+  margin-bottom: 10px;
+  border-bottom: 2px solid #ddd;
+
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 
+.signup-input-area > input{
+  width: 70%;
+  height: 100%;
 
-#mainLogo a{
-  width: 90%;
-  height: 90%;
-  text-decoration: none;
-  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+
+  border : none;
+  outline: none;
 }
 
-#join table tr{
-  width: 300px;
-  height: 50px;
-
-  border: 1px solid black;
+.signup-input-area > button{
+  width: 30%;
+  height: 70%;
+  background-color: white;
+  border: 1px solid gray;
+  cursor: pointer;
 }
 
-/* 모든 input 요소에 적용되는 기본 스타일 */
-input {
-  padding: 8px; /* 안쪽 여백 설정 */
-  border: 1px solid #ccc; /* 테두리 설정 */
-  border-radius: 4px; /* 테두리 둥글기 설정 */
+/* :focus-within : 내부 input 요소에 포커스가 맞춰졌을 때 */
+.signup-input-area:focus-within{
+  border-bottom-color: #455ba8;
 }
 
-/* input 요소에 포커스될 때의 스타일 */
-input:focus {
-  border-color: #007bff; /* 포커스 시 테두리 색상 변경 */
-  outline: none; /* 포커스 테두리 제거 */
-  box-shadow: 0 0 5px #007bff; /* 포커스 시 그림자 효과 추가 */
+
+/* 입력 관련 메세지 */
+.signup-message{
+  font-size: 14px;
+  letter-spacing: -1px;
+}
+
+/* 메세지 색상 지정 */
+.confirm{ color : green; }
+.error{ color : red; }
+
+
+/* 회원가입 버튼 */
+#signupBtn{
+  width: 100%;
+  padding: 10px;
+  margin: 50px 0;
+  border: none;
+
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #303030;
+  color : white;
+  cursor: pointer;
+}
+
+
+#signupBtn:active{
+  transform: scale(0.95);
 }

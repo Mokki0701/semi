@@ -68,7 +68,7 @@
                 </label>
 
                 <article class="signup-find-area">
-                  <a href="/member/signup">회원가입</a>
+                  <a href="/member/join">회원가입</a>
                   <span> / </span>
                   <a href="#">ID/PW 찾기</a>
                 </article>
@@ -132,8 +132,8 @@
                   <tr>
                     <th>게시판 :</th>
                   </tr>
-                  <tr th:each="board : ${favorBoard}">
-                    <td th:text="${board.bottomMenuName}"></td>
+                  <tr th:each="menu : ${favorBoard}">
+                    <td th:text="${menu.favorBoard.bottomMenuName}"></td>
                   </tr>
                 </table>
               </div>

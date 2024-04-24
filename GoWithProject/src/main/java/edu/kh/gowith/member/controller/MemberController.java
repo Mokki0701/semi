@@ -16,8 +16,8 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.gowith.board.model.dto.BottomMenu;
+import edu.kh.gowith.board.model.dto.MemberMenu;
 import edu.kh.gowith.member.model.dto.Member;
-import edu.kh.gowith.member.model.dto.MemberMenu2;
 import edu.kh.gowith.member.model.service.MemberService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -31,6 +31,15 @@ import lombok.RequiredArgsConstructor;
 public class MemberController {
 
 	private final MemberService service;
+	
+	//회원가입 페이지로 이동
+	
+		@GetMapping("join")
+		public String toJoin() {
+		    return "common/join";
+		}
+	
+	
 
 	// 빠른 로그인
 	@GetMapping("quickLogin")
@@ -45,12 +54,17 @@ public class MemberController {
 		} else {
 			int postCounter = service.postCounter(loginMember.getMemberNo());
 			
-			List<MemberMenu2> favorBoard = service.favorBoard(loginMember.getMemberNo());
+			List<BottomMenu> favorBoard = service.favorBoard(loginMember.getMemberNo());
 
+			StringBuilder sb = new StringBuilder();
+			for (BottomMenu menu : favorBoard) {
+			    sb.append(menu.toString());
+			    sb.append(", "); // 요소 사이에 구분자 추가 (옵션)
+			}
+			String favorBoardAsString = sb.toString();
+			
 			// 콘솔로 확인
-			MemberMenu2[] favorBoardArray = new MemberMenu2[favorBoard.size()];
-			favorBoard.toArray(favorBoardArray);
-			System.out.println("favorBoardArray" + favorBoardArray);
+			System.out.println("favorBoard: " + favorBoardAsString);
 
 			model.addAttribute("loginMember", loginMember);
 			model.addAttribute("postCounter", postCounter);
@@ -60,7 +74,9 @@ public class MemberController {
 
 		return "redirect:/";
 	}
-
+	
+	
+	// 일반 로그인
 	@PostMapping("login")
 	public String loginMember(@ModelAttribute Member member, RedirectAttributes ra, Model model) {
 
@@ -85,5 +101,17 @@ public class MemberController {
 		status.setComplete();
 		return "redirect:/";
 	}
+	
+	@PostMapping("signUp")
+	public String signUp(
+		Member inputMember,
+		@RequestParam("memberAddress") String[] memberAddress,
+		RedirectAttributes ra
+		) {
+		
+		int result = service.signup(inputMember,memberAddress);
+		
+	}
+	
 
 }

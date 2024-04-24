@@ -25,4 +25,7 @@
 		WHERE mm.MEMBER_NO = #{memberNo}
 	</select>
 
+	<!-- 회원 가입 -->
+	<insert id=""></insert>
+
 </mapper>

@@ -5,60 +5,124 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>회원가입 페이지</title>
-
-  <link rel="stylesheet" href="/src/main/resources/css/join.css">
-
+  <link rel="stylesheet" href="/css/join.css">
 </head>
 
 <body>
-  <!-- 이메일, 아이디, pw 입력 칸 -->
 
-  <div id="mainLogo">
-    <a href="#" th:replace="메인로고">메인페이지로 ㄱㄱ</a>
-  </div>
+  <main>
+    <!-- 헤더 추가 -->
+    <div></div>
+    <!-- <th:block th:replace="~{common/header}"></th:block> -->
 
+    <section class="signup-content">
 
-  <form action="#" id="join">
+      <form action="/member/signup" method="POST" name="signupForm" id="signupForm">
 
-    <table>
-      <tr>
-        <td>이메일 : </td>
-        <td><input name="inputEmail" id="inputEmail" 
-          placeholder="naver, hanmail, gmail입력 가능"></input></td>
-      </tr>
+        <!-- 이메일 입력 -->
+        <label for="memberEmail">
+          <span class="required">*</span> 아이디(이메일)
+        </label>
 
-      <tr>
-        <td>아이디 : </td>
-        <td><input name="inputId" id="inputId" 
-          placeholder="영문,한글,숫자 최대 8자리"
-          maxlength="8"></input></td>
-      </tr>
+        <div class="signup-input-area">
+          <input type="text" name="memberEmail" id="memberEmail" placeholder="아이디(이메일)" maxlength="30"
+            autocomplete="off">
 
-      <tr>
-        <td>비밀번호 : </td>
-        <td><input type="password" name="inputPw" id="inputPw"
-          placeholder="최대 11자리"
-          maxlength="11"></input></td>
-      </tr>
-
-    </table>
-
-    <button id="joinBtn"> 회원가입 </button>
-     
-
-    <!-- 전부 통과 시 나타내기-->
-    <div class="hide">
-      <input type="text"
-      placeholder="확인 번호를 입력하세요">
-      <div>아래의 시간 내에 입력해 주세요</div>
-      <p id="countdown">카운트 다운: <span id="count">300</span> 초</p>
-    </div>
-
-  </form>
-</body>
+          <button id="sendAuthKeyBtn" type="button">인증번호 받기</button>
+        </div>
+        <span class="signup-message" id="emailMessage">메일을 받을 수 있는 이메일을 입력해주세요.</span>
 
 
-<script src="/src/main/resources/js/join.js"></script>
+
+        <!-- 인증번호 입력 -->
+        <label for="emailCheck">
+          <span class="required">*</span> 인증번호
+        </label>
+
+        <div class="signup-input-area">
+          <input type="text" name="authKey" id="authKey" placeholder="인증번호 입력" maxlength="6" autocomplete="off">
+
+          <button id="checkAuthKeyBtn" type="button">인증하기</button>
+        </div>
+        <span class="signup-message" id="authKeyMessage"></span>
+        <!-- 인증번호가 일치하지 않습니다 -->
+
+
+        <!-- 비밀번호/비밀번호 확인 입력 -->
+        <label for="memberPw">
+          <span class="required">*</span> 비밀번호
+        </label>
+
+        <div class="signup-input-area">
+          <input type="password" name="memberPw" id="memberPw" placeholder="비밀번호" maxlength="20">
+        </div>
+        <div class="signup-input-area">
+          <input type="password" name="memberPwConfirm" id="memberPwConfirm" placeholder="비밀번호 확인" maxlength="20">
+        </div>
+
+        <!-- 정규 표현식 -->
+        <span class="signup-message" id="pwMessage">영어,숫자,특수문자(!,@,#,-,_) 6~20글자 사이로 입력해주세요.</span>
+
+
+        <!-- 닉네임 입력 -->
+        <label for="memberNickname">
+          <span class="required">*</span> 닉네임
+        </label>
+
+        <div class="signup-input-area">
+          <input type="text" name="memberNickname" id="memberNickname" placeholder="닉네임" maxlength="10">
+        </div>
+
+        <span class="signup-message" id="nickMessage">한글,영어,숫자로만 2~10글자</span>
+
+
+        <!-- 전화번호 입력 -->
+        <label for="memberTel">
+          <span class="required">*</span> 전화번호
+        </label>
+
+        <div class="signup-input-area">
+          <input type="text" name="memberTel" id="memberTel" placeholder="- 없이 숫자만 입력" maxlength="11">
+        </div>
+
+        <span class="signup-message" id="telMessage">전화번호를 입력해주세요.(- 제외)</span>
+
+
+
+        <!-- 주소 입력 -->
+        <label for="memberAddress">주소</label>
+
+        <div class="signup-input-area">
+          <input type="text" name="memberAddress" placeholder="우편번호" maxlength="6" id="postcode">
+
+          <button type="button" id="searchAddress">검색</button>
+        </div>
+
+        <div class="signup-input-area">
+          <input type="text" name="memberAddress" placeholder="도로명/지번 주소" id="address">
+        </div>
+
+        <div class="signup-input-area">
+          <input type="text" name="memberAddress" placeholder="상세 주소" id="detailAddress">
+        </div>
+
+
+        <button id="signupBtn">가입하기</button>
+    </section>
+
+
+
+
+
+  </main>
+
+  <!-- 푸터 추가 -->
+  <!-- <th:block th:replace="~{common/footer}"></th:block> -->
+
+  <!-- 다음 주소 API -->
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+  <script src="/js/join.js"></script>
 
 
 </html>
