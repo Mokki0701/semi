@@ -44,7 +44,8 @@ const checkObj = {
   "memberPwConfirm": false,
   "memberNickname": false,
   "memberTel": false,
-  "authKey": false
+  "authKey": false,
+  "address": true
 }
 
 // 1. 이메일 유효성 검사
@@ -413,7 +414,28 @@ function addZero(number) {
 
 }
 
+/* 주소 유효성 검사 */
+// 전부 입력 또는 전부 미입력시에만 통과
 
+// 입력받을때마다 검사
+const inputAddress = document.querySelectorAll("[name='memberAddress']");
+
+inputAddress.forEach(inputSense => {
+  inputSense.addEventListener("input", e => {
+    const memberAddress = document.querySelectorAll("[name='memberAddress']");
+    // 없으면 true
+    const addr0 = memberAddress[0].value.trim().length == 0;
+    const addr1 = memberAddress[1].value.trim().length == 0;
+    const addr2 = memberAddress[2].value.trim().length == 0;
+
+    const result1 = addr0 && addr1 && addr2; // 모두 true 인 경우 -> true
+    const result2 = !(addr0 || addr1 || addr2); // 하나라도 false -> false
+
+    checkObj.address = result1 || result2;
+    
+
+  });
+});
 
 
 // ------------------------------------------------------
@@ -440,6 +462,7 @@ signupForm.addEventListener("submit", e => {
         case "memberPwConfirm": str = "비밀번호가 유효하지 않습니다"; break;
         case "memberNickname": str = "닉네임이 유효하지 않습니다"; break;
         case "memberTel": str = "전화번호가 유효하지 않습니다"; break;
+        case "address": str = "주소를 모두 작성 / 전부 미작성 해주세요"; break;
       }
 
       alert(str) // 경고창 출력
