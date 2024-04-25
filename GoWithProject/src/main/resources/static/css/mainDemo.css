@@ -261,7 +261,18 @@
   background-color: gray;
 }
 
+/* *********** ↓ 쓰다 버릴 것 ↓ ************ */
 
+.quickLogin{
+  height: 50px;
+}
+.quickLogin:hover{
+  cursor: pointer;
+}
+
+
+
+/* *********** ↑ 쓰다 버릴 것 ↑ ************ */
 
 
 /* 헤더, 푸터 */
@@ -272,7 +283,55 @@
 
 .info * {
   border: 1px solid black;
+}
 
+/* 헤더 메뉴 체크박스 */
+#headerMenuToggle{display: none;}
+
+/* 닉네임부분 */
+label[for="headerMenuToggle"]{
+  cursor: pointer;
+  user-select: none;
+}
+
+label[for="headerMenuToggle"]:hover{
+  text-decoration: underline;
+}
+
+/* 체크박스 다음 형제요소 */
+#headerMenuToggle + div{
+  display: none;
+}
+
+/* 체크된headerMenuToggle 체크박스 다음 형제 요소 */
+#headerMenuToggle:checked + div{
+  display: block;
+}
+
+/* 닉네임 클릭 시 보이는 메뉴 */
+.header-menu{
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  right: 0;
+  margin-top: 5px;
+  border: 1px solid black;
+}
+
+.header-menu > a{
+  display: flex;
+  height: 50%;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-menu > a:first-child{
+  border-bottom: 1px solid #ccc;
+}
+
+.header-menu > a:hover{
+  color: white;
+  background-color: var(--main-color);
 }
 
 /* *********** footer ************ */

@@ -60,10 +60,37 @@
 	<!-- 닉네임 중복 검사 -->
 	<select id="checkNickname" resultType="_int">
 		SELECT COUNT(*)
-		FROM "MEMBER"
+		FROM
+		"MEMBER"
 		WHERE MEMBER_DEL_FL = 'N'
-		AND MEMBER_NICKNAME =
-		#{memberNickname}
+		AND MEMBER_NICKNAME = #{memberNickname}
 	</select>
+
+	<!-- ↓ 이메일 인증번호 ↓ -->
+
+	<!-- 인증 번호 수정 -->
+	<update id="updateAuthKey">
+		UPDATE "EMAIL" SET
+		"AUTH_KEY" = #{authKey},
+		"CREATE_TIME" = SYSDATE
+		WHERE "EMAIL" = #{email}
+	</update>
+
+	<!-- 인증 번호 삽입 -->
+	<insert id="insertAuthKey">
+		INSERT INTO "EMAIL"
+		VALUES(SEQ_KEY_NO.NEXTVAL, #{email}, #{authKey}, DEFAULT)
+	</insert>
+
+
+	<!-- 이메일 인증번호 확인 -->
+	<select id="checkAuthKey" resultType="_int">
+		SELECT COUNT(*)
+		FROM EMAIL
+		WHERE EMAIL = #{email}
+		AND AUTH_KEY = #{authKey}
+	</select>
+	
+	<!-- ↑ 이메일 인증번호 ↑ -->
 
 </mapper>

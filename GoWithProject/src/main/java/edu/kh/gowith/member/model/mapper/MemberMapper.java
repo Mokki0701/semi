@@ -1,6 +1,7 @@
 package edu.kh.gowith.member.model.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -25,6 +26,16 @@ public interface MemberMapper {
 
 	// 이메일 체크
 	int checkEmail(String memberEmail);
+
+	
+	// --------------- 회원가입 기능 --------------- //
+	// 이메일인증번호 기능 //
+	int updateAuthKey(Map<String, String> map);
+	int insertAuthKey(Map<String, String> map);
+	int checkAuthKey(Map<String, Object> map);
+	
+	// 닉네임 중복체크
+	int checkNickname(String memberNickname);
 
 	
 }
