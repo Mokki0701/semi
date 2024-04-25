@@ -9,8 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -102,6 +104,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	// 회원가입
 	@PostMapping("signUp")
 	public String signUp(
 		Member inputMember,
@@ -111,7 +114,41 @@ public class MemberController {
 		
 		int result = service.signup(inputMember,memberAddress);
 		
+		return null;
 	}
+	
+	/** 이메일 중복 검사
+	 * @param memberEmail
+	 * @return 중복 1, 아니면 0
+	 */
+	@ResponseBody // 응답 본문(요청한 fetch())으로 돌려보냄
+	@GetMapping("checkEmail")
+	public int checkEmail(
+		@RequestParam("memberEmail") String memberEmail) {
+		
+		return service.checkEmail(memberEmail);
+	}
+	
+	// 이메일 보내기
+	
+	public int signup(@RequestBody String email) {
+		String authKey = service.sendEmail("signup", email);
+		
+		if(authKey != null ) {
+			return 1;
+		}
+		return 0;
+	}
+	
+	
+	// 닉네임 확인
+		@ResponseBody
+		@GetMapping("checkNickname")
+		public int checkNickname(
+			@RequestParam("memberNickname") String memberNickname) {
+			
+			return service.checkNickname(memberNickname);
+		}
 	
 
 }

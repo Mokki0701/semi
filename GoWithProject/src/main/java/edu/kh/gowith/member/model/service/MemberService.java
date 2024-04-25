@@ -23,6 +23,12 @@ public interface MemberService {
 	// 회원가입
 	int signup(Member inputMember, String[] memberAddress);
 
+	// 이메일 체크
+	int checkEmail(String memberEmail);
+
+	// 회원가입 이메일 보내기
+	String sendEmail(String string, String email);
+
 	
 
 }

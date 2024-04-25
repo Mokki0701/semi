@@ -82,7 +82,8 @@ const checkObj = {
 
     // 4) 입력된 이메일이 있을 경우 정규식 검사
     //	(알맞은 형태로 작성 했는지 검사)
-    const regExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const regExp = /^(?:[a-zA-Z0-9._%+-]+@(?:naver\.com|gmail\.com|daum\.net))$/;
+
 
     // 입력 받은 이메일이 정규식과 일치하지 않는 경우
     // (알맞은 이메일 형태가 아닌 경우)
@@ -350,7 +351,7 @@ clearInterval(authTimer);
 // -> 전체 아닌 특정 부분만 해석해서 보내기
 // -> 순서대로 하는 것이 아닌 동시에 작업 진행
 
-fetch("/email/signup", {
+fetch("/member/email", {
   method : "POST",
   headers : {"Content-Type" : "application/json"},
   body : memberEmail.value

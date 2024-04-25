@@ -23,5 +23,8 @@ public interface MemberMapper {
 	// 회원가입
 	int signup(Member inputMember);
 
+	// 이메일 체크
+	int checkEmail(String memberEmail);
+
 	
 }
