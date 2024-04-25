@@ -3,14 +3,15 @@
 <mapper namespace="edu.kh.gowith.board.model.mapper.BoardMapper">
 	
 	<update id="boardFavortie">
-		UPDATE "MEMBER_MENU"
-		SET FAVORITE = 
-		<if test='myFavorite == "Y"'>'N'</if>
-		<if test='myFavorite == "N"'>'Y'</if>
+		DELETE FROM MEMBER_MENU
 		WHERE MEMBER_NO = #{loginMemberNo}
-		AND BOTTOM_MENU_CODE = #{bott
-		omMenuName}
+		AND BOTTOM_MENU_CODE = #{bottomMenuCode}
 	</update>
+	
+	<insert id="boardInsertFavorite">
+		INSERT INTO MEMBER_MENU
+		VALUES (#{loginMemberNo}, #{bottomMenuCode})
+	</insert>
 	
 	
 	<select id="getBoardList">
@@ -19,7 +20,7 @@
 				FROM "COMMENT" C
 				WHERE C.BOARD_NO = B.BOARD_NO
 				AND COMMENT_DEL_FL = 'N') COMMENT_COUNT,
-				BOARD_LIKE_COUNT,
+				
 				
 				<![CDATA[
 				CASE 
@@ -41,7 +42,7 @@
 		JOIN "MEMBER" USING(MEMBER_NO)
 		WHERE BOTTOM_MENU_CODE = #{bottomMenuCode}
 		AND BOARD_DEL_FL = 'N'
-		ORDER BY CASE WHEN BOARD_NOTIFICATION  = 'Y' THEN 1 ELSE 2 END, BOARD_NO ASC
+		ORDER BY CASE WHEN BOARD_NOTIFICATION  = 'Y' THEN 1 ELSE 2 END, BOARD_WRITE_DATE ASC
 	</select>
 	
 	
@@ -56,10 +57,10 @@
 	
 	
 	<select id="getFavorite">
-		SELECT FAVORITE, BOTTOM_MENU_NAME
+		SELECT COUNT(*)
 		FROM MEMBER_MENU
-		JOIN BOTTOM_MENU USING(BOTTOM_MENU_CODE)
 		WHERE BOTTOM_MENU_CODE = #{bottomMenuCode}
+		AND MEMBER_NO = #{loginMemberNo}
 	</select>
 	
 	
@@ -74,7 +75,7 @@
 	
 	
 	<select id="getSearchCount">
-		SELECT * FROM "BOARD"
+		SELECT COUNT(*) FROM "BOARD"
 		
 		<if test='searchKey == "w"'>
 			JOIN "MEMBER" USING(MEMBER_NO) 
@@ -108,20 +109,20 @@
 		
 		<choose>
 			<when test='periodKey == "day"'>
-				AND BOARD_WRITE_DATE > >= BOARD_WRITE_DATE - 1
+				AND BOARD_WRITE_DATE >= BOARD_WRITE_DATE - 1
 			</when>
 			
 			<when test='periodKey == "week"'>
-				AND BOARD_WRITE_DATE > >= BOARD_WRITE_DATE - 7
+				AND BOARD_WRITE_DATE >= BOARD_WRITE_DATE - 7
 			</when>
 			
 			<when test='periodKey == "month"'>
-				AND BOARD_WRITE_DATE > >= BOARD_WRITE_DATE - 30
+				AND BOARD_WRITE_DATE >= BOARD_WRITE_DATE - 30
 			</when>
 			
 			<!-- 일년인 경우 -->
 			<otherwise>
-				AND BOARD_WRITE_DATE > >= BOARD_WRITE_DATE - 365
+				AND BOARD_WRITE_DATE >= BOARD_WRITE_DATE - 365
 			</otherwise>
 			
 		</choose>
@@ -133,9 +134,90 @@
 	
 	
 	<select id="getSearchList">
+		SELECT BOARD_NO, BOARD_TITLE , MEMBER_NICKNAME, READ_COUNT, BOARD_NOTIFICATION ,BOARD_LIKE_COUNT,
+				(SELECT COUNT(*) 
+				FROM "COMMENT" C
+				WHERE C.BOARD_NO = B.BOARD_NO
+				AND COMMENT_DEL_FL = 'N') COMMENT_COUNT,
+				
+				
+				<![CDATA[
+				CASE 
+					WHEN SYSDATE - BOARD_WRITE_DATE < 1 / 24 / 60
+					THEN FLOOR((SYSDATE - BOARD_WRITE_DATE) * 24 * 60 * 60) || '초 전'
+					
+					WHEN SYSDATE - BOARD_WRITE_DATE < 1 / 24 
+					THEN FLOOR((SYSDATE - BOARD_WRITE_DATE) * 24 * 60) || '분 전'
+					
+					WHEN SYSDATE - BOARD_WRITE_DATE < 1  
+					THEN FLOOR((SYSDATE - BOARD_WRITE_DATE) * 24) || '시간 전'
+					
+					ELSE TO_CHAR(BOARD_WRITE_DATE, 'YYYY-MM-DD')
+					
+				END BOARD_WRITE_DATE
+				]]>
+				
+		FROM "BOARD" B
+		JOIN "MEMBER" USING(MEMBER_NO)
+		WHERE BOTTOM_MENU_CODE = #{bottomMenuKey}
+		AND BOARD_DEL_FL = 'N'
 		
+		<choose>
+			<when test='searchKey == "t"'>
+				AND BOARD_TITLE LIKE '%' || #{query} || '%'
+			</when>
+			
+			<when test='searchKey == "c"'>
+				AND BOARD_CONTENT LIKE '%' || #{query} || '%'
+			</when>
+			
+			<when test='searchKey == "tc"'>
+				AND ( 
+					BOARD_TITLE   LIKE '%' || #{query} || '%'
+					OR  
+					BOARD_CONTENT LIKE '%' || #{query} || '%'
+				)
+			</when>
+			
+			<otherwise>
+				AND MEMBER_NICKNAME LIKE '%' || #{query} || '%'
+			</otherwise>
+			
+		</choose>
+		
+		<choose>
+			<when test='periodKey == "day"'>
+				AND BOARD_WRITE_DATE >= BOARD_WRITE_DATE - 1
+			</when>
+			
+			<when test='periodKey == "week"'>
+				AND BOARD_WRITE_DATE >= BOARD_WRITE_DATE - 7
+			</when>
+			
+			<when test='periodKey == "month"'>
+				AND BOARD_WRITE_DATE >= BOARD_WRITE_DATE - 30
+			</when>
+			
+			<!-- 일년인 경우 -->
+			<otherwise>
+				AND BOARD_WRITE_DATE >= BOARD_WRITE_DATE - 365
+			</otherwise>
+			
+		</choose>
+		
+		ORDER BY CASE WHEN BOARD_NOTIFICATION  = 'Y' THEN 1 ELSE 2 END, BOARD_WRITE_DATE ASC
 		
 	
+	</select>
+	
+	
+	
+	
+	
+	<select id="getBottomName">
+		SELECT BOTTOM_MENU_CODE
+		FROM BOTTOM_MENU
+		WHERE BOTTOM_MENU_CODE = #{bottomMenuKey}
 	</select>
 	
 	

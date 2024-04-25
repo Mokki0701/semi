@@ -83,6 +83,7 @@ public class Pagination {
 		startPage = re*10 + 1; // 각 목록의 시작 번호
 		
 		endPage = startPage + 8; // 목록의 마지막 페이지 번호
+		if(startPage > endPage) endPage = startPage;
 		
 		if(endPage > maxPage) endPage = maxPage;
 		

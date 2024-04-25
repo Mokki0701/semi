@@ -1,41 +1,45 @@
 const favoriteBtn = document.querySelectorAll(".favoriteBtn");
-// const bottomName = document.querySelector("#bottomName");
+const bottomName = document.querySelector("#bottomName");
 
 
 for(let i = 0; i < favoriteBtn.length; i++){
 
-    favoriteBtn.addEventListener("click", e=>{
-    
-        // const bottomMenuName = bottomName.innerText; 
-    
+    favoriteBtn[i].addEventListener("click", e=>{
+
+        const bottomMenuName = bottomName.innerText; 
+        
         const param = {
-            // "bottomMenuName" : bottomMenuName,  이게 아니라 bottomMenuCode 가 와야한다.
-            "loginMemberNo" : loginMemberNo,
-            "myFavorite" : myFavorite
+            "bottomMenuCode" : bottomMenuCode, 
+            "loginMemberNo" : loginMemberNo
         }
-    
-        fetch("/board/favorite",{
-            method : "PUT",
-            headers : {"Content-Type" : "application/json"},
-            body : JSON.stringify(param)
-        })
-        .then(resp => resp.text())
-        .then(result => {
-            console.log(result);
+        
+        if(favoriteCheck == 1){
+            fetch("/board/favorite",{
+                method : "DELETE",
+                headers : {"Content-Type" : "application/json"},
+                body : JSON.stringify(param)
+            })
+            .then(resp => resp.text())
+            .then(result =>{
+                if(result == 1) favoriteBtn[i].innerText="N";
+                favoriteCheck = 0;
+            });
+            return;
+        }
+        else{
+            fetch("/board/favorite",{
+                method : "POST",
+                headers : {"Content-Type" : "application/json"},
+                body : JSON.stringify(param)
+            })
+            .then(resp=> resp.text())
+            .then(result=>{
+                if(result == 1) favoriteBtn[i].innerText="Y";
+                favoriteCheck = 1;
+            });
+        }
 
-            if(result == 1){
-
-                if(myFavorite == 'Y'){
-                    /* 색을 뺀다 */
-                    return;
-                }
-
-                favoriteBtn[i].append() /* 색을 추가 한다. */
-                return;
-            }
-        })
-    
-    });
+    })
 
 }
 
@@ -50,7 +54,7 @@ numberUnit.addEventListener("change", e=>{
     const topMenuCode = params.get("topMenuCode");
     const bottomMenuCode = params.get("bottomMenuCode");
     
-    location.href = `/${topMenuCode}/${bottomMenuCode}?limit=` + selectNumber;
+    location.href = `/board/${topMenuCode}/${bottomMenuCode}`;
 
 })
 

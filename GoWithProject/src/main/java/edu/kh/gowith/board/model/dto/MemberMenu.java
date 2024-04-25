@@ -1,6 +1,7 @@
 package edu.kh.gowith.board.model.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,16 +10,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class MemberMenu {
 
 	private int memberNo;
-	private String bottomMenuCode;
-	private String favorite;
-	
-	
-	
+	private int bottomMenuCode;
 	
 }
-
-////bottomMenu 테이블 조인
-//	private String bottomMenuName;
