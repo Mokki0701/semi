@@ -24,6 +24,7 @@ public class BoardImg {
 	private int imgOrder;
 	private int topMenuCode;
 	private int bottomMenuCode;
+	private int boardNo;
 	
 	//게시글 이미지 삽입/수정 시 사용
 	private MultipartFile uploadFile;
