@@ -14,7 +14,7 @@
         <section>
 
             <section>
-                <h1 id="bottomName" th:text="${memberMenu.bottomMenuName}">게시판 이름</h1>
+                <h1 id="bottomName" th:text="${bottomMenuName}">게시판 이름</h1>
  
                 <!-- DTO로 FAVORITE 도 보내야 하네... -->
 
@@ -29,16 +29,18 @@
                 <!-- 이거!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
                 <!-- 로그인 되있을때만 게시판명 옆에 그거 표식 넣어야함 -->
 
+                <th:block th:if="${session.loginMember}">
 
+                    <!-- y 여서 안에 색이 채워져있는 경우 -->
+                    <th:block th:if="${favoriteCheck == 1}">
+                        <button class="favoriteBtn">Y</button>
+                    </th:block>
+    
+                    <!-- n 이여서 색이 채워지지 않은 경우 -->
+                    <th:block th:if="${favoriteCheck == 0}">
+                        <button class="favoriteBtn">N</button>
+                    </th:block>
 
-                <!-- y 여서 안에 색이 채워져있는 경우 -->
-                <th:block th:if="${memberMenu.favorite == 'Y'}">
-                    <button class="favoriteBtn">Y</button>
-                </th:block>
-
-                <!-- n 이여서 색이 채워지지 않은 경우 -->
-                <th:block th:if="${memberMenu.favorite == 'N'}">
-                    <button class="favoriteBtn">N</button>
                 </th:block>
 
 
@@ -152,10 +154,10 @@
                 <ul class="pagination" th:object="${pagination}">
 
                     <!-- 첫 페이지로 이동 -->
-                    <li><a th:href="@{/board/{boardCode}(boardCode=${boardCode},cp=1)}">&lt;&lt;</a></li>
+                    <li><a th:href="@{/board/{topMenuCode}/{bottomMenuCode} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode},cp=1)}">&lt;&lt;</a></li>
 
                     <!-- 이전 목록 마지막 번호로 이동 -->
-                    <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=*{prevPage})}">&lt;</a></li>
+                    <li><a th:href="@{/board/{topMenuCode}/{bottomMenuCode} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode}, cp=*{prevPage})}">&lt;</a></li>
 
                     <!-- 특정 페이지로 이동 -->
 
@@ -167,23 +169,23 @@
 
                         <!-- 보고있지 않은 페이지 -->
                         <li th:unless="${i == pagination.currentPage}"> 
-                            <a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=${i})}" 
+                            <a th:href="@{/board/{topMenuCode}/{bottomMenuCode} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode}, cp=${i})}" 
                                 th:text="${i}">이동할 페이지</a> 
                         </li>
                     </th:block>
                     
 
                     <!-- 다음 목록 시작 번호로 이동 -->
-                    <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=*{nextPage})}">&gt;</a></li>
+                    <li><a th:href="@{/board/{topMenuCode}/{bottomMenuCode} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode}, cp=*{nextPage})}">&gt;</a></li>
 
                     <!-- 끝 페이지로 이동 -->
-                    <li><a th:href="@{/board/{boardCode} (boardCode=${boardCode}, cp=*{maxPage})}">&gt;&gt;</a></li>
+                    <li><a th:href="@{/board/{topMenuCode}/{bottomMenuCode} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode}, cp=*{maxPage})}">&gt;&gt;</a></li>
                 </ul>
 
             </div>
 
 
-            <form th:action="@{{boardCode}(boardCode=${boardCode})}" method="get" id="boardSearch">
+            <form th:action="@{/board/{topMenuCode}/{bottomMenuCode} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode})}" method="get" id="boardSearch">
 
                 <select name="bottomMenuKey" id="bottomMenuKey">
                     <option th:each="bottomMenu : ${bottomMenuList}" th:value="${bottomMenu.bottomMenuCode}" th:text="${bottomMenu.bottomMenuName}">게시판 이름</option>
@@ -213,11 +215,13 @@
         </section>
     </main>
 
-    <script>
+    <script th:inline="javascript">
 
-        const loginMemberNo = /*[[${session.loginMember.memberNo}]]*/ "로그인 회원 이메일";
+        const loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원 이메일";
         
-        const myFavorite = /*[[${memberMenu.favorite}]]*/ "즐겨찾기 선호요소";
+        const bottomMenuCode = /*[[${bottomMenuCode}]]*/ "하위메뉴번호";
+
+        let favoriteCheck = /*[[${favoriteCheck}]]*/ "즐겨찾기 여부";
 
     </script>
 

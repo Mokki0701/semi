@@ -11,4 +11,6 @@ public interface BoardService {
 	Map<String, Object> searchBoardList(Map<String, Object> paramMap, int cp, int limit,
 			int memberNo);
 
+	int boardInsertFavorite(Map<String, String> paramMap);
+
 }

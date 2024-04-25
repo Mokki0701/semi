@@ -8,7 +8,6 @@ import org.apache.ibatis.session.RowBounds;
 
 import edu.kh.gowith.board.model.dto.Board;
 import edu.kh.gowith.board.model.dto.BottomMenu;
-import edu.kh.gowith.board.model.dto.MemberMenu;
 
 
 @Mapper
@@ -22,12 +21,18 @@ public interface BoardMapper {
 
 	List<Board> getBoardList(int bottomMenuCode, RowBounds rowBounds);
 
-	MemberMenu getFavorite(Map<String, Integer> checkFavorite);
+	
 
 	List<BottomMenu> bottomTopMenu();
 
 	int getSearchCount(Map<String, Object> paramMap);
 
 	List<Board> getSearchList(Map<String, Object> paramMap, RowBounds rowBounds);
+
+	int getFavorite(Map<String, Integer> favoriteCheck);
+
+	int getBottomName(int object);
+
+	int boardInsertFavorite(Map<String, String> paramMap);
 
 }

@@ -5,8 +5,10 @@ import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,13 +51,14 @@ public class BoardController {
 		
 		model.addAttribute("pagination", boardMap.get("pagination"));
 		model.addAttribute("boardList", boardMap.get("boardList"));
-		model.addAttribute("memberMenu", boardMap.get("memberMenu"));
+		model.addAttribute("favoriteCheck", boardMap.get("favoriteCheck"));
 		model.addAttribute("bottomMenuList", boardMap.get("bottomMenuList"));
+		model.addAttribute("bottomMenuName", boardMap.get("bottomMenuName"));
 		
 		return "board/boardList";
 	}
 	
-	@PutMapping("favorite")
+	@DeleteMapping("favorite")
 	@ResponseBody
 	public int boardFavorite(
 			@RequestBody Map<String, String> paramMap
@@ -64,6 +67,15 @@ public class BoardController {
 		return service.boardFavorite(paramMap);
 	}
 	
+	
+	@PostMapping("favorite")
+	@ResponseBody
+	public int boardInsertFavorite(
+			@RequestBody Map<String, String> paramMap
+			) {
+		
+		return service.boardInsertFavorite(paramMap);
+	}
 	
 
 	
