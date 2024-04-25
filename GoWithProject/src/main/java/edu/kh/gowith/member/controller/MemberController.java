@@ -117,39 +117,39 @@ public class MemberController {
 		return null;
 	}
 	
-	/** 이메일 중복 검사
-	 * @param memberEmail
-	 * @return 중복 1, 아니면 0
-	 */
-	@ResponseBody // 응답 본문(요청한 fetch())으로 돌려보냄
-	@GetMapping("checkEmail")
-	public int checkEmail(
-		@RequestParam("memberEmail") String memberEmail) {
-		
-		return service.checkEmail(memberEmail);
-	}
+//	/** 이메일 중복 검사
+//	 * @param memberEmail
+//	 * @return 중복 1, 아니면 0
+//	 */
+//	@ResponseBody // 응답 본문(요청한 fetch())으로 돌려보냄
+//	@GetMapping("checkEmail")
+//	public int checkEmail(
+//		@RequestParam("memberEmail") String memberEmail) {
+//		
+//		return service.checkEmail(memberEmail);
+//	}
 	
-	// 이메일 보내기
-	@ResponseBody
-	@PostMapping("authMailSend")
-	public int signup(@RequestBody String email) {
-		String authKey = service.sendEmail("authMailSend", email);
-		
-		if(authKey != null ) {
-			return 1;
-		}
-		return 0;
-	}
+//	// 이메일 보내기
+//	@ResponseBody
+//	@PostMapping("authMailSend")
+//	public int signup(@RequestBody String email) {
+//		String authKey = service.sendEmail("authMailSend", email);
+//		
+//		if(authKey != null ) {
+//			return 1;
+//		}
+//		return 0;
+//	}
 	
 	
-	// 닉네임 확인
-		@ResponseBody
-		@GetMapping("checkNickname")
-		public int checkNickname(
-			@RequestParam("memberNickname") String memberNickname) {
-			
-			return service.checkNickname(memberNickname);
-		}
-	
+//	// 닉네임 확인
+//		@ResponseBody
+//		@GetMapping("checkNickname")
+//		public int checkNickname(
+//			@RequestParam("memberNickname") String memberNickname) {
+//			
+//			return service.checkNickname(memberNickname);
+//		}
+//	
 
 }

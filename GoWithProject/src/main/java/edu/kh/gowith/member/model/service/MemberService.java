@@ -24,10 +24,10 @@ public interface MemberService {
 	int signup(Member inputMember, String[] memberAddress);
 
 	// 이메일 체크
-	int checkEmail(String memberEmail);
+//	int checkEmail(String memberEmail);
 
 	// 회원 가입 이메일 보내기
-	String sendEmail(String string, String email);
+//	String sendEmail(String string, String email);
 
 	
 
