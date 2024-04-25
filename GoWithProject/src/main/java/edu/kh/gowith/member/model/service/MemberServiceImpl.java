@@ -2,14 +2,19 @@ package edu.kh.gowith.member.model.service;
 
 import java.util.List;
 
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring6.SpringTemplateEngine;
 
 import edu.kh.gowith.board.model.dto.BottomMenu;
 import edu.kh.gowith.board.model.dto.MemberMenu;
 import edu.kh.gowith.member.model.dto.Member;
 import edu.kh.gowith.member.model.mapper.MemberMapper;
+import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,9 +25,10 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberServiceImpl implements MemberService {
 
 	private final MemberMapper mapper;
-
 	private final BCryptPasswordEncoder bcrypt;
-
+	private final JavaMailSender mailSender;
+	private final SpringTemplateEngine templateEngine;
+	
 	@Override
 	public Member loginMember(Member member) {
 
@@ -105,8 +111,48 @@ public class MemberServiceImpl implements MemberService {
 
 	}
 
-	// 이메일 발송
-	
+	// 회원가입 이메일 발송
+	@Override
+	public String sendEmail(String htmlName, String email) {
+		
+		String authKey = createAuthKey();
+		
+		try {
+			
+			String subject = null;
+			switch(htmlName) {
+			case "authMailSend" : subject = "GoWith 회원 가입 인증번호입니다";
+				break;
+			}
+			
+			// 인증 메일 보내기
+			MimeMessage mimeMessage = mailSender.createMimeMessage();
+			
+			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+			
+			helper.setTo(email);
+			helper.setSubject(subject);
+			helper.setText(loadHtml(authKey, htmlName), true);
+		}
+		
+		public String loadHtml(String authKey, String htmlName) {
+			
+			// org.thymeleaf.context 선택!!!!!
+			// forward하는 용도가 아닌 자바에서 쓰고싶을 때 쓰는 thymeleaf 객체
+			Context context = new Context();
+			
+			// 타임리프가 적용된 html에서 사용할 값
+			context.setVariable("authKey", authKey);
+			
+			// templates/email 폴더에서 htmlName과 같은 .html 파일 내용을 읽어와
+			// String으로 변환을 시킨다
+			return templateEngine.process("email/" + htmlName, context);
+			
+		}
+		
+		
+		return null;
+	}
 	
 	
 	// 이메일 체크

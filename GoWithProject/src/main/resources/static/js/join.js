@@ -351,7 +351,7 @@ clearInterval(authTimer);
 // -> 전체 아닌 특정 부분만 해석해서 보내기
 // -> 순서대로 하는 것이 아닌 동시에 작업 진행
 
-fetch("/member/email", {
+fetch("/member/authMailSend", {
   method : "POST",
   headers : {"Content-Type" : "application/json"},
   body : memberEmail.value

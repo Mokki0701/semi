@@ -130,9 +130,10 @@ public class MemberController {
 	}
 	
 	// 이메일 보내기
-	
+	@ResponseBody
+	@PostMapping("authMailSend")
 	public int signup(@RequestBody String email) {
-		String authKey = service.sendEmail("signup", email);
+		String authKey = service.sendEmail("authMailSend", email);
 		
 		if(authKey != null ) {
 			return 1;
