@@ -151,7 +151,7 @@
             <div>
 
                                 <!-- 일반 목록 조회 ( 검색 X ) -->
-                <ul class="pagination" th:object="${pagination}">
+                <ul class="pagination" th:unless="${param.periodKey}" th:object="${pagination}">
 
                     <!-- 첫 페이지로 이동 -->
                     <li><a th:href="@{/board/{topMenuCode}/{bottomMenuCode} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode},cp=1)}">&lt;&lt;</a></li>
@@ -182,13 +182,52 @@
                     <li><a th:href="@{/board/{topMenuCode}/{bottomMenuCode} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode}, cp=*{maxPage})}">&gt;&gt;</a></li>
                 </ul>
 
+                <!-- 일반 목록 조회 ( 검색 O ) -->
+                <ul class="pagination" th:if="${param.periodKey}" th:object="${pagination}">
+
+                    <!-- 첫 페이지로 이동 -->
+                    <li><a th:href="@{/board/{topMenuCode}/{bottomMenuCode} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode},cp=1, topMenuKey=${param.topMenuKey}, bottomMenuKey=${param.bottomMenuKey}, periodKey=${param.periodKey}, searchKey=${param.searchKey}, query=${query})}">&lt;&lt;</a></li>
+
+                    <!-- 이전 목록 마지막 번호로 이동 -->
+                    <li><a th:href="@{/board/{topMenuCode}/{bottomMenuCode} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode}, cp=*{prevPage}, topMenuKey=${topMenuKey}, bottomMenuKey=${bottomMenuKey}, periodKey=${periodKey}, searchKey=${searchKey}, query=${query})}">&lt;</a></li>
+
+                    <!-- 특정 페이지로 이동 -->
+
+                    <th:block th:each="i : *{#numbers.sequence(startPage,endPage)}">
+                        <!-- 현재 보고있는 페이지 -->
+                        <li th:if="${i == pagination.currentPage}">
+                            <a class="current" th:text="${i}">현재 페이지</a>
+                        </li>
+
+                        <!-- 보고있지 않은 페이지 -->
+                        <li th:unless="${i == pagination.currentPage}"> 
+                            <a th:href="@{/board/{topMenuCode}/{bottomMenuCode} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode}, cp=${i}, topMenuKey=${topMenuKey}, bottomMenuKey=${bottomMenuKey}, periodKey=${periodKey}, searchKey=${searchKey}, query=${query})}" 
+                                th:text="${i}">이동할 페이지</a> 
+                        </li>
+                    </th:block>
+                    
+
+                    <!-- 다음 목록 시작 번호로 이동 -->
+                    <li><a th:href="@{/board/{topMenuCode}/{bottomMenuCode} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode}, cp=*{nextPage}, topMenuKey=${topMenuKey}, bottomMenuKey=${bottomMenuKey}, periodKey=${periodKey}, searchKey=${searchKey}, query=${query})}">&gt;</a></li>
+
+                    <!-- 끝 페이지로 이동 -->
+                    <li><a th:href="@{/board/{topMenuCode}/{bottomMenuCode} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode}, cp=*{maxPage}, topMenuKey=${topMenuKey}, bottomMenuKey=${bottomMenuKey}, periodKey=${periodKey}, searchKey=${searchKey}, query=${query})}">&gt;&gt;</a></li>
+                </ul>
+
+
+
+
             </div>
 
 
             <form th:action="@{/board/{topMenuCode}/{bottomMenuCode} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode})}" method="get" id="boardSearch">
 
+                <select name="topMenuKey" id="topMenuKey">
+                    <option th:each="topMenu : ${topMenuList}" th:value="${topMenu.topMenuCode}" th:text="${topMenu.topMenuName}">게시판 이름</option>
+                </select>
+
                 <select name="bottomMenuKey" id="bottomMenuKey">
-                    <option th:each="bottomMenu : ${bottomMenuList}" th:value="${bottomMenu.bottomMenuCode}" th:text="${bottomMenu.bottomMenuName}">게시판 이름</option>
+
                 </select>
 
                 <select name="periodKey" id="periodKey">
@@ -202,7 +241,6 @@
                     <option value="t">제목</option>
                     <option value="c">내용</option>
                     <option value="tc">제목+내용</option>
-                    <option value="w">작성자</option>
                 </select>
 
                 <input type="text" name="query"  id="searchQuery" placeholder="검색어를 입력해주세요.">
@@ -220,6 +258,8 @@
         const loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원 이메일";
         
         const bottomMenuCode = /*[[${bottomMenuCode}]]*/ "하위메뉴번호";
+
+        const topMenuCode = /*[[${topMenuCode}]]*/ "하위메뉴번호";
 
         let favoriteCheck = /*[[${favoriteCheck}]]*/ "즐겨찾기 여부";
 
