@@ -270,8 +270,6 @@
   cursor: pointer;
 }
 
-
-
 /* *********** ↑ 쓰다 버릴 것 ↑ ************ */
 
 
@@ -309,14 +307,32 @@ label[for="headerMenuToggle"]:hover{
 }
 
 /* 닉네임 클릭 시 보이는 메뉴 */
-.header-menu{
+.header-menu {
   position: absolute;
+  top: 20px;
   width: 100px;
   height: 100px;
   right: 0;
-  margin-top: 5px;
+  margin-top: 10px;
   border: 1px solid black;
+  background-color: #fff;
+  border-radius: 5px;
+  animation-name: moveLeft;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  z-index: 999; /* .highest 아래로 위치하도록 z-index 값을 설정합니다. */
 }
+
+
+@keyframes moveLeft {
+  from {
+    transform: translateX(100%); /* 시작 지점에서 오른쪽으로 이동한 다음 왼쪽으로 이동합니다. */
+  }
+  to {
+    transform: translateX(0); /* 요소를 왼쪽으로 이동합니다. */
+  }
+}
+
 
 .header-menu > a{
   display: flex;

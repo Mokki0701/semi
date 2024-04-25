@@ -29,7 +29,7 @@
 
       <div class="highest">
         <label for="headerMenuToggle">
-          [[${session.loginMember.memberNickname}]]
+          [[${session.loginMember.memberNickname}]] 님 반갑습니다!
           <span>🔽</span>
         </label>
         <input type="checkbox" id="headerMenuToggle">
@@ -48,8 +48,9 @@
 
   </div>
 
-  <div class="all">
+  <!-- ↑ 임시 헤더 ↑-->
 
+  <div class="all">
 
     <!-- 사이드 메뉴 -->
     <!-- 로그인 전 로그인 입력칸, 로그인후 회원 정보 칸 -->
@@ -79,13 +80,12 @@
 
                   <!-- 로그인 버튼 -->
                   <section>
-                    <button>로그인</button>
+                    <button id="loginBtn">로그인</button>
                   </section>
                 </fieldset>
 
-                <label>
-                  <label for="saveId" id="rememberId">이메일 기억하기</label>
-                  <input type="checkbox" name="saveId" id="saveId">
+                <label for="saveId" id="rememberId">
+                  <input type="checkbox" name="saveId" id="saveId">이메일 기억하기
                 </label>
 
                 <article class="signup-find-area">

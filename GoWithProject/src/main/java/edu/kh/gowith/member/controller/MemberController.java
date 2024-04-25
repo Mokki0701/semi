@@ -25,11 +25,13 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @SessionAttributes({ "loginMember", "postCounter", "favorBoard" })
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("member")
+@Slf4j
 public class MemberController {
 
 	private final MemberService service;
@@ -102,7 +104,17 @@ public class MemberController {
 			model.addAttribute("loginMember", loginMember);
 			
 			// 아이디 저장용 쿠키
-//			Cookie cookie = new Cookie("saveId", loginMember.getMemberEmail());
+			Cookie cookie = new Cookie("saveId", loginMember.getMemberEmail() );
+			cookie.setPath("/");
+			
+			
+			if(saveId != null) {
+				cookie.setMaxAge(60*30); // 30분 유지
+			} else {
+				cookie.setMaxAge(0);
+			}
+			
+			resp.addCookie(cookie);
 			
 			model.addAttribute("postCounter", postCounter);
 		}
