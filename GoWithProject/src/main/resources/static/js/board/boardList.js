@@ -51,7 +51,11 @@ numberUnit.addEventListener("change", e=>{
 
     const params = new URL(location.href).searchParams;
     
-    location.href = new URL(location.href)+"&limit="+selectNumber;
+    const url = window.location.href;;
+
+    location.href = new URL(location.href).pathname+"?limit="+selectNumber;
+
+
 
 })
 

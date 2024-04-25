@@ -42,7 +42,7 @@
 		JOIN "MEMBER" USING(MEMBER_NO)
 		WHERE BOTTOM_MENU_CODE = #{bottomMenuCode}
 		AND BOARD_DEL_FL = 'N'
-		ORDER BY CASE WHEN BOARD_NOTIFICATION  = 'Y' THEN 1 ELSE 2 END, BOARD_WRITE_DATE ASC
+		ORDER BY CASE WHEN BOARD_NOTIFICATION  = 'Y' THEN 1 ELSE 2 END, LENGTH(BOARD_WRITE_DATE) ASC, BOARD_WRITE_DATE ASC
 	</select>
 	
 	
@@ -77,10 +77,6 @@
 	<select id="getSearchCount">
 		SELECT COUNT(*) FROM "BOARD"
 		
-		<if test='searchKey == "w"'>
-			JOIN "MEMBER" USING(MEMBER_NO) 
-		</if>
-		
 		WHERE BOTTOM_MENU_CODE = #{bottomMenuKey}
 		AND BOARD_DEL_FL = 'N'
 		AND TOP_MENU_CODE = #{topMenuKey}
@@ -101,10 +97,7 @@
 					BOARD_CONTENT LIKE '%' || #{query} || '%'
 				)
 			</when>
-			
-			<otherwise>
-				AND MEMBER_NICKNAME LIKE '%' || #{query} || '%'
-			</otherwise>
+		
 			
 		</choose>
 		
@@ -181,10 +174,6 @@
 				)
 			</when>
 			
-			<otherwise>
-				AND MEMBER_NICKNAME LIKE '%' || #{query} || '%'
-			</otherwise>
-			
 		</choose>
 		
 		<choose>
@@ -207,7 +196,7 @@
 			
 		</choose>
 		
-		ORDER BY CASE WHEN BOARD_NOTIFICATION  = 'Y' THEN 1 ELSE 2 END, BOARD_WRITE_DATE ASC
+		ORDER BY CASE WHEN BOARD_NOTIFICATION  = 'Y' THEN 1 ELSE 2 END, LENGTH(BOARD_WRITE_DATE) ASC, BOARD_WRITE_DATE ASC
 		
 	
 	</select>
