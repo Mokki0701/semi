@@ -1,5 +1,6 @@
 package edu.kh.gowith.board.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,13 +10,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import edu.kh.gowith.board.model.dto.BottomMenu;
 import edu.kh.gowith.board.model.service.BoardService;
 import edu.kh.gowith.member.model.dto.Member;
 import lombok.RequiredArgsConstructor;
@@ -41,19 +42,31 @@ public class BoardController {
 		Map<String, Object> boardMap = null;
 		
 		if(paramMap.get("periodKey") == null) {
+			Map<String, Integer> inputMap = new HashMap<>();
 			
-			boardMap = service.boardList(bottomMenuCode, cp, limit, loginMember.getMemberNo());
+			if(loginMember != null) {
+				inputMap.put("loginMemberNo", loginMember.getMemberNo());
+			}
+						
+			boardMap = service.boardList(bottomMenuCode, cp, limit, inputMap);
 
 		}else {
-			boardMap = service.searchBoardList(paramMap, cp, limit, loginMember.getMemberNo());
+			
+			Map<String, Integer> inputMap = new HashMap<>();
+			
+			if(loginMember != null) {
+				inputMap.put("loginMemberNo", loginMember.getMemberNo());
+			}
+			
+			boardMap = service.searchBoardList(paramMap, cp, limit, inputMap);
 		}
 		
 		
 		model.addAttribute("pagination", boardMap.get("pagination"));
 		model.addAttribute("boardList", boardMap.get("boardList"));
 		model.addAttribute("favoriteCheck", boardMap.get("favoriteCheck"));
-		model.addAttribute("bottomMenuList", boardMap.get("bottomMenuList"));
-		model.addAttribute("bottomMenuName", boardMap.get("bottomMenuName"));
+		model.addAttribute("topMenuList", boardMap.get("topMenuList"));
+		model.addAttribute("topMenuName", boardMap.get("topMenuName"));
 		
 		return "board/boardList";
 	}
@@ -76,6 +89,27 @@ public class BoardController {
 		
 		return service.boardInsertFavorite(paramMap);
 	}
+	
+	@GetMapping("selectBottom")
+	@ResponseBody
+	public List<BottomMenu> selectBottomList(
+			@RequestParam("topMenuCode") int topMenuCode
+			){
+		
+		return service.selectBottmList(topMenuCode);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 	

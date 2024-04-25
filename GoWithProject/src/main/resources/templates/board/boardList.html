@@ -187,8 +187,12 @@
 
             <form th:action="@{/board/{topMenuCode}/{bottomMenuCode} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode})}" method="get" id="boardSearch">
 
+                <select name="topMenuKey" id="topMenuKey">
+                    <option th:each="topMenu : ${topMenuList}" th:value="${topMenu.topMenuCode}" th:text="${topMenu.topMenuName}">게시판 이름</option>
+                </select>
+
                 <select name="bottomMenuKey" id="bottomMenuKey">
-                    <option th:each="bottomMenu : ${bottomMenuList}" th:value="${bottomMenu.bottomMenuCode}" th:text="${bottomMenu.bottomMenuName}">게시판 이름</option>
+                    
                 </select>
 
                 <select name="periodKey" id="periodKey">
@@ -202,7 +206,6 @@
                     <option value="t">제목</option>
                     <option value="c">내용</option>
                     <option value="tc">제목+내용</option>
-                    <option value="w">작성자</option>
                 </select>
 
                 <input type="text" name="query"  id="searchQuery" placeholder="검색어를 입력해주세요.">
@@ -220,6 +223,8 @@
         const loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원 이메일";
         
         const bottomMenuCode = /*[[${bottomMenuCode}]]*/ "하위메뉴번호";
+
+        const topMenuCode = /*[[${topMenuCode}]]*/ "하위메뉴번호";
 
         let favoriteCheck = /*[[${favoriteCheck}]]*/ "즐겨찾기 여부";
 

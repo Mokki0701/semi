@@ -66,7 +66,7 @@
 	
 	
 	<select id="bottomTopMenu">
-		SELECT * FROM BOTTOM_MENU
+		SELECT * FROM TOP_MENU
 	</select>
 	
 	
@@ -83,6 +83,7 @@
 		
 		WHERE BOTTOM_MENU_CODE = #{bottomMenuKey}
 		AND BOARD_DEL_FL = 'N'
+		AND TOP_MENU_CODE = #{topMenuKey}
 		
 		<choose>
 			<when test='searchKey == "t"'>
@@ -161,6 +162,7 @@
 		JOIN "MEMBER" USING(MEMBER_NO)
 		WHERE BOTTOM_MENU_CODE = #{bottomMenuKey}
 		AND BOARD_DEL_FL = 'N'
+		AND TOP_MENU_CODE = #{topMenuKey}
 		
 		<choose>
 			<when test='searchKey == "t"'>
@@ -222,7 +224,10 @@
 	
 	
 	
-	
+	<select id="selectBottomList">
+		SELECT * FROM BOTTOM_MENU
+		WHERE TOP_MENU_CODE = #{topMenuCode}
+	</select>
 	
 	
 	
