@@ -5,17 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>로그인 페이지</title>
 
-  <link rel="stylesheet" href="/mainDemo.css">
+  <link rel="stylesheet" href="/css/login.css">
 
 </head>
 <body>
+  <!-- 로그인 전용 페이지 -->
   
-  <form action="#" class="loginForm">
-    <input type="text" id="inputEmail">
+  <a href="/" id="btnToHome">홈으로 가기</a>
+
+  <form action="/member/login" method="post" id="loginForm">
+    <section class="input-box">
+        <input type="text" name="memberEmail" placeholder="Email" value="" required />
+    </section>
+
+    <section class="input-box">
+        <input type="password" name="memberPw" placeholder="Password" required />
+    </section>
+
+    <button class="login-btn">Login</button>
+
+    <div class="saveId-area">
+        <input type="checkbox" name="saveId" id="saveId">
+        <label for="saveId"><i class="fas fa-check"></i>아이디 저장</label>
+    </div>
+
+    <p class="text-area">
+        <a href="#">회원가입</a>
+        |
+        <a href="#">ID/PW 찾기</a>
+    </p>
   </form>
+</main>
 
-  
-
-
+<script src="/js/join.js"></script>
 </body>
 </html>

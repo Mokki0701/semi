@@ -1,6 +1,7 @@
 package edu.kh.gowith.member.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import edu.kh.gowith.board.model.dto.BottomMenu;
 import edu.kh.gowith.board.model.dto.MemberMenu;
@@ -24,10 +25,16 @@ public interface MemberService {
 	int signup(Member inputMember, String[] memberAddress);
 
 	// 이메일 체크
-//	int checkEmail(String memberEmail);
+	int checkEmail(String memberEmail);
 
 	// 회원 가입 이메일 보내기
-//	String sendEmail(String string, String email);
+	String sendEmail(String string, String email);
+
+	// 인증번호 확인
+	int checkAuthKey(Map<String, Object> map);
+
+	// 닉네임 체크
+	int checkNickname(String memberNickname);
 
 	
 

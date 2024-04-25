@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <title th:text="${app.name}">임시 메인</title> -->
   <title>임시 메인</title>
   <!-- <link rel="stylesheet" href="/mainDemo.css"> -->
   <link rel="stylesheet" href="/css/mainDemo.css">
@@ -15,10 +16,30 @@
 
   <!-- 임시 헤더 -->
   <div class="header">
-    <div class="highest">
-      <div><a href="#">로그인</a></div>
-      <div><a href="#">메인페이지</a></div>
-    </div>
+    <!-- 로그인 안된 경우 -->
+    <th:block th:if="${session.loginMember == null}">
+      <div class="highest">
+        <div><a href="/member/login">로그인</a></div>
+        <div><a href="#">메인페이지</a></div>
+      </div>
+    </th:block>
+
+    <!-- 로그인 된 경우 -->
+    <th:block th:unless="${session.loginMember == null}">
+
+      <div class="highest">
+        <label for="headerMenuToggle">
+          [[${session.loginMember.memberNickname}]]
+          <span>🔽</span>
+        </label>
+        <input type="checkbox" id="headerMenuToggle">
+        <div class="header-menu">
+          <a href="#">내정보</a>
+          <a href="/member/logout">로그아웃</a>
+        </div>
+      </div>
+
+    </th:block>
 
     <a href="#">
       <div id="mainLogo">
@@ -201,7 +222,7 @@
       <div class="room" id="room1">
         <a href="#">공지사항</a>
 
-
+        <p>임시계정은 홈로그인 불가(암호화), 버튼으로만 가능</p>
         <!-- 임시계정 로그인 버튼 -->
         <button class="quickLogin">temp00@naver.com</button>
         <button class="quickLogin">temp01@naver.com</button>
