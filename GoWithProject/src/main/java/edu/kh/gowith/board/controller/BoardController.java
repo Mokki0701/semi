@@ -1,6 +1,6 @@
 package edu.kh.gowith.board.controller;
 
-import java.beans.JavaBean;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -21,7 +21,6 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("board")
-@JavaBean
 public class BoardController {
 
 	private final BoardService service;
@@ -33,14 +32,25 @@ public class BoardController {
 			@RequestParam(value="cp", required = false, defaultValue= "1") int cp,
 			@RequestParam(value="limit", required = false, defaultValue="10") int limit,
 			@SessionAttribute(value="loginMember", required = false) Member loginMember,
+			@RequestParam Map<String, Object> paramMap,
 			Model model
 			) {
 		
-		Map<String, Object> boardMap = service.boardList(bottomMenuCode, cp, limit, loginMember.getMemberNo());
+		Map<String, Object> boardMap = null;
+		
+		if(paramMap.get("periodKey") == null) {
+			
+			boardMap = service.boardList(bottomMenuCode, cp, limit, loginMember.getMemberNo());
+
+		}else {
+			boardMap = service.searchBoardList(paramMap, cp, limit, loginMember.getMemberNo());
+		}
+		
 		
 		model.addAttribute("pagination", boardMap.get("pagination"));
 		model.addAttribute("boardList", boardMap.get("boardList"));
 		model.addAttribute("memberMenu", boardMap.get("memberMenu"));
+		model.addAttribute("bottomMenuList", boardMap.get("bottomMenuList"));
 		
 		return "board/boardList";
 	}
@@ -53,5 +63,13 @@ public class BoardController {
 		
 		return service.boardFavorite(paramMap);
 	}
+	
+	
+
+	
+	
+	
+	
+	
 	
 }

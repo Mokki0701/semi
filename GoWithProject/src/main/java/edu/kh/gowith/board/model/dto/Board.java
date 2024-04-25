@@ -29,5 +29,8 @@ public class Board {
 	private int topMenuCode;
 	
 	private String bottomMenuName;
+	private int commentCount;
+	
+	private String memberNickname;
 	
 }

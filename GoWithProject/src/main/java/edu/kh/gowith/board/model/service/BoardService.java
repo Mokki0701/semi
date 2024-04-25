@@ -8,4 +8,7 @@ public interface BoardService {
 
 	Map<String, Object> boardList(int bottomMenuCode, int cp, int limit, int memberNo);
 
+	Map<String, Object> searchBoardList(Map<String, Object> paramMap, int cp, int limit,
+			int memberNo);
+
 }
