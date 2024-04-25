@@ -50,14 +50,29 @@ numberUnit.addEventListener("change", e=>{
     const topMenuCode = params.get("topMenuCode");
     const bottomMenuCode = params.get("bottomMenuCode");
     
-    location.href = `/` + topMenuCode + `/` + bottomMenuCode + `?limit=` + selectNumber;
+    location.href = `/${topMenuCode}/${bottomMenuCode}?limit=` + selectNumber;
 
 })
 
 
 
 
+const insertBtn = document.querySelector("#insertBtn");
 
+if(insertBtn != null){
+    
+    const params = new URL(location.href).searchParams;
+    
+    const topMenuCode = params.get("topMenuCode");
+    const bottomMenuCode = params.get("bottomMenuCode");
+
+    insertBtn.addEventListener("click", e=>{
+    
+        location.href = `/editBoard/${topMenuCode}/${bottomMenuCode}/insert`;
+    
+    })
+
+}
 
 
 

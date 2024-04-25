@@ -8,7 +8,8 @@
 		<if test='myFavorite == "Y"'>'N'</if>
 		<if test='myFavorite == "N"'>'Y'</if>
 		WHERE MEMBER_NO = #{loginMemberNo}
-		AND BOTTOM_MENU_CODE = #{bottomMenuName}
+		AND BOTTOM_MENU_CODE = #{bott
+		omMenuName}
 	</update>
 	
 	
@@ -17,7 +18,7 @@
 				(SELECT COUNT(*) 
 				FROM "COMMENT" C
 				WHERE C.BOARD_NO = B.BOARD_NO
-				AND COMMENT_DEL_FL = 'N') COMMENT_COUNT,X
+				AND COMMENT_DEL_FL = 'N') COMMENT_COUNT,
 				BOARD_LIKE_COUNT,
 				
 				<![CDATA[
@@ -43,6 +44,8 @@
 		ORDER BY CASE WHEN BOARD_NOTIFICATION  = 'Y' THEN 1 ELSE 2 END, BOARD_NO ASC
 	</select>
 	
+	
+	
 	<select id="getListCount">
 		SELECT COUNT(*)
 		FROM "BOARD"
@@ -50,13 +53,97 @@
 		AND BOARD_DEL_FL = 'N'
 	</select>
 	
+	
+	
 	<select id="getFavorite">
 		SELECT FAVORITE, BOTTOM_MENU_NAME
 		FROM MEMBER_MENU
 		JOIN BOTTOM_MENU USING(BOTTOM_MENU_CODE)
-		WHERE MEMBER_NO = #{memberNo}
-		AND BOTTOM_MENU_CODE = #{bottomMenuCode}
+		WHERE BOTTOM_MENU_CODE = #{bottomMenuCode}
 	</select>
+	
+	
+	
+	<select id="bottomTopMenu">
+		SELECT * FROM BOTTOM_MENU
+	</select>
+	
+	
+	
+	
+	
+	
+	<select id="getSearchCount">
+		SELECT * FROM "BOARD"
+		
+		<if test='searchKey == "w"'>
+			JOIN "MEMBER" USING(MEMBER_NO) 
+		</if>
+		
+		WHERE BOTTOM_MENU_CODE = #{bottomMenuKey}
+		AND BOARD_DEL_FL = 'N'
+		
+		<choose>
+			<when test='searchKey == "t"'>
+				AND BOARD_TITLE LIKE '%' || #{query} || '%'
+			</when>
+			
+			<when test='searchKey == "c"'>
+				AND BOARD_CONTENT LIKE '%' || #{query} || '%'
+			</when>
+			
+			<when test='searchKey == "tc"'>
+				AND ( 
+					BOARD_TITLE   LIKE '%' || #{query} || '%'
+					OR  
+					BOARD_CONTENT LIKE '%' || #{query} || '%'
+				)
+			</when>
+			
+			<otherwise>
+				AND MEMBER_NICKNAME LIKE '%' || #{query} || '%'
+			</otherwise>
+			
+		</choose>
+		
+		<choose>
+			<when test='periodKey == "day"'>
+				AND BOARD_WRITE_DATE > >= BOARD_WRITE_DATE - 1
+			</when>
+			
+			<when test='periodKey == "week"'>
+				AND BOARD_WRITE_DATE > >= BOARD_WRITE_DATE - 7
+			</when>
+			
+			<when test='periodKey == "month"'>
+				AND BOARD_WRITE_DATE > >= BOARD_WRITE_DATE - 30
+			</when>
+			
+			<!-- 일년인 경우 -->
+			<otherwise>
+				AND BOARD_WRITE_DATE > >= BOARD_WRITE_DATE - 365
+			</otherwise>
+			
+		</choose>
+		
+		
+	</select>
+	
+	
+	
+	
+	<select id="getSearchList">
+		
+		
+	
+	</select>
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

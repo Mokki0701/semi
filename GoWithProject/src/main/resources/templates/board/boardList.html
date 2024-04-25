@@ -15,7 +15,7 @@
 
             <section>
                 <h1 id="bottomName" th:text="${memberMenu.bottomMenuName}">게시판 이름</h1>
-
+ 
                 <!-- DTO로 FAVORITE 도 보내야 하네... -->
 
                 <!-- 
@@ -25,6 +25,11 @@
                     3. 페이지네이션 ex) pagination
                     4. 세션에 있는 아이디 ex) session.loginMember (로그인 되어있을 경우에만)
                 -->
+
+                <!-- 이거!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+                <!-- 로그인 되있을때만 게시판명 옆에 그거 표식 넣어야함 -->
+
+
 
                 <!-- y 여서 안에 색이 채워져있는 경우 -->
                 <th:block th:if="${memberMenu.favorite == 'Y'}">
@@ -83,12 +88,12 @@
                             <tr th:each="board : ${boardList}" th:object="${board}">
 
                                 <!-- BOARD_NOTIFICATION 이 'Y' 인 경우 -->
-                                <th:block th:if="${*{boardNotification} == 'Y'}">
+                                <th:block th:if="*{boardNotification} == 'Y'">
 
                                     <td>공지</td>
                                     <td>
                                         <a  
-                                            th:href="@{}" 
+                                            href="#" 
                                             th:text="*{boardTitle}">게시글 제목
                                         </a>
                                         
@@ -102,12 +107,12 @@
                                 </th:block>
 
                                 <!-- BOARD_NOTIFICATION 이 'N' 인 경우 -->
-                                <th:block th:if="${*{boardNotification} == 'N'}">
+                                <th:block th:if="*{boardNotification} == 'N'">
 
                                     <td th:text="*{boardNo}">게시글 번호</td>
                                     <td>
                                         <a  
-                                            th:href="@{}" 
+                                            href="#" 
                                             th:text="*{boardTitle}">게시글 제목
                                         </a>
                                         
@@ -178,6 +183,32 @@
             </div>
 
 
+            <form th:action="@{{boardCode}(boardCode=${boardCode})}" method="get" id="boardSearch">
+
+                <select name="bottomMenuKey" id="bottomMenuKey">
+                    <option th:each="bottomMenu : ${bottomMenuList}" th:value="${bottomMenu.bottomMenuCode}" th:text="${bottomMenu.bottomMenuName}">게시판 이름</option>
+                </select>
+
+                <select name="periodKey" id="periodKey">
+                    <option value="day">1일</option>
+                    <option value="week">1주일</option>
+                    <option value="month">1달</option>
+                    <option value="year">1년</option>
+                </select>
+
+                <select name="searchKey" id="searchKey">
+                    <option value="t">제목</option>
+                    <option value="c">내용</option>
+                    <option value="tc">제목+내용</option>
+                    <option value="w">작성자</option>
+                </select>
+
+                <input type="text" name="query"  id="searchQuery" placeholder="검색어를 입력해주세요.">
+
+                <button>검색</button>
+            </form>
+
+
 
         </section>
     </main>
@@ -187,6 +218,7 @@
         const loginMemberNo = /*[[${session.loginMember.memberNo}]]*/ "로그인 회원 이메일";
         
         const myFavorite = /*[[${memberMenu.favorite}]]*/ "즐겨찾기 선호요소";
+
     </script>
 
 
