@@ -15,7 +15,10 @@ public class MemberMenu {
 	private String bottomMenuCode;
 	private String favorite;
 	
-	private String bottomMenuName;
+	
 	
 	
 }
+
+////bottomMenu 테이블 조인
+//	private String bottomMenuName;

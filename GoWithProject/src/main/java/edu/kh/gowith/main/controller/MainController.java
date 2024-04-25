@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class MainController {
 
-	@RequestMapping("/") // "/" 요청 매핑, 모든 메서드 요청 받아내기(get post 구분 x)
+	@RequestMapping("") // "/" 요청 매핑, 모든 메서드 요청 받아내기(get post 구분 x)
 	public String mainPage() {
 		
 		

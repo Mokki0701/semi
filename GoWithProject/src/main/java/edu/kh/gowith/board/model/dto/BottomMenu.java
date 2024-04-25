@@ -17,4 +17,6 @@ public class BottomMenu {
 	private String bottomMenuName; 
 	private int topMenuCode;
 	
+	private int memberNo;
+	
 }

@@ -2,8 +2,9 @@ package edu.kh.gowith.member.model.service;
 
 import java.util.List;
 
+import edu.kh.gowith.board.model.dto.BottomMenu;
+import edu.kh.gowith.board.model.dto.MemberMenu;
 import edu.kh.gowith.member.model.dto.Member;
-import edu.kh.gowith.member.model.dto.MemberMenu2;
 
 public interface MemberService {
 
@@ -17,7 +18,18 @@ public interface MemberService {
 	Member quickLogin(String memberEmail);
 
 	// 좋아하는 하위 게시판
-	List<MemberMenu2> favorBoard(int memberNo);
+	List<BottomMenu> favorBoard(int memberNo);
+
+	// 회원가입
+	int signup(Member inputMember, String[] memberAddress);
+
+	// 이메일 체크
+	int checkEmail(String memberEmail);
+
+	// 회원 가입 이메일 보내기
+	String sendEmail(String string, String email);
+
+	
 
 	
 
