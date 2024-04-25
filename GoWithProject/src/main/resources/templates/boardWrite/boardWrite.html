@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,7 @@
 <body>
   <section>
 
-    <form action="#" class="boardWrite">
+    <form th:action="@{insert}" method="POST" class="boardWrite" enctype="multipart/form-data">
 
       <h1>게시판 이름</h1>
 
@@ -63,17 +63,28 @@
       </div>
       
       <hr>
+      
+      <!-- 전체글일 경우 보여지는 상위 메뉴 -->
+      <th:block>
+        <select name="top-menu" id="">
+          <option value="">동행구해요</option>
+          <option value="">후기</option>
+          <option value="">광고</option>
+          <option value="">여행꿀팁</option>
+        </select>
+      </th:block>
 
-      <!-- 양식 세팅 -->
-      <select name="" id="selectForm">
-        <option value="notice">공지</option>
-        <option value="goWith">동행</option>
-        <option value="review">후기</option>
-        <option value="advertisement">광고</option>
+      <!-- 기존 양식 세팅 -->
+      <select name="bottom-menu" id="selectForm">
+        <option value="China">중국</option>
+        <option value="Japan">일본</option>
+        <option value="Southeast-Asia">동남아</option>
+        <option value="eu">유럽</option>
       </select>
 
+
       <div>
-        <textarea name="" id="" cols="30" rows="10"></textarea>
+        <textarea name="boardContent" id="" cols="30" rows="10"></textarea>
       </div>
 
       <!-- 버튼 영역 -->
