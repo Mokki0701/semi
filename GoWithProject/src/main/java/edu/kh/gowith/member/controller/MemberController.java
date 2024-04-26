@@ -27,7 +27,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-@SessionAttributes({ "loginMember", "postCounter", "favorBoard" })
+@SessionAttributes({ "loginMember", "postCounter", "favorBoard" , "commentCounter"})
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("member")
@@ -55,6 +55,7 @@ public class MemberController {
 			// 빠른 로그인 성공 시
 		} else {
 			int postCounter = service.postCounter(loginMember.getMemberNo());
+			int commentCounter = service.commentCounter(loginMember.getMemberNo());
 
 			List<BottomMenu> favorBoard = service.favorBoard(loginMember.getMemberNo());
 
@@ -70,6 +71,7 @@ public class MemberController {
 
 			model.addAttribute("loginMember", loginMember);
 			model.addAttribute("postCounter", postCounter);
+			model.addAttribute("commentCounter", commentCounter);
 			model.addAttribute("favorBoard", favorBoard);
 
 		}
@@ -138,7 +140,7 @@ public class MemberController {
 		String path = null;
 		String message = null;
 		if(result > 0) {
-			message="😀😁😊" + inputMember.getMemberNickname()+"님의 가입을 환영합니다😀😁😊";
+			message="😀😁😊 " + inputMember.getMemberNickname()+" 님의 가입을 환영합니다 😀😁😊";
 			path = "/";
 		} else {
 			message = "회원 가입 실패";

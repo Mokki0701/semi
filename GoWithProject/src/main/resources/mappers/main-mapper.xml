@@ -2,37 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN " "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="edu.kh.gowith.main.model.mapper.MainMapper">
 	
-	<select id="popBoardInquiry" resultType="Board">
+	<select id="popLike" resultType="Board">
 	
-		SELECT 
-		    BOARD_TITLE, 
-		    MEMBER_NICKNAME, 
-		    BOARD_WRITE_DATE, 
-		    BOARD_LIKE_COUNT
-		FROM 
-		    (
-		        SELECT 
-		            b.BOARD_TITLE, 
-		            m.MEMBER_NICKNAME, 
-		            b.BOARD_WRITE_DATE, 
-		            b.BOARD_LIKE_COUNT,
-		            CASE
-		                WHEN '#{value}' = 'LIKE' THEN b.BOARD_LIKE_COUNT
-		                WHEN '#{value}' = 'COMMENT' THEN b.COMMENT_COUNT
-		            END AS SORT_FIELD
-		        FROM 
-		            BOARD b 
-		            JOIN "MEMBER" m ON b.MEMBER_NO = m.MEMBER_NO
-		    ) subquery
-		ORDER BY 
-		    CASE 
-		        WHEN '#{value}' = 'LIKE' THEN subquery.BOARD_LIKE_COUNT
-		        WHEN '#{value}' = 'COMMENT' THEN subquery.COMMENT_COUNT
-		    END ASC 
+		SELECT BOARD_TITLE, MEMBER_NICKNAME, BOARD_WRITE_DATE, BOARD_LIKE_COUNT
+		FROM (
+	    	SELECT BOARD_TITLE, MEMBER_NICKNAME, BOARD_WRITE_DATE, BOARD_LIKE_COUNT
+	    	FROM "BOARD"
+	    	JOIN "MEMBER" m ON BOARD.MEMBER_NO = m.MEMBER_NO
+	    	ORDER BY BOARD_LIKE_COUNT DESC
+			)
+		WHERE ROWNUM  BETWEEN 1 AND 20
 
-	
+		
 	</select>
 	
+	<select id="popComment" resultType = "Board">
+		
+		SELECT * FROM (
+		    SELECT BOARD_TITLE, MEMBER_NICKNAME, BOARD_WRITE_DATE, COMMENT_COUNT
+		    FROM (
+		        SELECT b.BOARD_TITLE, m.MEMBER_NICKNAME, b.BOARD_WRITE_DATE,
+		        COUNT(*) AS COMMENT_COUNT
+		        FROM "COMMENT" c 
+		        JOIN "BOARD" b ON b.BOARD_NO = c.BOARD_NO 
+		        JOIN "MEMBER" m ON m.MEMBER_NO = c.MEMBER_NO
+		        GROUP BY b.BOARD_TITLE, m.MEMBER_NICKNAME, b.BOARD_WRITE_DATE -- 모든 SELECT 열은 GROUP BY에 포함되어야 함
+		    )
+		    ORDER BY COMMENT_COUNT DESC -- GROUP BY 후 정렬
+		)
+		WHERE ROWNUM BETWEEN 1 AND 20
+				
+	
+	</select>
 	
 	
 

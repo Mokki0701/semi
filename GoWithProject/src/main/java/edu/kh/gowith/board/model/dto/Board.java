@@ -33,4 +33,6 @@ public class Board {
 	
 	private String memberNickname;
 	
+	
+	
 }

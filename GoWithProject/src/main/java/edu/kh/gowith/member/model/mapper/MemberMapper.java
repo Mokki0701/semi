@@ -18,6 +18,10 @@ public interface MemberMapper {
 	// 작성한 글 개수
 	int postCounter(int memberNo);
 
+	// 작성한 댓글 수
+	int commentCounter(int memberNo);
+
+	
 	// 좋아하는 하위 게시판
 	List<BottomMenu> favorBoard(int memberNo);
 
@@ -37,5 +41,6 @@ public interface MemberMapper {
 	// 닉네임 중복체크
 	int checkNickname(String memberNickname);
 
+	
 	
 }

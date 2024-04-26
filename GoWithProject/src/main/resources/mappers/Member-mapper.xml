@@ -16,6 +16,15 @@
 		WHERE MEMBER_NO =
 		#{memberNo}
 	</select>
+	
+	<!-- 작성한 댓글 갯수 -->
+	<select id="commentCounter">
+		SELECT COUNT(*)
+		FROM "COMMENT" c
+		JOIN "MEMBER" m ON m.MEMBER_NO = c.MEMBER_NO
+		WHERE m.MEMBER_NO = #{memberNo}
+		
+	</select>
 
 	<!-- 좋아하는 하위 게시판 -->
 	<!-- resultType="bottomMenu" -->

@@ -17,11 +17,22 @@ public class MainServiceImpl implements MainService{
 	
 	private final MainMapper mapper; 
 	
-	// 인기글 비동기 조회
+	
+	// 좋아요 갯수 순서로 조회
 	@Override
-		public List<Board> popBoardInquiry(String value) {
+	public List<Board> popLike(String value) {
 		
-			return mapper.popBoardInquiry(value);
-		}
+		
+		return mapper.popLike();
+	}
 
+	// comment 갯수 순서로 조회
+	@Override
+	public List<Board> popComment(String value) {
+		
+		return mapper.popComment();
+	}
+	
+	
+	
 }

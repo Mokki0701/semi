@@ -11,45 +11,8 @@
 </head>
 
 <body>
-
-  <!-- <th:block th:replace="~{header}">헤더</th:block> -->
-
-  <!-- 임시 헤더 -->
-  <div class="header">
-    <!-- 로그인 안된 경우 -->
-    <th:block th:if="${session.loginMember == null}">
-      <div class="highest">
-        <div><a href="/member/login">로그인</a></div>
-        <div><a href="#">메인페이지</a></div>
-      </div>
-    </th:block>
-
-    <!-- 로그인 된 경우 -->
-    <th:block th:unless="${session.loginMember == null}">
-
-      <div class="highest">
-        <label for="headerMenuToggle">
-          [[${session.loginMember.memberNickname}]] 님 반갑습니다!
-          <span>🔽</span>
-        </label>
-        <input type="checkbox" id="headerMenuToggle">
-        <div class="header-menu">
-          <a href="#">내정보</a>
-          <a href="/member/logout">로그아웃</a>
-        </div>
-      </div>
-
-    </th:block>
-
-    <a href="#">
-      <div id="mainLogo">
-      </div>
-    </a>
-
-  </div>
-
-  <!-- ↑ 임시 헤더 ↑-->
-
+  <th:block th:replace="~{/common/header}">헤더</th:block>
+  
   <div class="all">
 
     <!-- 사이드 메뉴 -->
@@ -143,7 +106,7 @@
                   </tr>
                   <tr>
                     <th>댓글 수</th>
-                    <td>000개</td>
+                    <td th:text="|${session.commentCounter} 개|">000개</td>
                   </tr>
                 </table>
               </div>
@@ -180,7 +143,7 @@
           <hr>
           <div class="menuList">
             <div class="contextHead">동행 구해요</div>
-            <a>중국</a>
+            <a href="">중국</a>
             <li>일본</li>
             <li>동남아</li>
             <li>유럽</li>
@@ -247,27 +210,21 @@
 
         <br>
 
-        <table id="popTable">
-          <tr class="tableTitleArea">
-            <th id="title">제목</th>
+        <table id="popTable" class="scrollContainer">
+          <thead class="tableTitleArea">
+            <th class="title">제목</th>
             <th>작성자</th>
-            <th>작성일</th>
-            <th>조회</th>
-          </tr>
+            <th class="writeDate">작성일</th>
+            <th>조회수</th>
+          </thead>
 
-          <tr>
+          <tbody id="PbList">
             <td>임시1</td>
             <td class="textCenter">임시2</td>
             <td class="textCenter">임시3</td>
             <td class="textCenter">임시4</td>
-          </tr>
+          </tbody>
         </table>
-
-
-
-
-
-
 
       </div>
 
@@ -278,21 +235,9 @@
 
 
   </div>
-  <!-- <th:block th:replace="~{footer}" class="footer">푸터</th:block> -->
-  <!-- 임시 푸터 -->
-  <footer>
-    <p>Copyright &copy; KH Information Educational Institute A-Class</p>
 
-    <article>
-      <a href="#">프로젝트 소개</a>
-      <span>|</span>
-      <a href="#">이용약관</a>
-      <span>|</span>
-      <a href="#">개인정보처리방침</a>
-      <span>|</span>
-      <a href="#">고객센터</a>
-    </article>
-  </footer>
+  <th:block th:replace="~{/common/footer}" class="footer">푸터</th:block>
+  
 
 
   <script th:inline="javascript">

@@ -192,14 +192,14 @@ likeBtn.addEventListener('change', function () {
   if (likeBtn.checked) {
     likeLabel.classList.add('label-like');
     commentLabel.classList.remove('label-comment');
-  } 
+  }
 });
 
 commentBtn.addEventListener('change', function () {
   if (commentBtn.checked) {
     commentLabel.classList.add('label-comment');
     likeLabel.classList.remove('label-like');
-  } 
+  }
 });
 
 // 비동기로 목록 조회(두개를 동시에)
@@ -207,18 +207,42 @@ const popWriteBtnContext = document.querySelectorAll(".popWriteBtnContext");
 popWriteBtnContext.forEach(btn => {
   btn.addEventListener("click", e => {
     const value = e.target.value;
-    fetch("/popWriteInquiry", {
+    fetch("/popWriteInquiry?popWriteBtn=" + value, {
       method: "GET",
       headers: { "Content-Type": "application/json" }
     })
-    .then(response => response.json())
-    .then(result => {
-      console.log(result);
-      console.log("반환 타입 : " + typeof result);
-    })
+      .then(response => response.json())
+      .then(result => {
+        console.log(result);
+        console.log("반환 타입 : " + typeof result);
+
+        const PbList = document.querySelector("#PbList");
+        PbList.innerHTML = "";
+
+        for (let obj of result) {
+          const tr = document.createElement("tr");
+          const arr = ['boardTitle', 'memberNickname', 'boardWriteDate', 'readCount'];
+
+          for (let key of arr) {
+            const td = document.createElement("td");
+            td.innerText = obj[key];
+            if (key === 'boardTitle') { 
+              td.classList.add("title");
+            }
+            if(key === 'boardWriteDate'){
+              td.classList.add("writeDate");
+            }
+            tr.append(td);
+            td.classList.add("textCenter");
+          }
+          PbList.append(tr);
+        }
+      })
   });
 });
 
+
+// 비동기로 목록 조회
 
 
 /* -- 메뉴 체크박스 테스트중.. */
@@ -230,3 +254,5 @@ popWriteBtnContext.forEach(btn => {
 
 
 /* ↑ 메인페이지에서 사용합니다 ↑ */
+// <th:block th:replace="~{/common/header}">헤더</th:block>
+// <th:block th:replace="~{/common/footer}" class="footer">푸터</th:block>
