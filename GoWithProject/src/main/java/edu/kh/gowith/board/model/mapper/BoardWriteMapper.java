@@ -16,4 +16,9 @@ public interface BoardWriteMapper {
 	// 이미지 삽입하기
 	int insertImg(List<BoardImg> imageList);
 
+	// 게시판 제목
+	String selectTitle(int topMenuCode);
+
+	
+
 }
