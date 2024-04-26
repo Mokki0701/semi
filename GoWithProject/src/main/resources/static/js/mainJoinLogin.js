@@ -181,7 +181,47 @@ mainLogo.addEventListener("click", () => {
   alert("잘 되는지 확인");
 });
 
+/* ++ 메뉴 체크박스 테스트중.. */
 
+const likeBtn = document.getElementById('likeBtn');
+const commentBtn = document.getElementById('commentBtn');
+const likeLabel = document.getElementById('likeLabel');
+const commentLabel = document.getElementById('commentLabel');
+
+likeBtn.addEventListener('change', function () {
+  if (likeBtn.checked) {
+    likeLabel.classList.add('label-like');
+    commentLabel.classList.remove('label-comment');
+  } 
+});
+
+commentBtn.addEventListener('change', function () {
+  if (commentBtn.checked) {
+    commentLabel.classList.add('label-comment');
+    likeLabel.classList.remove('label-like');
+  } 
+});
+
+// 비동기로 목록 조회(두개를 동시에)
+const popWriteBtnContext = document.querySelectorAll(".popWriteBtnContext");
+popWriteBtnContext.forEach(btn => {
+  btn.addEventListener("click", e => {
+    const value = e.target.value;
+    fetch("/popWriteInquiry", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" }
+    })
+    .then(response => response.json())
+    .then(result => {
+      console.log(result);
+      console.log("반환 타입 : " + typeof result);
+    })
+  });
+});
+
+
+
+/* -- 메뉴 체크박스 테스트중.. */
 
 
 

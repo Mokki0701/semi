@@ -246,16 +246,63 @@
 /* 홈 */
 .room{
   height: 33%;
-  width: 75vw
+  width: 75vw;
 }
 
 #room1{
   background-color: gray;
 }
 
-#room2{
+/* 인기 글 조회 */
+#popWrite{
   background-color: rgb(65, 62, 62);
+  display: flex;
+  flex-direction: column;
+
 }
+
+.popWriteBtnBox{
+  display: flex;
+  justify-content: center;
+}
+
+/* ++ 메뉴 체크박스 테스트중.. */
+
+.popWriteBtnBox .popWriteBtnContext {
+  display: none;
+}
+.label-like {
+  color: green;
+}
+.label-comment {
+  color: blue;
+}
+
+/* -- 메뉴 체크박스 테스트중.. */
+
+#popTable{
+  background-color: gray;
+}
+
+.tableTitleArea{
+  background-color: gainsboro;
+  height: 50px;
+}
+
+.tableTitleArea th{
+  font-size: 20px;
+}
+
+#title{
+  width: 500px;
+}
+
+.textCenter{
+  text-align: center;
+}
+
+/* 인기글 조회 끝 */
+
 
 #room3{
   background-color: gray;
@@ -269,6 +316,7 @@
 .quickLogin:hover{
   cursor: pointer;
 }
+
 
 /* *********** ↑ 쓰다 버릴 것 ↑ ************ */
 
@@ -307,7 +355,7 @@ label[for="headerMenuToggle"]:hover{
 }
 
 /* 닉네임 클릭 시 보이는 메뉴 */
-.header-menu {
+.header-menu{
   position: absolute;
   top: 20px;
   width: 100px;
@@ -331,6 +379,11 @@ label[for="headerMenuToggle"]:hover{
   to {
     transform: translateX(0); /* 요소를 왼쪽으로 이동합니다. */
   }
+}
+
+/* 체크 해제 시 */
+.header-menu:not(:checked){
+  
 }
 
 

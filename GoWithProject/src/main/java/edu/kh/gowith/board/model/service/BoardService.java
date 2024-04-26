@@ -1,6 +1,9 @@
 package edu.kh.gowith.board.model.service;
 
+import java.util.List;
 import java.util.Map;
+
+import edu.kh.gowith.board.model.dto.Board;
 
 public interface BoardService {
 
@@ -12,5 +15,7 @@ public interface BoardService {
 			int memberNo);
 
 	int boardInsertFavorite(Map<String, String> paramMap);
+
+	
 
 }
