@@ -5,17 +5,17 @@
 	<!-- 제목, 내용 삽입 -->
 	<insert id="boardInsert" useGeneratedKeys="true" parameterType="Board">
 	
-	<selectKey order="BEFORE" resultType="_int" keyProperty="boardNo">
-		SELECT SEQ_BOARD_NO.NEXTVAL FROM DUAL
-	</selectKey>
-			
-		INSERT INTO "BOARD"
-		VALUES(
-			#{boardNo},#{boardTitle},#{boardContent},
-			DEFAULT,DEFAULT,DEFAULT,DEFAULT,
-			#{memberNo},#{bottomBoardCode},
-			DEFAULT,DEFAULT,#{topMenuCode}
-		)
+		<selectKey order="BEFORE" resultType="_int" keyProperty="boardNo">
+			SELECT SEQ_BOARD_NO.NEXTVAL FROM DUAL
+		</selectKey>
+				
+			INSERT INTO "BOARD"
+			VALUES(
+				#{boardNo},#{boardTitle},#{boardContent},
+				DEFAULT,DEFAULT,DEFAULT,DEFAULT,
+				#{memberNo},#{bottomBoardCode},
+				DEFAULT,DEFAULT,#{topMenuCode}
+			)
 		
 	</insert> 
 	
@@ -39,5 +39,24 @@
 		WHERE TOP_MENU_CODE = #{topMenuCode}
 	
 	</select>
+	
+	<insert id="notiInsert" useGeneratedKeys="true" parameterType="Board">
+	
+		
+		<selectKey order="BEFORE" resultType="_int" keyProperty="boardNo">
+			SELECT SEQ_BOARD_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		
+			INSERT INTO "BOARD"
+			VALUES(
+				#{boardNo},#{boardTitle},#{boardContent},
+				DEFAULT,DEFAULT,DEFAULT,DEFAULT,
+				#{memberNo},#{bottomBoardCode},
+				#{boardNotification},DEFAULT,#{topMenuCode}
+			)
+	
+	</insert>
+	
+
 
 </mapper>
