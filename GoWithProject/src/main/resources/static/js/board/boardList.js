@@ -64,14 +64,9 @@ const insertBtn = document.querySelector("#insertBtn");
 
 if(insertBtn != null){
     
-    const params = new URL(location.href).searchParams;
     
-    const topMenuCode = params.get("topMenuCode");
-    const bottomMenuCode = params.get("bottomMenuCode");
-
     insertBtn.addEventListener("click", e=>{
-        console.log(object);
-        //location.href = `/editBoard/${topMenuCode}/${bottomMenuCode}/insert`;
+
         location.href = "/editBoard/"+topMenuCode +"/"+bottomMenuCode +"/insert";
     
     })

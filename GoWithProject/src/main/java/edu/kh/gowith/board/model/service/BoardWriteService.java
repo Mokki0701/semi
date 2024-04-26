@@ -12,4 +12,9 @@ public interface BoardWriteService  {
 	//게시글 작성 
 	int boardInsert(Board inputBoard, List<MultipartFile> images) throws IllegalStateException, IOException;
 
+	//게시판 제목 
+	String selectTitle(int topMenuCode);
+
+
+
 }

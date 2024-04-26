@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -31,7 +31,18 @@ public class FileUploadController {
 	
 	//글쓰기 화면 보이게
 	@GetMapping("{topMenuCode:[0-9]+}/{bottomMenuCode:[0-9]+}/insert")
-	public String boardInsert() {
+	public String boardInsert(
+			@PathVariable("topMenuCode") int topMenuCode,
+			@PathVariable("bottomMenuCode") int bottomMenuCode,
+			@SessionAttribute("loginMember") Member loginMember,
+			Model model
+			) {
+
+		// 게시글 목록 조회 -> 상위 메뉴 이름만 전달하기
+		String boardTitle = service.selectTitle(topMenuCode);
+		
+		model.addAttribute("boardTitle",boardTitle);
+		model.addAttribute(loginMember);
 		
 		return "boardWrite/boardWrite";
 	}
@@ -57,9 +68,11 @@ public class FileUploadController {
 		String message = null;
 		
 		if(boardNo>0) {
+			//성공시 상세페이지 보내기
 			//path = ""
 			//message = "게시글이 작성 되었습니다";
 		}else {
+			//실패시 글쓰기 페이지로 redirect
 			//path= String.format("redirect:/board/%d/%d")
 			//message = "게시글 작성 실패";
 		}

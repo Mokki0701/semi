@@ -31,5 +31,13 @@
 		
 	</insert>
 	
+	
+	<select id="selectTitle" resultType="string">
+	
+		SELECT TOP_MENU_NAME 
+		FROM TOP_MENU
+		WHERE TOP_MENU_CODE = #{topMenuCode}
+	
+	</select>
 
 </mapper>

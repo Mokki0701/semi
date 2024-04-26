@@ -30,6 +30,7 @@ public class BoardWriteServiceImpl implements BoardWriteService{
 	@Value("${my.board.folder-path}")
 	private String folderPath;
 	
+	
 	// 게시글 작성
 	@Override
 	public int boardInsert(Board inputBoard, List<MultipartFile> images) throws IllegalStateException, IOException {
@@ -87,5 +88,18 @@ public class BoardWriteServiceImpl implements BoardWriteService{
 			
 		return boardNo;
 	}
+	
+	//게시판 제목
+	@Override
+	public String selectTitle(int topMenuCode) {
+		return mapper.selectTitle(topMenuCode);
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }

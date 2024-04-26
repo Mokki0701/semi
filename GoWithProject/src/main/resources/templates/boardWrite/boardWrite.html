@@ -6,12 +6,13 @@
   <title>boardWrite</title>
   <link rel="stylesheet" href="/css/boardWrite/boardWrite.css">
 </head>
+
 <body>
   <section>
 
-    <form th:action="@{insert}" method="POST" class="boardWrite" enctype="multipart/form-data">
+    <form th:action="@{insert}" method="POST" class="boardWrite" enctype="multipart/form-data" id="boardFrm">
 
-      <h1>게시판 이름</h1>
+      <h1 th:text="${boardTitle}">게시판 이름</h1>
 
       <!-- 게시판 제목-->
       <h2 class="boardTitle">
@@ -24,7 +25,7 @@
         <!-- 이미지 1 -->
         <div class="img-box">
           <label for="imageFile0">
-            <img class="preview" src="">
+            <img class="preview" src="https://via.placeholder.com/300.jpg" alt="img0">
           </label>
           <input type="file" name="images" class="inputImg" id="imageFile0" accept="image/*">
           <!-- 이미지 X표시 -->
@@ -34,7 +35,7 @@
         <!-- 이미지 2 -->
         <div class="img-box">
           <label for="imageFile1">
-            <img class="preview" src="">
+            <img class="preview" src="https://via.placeholder.com/300.jpg" alt="img1">
           </label>
           <input type="file" name="images" class="inputImg" id="imageFile1" accept="image/*">
           <!-- 이미지 X표시 -->
@@ -44,7 +45,7 @@
         <!-- 이미지 3 -->
         <div class="img-box">
           <label for="imageFile2">
-            <img class="preview" src="">
+            <img class="preview" src="https://via.placeholder.com/300.jpg" alt="img3">
           </label>
           <input type="file" name="images" class="inputImg" id="imageFile2" accept="image/*">
           <!-- 이미지 X표시 -->
@@ -54,7 +55,7 @@
         <!-- 이미지 4 -->
         <div class="img-box">
           <label for="imageFile3">
-            <img class="preview" src="">
+            <img class="preview" src="https://via.placeholder.com/300.jpg" alt="img4">
           </label>
           <input type="file" name="images" class="inputImg" id="imageFile3" accept="image/*">
           <!-- 이미지 X표시 -->
@@ -85,17 +86,21 @@
 
 
       <div>
-        <textarea name="boardContent" id="" cols="30" rows="10"></textarea>
+        <textarea name="boardContent" cols="30" rows="10"></textarea>
       </div>
 
       <!-- 버튼 영역 -->
       <div class="submit-area">
         <!-- 관리자인 경우에만 checkbox 보이도록하기 -->
-        <input type="checkbox" id="managerCheck"> 공지글 등록
+        <input type="checkbox" id="managerCheck" th:if="${session.loginMember.authority} == 2"> 
+        <span th:if="${session.loginMember.authority} == 2">공지글 등록</span>
+        
         <button type="submit" id="boardBtn">등록</button> 
       </div>
 
     </form>
   </section>
+
+  <script src="/js/boardWrite/boardWrite.js"></script>
 </body>
 </html>
