@@ -15,6 +15,9 @@ public interface BoardWriteService  {
 	//게시판 제목 
 	String selectTitle(int topMenuCode);
 
+	//관리자 공지글 등록
+	int notiInsert(Board inputBoard, List<MultipartFile> images) throws IllegalStateException, IOException;
+
 
 
 }

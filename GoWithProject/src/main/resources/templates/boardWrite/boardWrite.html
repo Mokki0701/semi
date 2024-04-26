@@ -66,14 +66,12 @@
       <hr>
       
       <!-- 전체글일 경우 보여지는 상위 메뉴 -->
-      <th:block>
-        <select name="top-menu" id="">
+        <select th:if="${topMenuCode} == 1" name="top-menu" id="">
           <option value="4">동행구해요</option>
           <option value="5">후기(추천/지역)</option>
           <option value="6">광고</option>
           <option value="7">여행꿀팁</option>
         </select>
-      </th:block>
 
       <!-- 기존 양식 세팅 -->
       <select name="bottom-menu" id="selectForm">
@@ -91,8 +89,10 @@
 
       <!-- 버튼 영역 -->
       <div class="submit-area">
+
         <!-- 관리자인 경우에만 checkbox 보이도록하기 -->
-        <input type="checkbox" id="managerCheck" th:if="${session.loginMember.authority} == 2"> 
+        <input type="checkbox" th:if="${session.loginMember.authority} == 2" name="managerCheck" value="yes"> 
+        <!-- <input type="checkbox" name="managerCheck" value="yes" >  -->
         <span th:if="${session.loginMember.authority} == 2">공지글 등록</span>
         
         <button type="submit" id="boardBtn">등록</button> 

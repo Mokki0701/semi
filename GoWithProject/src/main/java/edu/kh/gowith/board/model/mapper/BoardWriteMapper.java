@@ -19,6 +19,9 @@ public interface BoardWriteMapper {
 	// 게시판 제목
 	String selectTitle(int topMenuCode);
 
+	// 공지 등록
+	int notiInsert(Board inputBoard);
+
 	
 
 }

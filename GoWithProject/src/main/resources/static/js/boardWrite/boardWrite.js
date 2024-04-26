@@ -10,8 +10,6 @@ const backupInputList = new Array(inputImageList.length);
 
 /* 백업 리스트 만들기 -------------------------------------------- */
 
-
-
 changeFn = (inputImage,order)=>{
   const maxSize = 1024 * 1024 * 10;
   const file = inputImage.files[0];
@@ -107,9 +105,10 @@ form.addEventListener("submit",e=>{
     e.preventDefault();
     return;
   }
-
-  
-
-
-
 })
+
+// 양식 세팅 -----------------------------------------
+
+
+
+
