@@ -35,8 +35,13 @@ public class BoardController {
 			@RequestParam(value="cp", required = false, defaultValue= "1") int cp,
 			@RequestParam(value="limit", required = false, defaultValue="10") int limit,
 			@SessionAttribute(value="loginMember", required = false) Member loginMember,
+			@RequestParam(value="topMenuKey", required = false) String searchTopMenu,
+			@RequestParam(value="bottomMenuKey", required = false) String searchBottomMenu,
+			@RequestParam(value="periodKey", required = false) String searchDate,
+			@RequestParam(value="searchKey", required = false) String searchformKey,
+			@RequestParam(value="query", required = false) String searchQuery,
 			@RequestParam Map<String, Object> paramMap,
-			Model model
+			Model model	
 			) {
 		
 		Map<String, Object> boardMap = null;
@@ -46,9 +51,14 @@ public class BoardController {
 			
 			if(loginMember != null) {
 				inputMap.put("loginMemberNo", loginMember.getMemberNo());
+				
 			}
 						
 			boardMap = service.boardList(bottomMenuCode, cp, limit, inputMap);
+			
+			model.addAttribute("queryStringLimit", "?cp="+cp);
+			 
+			model.addAttribute("queryStringCp", "limit=" + limit);
 
 		}else {
 			
@@ -59,6 +69,13 @@ public class BoardController {
 			}
 			
 			boardMap = service.searchBoardList(paramMap, cp, limit, inputMap);
+			
+			model.addAttribute("queryStringLimit", "?cp="+cp + "&topMenuKey="+searchTopMenu+"&bottomMenuKey="
+					+searchBottomMenu+"&periodKey="+searchDate+"&searchKey="+searchformKey +"&query="+searchQuery);
+			
+			model.addAttribute("queryStringCp", "limit=" + limit + "&topMenuKey="+searchTopMenu+"&bottomMenuKey="
+					+searchBottomMenu+"&periodKey="+searchDate+"&searchKey="+searchformKey +"&query="+searchQuery);
+			
 		}
 		
 		

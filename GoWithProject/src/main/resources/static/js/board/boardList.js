@@ -50,10 +50,10 @@ numberUnit.addEventListener("change", e=>{
     const selectNumber = numberUnit.options[numberUnit.selectedIndex].value;
 
     const params = new URL(location.href).searchParams;
-    
-    const url = window.location.href;;
 
-    location.href = new URL(location.href).pathname+"?limit="+selectNumber;
+    const url = window.location.href;
+    console.log(queryStringLimit);
+    location.href = new URL(location.href).pathname+queryStringLimit + "&limit=" + selectNumber;
 
 
 
@@ -66,8 +66,7 @@ if(insertBtn != null){
     
     
     insertBtn.addEventListener("click", e=>{
-    
-        // location.href = `/editBoard/${topMenuCode}/${bottomMenuCode}/insert`;
+
         location.href = "/editBoard/"+topMenuCode +"/"+bottomMenuCode +"/insert";
     
     })
@@ -103,7 +102,26 @@ topMenuKey.addEventListener("change", e=>{
         }
 
     })
-})
+});
+
+(()=>{
+    console.log(new URL(location.href));
+
+    const numberUnit = document.querySelector("#numberUnit");
+
+    Array.from(numberUnit.children).forEach((child) => {
+        if(child.value == limit){
+            child.selected = true;
+        }
+    });
+
+})();
+
+
+
+
+
+
 
 
 
