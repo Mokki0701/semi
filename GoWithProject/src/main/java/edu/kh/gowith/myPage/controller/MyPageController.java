@@ -2,6 +2,8 @@ package edu.kh.gowith.myPage.controller;
 
 
 
+import java.io.IOException;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -71,32 +73,38 @@ public class MyPageController {
 	public String updateInfo(
 			@ModelAttribute MyPage inputMember,
 			@SessionAttribute("loginMember") MyPage loginMember,
+			@RequestParam("memberAddress") String[] memberAddress,
+			@RequestParam("newPw") String newPw,
+			@RequestParam("currentPw") String currentPw,
+			@RequestParam("profileImg") MultipartFile profileImg,
 			Model model,
 			RedirectAttributes ra
-			) {
+			) throws IllegalStateException, IOException {
 		
 		int memberNo = loginMember.getMemberNo();
+		
 		inputMember.setMemberNo(memberNo);
 	
-		int result = service.updateInfo(inputMember);
+		int result = service.updateInfo(inputMember,newPw,currentPw,memberNo,profileImg,loginMember,memberAddress);
 		
 		String message = null;
 		
 		if(result>0) {
 			message = "회원 정보 수정 성공";
 			
-			
-			
 			loginMember.setMemberNickname(inputMember.getMemberNickname());
 			loginMember.setMemberTel(inputMember.getMemberTel());
 			loginMember.setMemberAddress(inputMember.getMemberAddress());
+			loginMember.setMemberPw(inputMember.getMemberPw());
+			
+			return "redirect:/myPage/update";
+			
 		}else {
 			message = "회원정보 수정 실패...";
 		}
 		ra.addFlashAttribute("message", message);
 		
-		
-		return "redirect:profile";
+		return "redirect:/profile";
 	}
 	
 
@@ -105,7 +113,7 @@ public class MyPageController {
 	
 	
 	//회원탈퇴
-	@PostMapping("delete")
+	@PostMapping("secession")
 	public String deleteMember(
 			@SessionAttribute("loginMember") Member loginMember,
 			@RequestParam("memberPw") String currentPw,
@@ -120,9 +128,9 @@ public class MyPageController {
 			status.setComplete();
 			return "redirect:/";
 		}else {
-			ra.addAttribute("message", "비밀번호불일치-탈퇴실패");
+			ra.addFlashAttribute("message", "비밀번호불일치-탈퇴실패");
 		}
-		return "redirect:delete";
+		return "redirect:/myPage/delete";
 	} 
 	
 	

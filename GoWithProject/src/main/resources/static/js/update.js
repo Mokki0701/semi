@@ -22,7 +22,6 @@ if(updateInfo != null){
     }
 
     // 정규식에 맞지 않으면
-
     let regExp = /^[가-힣\w\d]{2,10}$/;
     if( !regExp.test(memberNickname.value) ){
       alert("닉네임이 유효하지 않습니다");
@@ -59,6 +58,7 @@ if(updateInfo != null){
       alert("주소를 모두 작성 또는 미작성 해주세요.")
       e.preventDefault(); 
     }
+
 
     //비밀번호변경
     if(changePw != null){
@@ -101,6 +101,9 @@ if(updateInfo != null){
   });
 }
 
+
+
+
 // ---------------------------------------------------------------------------------
 
 /* 탈퇴 유효성 검사 */
@@ -109,7 +112,7 @@ const secession = document.querySelector("#secession");
 if(secession != null){
 
   secession.addEventListener("submit", e => {
-
+ 
     const memberPw = document.querySelector("#memberPw");
     const agree = document.querySelector("#agree");
 
@@ -131,6 +134,14 @@ if(secession != null){
 
   })
 }
+
+
+
+
+
+
+
+
 
 
 // ----------------------------------------------------------------------------------
@@ -241,6 +252,10 @@ if(profile != null){
   });
 
 }
+
+
+
+
 
 
 
