@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import edu.kh.gowith.board.model.dto.Board;
 import edu.kh.gowith.board.model.dto.BottomMenu;
 import edu.kh.gowith.board.model.dto.Pagination;
+import edu.kh.gowith.board.model.dto.TopMenu;
 import edu.kh.gowith.board.model.mapper.BoardMapper;
 import lombok.RequiredArgsConstructor;
 
@@ -37,7 +38,7 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	@Override
-	public Map<String, Object> boardList(int bottomMenuCode, int cp, int limit, int loginMemberNo) {
+	public Map<String, Object> boardList(int bottomMenuCode, int cp, int limit, Map<String,Integer> inputMap) {
 		
 		int listCount = mapper.getListCount(bottomMenuCode);
 		
@@ -52,28 +53,36 @@ public class BoardServiceImpl implements BoardService {
 		
 		Map<String, Object> mapList = new HashMap<>();
 		
-		Map<String, Integer> checkFavorite = new HashMap<>();
-		checkFavorite.put("bottomMenuCode", bottomMenuCode);
-		checkFavorite.put("loginMemberNo", loginMemberNo);
+		if(inputMap.get("loginMemberNo") != null) {
+			
+			int loginMemberNo = inputMap.get("loginMemberNo");
+			
+			Map<String, Integer> checkFavorite = new HashMap<>();
+			checkFavorite.put("bottomMenuCode", bottomMenuCode);
+			checkFavorite.put("loginMemberNo", loginMemberNo);
+			
+			int favoriteCheck = mapper.getFavorite(checkFavorite);
+			
+			mapList.put("favoriteCheck", favoriteCheck);
+		}
 		
-		int favoriteCheck = mapper.getFavorite(checkFavorite);
 		
-		List<BottomMenu> bottomMeniList = mapper.bottomTopMenu();
 		
-		String bottomMenuName = null;
+		List<TopMenu> topMenuList = mapper.bottomTopMenu();
 		
-		for(int i = 0; i < bottomMeniList.size(); i++) {
-			if(bottomMenuCode == bottomMeniList.get(i).getBottomMenuCode()) {
-				bottomMenuName = bottomMeniList.get(i).getBottomMenuName();
+		String topMenuName = null;
+		
+		for(int i = 0; i < topMenuList.size(); i++) {
+			if(bottomMenuCode == topMenuList.get(i).getTopMenuCode()) {
+				topMenuName = topMenuList.get(i).getTopMenuName();
 				break;
 			}
 		}
 		
-		mapList.put("bottomMenuName", bottomMenuName);
+		mapList.put("topMenuName", topMenuName);
 		mapList.put("pagination", pagination);
 		mapList.put("boardList", boardList);
-		mapList.put("favoriteCheck", favoriteCheck);
-		mapList.put("bottomMenuList", bottomMeniList);
+		mapList.put("topMenuList", topMenuList);
 		
 		return mapList;
 	}
@@ -81,7 +90,7 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public Map<String, Object> searchBoardList(Map<String, Object> paramMap, int cp, int limit,
-			int loginMemberNo) {
+			Map<String, Integer> inputMap) {
 		
 		int listCount = mapper.getSearchCount(paramMap);
 		
@@ -104,37 +113,49 @@ public class BoardServiceImpl implements BoardService {
 //			checkFavorite.put("bottomMenuCode", Integer.parseInt(String.valueOf(paramMap.get("bottomMenuKey"))));
 //		}
 		
-		checkFavorite.put("bottomMenuCode", Integer.parseInt(String.valueOf(paramMap.get("bottomMenuKey"))));
+		if(inputMap.get("loginMemberNo") != null) {
 			
-	
-		checkFavorite.put("loginMemberNo", loginMemberNo);
+			int loginMemberNo = inputMap.get("loginMemberNo");
+			
+			checkFavorite.put("bottomMenuCode", Integer.parseInt(String.valueOf(paramMap.get("bottomMenuKey"))));
+			checkFavorite.put("loginMemberNo", loginMemberNo);
+			
+			int favoriteCheck = mapper.getFavorite(checkFavorite);
+			
+			mapList.put("favoriteCheck", favoriteCheck);
+		}
 		
+		List<TopMenu> topMenuList = mapper.bottomTopMenu();
 		
+		String topMenuName = null;
 		
-		int favoriteCheck = mapper.getFavorite(checkFavorite);
-		
-		List<BottomMenu> bottomMenuList = mapper.bottomTopMenu();
-		
-		String bottomMenuName = null;
-		
-		for(int i = 0; i < bottomMenuList.size(); i++) {
+		for(int i = 0; i < topMenuList.size(); i++) {
 			
 
-			if(mapper.getBottomName(Integer.parseInt(String.valueOf(paramMap.get("bottomMenuKey")))) == bottomMenuList.get(i).getBottomMenuCode()) {
-				bottomMenuName = bottomMenuList.get(i).getBottomMenuName();
+			if(mapper.getBottomName(Integer.parseInt(String.valueOf(paramMap.get("bottomMenuKey")))) == topMenuList.get(i).getTopMenuCode()) {
+				topMenuName = topMenuList.get(i).getTopMenuName();
 				break;
 
 			}
 		}
 		
-		mapList.put("bottomMenuName", bottomMenuName);
+		mapList.put("topMenuName", topMenuName);
 		mapList.put("pagination", pagination);
 		mapList.put("boardList", boardList);
-		mapList.put("favoriteCheck", favoriteCheck);
-		mapList.put("bottomMenuList", bottomMenuList);
+		mapList.put("topMenuList", topMenuList);
 		
 		return mapList;
 	}
+	
+	
+	@Override
+	public List<BottomMenu> selectBottmList(int topMenuCode) {
+
+		return mapper.selectBottomList(topMenuCode);
+	}
+	
+	
+	
 	
 	
 	

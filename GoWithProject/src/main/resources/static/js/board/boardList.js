@@ -47,18 +47,17 @@ const numberUnit = document.querySelector("#numberUnit");
 
 numberUnit.addEventListener("change", e=>{
 
-    const selectNumber = numberUnit.options[numberUnit.selectedIndex].innerText;
+    const selectNumber = numberUnit.options[numberUnit.selectedIndex].value;
 
     const params = new URL(location.href).searchParams;
-    
-    const topMenuCode = params.get("topMenuCode");
-    const bottomMenuCode = params.get("bottomMenuCode");
-    
-    location.href = `/board/${topMenuCode}/${bottomMenuCode}`;
+
+    const url = window.location.href;
+    console.log(queryStringLimit);
+    location.href = new URL(location.href).pathname+queryStringLimit + "&limit=" + selectNumber;
+
+
 
 })
-
-
 
 
 const insertBtn = document.querySelector("#insertBtn");
@@ -71,12 +70,61 @@ if(insertBtn != null){
     const bottomMenuCode = params.get("bottomMenuCode");
 
     insertBtn.addEventListener("click", e=>{
-    
-        location.href = `/editBoard/${topMenuCode}/${bottomMenuCode}/insert`;
+        console.log(object);
+        //location.href = `/editBoard/${topMenuCode}/${bottomMenuCode}/insert`;
+        location.href = "/editBoard/"+topMenuCode +"/"+bottomMenuCode +"/insert";
     
     })
 
 }
+
+
+const topMenuKey = document.querySelector("#topMenuKey");
+
+topMenuKey.addEventListener("change", e=>{
+
+    const selectTopMenuCode = topMenuKey.options[topMenuKey.selectedIndex].value;
+
+    const bottomMenuKey = document.querySelector("#bottomMenuKey");
+
+    bottomMenuKey.innerHTML = "";
+
+    fetch("/board/selectBottom?topMenuCode="+selectTopMenuCode)
+    .then(resp => resp.json())
+    .then(bottomList => {
+
+        for(let bottom of bottomList){
+
+            const option = document.createElement("option");
+
+            option.value = bottom['bottomMenuCode'];
+            option.innerText = bottom['bottomMenuName'];
+
+            console.log(option);
+
+            bottomMenuKey.append(option);
+
+        }
+
+    })
+});
+
+(()=>{
+    console.log(new URL(location.href));
+
+    const numberUnit = document.querySelector("#numberUnit");
+
+    Array.from(numberUnit.children).forEach((child) => {
+        if(child.value == limit){
+            child.selected = true;
+        }
+    });
+
+})();
+
+
+
+
 
 
 
