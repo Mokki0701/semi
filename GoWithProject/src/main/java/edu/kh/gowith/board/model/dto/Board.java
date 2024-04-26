@@ -1,5 +1,7 @@
 package edu.kh.gowith.board.model.dto;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,7 +32,12 @@ public class Board {
 	
 	private String bottomMenuName;
 	private int commentCount;
+		
+	private List<BoardImg> imgList;
+	private List<Comment> commentList;
 	
 	private String memberNickname;
+	private int memberRank;
+	private String profileImg;
 	
 }
