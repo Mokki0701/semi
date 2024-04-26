@@ -266,7 +266,7 @@
   justify-content: center;
 }
 
-/* ++ 메뉴 체크박스 테스트중.. */
+/* ++ 메뉴 체크박스 */
 
 .popWriteBtnBox .popWriteBtnContext {
   display: none;
@@ -278,7 +278,7 @@
   color: blue;
 }
 
-/* -- 메뉴 체크박스 테스트중.. */
+/* -- 메뉴 체크박스 */
 
 #popTable{
   background-color: gray;
@@ -293,8 +293,14 @@
   font-size: 20px;
 }
 
-#title{
-  width: 500px;
+.title{
+  width: 50%;
+  text-align: center;
+  height: 20px;
+}
+
+.writeDate{
+  width: 20%;
 }
 
 .textCenter{
@@ -319,7 +325,6 @@
 
 
 /* *********** ↑ 쓰다 버릴 것 ↑ ************ */
-
 
 /* 헤더, 푸터 */
 .info{
@@ -353,6 +358,7 @@ label[for="headerMenuToggle"]:hover{
 #headerMenuToggle:checked + div{
   display: block;
 }
+
 
 /* 닉네임 클릭 시 보이는 메뉴 */
 .header-menu{

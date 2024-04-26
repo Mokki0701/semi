@@ -87,6 +87,15 @@ public class MemberServiceImpl implements MemberService {
 
 		return result;
 	}
+	
+	// 작성한 댓글 갯수
+	@Override
+	public int commentCounter(int memberNo) {
+
+		int result = mapper.commentCounter(memberNo);
+		
+		return result;
+	}
 
 	// 좋아하는 하위 게시판
 	@Override

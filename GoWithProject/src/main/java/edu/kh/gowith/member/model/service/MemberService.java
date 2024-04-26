@@ -15,6 +15,9 @@ public interface MemberService {
 	// 작성한 글 개수
 	int postCounter(int memberNo);
 	
+	// 댓글 수
+	int commentCounter(int memberNo);
+	
 	// 빠른 로그인
 	Member quickLogin(String memberEmail);
 
@@ -35,6 +38,8 @@ public interface MemberService {
 
 	// 닉네임 체크
 	int checkNickname(String memberNickname);
+
+	
 
 	
 

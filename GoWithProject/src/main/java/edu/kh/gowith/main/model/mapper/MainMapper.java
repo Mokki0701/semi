@@ -9,7 +9,11 @@ import edu.kh.gowith.board.model.dto.Board;
 @Mapper
 public interface MainMapper {
 
-	// 메인페이지 보드 목록 조회
-	List<Board> popBoardInquiry(String value);
+
+	// 좋아요 갯수 순으로 조회
+	List<Board> popLike();
+
+	// comment 갯수 순서로 조회
+	List<Board> popComment();
 
 }

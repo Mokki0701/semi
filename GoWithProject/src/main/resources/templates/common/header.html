@@ -1,0 +1,32 @@
+<div class="header">
+  <!-- 로그인 안된 경우 -->
+  <th:block th:if="${session.loginMember == null}">
+    <div class="highest">
+      <div><a href="/member/login">로그인</a></div>
+      <div><a href="#">메인페이지</a></div>
+    </div>
+  </th:block>
+
+  <!-- 로그인 된 경우 -->
+  <th:block th:unless="${session.loginMember == null}">
+
+    <div class="highest">
+      <label for="headerMenuToggle">
+        [[${session.loginMember.memberNickname}]] 님 반갑습니다!
+        <span>🔽</span>
+      </label>
+      <input type="checkbox" id="headerMenuToggle">
+      <div class="header-menu">
+        <a href="#">내정보</a>
+        <a href="/member/logout">로그아웃</a>
+      </div>
+    </div>
+
+  </th:block>
+
+  <a href="#">
+    <div id="mainLogo">
+    </div>
+  </a>
+
+</div>

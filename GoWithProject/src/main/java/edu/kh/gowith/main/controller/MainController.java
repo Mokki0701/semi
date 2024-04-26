@@ -1,5 +1,6 @@
 package edu.kh.gowith.main.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -32,12 +33,28 @@ public class MainController {
 	@ResponseBody
 	@GetMapping("popWriteInquiry")
 	public List<Board> popWriteInquiry(
-		@RequestParam("popWriteBtn") String value
+		@RequestParam("popWriteBtn") String value,
+		Model model
 		) {
 		
-		List<Board> popBoardInquiry = service.popBoardInquiry(value);
+		List<Board> popBoard = new ArrayList<>();
 		
-		return popBoardInquiry;
+		// 좋아요 개수에 따라 조회
+		if(value.equals("like") ) {
+			popBoard = service.popLike(value);
+			
+			
+		}
+		
+		// 댓글 갯수에 따라 조회
+		if(value.equals("comment")) {
+			popBoard = service.popComment(value);
+		}
+		
+		System.out.println("value : " + value );
+		
+		
+		return popBoard;
 	}
 	
 	
