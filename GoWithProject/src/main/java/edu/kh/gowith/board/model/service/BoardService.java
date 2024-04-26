@@ -3,7 +3,11 @@ package edu.kh.gowith.board.model.service;
 import java.util.List;
 import java.util.Map;
 
+
+import edu.kh.gowith.board.model.dto.Board;
+
 import edu.kh.gowith.board.model.dto.BottomMenu;
+
 
 public interface BoardService {
 
@@ -16,6 +20,10 @@ public interface BoardService {
 
 	int boardInsertFavorite(Map<String, String> paramMap);
 
+
+	
+
 	List<BottomMenu> selectBottmList(int topMenuCode);
+
 
 }
