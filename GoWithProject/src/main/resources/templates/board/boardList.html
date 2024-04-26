@@ -95,13 +95,13 @@
                                     <td>공지</td>
                                     <td>
                                         <a  
-                                            href="#" 
+                                        th:href="|@{{bottomMenuCode}/{boardNo} (bottomMenuCode=${bottomMenuCode},boardNo=*{boardNo})}?${queryStringDetail}|" 
                                             th:text="*{boardTitle}">게시글 제목
                                         </a>
                                         
-                                        <th:block th:text="|[*{commentCount}]|">댓글 수</th:block> <!-- 댓글 수 DTO 만들어서 보냈어야한다. -->
+                                        <th:block th:text="|[*{commentCount}]|">댓글 수</th:block> 
                                     </td>
-                                    <td th:text="*{memberNickname}">닉네임</td>  <!-- 이거 여기 받아올 때, DTO에 memberNickname 필드도 있어야한다. -->
+                                    <td th:text="*{memberNickname}">닉네임</td> 
                                     <td th:text="*{boardWriteDate}">작성일</td>
                                     <td th:text="*{readCount}">조회수</td>
                                     <td th:text="*{boardLikeCount}">좋아요수</td>
@@ -114,13 +114,13 @@
                                     <td th:text="*{boardNo}">게시글 번호</td>
                                     <td>
                                         <a  
-                                            href="#" 
+                                            th:href="|@{{bottomMenuCode}/{boardNo} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode},boardNo=*{boardNo})}?${queryStringDetail}|" 
                                             th:text="*{boardTitle}">게시글 제목
                                         </a>
                                         
-                                        <th:block th:text="|[*{commentCount}]|">댓글 수</th:block> <!-- 댓글 수 DTO 만들어서 보냈어야한다. -->
+                                        <th:block th:text="|[*{commentCount}]|">댓글 수</th:block> 
                                     </td>
-                                    <td th:text="*{memberNickname}">닉네임</td>  <!-- 이거 여기 받아올 때, DTO에 memberNickname 필드도 있어야한다. -->
+                                    <td th:text="*{memberNickname}">닉네임</td>  
                                     <td th:text="*{boardWriteDate}">작성일</td>
                                     <td th:text="*{readCount}">조회수</td>
                                     <td th:text="*{boardLikeCount}">좋아요수</td>

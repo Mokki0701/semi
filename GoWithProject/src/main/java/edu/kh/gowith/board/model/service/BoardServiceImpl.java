@@ -155,6 +155,21 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	
+	@Override
+	public Map<String, Object> boardDetail(int boardNo) {
+		
+		
+		
+		return null;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

@@ -59,6 +59,8 @@ public class BoardController {
 			model.addAttribute("queryStringLimit", "?cp="+cp);
 			 
 			model.addAttribute("queryStringCp", "limit=" + limit);
+			
+			model.addAttribute("queryStringDetail", "limit=" + limit + "&cp=" + cp);
 
 		}else {
 			
@@ -75,6 +77,9 @@ public class BoardController {
 			
 			model.addAttribute("queryStringCp", "limit=" + limit + "&topMenuKey="+searchTopMenu+"&bottomMenuKey="
 					+searchBottomMenu+"&periodKey="+searchDate+"&searchKey="+searchformKey +"&query="+searchQuery);
+			
+			model.addAttribute("queryStringDetail", "limit=" + limit + "&topMenuKey="+searchTopMenu+"&bottomMenuKey="
+					+searchBottomMenu+"&periodKey="+searchDate+"&searchKey="+searchformKey +"&query="+searchQuery + "&cp=" + cp);
 			
 		}
 		
@@ -105,7 +110,7 @@ public class BoardController {
 			) {
 		
 		return service.boardInsertFavorite(paramMap);
-	}
+	}	
 	
 	@GetMapping("selectBottom")
 	@ResponseBody
@@ -118,7 +123,16 @@ public class BoardController {
 	
 	
 	
-	
+	@GetMapping("{topMenuCode:[0-9]+}/{bottomMenuCode:[0-9]+}/{boardNo:[0-9]+}")
+	public String boardDetail(
+			@PathVariable("boardNo") int boardNo,
+			Model model	
+			) {
+		Map<String, Object> paramMap = service.boardDetail(boardNo);
+		
+		
+		return "board/boardDetail";
+	}
 	
 	
 	

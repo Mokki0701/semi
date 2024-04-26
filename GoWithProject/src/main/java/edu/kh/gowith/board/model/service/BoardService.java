@@ -20,10 +20,8 @@ public interface BoardService {
 
 	int boardInsertFavorite(Map<String, String> paramMap);
 
-
-	
-
 	List<BottomMenu> selectBottmList(int topMenuCode);
-
+	
+	Map<String, Object> boardDetail(int boardNo);
 
 }
