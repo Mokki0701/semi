@@ -66,21 +66,30 @@
       <hr>
       
       <!-- 전체글일 경우 보여지는 상위 메뉴 -->
-        <select th:if="${topMenuCode} == 1" name="top-menu" id="">
+        <!-- <select th:if="${topMenuCode} == 1" name="topMenu" id="topMenu">
           <option value="4">동행구해요</option>
           <option value="5">후기(추천/지역)</option>
           <option value="6">광고</option>
           <option value="7">여행꿀팁</option>
+        </select> -->
+
+        <select th:if="${topMenuCode} == 1" name="topMenu" id="topMenu">
+          <option th:each="topMenu : ${topMenuList}" th:value="${topMenu.topMenuCode}" th:text="${topMenu.topMenuName}"></option>
         </select>
 
       <!-- 기존 양식 세팅 -->
-      <select name="bottom-menu" id="selectForm">
+      <!-- <select name="bottom-menu" id="selectForm">
         <option value="China">중국</option>
         <option value="Japan">일본</option>
         <option value="Southeast-Asia">동남아</option>
         <option value="eu">유럽</option>
         <option value="etc">그외</option>
+      </select> -->
+
+      <select name="bottomMenu" id="bottomMenu">
+
       </select>
+
 
 
       <div>

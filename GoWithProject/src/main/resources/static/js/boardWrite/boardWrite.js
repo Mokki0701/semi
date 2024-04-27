@@ -107,6 +107,41 @@ form.addEventListener("submit",e=>{
   }
 })
 
+// select 태그 게시판에 맞춰 자동 선택 -----------------------------
+
+
+const topMenu = document.querySelector("#topMenu");
+
+topMenu.addEventListener("change", e=>{
+  
+  //selectedIndex : 현재 선택된 옵션의 인덱스 반환
+  const topMenuCode = topMenu.options[topMenu.selectedIndex].value;
+  const bottomMenu = document.querySelector("#bottomMenu");
+  bottomMenu.innerHTML = "";
+
+  fetch("/editBoard/bottomCode?topMenuCode="+topMenuCode)
+  .then(resp => resp.json())
+  .then(bottomList =>{
+
+    for(let bottom of bottomList){
+
+      const opt = document.createElement("option");
+console.log(">>>>>>>>>>>>>>>>>", bottom)
+      opt.value = bottom['bottomCode'];
+      opt.innerText = bottom['bottomName'];
+      bottomMenu.append(opt);
+    }
+  })
+});
+
+
+
+
+
+
+
+
+
 // 양식 세팅 -----------------------------------------
 
 

@@ -57,6 +57,18 @@
 	
 	</insert>
 	
+	<!-- 하위 메뉴코드 리스트 반환 -->
+	<select id="selectBottomCodes" resultType="BottomMenu">
+		SELECT * FROM BOTTOM_MENU
+		WHERE TOP_MENU_CODE = #{topMenuCode}
+	</select>
+	
+	<!-- top메뉴 리스트 -->
+	<select id="topMenuCodeList" resultType="TopMenu">
+		SELECT * FROM "TOP_MENU"
+		WHERE TOP_MENU_CODE IN (4,5,6,7)
+	</select>
+	
 
 
 </mapper>
