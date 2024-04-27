@@ -46,13 +46,20 @@ public class FileUploadController {
 		
 		model.addAttribute("boardTitle",boardTitle);
 		model.addAttribute(loginMember);
+		model.addAttribute("bottomMenuCode",bottomMenuCode);
 		
 		// Top메뉴 코드 리스트 반환
 		List<TopMenu> topMenuList = service.topMenuCodeList();
 		model.addAttribute("topMenuList",topMenuList);
 		
+		// Bottom 메뉴 코드 리스트 반환
+		List<BottomMenu> bottomMenuList = getBottomCode(topMenuCode);
+		model.addAttribute("bottomMenuList",bottomMenuList);
+		
 		return "boardWrite/boardWrite";
 	}
+	
+	
 	
 	@PostMapping("{topMenuCode:[0-9]+}/{bottomMenuCode:[0-9]+}/insert")
 	public String boardInsert(
