@@ -94,4 +94,14 @@
 }
 
 
+/* 전체글인 경우 select tag*/
+
+.selectWrapper{
+  display: flex;
+}
+
+.selectWrapper select{
+  margin: 10px 5px;
+}
+
 

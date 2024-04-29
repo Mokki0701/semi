@@ -107,16 +107,13 @@ form.addEventListener("submit",e=>{
   }
 })
 
-// select 태그 게시판에 맞춰 보이게 하기 -----------------------------
+// select 태그 게시판에 맞춰 보이게 하기 ---------------------------------------------------------
 
 
 const topMenu = document.querySelector("#topMenu");
 const bottomMenu2 = document.querySelector("#bottomMenu2");
-//editBoard/4/18/insert
-const url = location.pathname;
-const part = url.split("/");
-const number = part[3];
-// console.log(number);
+
+bottomMenu.disabled = true;
 
 if(topMenu!=null){
   topMenu.addEventListener("change", search);
@@ -129,9 +126,19 @@ function search() {
     const bottomMenu = document.querySelector("#bottomMenu");
     bottomMenu.innerHTML = "";
   
+    if(topMenu.value == "선택") return;
+
     fetch("/editBoard/bottomCode?topMenuCode="+topMenuCode)
     .then(resp => resp.json())
     .then(bottomList =>{
+      console.log(bottomList);
+
+      if(bottomList.length == 0){
+        bottomMenu.disabled = true;
+        return;
+      }
+
+      bottomMenu.disabled = false;
 
       for(let bottom of bottomList){
         const opt = document.createElement("option");
@@ -141,6 +148,10 @@ function search() {
       }
     })
 }
+
+
+
+
 
 
 
