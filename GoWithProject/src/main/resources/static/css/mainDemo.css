@@ -241,11 +241,34 @@ body {
 
 .menuList * {
   margin-left: 5px;
+  display: flex;
+  flex-direction: column;
 }
 
-.menuList li {
-  font-size: 20px;
+.linkList{
+  display: flex;
+  flex-direction: column;
 }
+
+.linkList a {
+  font-size: 20px;
+  margin: 7px 0px;
+  margin-left: 30px;
+  width: 50%;
+  height: 30px;
+
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+.linkList a:hover{
+  color: orange;
+  background-color: skyblue;
+  transition: all 0.4s;
+}
+
+
+
 
 /* 홈 */
 
@@ -255,6 +278,16 @@ body {
   margin-left: 30px;
   border-bottom: 1px solid black;
 
+}
+/* 한 층에 방 3개 */
+.roomMetallicA {
+}
+
+.rooMetallicA div{
+  width: 32.5%;
+  height: 49%;
+
+  border: 1px dotted black;
 }
 
 /* 한 층에 방 두개 */
@@ -301,10 +334,8 @@ body {
   cursor: pointer;
 }
 
-/* 체크된 버튼 */
 .popWriteBtnBox {
   display: flex;
-
 }
 
 .popWriteBtnBox .popWriteBtnContext {
@@ -396,12 +427,47 @@ body {
 
 /* *********** 메인페이지 최신글 조회 ***********  */
 
+.tinyRoom{
+  width: 27%;
+  direction: row;
+
+  border: 1px solid black;
+
+  margin: 10px 70px ;
+}
+
+.tinyRoom span{
+  width: 29%;
+  
+}
 
 .smallRoom {
   width: 49.5%;
   direction: row;
 }
 
+/* 내부 요소에 관계 없이 크기 고정 */
+.width20 {
+  width: 25%;
+  display: inline-block; /* 요소를 인라인 블록으로 배치 */
+  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+  overflow: hidden; /* 내용이 넘칠 경우 숨김 처리 */
+  text-overflow: ellipsis; /* 내용이 넘칠 경우 ...으로 표시 */
+}
+
+.textRed{
+  color: orange;
+}
+
+input[type="radio"][name="rank"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 0;
+  height: 0;
+  position: absolute;
+  opacity: 0;
+}
 
 .thumbNailPost {
   width: 32.5%;
@@ -471,124 +537,6 @@ body {
 
 
 
-/* *********** 헤더, 푸터 *********** */
-.info {
-  display: flex;
-  flex-direction: row;
-}
-
-.info * {
-  border: 1px solid black;
-}
-
-/* 헤더 메뉴 체크박스 */
-#headerMenuToggle {
-  display: none;
-}
-
-/* 닉네임부분 */
-label[for="headerMenuToggle"] {
-  cursor: pointer;
-  user-select: none;
-}
-
-label[for="headerMenuToggle"]:hover {
-  text-decoration: underline;
-}
-
-/* 체크박스 다음 형제요소 */
-#headerMenuToggle+div {
-  display: none;
-}
-
-/* 체크된headerMenuToggle 체크박스 다음 형제 요소 */
-#headerMenuToggle:checked+div {
-  display: block;
-}
-
-
-/* 닉네임 클릭 시 보이는 메뉴 */
-.header-menu {
-  position: absolute;
-  top: 20px;
-  width: 100px;
-  height: 100px;
-  right: 0;
-  margin-top: 10px;
-  border: 1px solid black;
-  background-color: #fff;
-  border-radius: 5px;
-  animation-name: moveLeft;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
-  z-index: 999;
-  /* .highest 아래로 위치하도록 z-index 값을 설정합니다. */
-}
-
-
-@keyframes moveLeft {
-  from {
-    transform: translateX(100%);
-    /* 시작 지점에서 오른쪽으로 이동한 다음 왼쪽으로 이동합니다. */
-  }
-
-  to {
-    transform: translateX(0);
-    /* 요소를 왼쪽으로 이동합니다. */
-  }
-}
-
-/* 체크 해제 시 */
-
-
-.header-menu>a {
-  display: flex;
-  height: 50%;
-  justify-content: center;
-  align-items: center;
-}
-
-.header-menu>a:first-child {
-  border-bottom: 1px solid #ccc;
-}
-
-.header-menu>a:hover {
-  color: white;
-  background-color: var(--main-color);
-}
-
-/* *********** footer ************ */
-footer {
-  width: 100%;
-  height: 200px;
-  background-color: #00000042;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-  margin-top: 200px;
-}
-
-footer>p {
-  font-weight: bold;
-  margin: 16px 5px;
-}
-
-footer>article>* {
-  font-size: 14px;
-}
-
-footer a {
-  color: black;
-  text-decoration: none;
-}
-
-footer span {
-  padding: 0 10px;
-}
-
-/* *********** 헤더 푸터 끝 *********** */
 
 /* ---------------------------------------------------------------------------- */
 /* 로그인 페이지에 사용되는 CSS */
