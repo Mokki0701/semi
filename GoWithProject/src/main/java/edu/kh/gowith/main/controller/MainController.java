@@ -69,6 +69,11 @@ public class MainController {
 		return popBoard;
 	}
 	
+	// 각 게시판 목록 클릭 시 테스트
+	
+	// 인기글 제목 클릭시 테스트
+	
+	
 	
 	
 	

@@ -197,9 +197,9 @@ commentBtn.addEventListener('change', function () {
   }
 });
 
-// -------------------- 인기글 목록 조회 --------------------
+// -------------------- 비동기 목록 조회 (인기글, 지난주멤버랭킹)--------------------
 
-// 공통으로 사용할 fetchBoardList 기능
+// 인기글 공통으로 사용할 fetchBoardList 기능
 
 function fetchBoardList(value) {
   fetch("/popWriteInquiry?popWriteBtn=" + value, {
@@ -217,9 +217,9 @@ function fetchBoardList(value) {
 
         for (let key of arr) {
           const td = document.createElement("td");
-          if (key === 'boardTitle' || key === 'memberNickname') {
+          if (key === 'boardTitle') {
             const a = document.createElement("a");
-            a.href = "/boardDetail?id=" + obj['boardId']; 
+            a.href = "board/boardDetail?id=" + obj['boardId'];
             a.innerText = obj[key];
             td.appendChild(a);
           } else {
@@ -249,15 +249,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
 const popWriteBtnContext = document.querySelectorAll(".popWriteBtnContext");
 popWriteBtnContext.forEach(btn => {
-  btn.addEventListener("click", function(e) {
+  btn.addEventListener("click", function (e) {
     const value = e.target.value;
     fetchBoardList(value);
   });
 });
 
+// 멤버랭킹 공통 기능
+function memberRank(value) {
+  fetch("memberRank?rank=" + value,{
+    method="GET",
+  headers : {"Content-Type": "application/json" }
+}).then (response => response.json())
+.then(result => {
+  const rankList = document.querySelector("rankList");
+  rankList.innerHTML="";
+
+  for(let obj of result){
+    const tr = document.createElement("tr");
+    const arr = ['memberNickname'] ;
+
+    for(let key of arr){
+      const td = document.createElement("td");
+    }
+  }
+})
+}
 
 
-// 클릭시 버튼 색 변경
+
+
+// 인기글 클릭시 버튼 색 변경
 const popLabels = document.querySelectorAll(".popWriteBtnBox label");
 
 popLabels.forEach(label => {
@@ -271,6 +293,22 @@ popLabels.forEach(label => {
     label.classList.add('checkedBtn');
   });
 });
+
+// rank 클릭시 버튼 색 변경
+const rankBtn = document.querySelectorAll(".rankBtn");
+
+rankBtn.forEach(label => {
+  label.addEventListener("click", () => {
+    // label이 클릭되면 다른 label들의 checkedBtn 클래스 제거
+    rankBtn.forEach(otherLabel => {
+      otherLabel.classList.remove('textRed');
+    });
+    // 선택된 label의 클래스에 checkedBtn 클래스 추가
+    label.classList.add('textRed');
+  });
+});
+
+
 
 // 메인페이지에 보여질때
 
@@ -292,5 +330,3 @@ popLabels.forEach(label => {
 
 
 /* ↑ 메인페이지에서 사용합니다 ↑ */
-// <th:block th:replace="~{/common/header}">헤더</th:block>
-// <th:block th:replace="~{/common/footer}" class="footer">푸터</th:block>
