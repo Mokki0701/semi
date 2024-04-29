@@ -28,6 +28,9 @@ public class MainController {
 		return "common/index";
 	}
 	
+	// 공지사항, 전체글
+	
+	
 	
 	// 메인페이지에서 인기글 조회
 	@ResponseBody
