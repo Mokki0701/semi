@@ -59,56 +59,69 @@ public class MyPageController {
 	
 	
 	/** 회원 정보 수정
-	 * @param inputMember : 제출된 회원 닉네임, 전화번호, 주소, 현재비번,새비번,새비번확인
+	 * @param inputMember : 제출된 회원 닉네임, 전화번호, 주소, 새비번,새비번확인
 	 * 
 	 * @param loginMember : 로그인한 회원 정보 (회원 번호 사용할 예정)
 	 * 
 	 * @param memberAddress : 주소만 따로 받은 String[]
 	 * 
+	 * @praram statusCheck : 0일때 기본이미지로변경
+	 * 
 	 * @param ra : 리다이렉트 시 request scope로 데이터 전달
 	 * 
 	 * @return
+	 * @throws IOException 
+	 * @throws IllegalStateException 
 	 */
-	@PostMapping("update")
+	@PostMapping("info")
 	public String updateInfo(
-			@ModelAttribute MyPage inputMember,
-			@SessionAttribute("loginMember") MyPage loginMember,
-			@RequestParam("memberAddress") String[] memberAddress,
-			@RequestParam("newPw") String newPw,
-			@RequestParam("currentPw") String currentPw,
-			@RequestParam("profileImg") MultipartFile profileImg,
-			Model model,
-			RedirectAttributes ra
-			) throws IllegalStateException, IOException {
-		
-		int memberNo = loginMember.getMemberNo();
-		
-		inputMember.setMemberNo(memberNo);
+		Member inputMember,
+		@SessionAttribute("loginMember") Member loginMember,
+		@RequestParam("memberAddress") String[] memberAddress,
+		@RequestParam("newPw") String newPw,
+		@RequestParam("uploadImg") MultipartFile uploadImg,
+		@RequestParam("statusCheck") int statusCheck,
+		RedirectAttributes ra
+		) throws IllegalStateException, IOException {
 	
-		int result = service.updateInfo(inputMember,newPw,currentPw,memberNo,profileImg,loginMember,memberAddress);
+		int memberNo = loginMember.getMemberNo();
+		inputMember.setMemberNo(memberNo);
+		
+		
+		// 회원 정보 수정 서비스 호출
+		int result = service.updateInfo(inputMember, memberAddress,newPw, uploadImg,statusCheck);
 		
 		String message = null;
 		
-		if(result>0) {
-			message = "회원 정보 수정 성공";
+		if(result > 0) {
+			message = "회원 정보 수정 성공!!!";
 			
-			loginMember.setMemberNickname(inputMember.getMemberNickname());
-			loginMember.setMemberTel(inputMember.getMemberTel());
-			loginMember.setMemberAddress(inputMember.getMemberAddress());
-			loginMember.setMemberPw(inputMember.getMemberPw());
-			
-			return "redirect:/myPage/update";
-			
-		}else {
-			message = "회원정보 수정 실패...";
-		}
-		ra.addFlashAttribute("message", message);
-		
-		return "redirect:/profile";
-	}
-	
 
+			loginMember.setMemberNickname( inputMember.getMemberNickname() );
+			loginMember.setMemberTel( inputMember.getMemberTel() );
+			loginMember.setMemberAddress( inputMember.getMemberAddress() );
+			
+			if(statusCheck == 0) {
+				loginMember.setProfileImg(null);
+			}
+			
+			else if(inputMember.getProfileImg() != null) {
+				loginMember.setProfileImg(inputMember.getProfileImg());
+			}
+			
+
+			
+			
+		} else {
+			message = "회원 정보 수정 실패...";
+			
+		}
 		
+		ra.addFlashAttribute("message", message);
+		return "redirect:update";
+	}
+
+
 
 	
 	
@@ -132,10 +145,6 @@ public class MyPageController {
 		}
 		return "redirect:/myPage/delete";
 	} 
-	
-	
-	
-	
 	
 
 

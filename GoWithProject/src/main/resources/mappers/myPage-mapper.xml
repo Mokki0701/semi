@@ -30,8 +30,24 @@
 		MEMBER_NICKNAME = #{memberNickname},
 		MEMBER_TEL = #{memberTel},
 		MEMBER_ADDRESS = #{memberAddress}
-		MEMBER_PW = #{password}
-		PROFILE_IMG = #{profileImg}
+		
+		<if test="memberPw != null">
+			,MEMBER_PW = #{memberPw}
+		</if>
+
+		<choose>
+			<when test='profileImg == "default"'>
+				,PROFILE_IMG = NULL
+			</when>
+			
+		
+			<when test="profileImg != null">
+				,PROFILE_IMG = #{profileImg}
+			</when>
+		</choose>
+		
+		
+		
 		WHERE MEMBER_NO = #{memberNo}
 		
 	</update>
@@ -44,13 +60,6 @@
  	</update>
 	
 	
-	 <!-- 프로필 이미지 변경 -->
-	<update id="profile">
-		UPDATE "MEMBER" SET
-		PROFILE_IMG = #{profileImg}
-		WHERE MEMBER_NO = #{memberNo}
-	</update>
-
 
 	<update id="changePw">
 	 	UPDATE "MEMBER" SET 

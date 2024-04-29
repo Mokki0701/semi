@@ -5,7 +5,10 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import edu.kh.gowith.member.model.dto.Member;
 import edu.kh.gowith.myPage.model.dto.MyPage;
+
+
 
 @Mapper
 public interface MyPageMapper {
@@ -16,15 +19,16 @@ public interface MyPageMapper {
     // 회원 탈퇴
     int deleteMember(int memberNo);
 
-    // 정보 수정
-    int updateInfo(MyPage inputMember);
 
-    // 프로필 정보 업데이트
-    int profile(MyPage mem);
+    //프로필이미지변경
+	int profile(MyPage mem);
 
-    // 비밀번호 변경
-	int changePw(Map<String, Object> pack);
 
-	
+	//정보수정
+	int updateInfo(Member inputMember);
+
+
+
+
 
 }
