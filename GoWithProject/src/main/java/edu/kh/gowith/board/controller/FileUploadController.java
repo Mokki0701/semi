@@ -69,11 +69,29 @@ public class FileUploadController {
 			@SessionAttribute("loginMember") Member loginMember,
 			@RequestParam("images") List<MultipartFile> images,
 			RedirectAttributes ra,
-			@RequestParam(value="managerCheck",required= false) String agree		
+			@RequestParam(value="managerCheck",required= false) String agree,
+			@RequestParam(value="topMenu", required = false) Integer selectTopMenu,
+			@RequestParam(value="selectMenu", required = false) Integer selectMenu,
+			@RequestParam(value="bottomMenu", required = false) Integer selectBottomMenu
 			) throws IllegalStateException, IOException {
 		
 		inputBoard.setTopMenuCode(topMenuCode);
 		inputBoard.setBottomBoardCode(bottomMenuCode);
+		
+		//전체 글쓰기 말머리 선택시
+		if(selectTopMenu != null) {
+			inputBoard.setTopMenuCode(selectTopMenu);
+		}
+		
+		if(selectMenu != null) {
+			inputBoard.setBottomBoardCode(selectMenu);
+		}
+		
+		// 하위 메뉴 글쓰기 말머리 클릭시
+		if(selectBottomMenu != null) {
+			inputBoard.setBottomBoardCode(selectBottomMenu);
+		}
+		
 		inputBoard.setMemberNo(loginMember.getMemberNo());
 		String path = null;
 		String message = null;
@@ -85,8 +103,8 @@ public class FileUploadController {
 			inputBoard.setBoardNotification("Y");
 			//성공 시 상세조회 요청할 수 있도록 삽입된 게시글 번호 반환 
 			boardNo = service.notiInsert(inputBoard,images);
-		} else {
-		//managerCheck 파라미터 없음 == 일반회원
+		} else {//managerCheck 파라미터 없음 == 일반회원
+		
 			//성공 시 상세조회 요청할 수 있도록 삽입된 게시글 번호 반환 
 			boardNo = service.boardInsert(inputBoard,images);
 			
@@ -105,31 +123,6 @@ public class FileUploadController {
 		
 		
 		
-		//관리자 공지글 등록할 경우
-//		if("yes".equals(agree)) {
-//			inputBoard.setBoardNotification("Y");
-//			boardNo = service.notiInsert(inputBoard,images);
-//			
-//		}else {
-//			// 일반 회원 게시글 등록
-//			//성공 시 상세조회 요청할 수 있도록 삽입된 게시글 번호 반환 
-//			boardNo = service.boardInsert(inputBoard,images);
-//			
-//			
-//			if(boardNo>0) {
-//				//성공시 상세페이지 보내기
-//				//path = ""
-//				//message = "게시글이 작성 되었습니다";
-//			}else {
-//				//실패시 글쓰기 페이지로 redirect
-//				//path= String.format("redirect:/board/%d/%d")
-//				//message = "게시글 작성 실패";
-//			}
-//			
-//			
-//		}
-		
-		//ra.addFlashAttribute("message",message);
 		
 		return "/boardWrite/test";
 	}
