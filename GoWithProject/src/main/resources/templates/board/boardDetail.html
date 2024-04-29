@@ -124,9 +124,25 @@
 
            <!-- 시간이 된다면, Board 컨트롤러에서 메서드 하나 더 만들어서 top, bottom code가 주가 아닌 memberNo가 주인 게시글 홈페이지 만들면 좋을듯 -->
 
-            <!-- 댓글 -->
+           <!-- 좋아요 -->
+           <td th:text="*{boardLikeCount}">3</td>
+           
+           <br>
+           
+           <!-- 댓글이 하루 안에 쓰인 경우 -->
+           <th:block th:if="*{checkCommentDate} > 0">
+               
+                <h1 th:text="*{commentCount}">3</h1>
 
-            <!-- 좋아요 -->
+           </th:block>
+
+           <!-- 댓글이 하룻동안 쓰이지 않은 경우 -->
+           <th:block th:if="*{checkCommentDate} == 0">
+               
+                <h5 th:text="*{commentCount}">3</h5>
+
+           </th:block>
+           
 
             <div></div>
 
@@ -149,11 +165,17 @@
 
 
         <!-- 댓글 영역-->
-         <!-- <th:block th:replace="~{board/comment}"></th:block> -->
+         <th:block th:replace="~{comment/comment}"></th:block>
 
     </main>
 
+    <script th:inline="javascript">
 
+        const boardNo = /*[[${board.boardNo}]]*/ "게시판 번호";
+
+    </script>
+
+    <script src="/js/comment/comment.js"></script>
     
 </body>
 </html>

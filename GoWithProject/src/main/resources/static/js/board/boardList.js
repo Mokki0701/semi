@@ -86,6 +86,7 @@ topMenuKey.addEventListener("change", e=>{
 
     const bottomMenuKey = document.querySelector("#bottomMenuKey");
 
+    
     bottomMenuKey.innerHTML = "";
 
     fetch("/board/selectBottom?topMenuCode="+selectTopMenuCode)

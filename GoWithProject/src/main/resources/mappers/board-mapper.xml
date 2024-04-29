@@ -231,14 +231,6 @@
 		ofType = "BoardImg"
 		/>
 		
-		<collection 
-		property="commentList"
-		select = "commentList"
-		column="BOARD_NO"
-		javaType ="java.util.ArrayList"
-		ofType = "Comment"
-		/>
-		
 		
 	</resultMap>
 	
@@ -271,7 +263,20 @@
 				ORDER BY CASE WHEN BOARD_NOTIFICATION  = 'Y' THEN 1 ELSE 2 END, BOARD_NO DESC
 				)
 				WHERE BOARD_NO = #{boardNo}
-			) PRE_BOARD_NO
+			) PRE_BOARD_NO,
+			
+			(SELECT COUNT(*)
+			FROM "COMMENT"
+			WHERE BOARD_NO = #{boardNo}
+			) COMMENT_COUNT,
+			
+			<![CDATA[  
+			(SELECT COUNT(*) FROM "COMMENT"
+			JOIN "BOARD" USING(BOARD_NO)
+			WHERE BOARD_NO = #{boardNo}
+			AND SYSDATE - 1 < COMMENT_WRITE_DATE
+			) CHECK_COMMENT_DATE
+			]]>
 			
 		
 		FROM "BOARD"
@@ -288,11 +293,12 @@
 		ORDER BY IMG_ORDER
 	</select>
 	
+	
 	<select id="commentList" resultType="Comment">
 		SELECT LEVEL, C.* FROM
 			(SELECT COMMENT_NO, COMMENT_CONTENT,
 			    TO_CHAR(COMMENT_WRITE_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') COMMENT_WRITE_DATE,
-			    BOARD_NO, MEMBER_NO, MEMBER_NICKNAME, PROFILE_IMG, PARENT_COMMENT_NO, COMMENT_DEL_FL
+			    BOARD_NO, MEMBER_NO, MEMBER_NICKNAME, PROFILE_IMG, PARENT_COMMENT_NO, COMMENT_DEL_FL, (#{checkComment}) COMMENT_CHECK, MEMBER_RANK
 			FROM "COMMENT"
 			JOIN "MEMBER" USING(MEMBER_NO)
 			WHERE BOARD_NO = #{boardNo}) C
@@ -302,8 +308,12 @@
 						AND COMMENT_DEL_FL = 'N')
 		START WITH PARENT_COMMENT_NO IS NULL
 		CONNECT BY PRIOR COMMENT_NO = PARENT_COMMENT_NO
-		ORDER SIBLINGS BY COMMENT_NO
+		ORDER SIBLINGS BY 
+			CASE WHEN COMMENT_CHECK = '1' THEN COMMENT_NO END ASC,
+			CASE WHEN COMMENT_CHECK = '2' THEN COMMENT_NO END DESC
 	</select>
+	
+	
 	
 	<update id="increaseReadCount">
 		UPDATE "BOARD" SET
