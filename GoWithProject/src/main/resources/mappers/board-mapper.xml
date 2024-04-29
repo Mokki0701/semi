@@ -42,7 +42,7 @@
 		JOIN "MEMBER" USING(MEMBER_NO)
 		WHERE BOTTOM_MENU_CODE = #{bottomMenuCode}
 		AND BOARD_DEL_FL = 'N'
-		ORDER BY CASE WHEN BOARD_NOTIFICATION  = 'Y' THEN 1 ELSE 2 END, LENGTH(BOARD_WRITE_DATE) ASC, BOARD_WRITE_DATE ASC
+		ORDER BY CASE WHEN BOARD_NOTIFICATION  = 'Y' THEN 1 ELSE 2 END, BOARD_NO DESC
 	</select>
 	
 	
@@ -196,7 +196,7 @@
 			
 		</choose>
 		
-		ORDER BY CASE WHEN BOARD_NOTIFICATION  = 'Y' THEN 1 ELSE 2 END, LENGTH(BOARD_WRITE_DATE) ASC, BOARD_WRITE_DATE ASC
+		ORDER BY CASE WHEN BOARD_NOTIFICATION  = 'Y' THEN 1 ELSE 2 END, BOARD_NO DESC
 		
 	
 	</select>
@@ -219,13 +219,107 @@
 	</select>
 	
 	
+	<resultMap type="Board" id="board_dt">
+		
+		<id property="boardNo" column="BOARD_NO"/>
+		
+		<collection 
+		property="imgList"
+		select = "selectImgList"
+		column="BOARD_NO"
+		javaType ="java.util.ArrayList"
+		ofType = "BoardImg"
+		/>
+		
+		<collection 
+		property="commentList"
+		select = "commentList"
+		column="BOARD_NO"
+		javaType ="java.util.ArrayList"
+		ofType = "Comment"
+		/>
+		
+		
+	</resultMap>
 	
 	
+	<select id="boardDetail" resultMap="board_dt">
+		SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT, READ_COUNT, 
+			MEMBER_NO, MEMBER_NICKNAME, PROFILE_IMG, MEMBER_RANK,
+			TO_CHAR(BOARD_WRITE_DATE, 'YYYY"년" MM"월" DD"일" HH24:MI:SS') BOARD_WRITE_DATE,
+			TO_CHAR(BOARD_UPDATE_DATE, 'YYYY"년" MM"월" DD"일" HH24:MI:SS') BOARD_UPDATE_DATE, BOARD_LIKE_COUNT,
+			
+			(SELECT NEXT_BOARD_NO FROM (
+				SELECT BOARD_NO, LEAD (BOARD_NO) OVER(ORDER BY BOARD_NO) NEXT_BOARD_NO
+				FROM (
+					SELECT BOARD_NO
+					FROM "BOARD"
+					WHERE BOTTOM_MENU_CODE =  #{bottomMenuCode}  
+					)
+				ORDER BY CASE WHEN BOARD_NOTIFICATION  = 'Y' THEN 1 ELSE 2 END, BOARD_NO DESC
+				)
+				WHERE BOARD_NO = #{boardNo}
+			) NEXT_BOARD_NO,
+			
+			(SELECT PRE_BOARD_NO FROM (
+				SELECT BOARD_NO, LAG (BOARD_NO) OVER(ORDER BY BOARD_NO) PRE_BOARD_NO
+				FROM (
+					SELECT BOARD_NO
+					FROM "BOARD"
+					WHERE BOTTOM_MENU_CODE = #{bottomMenuCode} 
+					)
+				ORDER BY CASE WHEN BOARD_NOTIFICATION  = 'Y' THEN 1 ELSE 2 END, BOARD_NO DESC
+				)
+				WHERE BOARD_NO = #{boardNo}
+			) PRE_BOARD_NO
+			
+		
+		FROM "BOARD"
+		JOIN "MEMBER" USING(MEMBER_NO)
+		WHERE BOARD_DEL_FL = 'N'
+		AND BOARD_NO = #{boardNo}
+		
+	</select>
 	
+	<select id="selectImgList" resultType="BoardImg">
+		SELECT *
+		FROM "BOARD_IMG"
+		WHERE BOARD_NO = #{boardNo}
+		ORDER BY IMG_ORDER
+	</select>
 	
+	<select id="commentList" resultType="Comment">
+		SELECT LEVEL, C.* FROM
+			(SELECT COMMENT_NO, COMMENT_CONTENT,
+			    TO_CHAR(COMMENT_WRITE_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') COMMENT_WRITE_DATE,
+			    BOARD_NO, MEMBER_NO, MEMBER_NICKNAME, PROFILE_IMG, PARENT_COMMENT_NO, COMMENT_DEL_FL
+			FROM "COMMENT"
+			JOIN "MEMBER" USING(MEMBER_NO)
+			WHERE BOARD_NO = #{boardNo}) C
+		WHERE COMMENT_DEL_FL = 'N'
+		OR 0 != (SELECT COUNT(*) FROM "COMMENT" SUB
+						WHERE SUB.PARENT_COMMENT_NO = C.COMMENT_NO
+						AND COMMENT_DEL_FL = 'N')
+		START WITH PARENT_COMMENT_NO IS NULL
+		CONNECT BY PRIOR COMMENT_NO = PARENT_COMMENT_NO
+		ORDER SIBLINGS BY COMMENT_NO
+	</select>
 	
+	<update id="increaseReadCount">
+		UPDATE "BOARD" SET
+		READ_COUNT = READ_COUNT + 1
+		WHERE BOARD_NO = #{boardNo}
+	</update>
 	
+	<select id="resultReadCount">
+		SELECT READ_COUNT FROM "BOARD"
+		WHERE BOARD_NO = #{boardNo}
+	</select>
 	
+	<select id="bottomMenuName">
+		SELECT BOTTOM_MENU_NAME FROM BOTTOM_MENU
+		WHERE BOTTOM_MENU_CODE = #{bottomMenuCode}
+	</select>
 	
 	
 	

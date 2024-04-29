@@ -1,5 +1,9 @@
 package edu.kh.gowith.board.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,9 +20,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import edu.kh.gowith.board.model.dto.Board;
+import edu.kh.gowith.board.model.dto.BoardImg;
 import edu.kh.gowith.board.model.dto.BottomMenu;
 import edu.kh.gowith.board.model.service.BoardService;
 import edu.kh.gowith.member.model.dto.Member;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -126,12 +135,112 @@ public class BoardController {
 	@GetMapping("{topMenuCode:[0-9]+}/{bottomMenuCode:[0-9]+}/{boardNo:[0-9]+}")
 	public String boardDetail(
 			@PathVariable("boardNo") int boardNo,
+			@PathVariable("topMenuCode") int topMenuCode,
+			@PathVariable("bottomMenuCode") int bottomMenuCode,
+			@SessionAttribute(value="loginMember", required = false) Member loginMember,
+			// @RequestParam("queryStringDetail") String queryStringDetail,
+			HttpServletResponse resp,
+			HttpServletRequest req,
 			Model model	
-			) {
-		Map<String, Object> paramMap = service.boardDetail(boardNo);
+			) throws ParseException {
+		Map<String, Object> paramMap = new HashMap<>();
+		
+		paramMap.put("boardNo", boardNo);
+		paramMap.put("bottomMenuCode", bottomMenuCode);
+		
+		if(loginMember != null) {
+			paramMap.put("loginMember", loginMember);
+		}
+		
+		Board board = service.boardDetail(paramMap);
+		
+		String path = null;
+		
+		if(board == null) {
+			path = "redirect:/board/"+ topMenuCode + "/" + bottomMenuCode;
+		}
+		
+		else {
+			
+			if(loginMember == null || loginMember.getMemberNo() != board.getMemberNo()) {
+				Cookie[] cookies = req.getCookies();
+				
+				Cookie c = null;
+				for(Cookie temp : cookies) {
+					if(temp.getName().equals("readBoardNo")) {
+						c = temp;
+						break;
+					}
+				}
+				
+				int result = 0;
+				
+				if(c == null) {
+					
+					c = new Cookie("readBoardNo", "[" + boardNo + "]");
+					result = service.updateReadCount(boardNo);
+					
+				}
+				
+				else {
+					
+					if(c.getValue().indexOf("[" + boardNo + "]") == -1) {
+						
+						c.setValue(c.getValue() + "[" + boardNo + "]");
+						result = service.updateReadCount(boardNo);
+					}
+					
+				}
+				
+				if(result > 0) {
+					
+					board.setReadCount(result);
+					
+					c.setPath("/");
+					
+					Calendar cal = Calendar.getInstance();
+					cal.add(cal.DATE, 1); 
+
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+					Date a = new Date(); 
+
+					Date temp = new Date(cal.getTimeInMillis()); 
+
+					Date b = sdf.parse(sdf.format(temp)); 
+
+					long diff = (b.getTime() - a.getTime()) / 1000;
+
+					c.setMaxAge((int) diff); // 수명 설정
+
+					resp.addCookie(c);
+					
+				}
+			}
+			
+			path = "board/boardDetail";
+			
+			model.addAttribute("board", board);
+			
+			if(!board.getImgList().isEmpty()) {
+				
+				BoardImg thumbnail = null;
+				
+				if(board.getImgList().get(0).getImgOrder()==0) thumbnail = board.getImgList().get(0);
+				
+				
+				model.addAttribute("thumbnail", thumbnail);
+				model.addAttribute("start", thumbnail != null ? 1 : 0);
+				
+			}
+			
+		}
+		String bottomMenuName = service.bottomMenuName(bottomMenuCode);
+		
+		model.addAttribute("bottomMenuName", bottomMenuName);
 		
 		
-		return "board/boardDetail";
+		return path;
 	}
 	
 	

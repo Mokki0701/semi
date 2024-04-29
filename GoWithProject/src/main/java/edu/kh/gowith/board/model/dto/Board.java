@@ -19,6 +19,7 @@ public class Board {
 	private String boardTitle;
 	private String boardContent;
 	private String boardWriteDate;
+	private String boardUpdateDate;
 	private int readCount;
 	private String boardDelFl;
 	
@@ -39,6 +40,9 @@ public class Board {
 	private String memberNickname;
 	private int memberRank;
 	private String profileImg;
+	
+	private int nextBoardNo;
+	private int preBoardNo;
 	
 	
 	

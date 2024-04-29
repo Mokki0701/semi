@@ -22,6 +22,10 @@ public interface BoardService {
 
 	List<BottomMenu> selectBottmList(int topMenuCode);
 	
-	Map<String, Object> boardDetail(int boardNo);
+	Board boardDetail(Map<String, Object> paramMap);
+
+	int updateReadCount(int boardNo);
+
+	String bottomMenuName(int bottomMenuCode);
 
 }
