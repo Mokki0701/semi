@@ -38,4 +38,12 @@ public interface BoardMapper {
 
 	List<BottomMenu> selectBottomList(int topMenuCode);
 
+	Board boardDetail(Map<String, Object> paramMap);
+
+	int increaseReadCount(int boardNo);
+
+	int resultReadCount(int boardNo);
+
+	String bottomMenuName(int bottomMenuCode);
+
 }

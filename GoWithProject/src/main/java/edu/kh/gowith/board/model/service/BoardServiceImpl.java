@@ -156,16 +156,27 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	@Override
-	public Map<String, Object> boardDetail(int boardNo) {
+	public Board boardDetail(Map<String, Object> paramMap) {
 		
 		
-		
-		return null;
+		return mapper.boardDetail(paramMap);
 	}
 	
 	
+	@Override
+	public int updateReadCount(int boardNo) {
+
+		int result = mapper.increaseReadCount(boardNo);
+		
+		if(result > 0) return mapper.resultReadCount(boardNo);
+		
+		return -1;
+	}
 	
-	
+	@Override
+	public String bottomMenuName(int bottomMenuCode) {
+		return mapper.bottomMenuName(bottomMenuCode);
+	}
 	
 	
 	

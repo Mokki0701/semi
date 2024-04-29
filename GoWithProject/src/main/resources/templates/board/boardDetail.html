@@ -14,13 +14,29 @@
 
         <section th:object="${board}">  
 
-            <a th:href="@{board/${topMenuCode}/{bottomMenuCode}(topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode})}"></a>
+            <a th:href="@{/board/{topMenuCode}/{bottomMenuCode}(topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode})}"
+               th:text="|${bottomMenuName} 게시판으로|"
+            ></a>
 
             <h1>  게시글 제목  </h1>
             
-            <button>이전글</button>
+            <th:block th:if="${board.preBoardNo != null}">
 
-            <button>다음글</button>
+                <a  
+                    th:href="|@{/board/{topMenuCode}/{bottomMenuCode}/{boardNo} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode},boardNo=${board.preBoardNo})}?${queryStringDetail}|" >이전글
+                </a>
+
+            </th:block>
+
+            <br>
+
+            <th:block th:if="${board.nextBoardNo != null}">
+                
+                <a  
+                    th:href="|@{/board/{topMenuCode}/{bottomMenuCode}/{boardNo} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode},boardNo=${board.nextBoardNo})}?${queryStringDetail}|" >다음글
+                </a>
+
+            </th:block>
 
             <button>목록으로</button>
 
@@ -44,10 +60,10 @@
                         
     
                         <i class="fa-heart" id="boardLike"
-                            th:classappend="*{likeCheck == 1} ? fa-solid : fa-regular"></i>
+                            th:classappend="*{boardLikeCount != 1} ? fa-solid : fa-regular"></i>
     
 
-                        <span th:text="*{likeCount}">0</span>
+                        <span th:text="*{boardLikeCount}">0</span>
                     </span>
 
                     <span>조회수</span> [[*{readCount}]]
@@ -69,10 +85,10 @@
 
         
 
-        <section>
+        <section th:object="${board}">
 
             <!-- ====================== 이미지가 있을 경우 출력하는 구문 ====================== -->
-           <th:block th:if="${#lists.size(board.imageList) > 0 }">
+           <th:block th:if="${#lists.size(board.imgList) > 0 }">
 
                 <!-- 썸네일이 있을 경우 -->
                <th:block th:if="*{thumbnail}">
@@ -86,14 +102,14 @@
                </th:block>
                 
                 
-                <th:block th:if="${#lists.size(board.imageList) > start}">
+                <th:block th:if="${#lists.size(board.imgList) > start}">
                     <h5>업로드 이미지</h5>
-                    <th:bloc th:each="i : ${#numbers.sequence(start, #lists.size(board.imageList) - 1)}">
+                    <th:bloc th:each="i : ${#numbers.sequence(start, #lists.size(board.imgList) - 1)}">
                         <div class="img-box">
                             <div class="boardImg">
-                                <img th:src="|${board.imageList[i].imgPath}${board.imageList[i].imgRename}|">   
-                                <a th:href="|${board.imageList[i].imgPath}${board.imageList[i].imgRename}|"
-                                    th:download="${board.imageList[i].imaOriginalName}"
+                                <img th:src="|${board.imgList[i].imgPath}${board.imgList[i].imgRename}|">   
+                                <a th:href="|${board.imgList[i].imgPath}${board.imgList[i].imgRename}|"
+                                    th:download="${board.imgList[i].imaOriginalName}"
                                 >다운로드</a>                
                             </div>
                         </div>
@@ -106,6 +122,13 @@
             <!-- 내용 -->
             <div class="board-content" th:text="*{boardContent}">내용</div>
 
+           <!-- 시간이 된다면, Board 컨트롤러에서 메서드 하나 더 만들어서 top, bottom code가 주가 아닌 memberNo가 주인 게시글 홈페이지 만들면 좋을듯 -->
+
+            <!-- 댓글 -->
+
+            <!-- 좋아요 -->
+
+            <div></div>
 
 
             <!-- 버튼 영역-->
@@ -120,14 +143,13 @@
 
                 </th:block>
 
-                <button id="goToListBtn">목록으로</button>
             </div>
 
         </section>
 
 
         <!-- 댓글 영역-->
-        <th:block th:replace="~{board/comment}"></th:block>
+         <!-- <th:block th:replace="~{board/comment}"></th:block> -->
 
     </main>
 

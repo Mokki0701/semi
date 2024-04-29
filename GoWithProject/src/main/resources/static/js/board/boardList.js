@@ -50,10 +50,10 @@ numberUnit.addEventListener("change", e=>{
     const selectNumber = numberUnit.options[numberUnit.selectedIndex].value;
 
     const params = new URL(location.href).searchParams;
+    
+    const url = window.location.href;;
 
-    const url = window.location.href;
-    console.log(queryStringLimit);
-    location.href = new URL(location.href).pathname+queryStringLimit + "&limit=" + selectNumber;
+    location.href = new URL(location.href).pathname+"?limit="+selectNumber;
 
 
 
@@ -64,10 +64,14 @@ const insertBtn = document.querySelector("#insertBtn");
 
 if(insertBtn != null){
     
+    const params = new URL(location.href).searchParams;
     
-    insertBtn.addEventListener("click", e=>{
+    const topMenuCode = params.get("topMenuCode");
+    const bottomMenuCode = params.get("bottomMenuCode");
 
-        location.href = "/editBoard/"+topMenuCode +"/"+bottomMenuCode +"/insert";
+    insertBtn.addEventListener("click", e=>{
+    
+        location.href = `/editBoard/${topMenuCode}/${bottomMenuCode}/insert`;
     
     })
 
@@ -102,26 +106,7 @@ topMenuKey.addEventListener("change", e=>{
         }
 
     })
-});
-
-(()=>{
-    console.log(new URL(location.href));
-
-    const numberUnit = document.querySelector("#numberUnit");
-
-    Array.from(numberUnit.children).forEach((child) => {
-        if(child.value == limit){
-            child.selected = true;
-        }
-    });
-
-})();
-
-
-
-
-
-
+})
 
 
 
