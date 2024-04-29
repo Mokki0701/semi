@@ -23,7 +23,12 @@ public class MainController {
 	private final MainService service;
 	
 	@RequestMapping("") // "/" 요청 매핑, 모든 메서드 요청 받아내기(get post 구분 x)
-	public String mainPage() {
+	public String mainPage(
+			Model model ) {
+		
+		String value = "popDefault";
+		List<Board> popBoard = service.popDefault(value);
+        model.addAttribute("popBoard", popBoard);
 		
 		return "common/index";
 	}
@@ -42,17 +47,21 @@ public class MainController {
 		
 		List<Board> popBoard = new ArrayList<>();
 		
+		// 인기글 top 10 조회
+		if(value.equals("popDefault") ) {
+			popBoard = service.popDefault(value);
+		}
+		
 		// 좋아요 개수에 따라 조회
 		if(value.equals("like") ) {
 			popBoard = service.popLike(value);
-			
-			
 		}
 		
 		// 댓글 갯수에 따라 조회
 		if(value.equals("comment")) {
 			popBoard = service.popComment(value);
 		}
+		
 		
 		System.out.println("value : " + value );
 		
