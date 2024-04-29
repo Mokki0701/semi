@@ -202,7 +202,8 @@ commentBtn.addEventListener('change', function () {
   }
 });
 
-// 비동기로 목록 조회(두개를 동시에)
+// 인기글 목록 조회
+
 const popWriteBtnContext = document.querySelectorAll(".popWriteBtnContext");
 popWriteBtnContext.forEach(btn => {
   btn.addEventListener("click", e => {

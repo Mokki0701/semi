@@ -12,7 +12,7 @@
 
 <body>
   <th:block th:replace="~{/common/header}">헤더</th:block>
-  
+
   <div class="all">
 
     <!-- 사이드 메뉴 -->
@@ -22,18 +22,16 @@
 
       <div>
         <div class="profileBox">
-
-
-
           <div>
 
 
             <!-- 로그인이 되어있지 않은 경우 -->
-            <th:block th:if="${session.loginMember == null}">
+            <th:block th:if="${session.loginMember == null}" class="nonLogin">
 
               <!-- 로그인 박스 -->
               <form action="/member/login" method="POST" id="loginForm">
-                <fieldset class="id-pw-area">
+
+                <div class="id-pw-area">
 
                   <!-- 아이디/비밀번호 입력 -->
                   <section>
@@ -45,7 +43,7 @@
                   <section>
                     <button id="loginBtn">로그인</button>
                   </section>
-                </fieldset>
+                </div>
 
                 <label for="saveId" id="rememberId">
                   <input type="checkbox" name="saveId" id="saveId">이메일 기억하기
@@ -59,14 +57,13 @@
 
               </form>
 
-
             </th:block>
 
 
             <!-- 로그인 되어있는 경우 -->
             <th:block th:if="${session.loginMember != null}">
 
-              <table class="profileTable">
+              <table class="profileBox">
 
                 <div class="info">
                   <a href="/myPage/update" class="infoChild"> <!-- 회원 정보 수정으로 -->
@@ -74,9 +71,9 @@
                   </a>
                 </div>
 
-                <div id="profileImage">profile Image</div>
+                <a href="/myPage/update" id="profileImage">profile Image</a>
                 <tr>
-                  <th>이메일</th>
+                  <th>E-mail</th>
                   <td th:text="${session.loginMember.memberEmail}">현재 로그인한 회원 이메일</td>
                 </tr>
                 <tr>
@@ -84,7 +81,7 @@
                   <td th:text="${session.loginMember.enrollDate}">가입일</td>
                 </tr>
                 <tr>
-                  <th>선호여행지</th>
+                  <th>Like</th>
                   <td th:text="${session.loginMember.favorPlace}">선호여행지</td>
                 </tr>
 
@@ -137,6 +134,7 @@
           <hr>
 
           <br>
+
           <hr>
           <div class="contextHead">인기글</div> <br>
           <p>좋아요, 댓글 수 상위 10개 표시</p>
@@ -181,22 +179,111 @@
 
     <!-- 홈 메뉴 -->
     <!-- 리스트 자동 생성 (몇개까지 할 것인지?) -->
-    <div class="home">
-      <div class="room" id="room1">
-        <a href="#">공지사항</a>
+    <div>
 
-        <p>임시계정은 홈로그인 불가(암호화), 버튼으로만 가능</p>
-        <!-- 임시계정 로그인 버튼 -->
+      <!-- 임시계정 로그인 버튼 -->
+      <p>임시계정은 홈로그인 불가(암호화), 버튼으로만 가능</p>
+      <div>
         <button class="quickLogin">temp00@naver.com</button>
         <button class="quickLogin">temp01@naver.com</button>
         <button class="quickLogin">temp02@naver.com</button>
-        <br>
+      </div>
+
+      <div class="room" id="room1">
+
+        <div class="smallRoom">
+          <a href="#">공지사항</a>
+        </div>
+
+        <div class="smallRoom">
+          <div>
+
+            <a href="#" class="smallRoom">전체글(6개만조회)</a>
+          </div>
+
+          <!-- 실험용 -->
+          <div class="thumbNailPost">
+
+            <div class="thumbNail"> 썸넬 </div>
+            <span class="tpTitle">최대8글자</span>
+            <span class="tbLike">[댓글수]</span> <br>
+            <span class="tbWriter">작성자</span>
+            <span>|</span>
+            <span class="tbWriteDay">작성일</span>
+
+            <span></span>
+
+          </div>
+
+          <div class="thumbNailPost">
+
+            <div class="thumbNail"> 썸넬 </div>
+            <span class="tpTitle">최대8글자</span>
+            <span class="tbLike">[댓글수]</span> <br>
+            <span class="tbWriter">작성자</span>
+            <span>|</span>
+            <span class="tbWriteDay">작성일</span>
+
+            <span></span>
+
+          </div>
+
+          <div class="thumbNailPost">
+
+            <div class="thumbNail"> 썸넬 </div>
+            <span class="tpTitle">최대8글자</span>
+            <span class="tbLike">[댓글수]</span> <br>
+            <span class="tbWriter">작성자</span>
+            <span>|</span>
+            <span class="tbWriteDay">작성일</span>
+
+            <span></span>
+
+          </div>
+
+          <div class="thumbNailPost">
+
+            <div class="thumbNail"> 썸넬 </div>
+            <span class="tpTitle">최대8글자</span>
+            <span class="tbLike">[댓글수]</span> <br>
+            <span class="tbWriter">작성자</span>
+            <span>|</span>
+            <span class="tbWriteDay">작성일</span>
+
+          </div>
+
+
+          <div class="thumbNailPost">
+
+            <div class="thumbNail"> 썸넬 </div>
+            <span class="tpTitle">최대8글자</span>
+            <span class="tbLike">[댓글수]</span> <br>
+            <span class="tbWriter">작성자</span>
+            <span>|</span>
+            <span class="tbWriteDay">작성일</span>
+
+          </div>
+
+
+          <div class="thumbNailPost">
+
+            <div class="thumbNail"> 썸넬 </div>
+            <span class="tpTitle">최대8글자</span>
+            <span class="tbLike">[댓글수]</span> <br>
+            <span class="tbWriter">작성자</span>
+            <span>|</span>
+            <span class="tbWriteDay">작성일</span>
+
+          </div>
+        </div>
 
         </p>
 
       </div>
 
-      <div class="room" id="popWrite">
+
+      <!-- Favorite Container -->
+      <div class="room scrollBox" id="popWrite">
         <a href="#">인기글</a>
 
         <div class="popWriteBtnBox">
@@ -206,11 +293,7 @@
           <label for="commentBtn" id="commentLabel">댓글 Top</label>
         </div>
 
-
-
-        <br>
-
-        <table id="popTable" class="scrollContainer">
+        <table id="popTable">
           <thead class="tableTitleArea">
             <th class="title">제목</th>
             <th>작성자</th>
@@ -237,17 +320,15 @@
   </div>
 
   <th:block th:replace="~{/common/footer}" class="footer">푸터</th:block>
-  
-
-
-  <script th:inline="javascript">
-    const message =  /*[[${message}]]*/ "전달 받은 message";
-
-    if (message != null) alert(message);
-  </script>
-
-
 </body>
+
+
+<script th:inline="javascript">
+  const message =  /*[[${message}]]*/ "전달 받은 message";
+
+  if (message != null) alert(message);
+</script>
+
 <script src="/js/mainJoinLogin.js"></script>
 
 </html>

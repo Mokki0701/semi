@@ -12,7 +12,8 @@
   font-weight: 200;
 }
 
-/* 임시 헤더 */
+
+/* 헤더 시작 */
 /* 메인페이지, 로그인 버튼 */
 .highest{
   width: 97.3vw;
@@ -43,7 +44,7 @@
 }
 .highest div a:hover{
   color: orange;
-}
+} 
 
 /* 임시 로고 */
 .header{
@@ -58,7 +59,7 @@
   width: 97.3vw;
 }
 
-
+/* 헤더 끝 */
 
 .side{
   border: 1px solid black;
@@ -67,9 +68,6 @@
   padding: 5px;
 }
 
-.side * {
-  /* margin: 1px; */
-}
 
 .all{
   display: flex;
@@ -96,6 +94,8 @@
 }
 
 /* 로그인 전 이메일, PW 입력 칸 */
+
+
 #loginForm{
   height: 150px;
   padding: 10px;
@@ -160,10 +160,13 @@
   user-select: none;
 }
 
-.profileBox{
+.profileBox {
   display: flex;
+  justify-content: center;
+  text-align: center;
+
   flex-direction: row;
-  align-items: center;
+
 }
 
 #profileImage{
@@ -174,26 +177,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
-  margin-left: 20px;
-  margin-right: 20px;
+  flex-direction: column;
+  margin: auto;
 }
 
 /* 로그인 시 프로필 테이블 꾸미기 */
-.profileTable {
-  display: flex;
-  flex-direction: column;
-  font-size: 20px;
-}
 
-.profileTable th,
-.profileTable td {
-  border: 1px solid black;
-}
-
-.profileTable tr td{
-  text-align: center;
-}
 
 .loginInfo{
   display: flex;
@@ -224,7 +213,7 @@
 
   text-decoration: none;
 
-  margin-bottom: 10px;
+  margin: 5px auto;
 }
 
 
@@ -247,6 +236,9 @@
 .room{
   height: 33%;
   width: 75vw;
+
+  display: flex;
+  flex-direction: row;
 }
 
 #room1{
@@ -266,11 +258,38 @@
   justify-content: center;
 }
 
+
+
 /* ++ 메뉴 체크박스 */
 
 .popWriteBtnBox .popWriteBtnContext {
   display: none;
 }
+
+.popWriteBtnBox label{
+  width: 100px;
+  height: 50px;
+  border-radius: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  color: black;
+
+  background-color: brown;
+  transition: color 0.4s;
+  transition: background-color 0.4s;
+
+  margin : 0px 20px;
+}
+
+.popWriteBtnBox label:hover{
+  color: orange;
+  background-color : skyblue;
+}
+
 .label-like {
   color: green;
 }
@@ -278,7 +297,13 @@
   color: blue;
 }
 
-/* -- 메뉴 체크박스 */
+/* -- 메뉴 체크박스 끝 */
+
+/* 버튼클릭시 조회되는 리스트 */
+.scrollBox{
+  max-height: 33%;
+  overflow: auto;
+}
 
 #popTable{
   background-color: gray;
@@ -286,7 +311,6 @@
 
 .tableTitleArea{
   background-color: gainsboro;
-  height: 50px;
 }
 
 .tableTitleArea th{
@@ -310,9 +334,66 @@
 /* 인기글 조회 끝 */
 
 
+/* *********** 메인페이지 최신글 조회 ***********  */
 #room3{
   background-color: gray;
 }
+
+.smallRoom{
+  width: 49.5%;
+  direction: row;
+}
+
+
+.thumbNailPost{
+  width: 32%;
+  height: 45%;
+
+  border: 1px solid black;
+
+  box-sizing: border-box;
+  float: left;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.thumbNail{
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* *********** 메인페이지 최신글 조회 *********** */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* *********** ↓ 쓰다 버릴 것 ↓ ************ */
 
@@ -326,7 +407,9 @@
 
 /* *********** ↑ 쓰다 버릴 것 ↑ ************ */
 
-/* 헤더, 푸터 */
+
+
+/* *********** 헤더, 푸터 *********** */
 .info{
   display: flex;
   flex-direction: row;
@@ -438,7 +521,7 @@ footer span {
   padding: 0 10px;
 }
 
-
+/* *********** 헤더 푸터 끝 *********** */
 
 /* ---------------------------------------------------------------------------- */
 /* 로그인 페이지에 사용되는 CSS */
