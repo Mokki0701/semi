@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.kh.gowith.board.model.dto.Board;
 import edu.kh.gowith.board.model.dto.BottomMenu;
+import edu.kh.gowith.board.model.dto.Comment;
 import edu.kh.gowith.board.model.dto.Pagination;
 import edu.kh.gowith.board.model.dto.TopMenu;
 import edu.kh.gowith.board.model.mapper.BoardMapper;
@@ -158,8 +159,12 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Board boardDetail(Map<String, Object> paramMap) {
 		
+		Board board = mapper.boardDetail(paramMap);
 		
-		return mapper.boardDetail(paramMap);
+		List<Comment> comment = mapper.commentList(paramMap);
+		board.setCommentList(comment);
+		
+		return board;
 	}
 	
 	

@@ -21,4 +21,8 @@ public class Comment {
 	private int memberNo;
 	private int parentCommentNo;
 	
+	private String memberNickname;
+	private int commentCount;
+	private int memberRank;
+	
 }

@@ -44,6 +44,8 @@ public class Board {
 	private int nextBoardNo;
 	private int preBoardNo;
 	
+	private int checkCommentDate;
+	
 	
 	
 }

@@ -147,6 +147,7 @@ public class BoardController {
 		
 		paramMap.put("boardNo", boardNo);
 		paramMap.put("bottomMenuCode", bottomMenuCode);
+		paramMap.put("checkComment", 1);
 		
 		if(loginMember != null) {
 			paramMap.put("loginMember", loginMember);
