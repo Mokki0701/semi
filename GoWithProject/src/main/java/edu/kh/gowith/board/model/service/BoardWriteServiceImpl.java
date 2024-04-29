@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.gowith.board.model.dto.Board;
 import edu.kh.gowith.board.model.dto.BoardImg;
+import edu.kh.gowith.board.model.dto.BottomMenu;
+import edu.kh.gowith.board.model.dto.TopMenu;
 import edu.kh.gowith.board.model.exception.BoardInsertException;
 import edu.kh.gowith.board.model.mapper.BoardWriteMapper;
 import edu.kh.gowith.common.config.Utility;
@@ -156,7 +158,17 @@ public class BoardWriteServiceImpl implements BoardWriteService{
 
 	}
 	
+	// 게시글 하위 메뉴코드 목록 조회
+	@Override
+	public List<BottomMenu> selectBottomCodes(int topMenuCode) {
+		return mapper.selectBottomCodes(topMenuCode);
+	}
 	
+	//상위 메뉴 리스트 반환
+	@Override
+	public List<TopMenu> topMenuCodeList() {
+		return mapper.topMenuCodeList();
+	}
 	
 	
 

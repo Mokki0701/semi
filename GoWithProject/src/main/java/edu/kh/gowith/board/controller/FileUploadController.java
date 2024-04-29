@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.gowith.board.model.dto.Board;
+import edu.kh.gowith.board.model.dto.BottomMenu;
+import edu.kh.gowith.board.model.dto.TopMenu;
 import edu.kh.gowith.board.model.service.BoardWriteService;
 import edu.kh.gowith.member.model.dto.Member;
 import lombok.RequiredArgsConstructor;
@@ -43,10 +46,20 @@ public class FileUploadController {
 		
 		model.addAttribute("boardTitle",boardTitle);
 		model.addAttribute(loginMember);
-		model.addAttribute("topMenuCode", topMenuCode);
+		model.addAttribute("bottomMenuCode",bottomMenuCode);
+		
+		// Top메뉴 코드 리스트 반환
+		List<TopMenu> topMenuList = service.topMenuCodeList();
+		model.addAttribute("topMenuList",topMenuList);
+		
+		// Bottom 메뉴 코드 리스트 반환
+		List<BottomMenu> bottomMenuList = getBottomCode(topMenuCode);
+		model.addAttribute("bottomMenuList",bottomMenuList);
 		
 		return "boardWrite/boardWrite";
 	}
+	
+	
 	
 	@PostMapping("{topMenuCode:[0-9]+}/{bottomMenuCode:[0-9]+}/insert")
 	public String boardInsert(
@@ -97,7 +110,14 @@ public class FileUploadController {
 		return path;
 	}
 	
-	
+	@ResponseBody
+	@GetMapping("bottomCode")
+	public List<BottomMenu> getBottomCode(
+			@RequestParam("topMenuCode") int topMenuCode
+			) {
+		
+		return service.selectBottomCodes(topMenuCode);
+	}
 	
 	
 	

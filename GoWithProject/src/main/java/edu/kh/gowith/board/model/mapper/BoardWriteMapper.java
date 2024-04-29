@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 import edu.kh.gowith.board.model.dto.Board;
 import edu.kh.gowith.board.model.dto.BoardImg;
+import edu.kh.gowith.board.model.dto.BottomMenu;
+import edu.kh.gowith.board.model.dto.TopMenu;
 
 @Mapper
 public interface BoardWriteMapper {
@@ -21,6 +23,12 @@ public interface BoardWriteMapper {
 
 	// 공지 등록
 	int notiInsert(Board inputBoard);
+
+	// 하위 메뉴 코드 반환 받기
+	List<BottomMenu> selectBottomCodes(int topMenuCode);
+
+	// 탑 메뉴 리스트 반환
+	List<TopMenu> topMenuCodeList();
 
 	
 
