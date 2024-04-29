@@ -6,19 +6,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.gowith.common.config.Utility;
+import edu.kh.gowith.member.model.dto.Member;
 import edu.kh.gowith.myPage.model.dto.MyPage;
 import edu.kh.gowith.myPage.model.mapper.MyPageMapper;
+
 import lombok.RequiredArgsConstructor;
 
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 @RequiredArgsConstructor
+@PropertySource("classpath:/config.properties")
 public class MyPageServiceImpl implements MyPageService{
 
 	private final MyPageMapper mapper;
@@ -48,70 +52,68 @@ public class MyPageServiceImpl implements MyPageService{
 	
 	
 	
+
+	//정보수정
 	@Override
-	public int updateInfo(MyPage inputMember, 
-			String newPw,
-			String currentPw,
-			int memberNo, 
-			MultipartFile profileImg,
-			MyPage loginMember,
-			String[] memberAddress
-			) throws IllegalStateException, IOException{
+	public int updateInfo(Member inputMember, String[] memberAddress, String newPw,  MultipartFile uploadImg,int statusCheck) throws IllegalStateException, IOException{
 		
-		String encPw = mapper.selectPw(memberNo);
-		String updatePath = null;
-		String rename = null;
 		
-		if(inputMember.getMemberAddress().equals(",,")) {
+		//주소데이터 가공
+		if( inputMember.getMemberAddress().equals(",,") ) {
 			inputMember.setMemberAddress(null);
-		}else {
-			String address =String.join("^^^",memberAddress);
+		} else { 
+			String address = String.join("^^^", memberAddress);
 			inputMember.setMemberAddress(address);
 		}
 		
-		if(!bcrypt.matches(currentPw,encPw)) {
-			return 0 ;
-		}else{
+		//새비밀번호 암호화
+		if(newPw.length() > 0) {
 			String pw = bcrypt.encode(newPw);
-			Map<String,Object> pack = new HashMap<>();
-			
-			pack.put("memberNo",memberNo);
-			pack.put("pw", pw);	
-			
-			int pwChangeResult = mapper.changePw(pack);
-			
-			if(pwChangeResult ==0) {
-				return 0;
-			}	
+			inputMember.setMemberPw(pw);
 		}
 		
+		String rename = null;
+		String updatePath = null;
 		
-		if (!profileImg.isEmpty()) {
-			rename = Utility.fileRename(profileImg.getOriginalFilename());
+		// 업로드한 이미지가 있을 경우
+		if( !uploadImg.isEmpty() ) {
+			
+			// updatePath 조합
+			
+			// 파일명 변경
+			rename = Utility.fileRename(uploadImg.getOriginalFilename());
+			
+			//   /myPage/profile/변경된파일명.jpg
 			updatePath = profileWebPath + rename;
-		
-		
-			MyPage mem = MyPage.builder().memberNo(loginMember.getMemberNo())
-							.profileImg(updatePath)
-							.build();  
-	
 			
-			int profileUpdateResult = mapper.profile(mem);
-			if(profileUpdateResult >0) {
-				profileImg.transferTo(new File(profileFolderPath + rename));
-				loginMember.setProfileImg(updatePath);
-			}else {
-				return 0;
+			
+			inputMember.setProfileImg(updatePath);
+		}
+			
+		
+		if(statusCheck==0) {
+			inputMember.setProfileImg("default");
+		}
+		
+		int result = mapper.updateInfo(inputMember);
+		
+		
+		if(result>0) {
+			// 프로필 이미지를 없앤 경우(NULL로 수정한 경우)를 제외
+			// -> 업로드한 이미지가 있을 경우
+			if( !uploadImg.isEmpty() ) {
+				// 파일을 서버 지정된 폴더에 저장
+				uploadImg.transferTo(new File(profileFolderPath + rename));
 			}
+						
+						
 		}
 	
-	return mapper.updateInfo(inputMember);
-}
+		// SQL 수행 후 결과 반환
+		return result;
+	}
+		
 
-	
-	
-	
-	
 
 	
 	

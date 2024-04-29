@@ -21,5 +21,7 @@ public class MyPage {
 	private String memberAddress;
 	private String profileImg;
 	
+	private String loginMember;
+	
 
 }
