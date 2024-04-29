@@ -4,9 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <title th:text="${app.name}">임시 메인</title> -->
-  <title>임시 메인</title>
-  <!-- <link rel="stylesheet" href="/mainDemo.css"> -->
+  <title>GOWITH</title>
   <link rel="stylesheet" href="/css/mainDemo.css">
 </head>
 
@@ -130,15 +128,7 @@
 
         <!-- 각 링크 클릭 시 해당 게시판으로 이동하기 -->
         <div>
-          <div class="contextHead">전체글</div> <br>
-          <hr>
 
-          <br>
-
-          <hr>
-          <div class="contextHead">인기글</div> <br>
-          <p>좋아요, 댓글 수 상위 10개 표시</p>
-          <hr>
           <div class="menuList">
             <div class="contextHead">동행 구해요</div>
             <a href="">중국</a>
@@ -192,14 +182,14 @@
       <div class="room" id="room1">
 
         <div class="smallRoom">
-          <a href="#">공지사항</a>
+          <a href="#" class="mainTitle">공지사항</a>
         </div>
 
         <div class="smallRoom">
           <div>
 
-            <a href="#" class="smallRoom">전체글(6개만조회)</a>
-          </div>
+            <a href="#" class="smallRoom mainTitle">전체글(6개 조회)</a>
+          </div> <br>
 
           <!-- 실험용 -->
           <div class="thumbNailPost">
@@ -228,53 +218,6 @@
 
           </div>
 
-          <div class="thumbNailPost">
-
-            <div class="thumbNail"> 썸넬 </div>
-            <span class="tpTitle">최대8글자</span>
-            <span class="tbLike">[댓글수]</span> <br>
-            <span class="tbWriter">작성자</span>
-            <span>|</span>
-            <span class="tbWriteDay">작성일</span>
-
-            <span></span>
-
-          </div>
-
-          <div class="thumbNailPost">
-
-            <div class="thumbNail"> 썸넬 </div>
-            <span class="tpTitle">최대8글자</span>
-            <span class="tbLike">[댓글수]</span> <br>
-            <span class="tbWriter">작성자</span>
-            <span>|</span>
-            <span class="tbWriteDay">작성일</span>
-
-          </div>
-
-
-          <div class="thumbNailPost">
-
-            <div class="thumbNail"> 썸넬 </div>
-            <span class="tpTitle">최대8글자</span>
-            <span class="tbLike">[댓글수]</span> <br>
-            <span class="tbWriter">작성자</span>
-            <span>|</span>
-            <span class="tbWriteDay">작성일</span>
-
-          </div>
-
-
-          <div class="thumbNailPost">
-
-            <div class="thumbNail"> 썸넬 </div>
-            <span class="tpTitle">최대8글자</span>
-            <span class="tbLike">[댓글수]</span> <br>
-            <span class="tbWriter">작성자</span>
-            <span>|</span>
-            <span class="tbWriteDay">작성일</span>
-
-          </div>
         </div>
 
         </p>
@@ -283,17 +226,21 @@
 
 
       <!-- Favorite Container -->
-      <div class="room scrollBox" id="popWrite">
-        <a href="#">인기글</a>
 
+
+
+      <div class="scrollBox" id="popWrite" >
+        <a href="#" class="mainTitle">인기글</a>
         <div class="popWriteBtnBox">
+          <input type="radio" name="popWriteBtn" class="popWriteBtnContext " value="popDefault" id="defaultBtn" checked>
+          <label for="defaultBtn" id="defaultLabel" class="btnCommon checkedBtn">인기글 TOP10</label>
           <input type="radio" name="popWriteBtn" class="popWriteBtnContext" value="like" id="likeBtn">
-          <label for="likeBtn" id="likeLabel" class="popWriteBtn">좋아요 Top</label>
+          <label for="likeBtn" id="likeLabel" class="btnCommon popWriteBtn">좋아요 Top</label>
           <input type="radio" name="popWriteBtn" class="popWriteBtnContext" value="comment" id="commentBtn">
-          <label for="commentBtn" id="commentLabel">댓글 Top</label>
+          <label for="commentBtn" id="commentLabel" class="btnCommon popWriteBtn">댓글 Top</label>
         </div>
 
-        <table id="popTable">
+        <table class="repeatTable">
           <thead class="tableTitleArea">
             <th class="title">제목</th>
             <th>작성자</th>
@@ -302,17 +249,33 @@
           </thead>
 
           <tbody id="PbList">
-            <td>임시1</td>
-            <td class="textCenter">임시2</td>
-            <td class="textCenter">임시3</td>
-            <td class="textCenter">임시4</td>
           </tbody>
         </table>
 
       </div>
 
-      <div class="room" id="room3">
-        <a href="#">최신글</a>
+      <div class="colRoom " id="room3">
+
+        <!-- 동기식 최신글 -->
+        <div class="smallRoom">
+          <a href="#" class="mainTitle">최신글</a>
+
+        </div>
+
+        <table class="repeatTable">
+          <thead class="tableTitleArea">
+            <th class="title">제목</th>
+            <th>작성자</th>
+            <th class="writeDate">작성일</th>
+            <th>조회수</th>
+          </thead>
+
+          <tbody id="PbList">
+
+          </tbody>
+        </table>
+
+
       </div>
     </div>
 

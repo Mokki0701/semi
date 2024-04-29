@@ -175,11 +175,6 @@ if (loginBtn != null) {
 
 
 // 테스트용
-// 홈버튼 클릭시 alert
-const mainLogo = document.querySelector("#mainLogo");
-mainLogo.addEventListener("click", () => {
-  alert("잘 되는지 확인");
-});
 
 /* ++ 메뉴 체크박스 테스트중.. */
 
@@ -202,45 +197,87 @@ commentBtn.addEventListener('change', function () {
   }
 });
 
-// 인기글 목록 조회
+// -------------------- 인기글 목록 조회 --------------------
+
+// 공통으로 사용할 fetchBoardList 기능
+
+function fetchBoardList(value) {
+  fetch("/popWriteInquiry?popWriteBtn=" + value, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" }
+  })
+    .then(response => response.json())
+    .then(result => {
+      const PbList = document.querySelector("#PbList");
+      PbList.innerHTML = "";
+
+      for (let obj of result) {
+        const tr = document.createElement("tr");
+        const arr = ['boardTitle', 'memberNickname', 'boardWriteDate', 'readCount'];
+
+        for (let key of arr) {
+          const td = document.createElement("td");
+          if (key === 'boardTitle' || key === 'memberNickname') {
+            const a = document.createElement("a");
+            a.href = "/boardDetail?id=" + obj['boardId']; 
+            a.innerText = obj[key];
+            td.appendChild(a);
+          } else {
+            td.innerText = obj[key];
+          }
+          if (key === 'boardTitle') {
+            td.classList.add("title");
+          }
+          if (key === 'boardWriteDate') {
+            td.classList.add("writeDate");
+          }
+          tr.append(td);
+          td.classList.add("textCenter");
+        }
+        PbList.append(tr);
+      }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+
+// index 페이지 로드 시 실행되는 코드
+document.addEventListener("DOMContentLoaded", function () {
+  const value = "popDefault"; // 기본값 설정
+  fetchBoardList(value);
+});
 
 const popWriteBtnContext = document.querySelectorAll(".popWriteBtnContext");
 popWriteBtnContext.forEach(btn => {
-  btn.addEventListener("click", e => {
+  btn.addEventListener("click", function(e) {
     const value = e.target.value;
-    fetch("/popWriteInquiry?popWriteBtn=" + value, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" }
-    })
-      .then(response => response.json())
-      .then(result => {
-        console.log(result);
-        console.log("반환 타입 : " + typeof result);
-
-        const PbList = document.querySelector("#PbList");
-        PbList.innerHTML = "";
-
-        for (let obj of result) {
-          const tr = document.createElement("tr");
-          const arr = ['boardTitle', 'memberNickname', 'boardWriteDate', 'readCount'];
-
-          for (let key of arr) {
-            const td = document.createElement("td");
-            td.innerText = obj[key];
-            if (key === 'boardTitle') { 
-              td.classList.add("title");
-            }
-            if(key === 'boardWriteDate'){
-              td.classList.add("writeDate");
-            }
-            tr.append(td);
-            td.classList.add("textCenter");
-          }
-          PbList.append(tr);
-        }
-      })
+    fetchBoardList(value);
   });
 });
+
+
+
+// 클릭시 버튼 색 변경
+const popLabels = document.querySelectorAll(".popWriteBtnBox label");
+
+popLabels.forEach(label => {
+  label.addEventListener("click", () => {
+    // label이 클릭되면 다른 label들의 checkedBtn 클래스 제거
+    popLabels.forEach(otherLabel => {
+      otherLabel.classList.remove('checkedBtn');
+      otherLabel.classList.add('popWriteBtn')
+    });
+    // 선택된 label의 클래스에 checkedBtn 클래스 추가
+    label.classList.add('checkedBtn');
+  });
+});
+
+// 메인페이지에 보여질때
+
+
+
+
+
 
 
 // 비동기로 목록 조회

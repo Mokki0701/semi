@@ -17,6 +17,13 @@ public class MainServiceImpl implements MainService{
 	
 	private final MainMapper mapper; 
 	
+	// 탑텐 조회(기본) 
+	@Override
+	public List<Board> popDefault(String value) {
+		
+		return mapper.popDefault();
+	}
+	
 	
 	// 좋아요 갯수 순서로 조회
 	@Override
@@ -32,6 +39,8 @@ public class MainServiceImpl implements MainService{
 		
 		return mapper.popComment();
 	}
+	
+	
 	
 	
 	
