@@ -255,26 +255,27 @@ popWriteBtnContext.forEach(btn => {
   });
 });
 
-// 멤버랭킹 공통 기능
-function memberRank(value) {
-  fetch("memberRank?rank=" + value,{
-    method="GET",
-  headers : {"Content-Type": "application/json" }
-}).then (response => response.json())
-.then(result => {
-  const rankList = document.querySelector("rankList");
-  rankList.innerHTML="";
+// // 멤버랭킹 공통 기능
+// function memberRank(value) {
+//   fetch("memberRank?rank=" + value,{
+//     method="GET",
+//   headers : {"Content-Type": "application/json" }
+// }).then (response => response.json())
+// .then(result => {
+//   const rankList = document.querySelector("rankList");
+//   rankList.innerHTML="";
 
-  for(let obj of result){
-    const tr = document.createElement("tr");
-    const arr = ['memberNickname'] ;
+//   for(let obj of result){
+//     const tr = document.createElement("tr");
+//     const arr = ['memberNickname'] ;
 
-    for(let key of arr){
-      const td = document.createElement("td");
-    }
-  }
-})
-}
+//     for(let key of arr){
+//       const td = document.createElement("td");
+//       if()
+//     }
+//   }
+// })
+// }
 
 
 
