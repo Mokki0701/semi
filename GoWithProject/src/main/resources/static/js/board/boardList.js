@@ -64,13 +64,15 @@ const insertBtn = document.querySelector("#insertBtn");
 
 if(insertBtn != null){
     
-    const params = new URL(location.href).searchParams;
+    // const params = new URL(location.href).searchParams;
     
-    const topMenuCode = params.get("topMenuCode");
-    const bottomMenuCode = params.get("bottomMenuCode");
+    /* 가까운 지역변수를 참조하기때문에 PathVariable에 값이 들어오지 않아 지움
+    */
+    // const topMenuCode = params.get("topMenuCode");
+    // const bottomMenuCode = params.get("bottomMenuCode");
 
     insertBtn.addEventListener("click", e=>{
-    
+        
         location.href = `/editBoard/${topMenuCode}/${bottomMenuCode}/insert`;
     
     })

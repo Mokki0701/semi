@@ -131,7 +131,8 @@ function search() {
     fetch("/editBoard/bottomCode?topMenuCode="+topMenuCode)
     .then(resp => resp.json())
     .then(bottomList =>{
-      console.log(bottomList);
+      //console.log(bottomList);
+
 
       if(bottomList.length == 0){
         bottomMenu.disabled = true;
