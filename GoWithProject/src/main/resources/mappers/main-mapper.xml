@@ -101,7 +101,6 @@
 	)
 	WHERE ROWNUM BETWEEN 1 AND 10
 
-			
 	</select>
 	
 	<select id="commentList" resultType='Comment'>
@@ -113,6 +112,52 @@
 	
 	</select>
 	
+	<!-- 멤버랭킹 댓글 (기본) -->
+	<select id="memDefault">
+		SELECT M.MEMBER_NICKNAME
+        FROM "MEMBER" M
+        JOIN (
+            SELECT MEMBER_NO, COUNT(*) AS COMMENT_COUNT
+            FROM "COMMENT"
+            GROUP BY MEMBER_NO
+        ) C ON M.MEMBER_NO = C.MEMBER_NO
+        ORDER BY C.COMMENT_COUNT DESC
+        FETCH FIRST 10 ROWS ONLY
+	</select>
 	
+	<!-- 멤버랭킹 게시글 -->
+	<select id="memBoard">
+	
+		SELECT M.MEMBER_NICKNAME
+		FROM "MEMBER" M
+		JOIN (
+		    SELECT MEMBER_NO, COUNT(*) AS BOARD_COUNT
+		    FROM "BOARD" B
+		    GROUP BY MEMBER_NO
+		) B ON M.MEMBER_NO = B.MEMBER_NO
+		ORDER BY B.BOARD_COUNT DESC
+		FETCH FIRST 10 ROWS ONLY
+	
+	</select>
+	
+	<!-- 멤버랭킹 방문 -->
+	<select id="memVisit">
+		SELECT MEMBER_NICKNAME
+		FROM MEMBER
+		ORDER BY VISIT_COUNT
+		FETCH FIRST 5 ROWS ONLY
+	</select>
 
+	<!-- 썸네일 리스트 6개 조회 --> 
+	<select id="listWithThumbnail">
+		SELECT bi.IMG_RENAME, b.BOARD_TITLE, b.BOARD_WRITE_DATE, m.MEMBER_NICKNAME
+		FROM BOARD b
+		JOIN BOARD_IMG bi ON b.BOARD_NO = bi.BOARD_NO
+		JOIN MEMBER m ON b.MEMBER_NO = m.MEMBER_NO
+		ORDER BY b.BOARD_WRITE_DATE DESC
+		FETCH FIRST 6 ROWS ONLY
+	</select>
+	
+	
+	
 </mapper>

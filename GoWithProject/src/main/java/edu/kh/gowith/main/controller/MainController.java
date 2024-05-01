@@ -15,6 +15,7 @@ import edu.kh.gowith.board.model.dto.Board;
 import edu.kh.gowith.board.model.dto.Comment;
 import edu.kh.gowith.board.model.service.BoardService;
 import edu.kh.gowith.main.model.service.MainService;
+import edu.kh.gowith.member.model.dto.Member;
 import jakarta.mail.Service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,11 @@ public class MainController {
 
 	@RequestMapping("") // "/" 요청 매핑, 모든 메서드 요청 받아내기(get post 구분 x)
 	public String mainPage(Model model) {
+		
+		// 최신글 조회
+		List<Board> listWithThumbnail = service.listWithThumbnail();
+		model.addAttribute("listWithThunbnail", listWithThumbnail);
+		System.out.println("썸넬리스트 :" + listWithThumbnail);
 
 		// 인기글 조회
 		String value = "popDefault";
@@ -37,17 +43,16 @@ public class MainController {
 		// 최신댓글조회
 		List<Comment> commentList = service.commentList();
 		model.addAttribute("commentList", commentList);
-		System.out.println("commentList :" + commentList);
-		
-		
 		
 		
 		// 활동 많이한 회원조회
-		// 댓글 많이 단 사람
+		String memberRankValue ="memDefault";
+		List<Member> memRank = service.memDefault(value);
+		model.addAttribute("value", value);
 		
-		// 접속 많이 한 사람
 		
-		// 방문 많이 한 사람
+		
+		
 		
 			
 		return "common/index";
@@ -82,6 +87,31 @@ public class MainController {
 		return popBoard;
 	}
 
+	// 메인페이지에서 멤버 랭킹 조회
+	@ResponseBody
+	@GetMapping("memberRank")
+	public List<Member> memberRank(@RequestParam("rank") String memberRankValue, Model model){
+	
+		List<Member> memRank = new ArrayList<>();
+		
+		// 댓글 많이 단 사람
+		if(memberRankValue.equals("memDefault")) {
+			memRank = service.memDefault(memberRankValue);
+		}
+		
+		// 게시글 많이 쓴 사람
+		if(memberRankValue.equals("board")) {
+			memRank = service.memBoard(memberRankValue);
+		}
+		
+		if(memberRankValue.equals("visit")) {
+			memRank = service.memVisit(memberRankValue);
+		}
+		
+		return memRank;
+		
+	}
+	
 	
 
 }

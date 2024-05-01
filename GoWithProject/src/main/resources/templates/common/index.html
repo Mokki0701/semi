@@ -208,37 +208,21 @@
 
         <div class="smallRoom">
           <div>
-            <a href="#" class="smallRoom mainTitle">전체글(6개 조회)</a>
+              <a href="#" class="smallRoom mainTitle">전체글(6개 조회)</a>
           </div> <br>
-
-          <!-- 실험용 -->
-          <div class="thumbNailPost">
-
-            <div class="thumbNail"> 썸넬 </div>
-            <span class="tpTitle">최대8글자</span>
-            <span class="tbLike">[댓글수]</span> <br>
-            <span class="tbWriter">작성자</span>
-            <span>|</span>
-            <span class="tbWriteDay">작성일</span>
-
-            <span></span>
-
+      
+          <div class="thumbNailPost" th:each="board : ${listWithThumbnail}">
+            <div class="thumbNail" th:text="${board.imgList[0].imgRename}"> 썸넬 </div>
+              <span class="tpTitle" th:text="${board.boardTitle}">최대8글자</span>
+              <span class="tbLike" th:text="[${board.commentCount}]">[댓글수]</span> <br>
+              <span class="tbWriter" th:text="${board.memberNickname}">작성자</span>
+              <span>|</span>
+              <span class="tbWriteDay" th:text="${board.boardWriteDate}">작성일</span>
+      
+              <span></span>
           </div>
-
-          <div class="thumbNailPost">
-
-            <div class="thumbNail"> 썸넬 </div>
-            <span class="tpTitle">최대8글자</span>
-            <span class="tbLike">[댓글수]</span> <br>
-            <span class="tbWriter">작성자</span>
-            <span>|</span>
-            <span class="tbWriteDay">작성일</span>
-
-            <span></span>
-
-          </div>
-
-        </div>
+      
+      </div>
 
         </p>
 
@@ -249,7 +233,7 @@
 
 
 
-      <div class="scrollBox" id="popWrite">
+      <div id="popWrite">
         <div class="mainTitle">인기글</div>
         <div class="popWriteBtnBox">
           <input type="radio" name="popWriteBtn" class="popWriteBtnContext " value="popDefault" id="defaultBtn" checked>
@@ -303,27 +287,30 @@
               <div class="textCenter">
 
                 <span>
-                  <input type="radio" name="rank" value="rankComment" id="defaultRank" checked>
+                  <input type="radio" name="rank" value="memDefault" id="defaultRank" class="memRank">
                   <label for="defaultRank" class="rankBtn width20 textRed">댓글</label>
                 </span>
 
                 <span>
-                  <input type="radio" name="rank" value="rankComment" id="boardRank">
+                  <input type="radio" name="rank" value="board" id="boardRank" class="memRank">
                   <label for="boardRank" class="rankBtn width20">게시글</label>
                 </span>
 
                 <span>
-                  <input type="radio" name="rank" value="rankComment" id="visitRank">
+                  <input type="radio" name="rank" value="visit" id="visitRank" class="memRank" >
                   <label for="visitRank" class="rankBtn width20">방문</label>
                 </span>
 
               </div>
               <hr>
-
-              <tbody id="rankList"></tbody>
-
+              
+              <div id="mrList"></div>
 
             </div>
+
+
+
+
 
             <div class="tinyRoom">
 

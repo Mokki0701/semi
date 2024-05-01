@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 
 <body>
   <div style="display: flex; flex-direction: column; align-items: center;">
 
     <!-- Content-ID로 등록된 이미지 중 logo를 출력 -->
-    <img src="cid:logo" width="200px">
+    <!-- <img src="cid:logo" width="200px" style="margin-bottom: 20px;"> -->
 
-    <h3>
+    <h3 style="text-align: center;">
       아래 발급된 인증 번호를 제한 시간 내에
       <br>
       회원 가입 화면에 입력 후 인증 버튼을 눌러주세요.
     </h3>
 
-    <h3 style="text-align: center; border: 3px solid black; color:rgb(33, 173, 162); width: 400px; padding:10px;">
+    <h3 style="text-align: center; border: 3px solid black; color:rgb(33, 173, 162); width: 400px; padding:10px; margin: 20px auto;">
       <th:block th:text="${authKey}"></th:block>
     </h3>
 
