@@ -27,7 +27,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-@SessionAttributes({ "loginMember", "postCounter", "favorBoard" , "commentCounter"})
+@SessionAttributes({ "loginMember", "postCounter", "favorBoard", "commentCounter" })
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("member")
@@ -81,19 +81,14 @@ public class MemberController {
 
 	@GetMapping("login")
 	public String login() {
-		
+
 		return "common/login";
 	}
-	
+
 	// 일반 로그인
 	@PostMapping("login")
-	public String loginMember(
-			@ModelAttribute Member member, 
-			RedirectAttributes ra, 
-			Model model,
-			@RequestParam(value="saveId", required=false) String saveId,
-			HttpServletResponse resp
-			) {
+	public String loginMember(@ModelAttribute Member member, RedirectAttributes ra, Model model,
+			@RequestParam(value = "saveId", required = false) String saveId, HttpServletResponse resp) {
 
 		Member loginMember = service.loginMember(member);
 
@@ -104,21 +99,23 @@ public class MemberController {
 		if (loginMember != null) { // 로그인 성공
 			int postCounter = service.postCounter(loginMember.getMemberNo());
 			model.addAttribute("loginMember", loginMember);
-			
+			int postCounter2 = service.postCounter(loginMember.getMemberNo());
+			int commentCounter = service.commentCounter(loginMember.getMemberNo());
+
 			// 아이디 저장용 쿠키
-			Cookie cookie = new Cookie("saveId", loginMember.getMemberEmail() );
+			Cookie cookie = new Cookie("saveId", loginMember.getMemberEmail());
 			cookie.setPath("/");
-			
-			
-			if(saveId != null) {
-				cookie.setMaxAge(60*30); // 30분 유지
+
+			if (saveId != null) {
+				cookie.setMaxAge(60 * 30); // 30분 유지
 			} else {
 				cookie.setMaxAge(0);
 			}
-			
+
 			resp.addCookie(cookie);
-			
-			model.addAttribute("postCounter", postCounter);
+
+			model.addAttribute("postCounter", postCounter2);
+			model.addAttribute("commentCounter", commentCounter);
 		}
 
 		return "redirect:/";
@@ -139,8 +136,8 @@ public class MemberController {
 		int result = service.signup(inputMember, memberAddress);
 		String path = null;
 		String message = null;
-		if(result > 0) {
-			message="😀😁😊 " + inputMember.getMemberNickname()+" 님의 가입을 환영합니다 😀😁😊";
+		if (result > 0) {
+			message = "😀😁😊 " + inputMember.getMemberNickname() + " 님의 가입을 환영합니다 😀😁😊";
 			path = "/";
 		} else {
 			message = "회원 가입 실패";
@@ -148,7 +145,7 @@ public class MemberController {
 		}
 
 		ra.addFlashAttribute("message", message);
-		return "redirect:"+path;
+		return "redirect:" + path;
 	}
 
 	/**
