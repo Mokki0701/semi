@@ -137,6 +137,39 @@ public class FileUploadController {
 	}
 	
 	
+	//게시글 수정 화면 전환
+	@GetMapping("{topMenuCode:[0-9]+}/{bottomMenuCode:[0-9]+}/{boardNo:[0-9]+}/update")
+	public String boardUpdate(
+			@PathVariable("topMenuCode") int topMenuCode,
+			@PathVariable("bottomMenuCode") int bottomMenuCode,
+			@PathVariable("boardNo") int boardNo,
+			@SessionAttribute("loginMember") Member loginMember,
+			Model model, RedirectAttributes ra
+			) {
+
+		// 게시글 제목, 내용 조회하기
+		Board updateBoard = service.searchBoard(boardNo);
+		String boardTitle = service.selectTitle(topMenuCode);
+		String message = null;
+		String path = null;
+		
+		if(updateBoard == null) {
+			message = "해당 게시글이 존재하지 않습니다";
+			path = "redirect:/";
+			ra.addFlashAttribute("message",message);
+		}else if(updateBoard.getMemberNo() != loginMember.getMemberNo()) {
+			message="자신이 작성한 글만 수정 가능합니다";
+			path = String.format("redirect:/board/%d/%d/%d", topMenuCode, bottomMenuCode, boardNo );
+			ra.addFlashAttribute("message",message);
+		}else {
+			path = "boardWrite/boardUpdate";
+			model.addAttribute("updateBoard",updateBoard);
+			model.addAttribute("boardTitle",boardTitle);
+		}
+		
+		return path;
+	}
+	
 	
 	
 }
