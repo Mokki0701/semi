@@ -112,12 +112,12 @@ public class FileUploadController {
 			
 			if(boardNo>0) {
 				//성공시 상세페이지 보내기
-				//path = "";
+				path = String.format("/board/%d/%d/%d", inputBoard.getTopMenuCode(),inputBoard.getBottomBoardCode(),boardNo);
 				message = "게시글이 작성 되었습니다";
 			}else {
 				//실패시 글쓰기 페이지로 redirect
-				//path= String.format("redirect:/board/%d/%d")
-				//message = "게시글 작성 실패";
+				path= "insert";
+				message = "게시글 작성 실패";
 			}
 		}
 		//ra.addFlashAttribute("message",message);
@@ -125,7 +125,7 @@ public class FileUploadController {
 		
 		
 		
-		return "/boardWrite/test";
+		return "redirect:"+path;
 	}
 	
 	@ResponseBody
