@@ -32,6 +32,13 @@ public interface BoardWriteService  {
 
 	// 수정 페이지에 표시될 미리보기 이미지
 	List<BoardImg> imgList(int boardNo);
+	
+	// 게시글 수정 (1행)
+	int notiUpdate(Board inputBoard, List<MultipartFile> images,String deleteOrder) throws IllegalStateException, IOException;
+
+
+	
+	
 
 	
 

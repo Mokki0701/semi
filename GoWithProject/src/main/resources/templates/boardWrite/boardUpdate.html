@@ -25,7 +25,7 @@
         <!-- 이미지 1 -->
         <div class="img-box">
           <label for="imageFile0">
-            <img class="preview" src="https://via.placeholder.com/300.jpg" alt="img0">
+            <img class="preview" alt="img0" src="">
           </label>
           <input type="file" name="images" class="inputImg" id="imageFile0" accept="image/*">
           <!-- 이미지 X표시 -->
@@ -35,7 +35,7 @@
         <!-- 이미지 2 -->
         <div class="img-box">
           <label for="imageFile1">
-            <img class="preview" src="https://via.placeholder.com/300.jpg" alt="img1">
+            <img class="preview" alt="img1" src="">
           </label>
           <input type="file" name="images" class="inputImg" id="imageFile1" accept="image/*">
           <!-- 이미지 X표시 -->
@@ -45,7 +45,7 @@
         <!-- 이미지 3 -->
         <div class="img-box">
           <label for="imageFile2">
-            <img class="preview" src="https://via.placeholder.com/300.jpg" alt="img3">
+            <img class="preview" alt="img3" src="">
           </label>
           <input type="file" name="images" class="inputImg" id="imageFile2" accept="image/*">
           <!-- 이미지 X표시 -->
@@ -55,7 +55,7 @@
         <!-- 이미지 4 -->
         <div class="img-box">
           <label for="imageFile3">
-            <img class="preview" src="https://via.placeholder.com/300.jpg" alt="img4">
+            <img class="preview" alt="img4" src="">
           </label>
           <input type="file" name="images" class="inputImg" id="imageFile3" accept="image/*">
           <!-- 이미지 X표시 -->
@@ -65,22 +65,22 @@
       
       <hr>
 
-        <!-- 전체 게시글인 경우 보임  -->
-        <div class="selectWrapper">
+        
+        <!-- <div class="selectWrapper">
           <select th:if="${topMenuCode} == 1" name="topMenu" id="topMenu">
             <option>선택</option>
             <option th:each="topMenu : ${topMenuList}" th:value="${topMenu.topMenuCode}" th:text="${topMenu.topMenuName}"></option>
           </select>
-          <!-- 전체 게시글인 경우 보임  -->
+          
           <select th:if="${topMenuCode} == 1" id="bottomMenu" name="selectMenu">
           </select>
-        </div>
+        </div> -->
         
         <!-- 전체 게시글이 아닌 경우 -->
-        <select th:if="${topMenuCode} == 4 or ${topMenuCode} == 5 or ${topMenuCode} == 6 " name="bottomMenu" id="bottomMenu2">
+        <!-- <select th:if="${topMenuCode} == 4 or ${topMenuCode} == 5 or ${topMenuCode} == 6 " name="bottomMenu" id="bottomMenu2">
           <option value="">선택</option>
           <option th:each="bottomMenu : ${bottomMenuList}" th:value="${bottomMenu.bottomMenuCode}" th:text="${bottomMenu.bottomMenuName}" th:selected="${bottomMenu.bottomMenuCode} == ${bottomMenuCode} "></option>
-        </select>
+        </select> -->
 
       <div>
         <textarea name="boardContent" cols="30" rows="10" th:text="${updateBoard.boardContent}"></textarea>
@@ -88,24 +88,30 @@
 
       <!-- 버튼 영역 -->
       <div class="submit-area">
-
-        <!-- 관리자인 경우에만 checkbox 보이도록하기 -->
-        <input type="checkbox" th:if="${session.loginMember.authority} == 2" name="managerCheck" value="yes"> 
-        <span th:if="${session.loginMember.authority} == 2">공지글 등록</span>
-        <button type="submit" id="boardBtn">등록</button> 
+        <button type="submit" id="boardBtn">수정</button> 
       </div>
 
+      <!-- 기존 이미지가 있다가 삭제된 이미지의 순서 기록 -->
+      <input type="hidden" name="deleteOrder" value="">
+      <input type="hidden" name="querystring" value="">
+      
+      
     </form>
   </section>
 
   <script th:inline="javascript">
     const imgList =/*[[${imgList}]]*/[];
-    const previesList = document.querySelectorAll('img.preview');
+    const previewsList = document.querySelectorAll('img.preview');
 
+    console.log(imgList);
     //기존에 존재하던 이미지 순서 기록
     const orderList = [];
 
-    
+    for(let img of imgList){
+      previewsList[img.imgOrder].src = img.imgPath+img.imgRename;
+
+      orderList.push(img.imgOrder);
+    }
 
 
   </script>

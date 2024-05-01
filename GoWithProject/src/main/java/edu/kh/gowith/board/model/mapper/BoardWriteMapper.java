@@ -1,6 +1,7 @@
 package edu.kh.gowith.board.model.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -35,6 +36,18 @@ public interface BoardWriteMapper {
 
 	// 수정 페이지에 표시될 미리보기 이미지
 	List<BoardImg> imgList(int boardNo);
+
+	// 공지사항 수정
+	int notiUpdate(Board inputBoard);
+
+	// 이미지 삭제
+	int deleteImg(Map<String, Object> map);
+
+	// 이미지 수정
+	int updateImg(BoardImg img);
+	
+	// 게시글 이미지 삽입 (1행 삽입)
+	int insertimage(BoardImg img);
 
 	
 
