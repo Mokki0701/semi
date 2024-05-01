@@ -1,86 +1,7 @@
 /* 강찬혁의 작업용 js */
 // 메인페이지, 로그인 페이지, 회원가입 페이지
 
-/* ↓ 회원가입 페이지에서 사용합니다. ↓ */
 
-const join = document.querySelector("#join");
-const joinBtn = document.querySelector("#joinBtn");
-if (join != null) {
-
-  const inputEmail = document.querySelector("#inputEmail");
-  const inputId = document.querySelector("#inputId");
-  const inputPw = document.querySelector("#inputPw");
-
-  joinBtn.addEventListener("click", () => {
-
-    /* 유효성검사 */
-
-    // 이메일 검사(naver, hanmail, gmail만 가능)
-    const EmailregExp = /^(?:[a-zA-Z0-9._%+-]+@(?:naver\.com|gmail\.com|hanmail\.net))$/;
-
-    if (inputEmail.value.trim().length == 0) {
-      alert("이메일을 입력하세요");
-      inputEmail.value = "";
-      inputEmail.focus();
-      return;
-    }
-    if (!EmailregExp.test(inputEmail.value)) {
-      alert("naver, gmail, hanmail 형식만 가입 가능합니다");
-      inputEmail.value = "";
-      inputEmail.focus();
-      return;
-    }
-
-
-    // 아이디 검사 
-    if (inputId.value.trim().length == 0) {
-      alert("아이디를 입력하세요");
-      inputId.innerText = "";
-      inputId.focus();
-      return;
-    }
-    if (inputId.value.trim().length >= 9) {
-      alert("아이디는 8자를 초과할 수 없습니다.");
-      inputId.innerText = "";
-      inputId.focus();
-      return;
-    }
-
-    // 비밀번호 검사
-    if (inputPw.value.trim().length == 0) {
-      alert("비밀번호를 입력하세요");
-      inputPw.innerText = "";
-      inputPw.focus();
-      return;
-    }
-    if (inputPw.value.trim().length >= 12) {
-      alert("비밀번호는 11자를 초과할 수 없습니다");
-      inputPw.innerText = "";
-      inputPw.focus();
-      return;
-    }
-
-    // 전부 통과한 경우 메일 발송 + 카운트다운 시작
-    function countDown() {
-      countDownInterval = setInterval(updateCountdown, 10); // 1초마다 ㄱㄱ
-    }
-    function updateCountdown() {
-      countdownValue -= 1;
-      document.querySelector("#count").innerText = countdownValue;
-      if (countdownValue == 0) {
-        alert("이 거북이 녀석");
-        clearInterval(countDownInterval);
-      }
-    }
-
-
-  });
-
-
-
-}
-
-/* ↑ 회원가입페이지에서 사용합니다 ↑ */
 
 
 
@@ -274,65 +195,113 @@ popLabels.forEach(label => {
   });
 });
 
-// rank 클릭시 버튼 색 변경
-const rankBtn = document.querySelectorAll(".rankBtn");
 
-rankBtn.forEach(label => {
-  label.addEventListener("click", () => {
-    // label이 클릭되면 다른 label들의 checkedBtn 클래스 제거
-    rankBtn.forEach(otherLabel => {
-      otherLabel.classList.remove('textRed');
-    });
-    // 선택된 label의 클래스에 checkedBtn 클래스 추가
-    label.classList.add('textRed');
-  });
-});
-
-// 글자 수 자르기
-function shaving() {
-  const text = target.innerText
-  const maxLength = 5
-  if (text.length > maxLength) {
-    return text.substring(0, maxLength) + "...";
-
-  } else return text;
-}
 
 // 리스트
 document.addEventListener("DOMContentLoaded", function () {
-  var pirateBtn = document.getElementById("pirate");
-  pirateBtn.addEventListener("click", function () {
-    var commentListItems = document.querySelectorAll("#commentList li");
-    if (pirateBtn.innerText === "다음") {
-      console.log(commentListItems);
-      pirateBtn.innerText = "이전";
-      commentListItems.forEach(function (item, index) {
-        if (index < 5) {
-          item.style.display = "hide";
-        } else {
-          item.style.display = "list-item";
-        }
+  const commentListItems = document.querySelectorAll("#commentList li");
+  const groupA = Array.from(commentListItems).slice(0, 5);
+  const groupB = Array.from(commentListItems).slice(5, 10);
+  const btn = document.getElementById("pirate");
+  let btnText = btn.innerText;
+
+  // 페이지 로딩 시 B 그룹 숨기기
+  groupB.forEach(item => {
+    item.style.display = 'none';
+  });
+
+  btn.addEventListener("click", () => {
+    if (btnText == '다음') {
+      // 다음 버튼을 누를 때마다 A 그룹 숨기고 B 그룹 보이기
+      groupA.forEach(i => {
+        i.style.display = 'none';
       });
-    } else {
-      pirateBtn.innerText = "다음";
-      console.log(commentListItems);
-      // 다음 댓글을 숨기고 이전 댓글을 보여줍니다.
-      commentListItems.forEach(function (item, index) {
-        if (index < 5) {
-          item.style.display = "list-item";
-        } else {
-          item.style.display = "none";
-        }
+      groupB.forEach(i => {
+        i.style.display = 'block';
       });
+
+      // 버튼 텍스트 변경
+      btn.innerText = '이전';
+      btnText = '이전';
+    } else if (btnText == '이전') {
+      // 이전 버튼을 누를 때마다 B 그룹 숨기고 A 그룹 보이기
+      groupA.forEach(i => {
+        i.style.display = 'block';
+      });
+      groupB.forEach(i => {
+        i.style.display = 'none';
+      });
+
+      btn.innerText = '다음';
+      btnText = '다음';
     }
   });
 });
 
+// ----------------------------------------------------------------------- //
+
+// 멤버랭킹조회 공통 기능
+// 멤버랭킹조회 공통 기능
+function memberRank(value) {
+  fetch("/memberRank?rank=" + value, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" }
+  })
+    .then(response => response.json())
+    .then(result => {
+      const mrList = document.querySelector("#mrList");
+      mrList.innerHTML = "";
+
+      for (let obj of result) {
+        const tr = document.createElement("tr");
+        const td = document.createElement("td");
+        td.innerText = obj.memberNickname; 
+        tr.appendChild(td); 
+        mrList.appendChild(tr); 
+      }
+    })
+    .catch(error => console.error('Error:', error)); 
+}
+
+// index 페이지 로드 시 실행되는 코드
+document.addEventListener("DOMContentLoaded", function () {
+  const value = "memDefault"; // 기본값 설정
+  memberRank(value);
+});
+
+const rankBtns = document.querySelectorAll(".memRank");
+
+// 각 라디오 버튼에 대해 클릭 이벤트 핸들러 추가
+rankBtns.forEach(btn => {
+  btn.addEventListener("click", function (e) {
+    const value = e.target.value; // 클릭된 라디오 버튼의 value 값 가져오기
+    memberRank(value); // 가져온 value 값을 memberRank 함수에 전달하여 실행
+  });
+});
+
+
+
+// 색깔변경
+// 인기글 클릭시 버튼 색 변경
+const memLabels = document.querySelectorAll(".rankBtn label");
+
+memLabels.forEach(label => {
+  label.addEventListener("click", () => {
+    // label이 클릭되면 다른 label들의 checkedBtn 클래스 제거
+    memLabels.forEach(otherLabel => {
+      otherLabel.classList.remove('textRed');
+      otherLabel.classList.add('textRed')
+    });
+    label.classList.add('textRed');
+  });
+});
 
 
 
 
-// 메인페이지에 보여질때
+
+
+/* 메인 페이지에서 보여질 때 끝 */
 
 
 
