@@ -11,4 +11,10 @@ public interface CommentService {
 
 	int enrollComment(Comment comment);
 
+	int replyComment(Comment comment);
+
+	int deleteComment(int commentNo);
+
+	int updateComment(Comment comment);
+
 }

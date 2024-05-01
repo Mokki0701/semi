@@ -51,7 +51,7 @@ numberUnit.addEventListener("change", e=>{
 
     const params = new URL(location.href).searchParams;
     
-    const url = window.location.href;;
+    const url = window.location.href;
 
     location.href = new URL(location.href).pathname+"?limit="+selectNumber;
 
@@ -91,7 +91,7 @@ topMenuKey.addEventListener("change", e=>{
     
     bottomMenuKey.innerHTML = "";
 
-    fetch("/board/selectBottom?topMenuCode="+selectTopMenuCode)
+    fetch("/board/selectBottom?topMenuCode="+selectTopMenuCode+"&limit"+limit)
     .then(resp => resp.json())
     .then(bottomList => {
 

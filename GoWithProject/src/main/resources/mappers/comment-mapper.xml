@@ -19,6 +19,44 @@
 
 	</insert>
 	
+	<update id="deleteComment">
+		UPDATE "COMMENT" SET
+		COMMENT_DEL_FL = 'Y'
+		WHERE COMMENT_NO = #{commentNo}
+	</update>
+	
+	<select id="checkTag">
+		SELECT COUNT(*) FROM "TAG"
+		WHERE TAG_NAME = #{tagWord}
+	</select>
+	
+	<insert id="insertTag">
+		INSERT INTO "TAG"
+		VALUES(SEQ_TAG_NO.NEXTVAL, #{tagWord})
+	</insert>
+	
+	<select id="selectTagNo">
+		SELECT TAG_NO FROM "TAG"
+		WHERE TAG_NAME = #{tagWord}
+	</select>
+	
+	<insert id="insertCommentTag">
+		INSERT INTO "COMMENT_TAG"
+		VALUES(#{tagNo}, SEQ_COMMENT_NO.CURRVAL)
+	</insert>
+	
+	
+	<update id="updateComment">
+		UPDATE "COMMENT" SET
+		COMMENT_CONTENT = #{commentContent}
+		WHERE COMMENT_NO = #{commentNo}
+	</update>
+	
+	
+	
+	
+	
+	
 	
 
 </mapper>

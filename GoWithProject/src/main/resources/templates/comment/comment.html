@@ -32,6 +32,11 @@
                     <div class="comment-btn-area">
                         <button th:onclick="|showInsertComment(*{commentNo}, this)|">답글</button>    
     
+                        <th:block th:if="${session.loginMember != null and session.loginMember.memberNo == comment.memberNo}">
+                            <button th:onclick="|showUpdateComment(*{commentNo}, this)|">수정</button>     
+                            <button th:onclick="|deleteComment(*{commentNo})|">삭제</button>
+                        </th:block>
+
                     </div>
                 </th:block>
 
@@ -41,14 +46,16 @@
             
             <!-- 대댓글인 경우 child-comment 클래스 추가 -->
             <!-- th:classappend="${comment.parentCommentNo} != 0 ? child-comment" -->
-            <li id="commentLast">
-                
-                
-
-            </li>
-
+            
             
         </ul>
+
+        <ul id="commentLast">
+            
+            
+
+        </ul>
+        
     </div>
     
 
