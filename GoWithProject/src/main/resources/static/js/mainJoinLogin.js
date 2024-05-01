@@ -120,7 +120,6 @@ const getCookie = (key) => {
     const v = cookieList[i][1];
     obj[k] = v;
   }
-  console.log(cookies);
 
   return obj[key]
 }
@@ -215,12 +214,15 @@ function fetchBoardList(value) {
         const tr = document.createElement("tr");
         const arr = ['boardTitle', 'memberNickname', 'boardWriteDate', 'readCount'];
 
+        // 'topMenuCode', 'bottomMenuCode', 'boardNo'
+
         for (let key of arr) {
           const td = document.createElement("td");
           if (key === 'boardTitle') {
             const a = document.createElement("a");
-            a.href = "board/boardDetail?id=" + obj['boardId'];
+            a.href = "board/" + obj['topMenuCode'] + "/" + obj['bottomMenuCode'] + "/" + obj['boardNo'];
             a.innerText = obj[key];
+
             td.appendChild(a);
           } else {
             td.innerText = obj[key];
@@ -234,6 +236,7 @@ function fetchBoardList(value) {
           tr.append(td);
           td.classList.add("textCenter");
         }
+
         PbList.append(tr);
       }
     })
@@ -247,6 +250,7 @@ document.addEventListener("DOMContentLoaded", function () {
   fetchBoardList(value);
 });
 
+// 각 버튼 클릭 시 실행되는 코드
 const popWriteBtnContext = document.querySelectorAll(".popWriteBtnContext");
 popWriteBtnContext.forEach(btn => {
   btn.addEventListener("click", function (e) {
@@ -254,31 +258,6 @@ popWriteBtnContext.forEach(btn => {
     fetchBoardList(value);
   });
 });
-
-// // 멤버랭킹 공통 기능
-// function memberRank(value) {
-//   fetch("memberRank?rank=" + value,{
-//     method="GET",
-//   headers : {"Content-Type": "application/json" }
-// }).then (response => response.json())
-// .then(result => {
-//   const rankList = document.querySelector("rankList");
-//   rankList.innerHTML="";
-
-//   for(let obj of result){
-//     const tr = document.createElement("tr");
-//     const arr = ['memberNickname'] ;
-
-//     for(let key of arr){
-//       const td = document.createElement("td");
-//       if()
-//     }
-//   }
-// })
-// }
-
-
-
 
 // 인기글 클릭시 버튼 색 변경
 const popLabels = document.querySelectorAll(".popWriteBtnBox label");
@@ -308,6 +287,48 @@ rankBtn.forEach(label => {
     label.classList.add('textRed');
   });
 });
+
+// 글자 수 자르기
+function shaving() {
+  const text = target.innerText
+  const maxLength = 5
+  if (text.length > maxLength) {
+    return text.substring(0, maxLength) + "...";
+
+  } else return text;
+}
+
+// 리스트
+document.addEventListener("DOMContentLoaded", function () {
+  var pirateBtn = document.getElementById("pirate");
+  pirateBtn.addEventListener("click", function () {
+    var commentListItems = document.querySelectorAll("#commentList li");
+    if (pirateBtn.innerText === "다음") {
+      console.log(commentListItems);
+      pirateBtn.innerText = "이전";
+      commentListItems.forEach(function (item, index) {
+        if (index < 5) {
+          item.style.display = "hide";
+        } else {
+          item.style.display = "list-item";
+        }
+      });
+    } else {
+      pirateBtn.innerText = "다음";
+      console.log(commentListItems);
+      // 다음 댓글을 숨기고 이전 댓글을 보여줍니다.
+      commentListItems.forEach(function (item, index) {
+        if (index < 5) {
+          item.style.display = "list-item";
+        } else {
+          item.style.display = "none";
+        }
+      });
+    }
+  });
+});
+
+
 
 
 

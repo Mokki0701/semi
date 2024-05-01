@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.kh.gowith.board.model.dto.Board;
+import edu.kh.gowith.board.model.dto.Comment;
 import edu.kh.gowith.main.model.mapper.MainMapper;
 import lombok.RequiredArgsConstructor;
 
@@ -40,8 +41,11 @@ public class MainServiceImpl implements MainService{
 		return mapper.popComment();
 	}
 	
-	
-	
+	// 최근 댓글 동기식 조회
+	@Override
+	public List<Comment> commentList() {
+		return mapper.commentList();
+	}
 	
 	
 }

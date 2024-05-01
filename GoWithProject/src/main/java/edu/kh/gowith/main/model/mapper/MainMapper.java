@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import edu.kh.gowith.board.model.dto.Board;
+import edu.kh.gowith.board.model.dto.Comment;
 
 @Mapper
 public interface MainMapper {
@@ -19,6 +20,13 @@ public interface MainMapper {
 
 	// comment 갯수 순서로 조회
 	List<Board> popComment();
+
+	// 최근 댓글 동기식 조회
+	List<Comment> commentList();
+	
+	
+
+	
 
 	
 }

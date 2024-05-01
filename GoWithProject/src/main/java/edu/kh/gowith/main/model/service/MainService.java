@@ -3,6 +3,7 @@ package edu.kh.gowith.main.model.service;
 import java.util.List;
 
 import edu.kh.gowith.board.model.dto.Board;
+import edu.kh.gowith.board.model.dto.Comment;
 
 public interface MainService {
 
@@ -14,6 +15,9 @@ public interface MainService {
 
 	// 댓글 개수에 따라
 	List<Board> popComment(String value);
+
+	// 최근댓글 동기식 조회
+	List<Comment> commentList();
 
 	
 

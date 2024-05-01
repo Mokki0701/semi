@@ -162,7 +162,7 @@
           <div class="linkList">
             <div class="contextHead">후기(추천/지역)</div>
             <a th:href="@{'/board/5/18'}">중국</a>
-            <a th:href="@{'/board/5/19'}">일본</a> 
+            <a th:href="@{'/board/5/19'}">일본</a>
             <a th:href="@{'/board/5/20'}">동남아</a>
             <a th:href="@{'/board/5/21'}">유럽</a>
             <a th:href="@{'/board/5/22'}">그외</a>
@@ -203,7 +203,7 @@
       <div class="room" id="room1">
 
         <div class="smallRoom">
-          <a href="#" class="mainTitle">공지사항</a>
+          <div class="mainTitle">공지사항</div>
         </div>
 
         <div class="smallRoom">
@@ -250,16 +250,18 @@
 
 
       <div class="scrollBox" id="popWrite">
-        <a href="#" class="mainTitle">인기글</a>
+        <div class="mainTitle">인기글</div>
         <div class="popWriteBtnBox">
           <input type="radio" name="popWriteBtn" class="popWriteBtnContext " value="popDefault" id="defaultBtn" checked>
           <label for="defaultBtn" id="defaultLabel" class="btnCommon checkedBtn">인기글 TOP10</label>
+
           <input type="radio" name="popWriteBtn" class="popWriteBtnContext" value="like" id="likeBtn">
           <label for="likeBtn" id="likeLabel" class="btnCommon popWriteBtn">좋아요 Top</label>
+
           <input type="radio" name="popWriteBtn" class="popWriteBtnContext" value="comment" id="commentBtn">
           <label for="commentBtn" id="commentLabel" class="btnCommon popWriteBtn">댓글 Top</label>
         </div>
- 
+
         <table class="repeatTable">
           <thead class="tableTitleArea">
             <th class="title">제목</th>
@@ -279,18 +281,20 @@
         <!-- 동기식 최신글 -->
         <div class="smallRoom">
           <!-- 제목부분 -->
-          <a href="#" class="mainTitle">최신글</a>
+          <div class="mainTitle">최신글</div>
 
           <!-- 층 부분 -->
           <div class="room">
 
             <div class="tinyRoom">
               <div>최근 댓글, 답글</div>
-
               <div>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
+                <ul id="commentList">
+                  <!-- 첫 번째 페이지에 대한 데이터만 표시 -->
+                  <li th:each="comment, iterStat : ${commentList}" 
+                    th:text="${comment.commentContent}"></li>
+                </ul>
+                <button id="pirate">다음</button>
               </div>
             </div>
 
@@ -300,7 +304,7 @@
 
                 <span>
                   <input type="radio" name="rank" value="rankComment" id="defaultRank" checked>
-                  <label for="defaultRank" class="rankBtn width20 textRed" >댓글</label>
+                  <label for="defaultRank" class="rankBtn width20 textRed">댓글</label>
                 </span>
 
                 <span>
@@ -347,6 +351,8 @@
   if (message != null) alert(message);
 </script>
 
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/js/mainJoinLogin.js"></script>
 
 </html>
