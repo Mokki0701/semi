@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>boardWrite</title>
+  <link rel="stylesheet" href="/css/boardWrite/boardWrite.css">
+</head>
+
+<body>
+  <section>
+
+    <form th:action="@{update}" method="POST" class="boardWrite" enctype="multipart/form-data" id="boardFrm">
+
+      <h1 th:text="${boardTitle}">게시판 이름</h1>
+
+      <!-- 게시판 제목-->
+      <h2 class="boardTitle">
+        <input type="text" name="boardTitle" placeholder="제목을 입력하세요" th:value="${}">
+      </h2>
+
+      <!-- 업로드 이미지 -->
+      <div class="image-wrapper">
+
+        <!-- 이미지 1 -->
+        <div class="img-box">
+          <label for="imageFile0">
+            <img class="preview" src="https://via.placeholder.com/300.jpg" alt="img0">
+          </label>
+          <input type="file" name="images" class="inputImg" id="imageFile0" accept="image/*">
+          <!-- 이미지 X표시 -->
+          <span class="del-img">&times;</span>
+        </div>
+
+        <!-- 이미지 2 -->
+        <div class="img-box">
+          <label for="imageFile1">
+            <img class="preview" src="https://via.placeholder.com/300.jpg" alt="img1">
+          </label>
+          <input type="file" name="images" class="inputImg" id="imageFile1" accept="image/*">
+          <!-- 이미지 X표시 -->
+          <span class="del-img">&times;</span>
+        </div>
+
+        <!-- 이미지 3 -->
+        <div class="img-box">
+          <label for="imageFile2">
+            <img class="preview" src="https://via.placeholder.com/300.jpg" alt="img3">
+          </label>
+          <input type="file" name="images" class="inputImg" id="imageFile2" accept="image/*">
+          <!-- 이미지 X표시 -->
+          <span class="del-img">&times;</span>
+        </div>
+
+        <!-- 이미지 4 -->
+        <div class="img-box">
+          <label for="imageFile3">
+            <img class="preview" src="https://via.placeholder.com/300.jpg" alt="img4">
+          </label>
+          <input type="file" name="images" class="inputImg" id="imageFile3" accept="image/*">
+          <!-- 이미지 X표시 -->
+          <span class="del-img">&times;</span>
+        </div>
+      </div>
+      
+      <hr>
+
+        <!-- 전체 게시글인 경우 보임  -->
+        <div class="selectWrapper">
+          <select th:if="${topMenuCode} == 1" name="topMenu" id="topMenu">
+            <option>선택</option>
+            <option th:each="topMenu : ${topMenuList}" th:value="${topMenu.topMenuCode}" th:text="${topMenu.topMenuName}"></option>
+          </select>
+          <!-- 전체 게시글인 경우 보임  -->
+          <select th:if="${topMenuCode} == 1" id="bottomMenu" name="selectMenu">
+          </select>
+        </div>
+        
+        <!-- 전체 게시글이 아닌 경우 -->
+        <select th:if="${topMenuCode} == 4 or ${topMenuCode} == 5 or ${topMenuCode} == 6 " name="bottomMenu" id="bottomMenu2">
+          <option value="">선택</option>
+          <option th:each="bottomMenu : ${bottomMenuList}" th:value="${bottomMenu.bottomMenuCode}" th:text="${bottomMenu.bottomMenuName}" th:selected="${bottomMenu.bottomMenuCode} == ${bottomMenuCode} "></option>
+        </select>
+
+      <div>
+        <textarea name="boardContent" cols="30" rows="10"></textarea>
+      </div>
+
+      <!-- 버튼 영역 -->
+      <div class="submit-area">
+
+        <!-- 관리자인 경우에만 checkbox 보이도록하기 -->
+        <input type="checkbox" th:if="${session.loginMember.authority} == 2" name="managerCheck" value="yes"> 
+        <span th:if="${session.loginMember.authority} == 2">공지글 등록</span>
+        <button type="submit" id="boardBtn">등록</button> 
+      </div>
+
+    </form>
+  </section>
+
+  <script src="/js/boardWrite/boardWrite.js"></script>
+</body>
+</html>

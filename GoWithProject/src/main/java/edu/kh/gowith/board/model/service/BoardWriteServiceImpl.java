@@ -40,6 +40,7 @@ public class BoardWriteServiceImpl implements BoardWriteService{
 		// 1. INSERT 결과로 작성된 게시글 번호(생성된 시퀀스 번호) 반환 받기
 		int result = mapper.boardInsert(inputBoard);
 		
+        
 		// 삽입 실패시
 		if(result == 0) return 0;
 		
@@ -86,6 +87,8 @@ public class BoardWriteServiceImpl implements BoardWriteService{
 			// -> 이전 삽입 내용 모두 롤백 -> RuntimeException 강제 발생 시켜서 롤백 해주기
 			throw new BoardInsertException();
 		}
+		
+		
 		
 			
 		return boardNo;
@@ -168,6 +171,13 @@ public class BoardWriteServiceImpl implements BoardWriteService{
 	@Override
 	public List<TopMenu> topMenuCodeList() {
 		return mapper.topMenuCodeList();
+	}
+	
+	
+	// 게시글 수정 시 세팅할 제목, 내용
+	@Override
+	public Board searchBoard(int boardNo) {
+		return mapper.searchBoard(boardNo);
 	}
 	
 	

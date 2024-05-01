@@ -26,6 +26,12 @@ public interface BoardWriteService  {
 	//상위 메뉴 리스트
 	List<TopMenu> topMenuCodeList();
 
+	// 게시글 수정 시 세팅할 제목, 내용
+	Board searchBoard(int boardNo);
+
+	
+
+
 
 
 

@@ -30,6 +30,9 @@ public interface BoardWriteMapper {
 	// 탑 메뉴 리스트 반환
 	List<TopMenu> topMenuCodeList();
 
+	// 수정할 게시판 찾아 제목, 내용 가져오기
+	Board searchBoard(int boardNo);
+
 	
 
 }

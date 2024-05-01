@@ -69,6 +69,14 @@
 		WHERE TOP_MENU_CODE IN (4,5,6,7)
 	</select>
 	
+	<select id="searchBoard">
+	
+		SELECT BOARD_TITLE,BOARD_CONTENT,MEMBER_NO
+		FROM BOARD
+		WHERE BOARD_NO = #{boardNo}
+	
+	</select>
+	
 
 
 </mapper>
