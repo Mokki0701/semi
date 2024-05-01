@@ -17,12 +17,22 @@ const currentURL = window.location.href;
 const limit = getQueryParameter(currentURL, "limit");
 const cp = getQueryParameter(currentURL, "cp");
 
-console.log(limit);
-console.log(cp);
+// console.log(limit);
+// console.log(cp);
 
 
-http://localhost/board/5/18/221?limit=10&cp=2
+
+if(updateBtn != null){
+
+  http://localhost/board/5/18/221?limit=10&cp=2
 updateBtn.addEventListener("click",()=>{
 
   location.href = `/editBoard/${topMenuCode}/${bottomMenuCode}/${boardNo}/update?limit=${limit}&cp=${cp}` 
 })
+
+}
+
+
+
+
+

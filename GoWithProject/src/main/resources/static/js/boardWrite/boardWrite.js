@@ -113,7 +113,7 @@ form.addEventListener("submit",e=>{
 const topMenu = document.querySelector("#topMenu");
 const bottomMenu2 = document.querySelector("#bottomMenu2");
 
-bottomMenu.disabled = true;
+// bottomMenu.disabled = true;
 
 if(topMenu!=null){
   topMenu.addEventListener("change", search);

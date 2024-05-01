@@ -180,6 +180,10 @@ public class BoardWriteServiceImpl implements BoardWriteService{
 		return mapper.searchBoard(boardNo);
 	}
 	
-	
+	// 수정 페이지에 표시될 미리보기 이미지
+	@Override
+	public List<BoardImg> imgList(int boardNo) {
+		return mapper.imgList(boardNo);
+	}
 
 }

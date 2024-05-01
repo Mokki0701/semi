@@ -33,6 +33,9 @@ public interface BoardWriteMapper {
 	// 수정할 게시판 찾아 제목, 내용 가져오기
 	Board searchBoard(int boardNo);
 
+	// 수정 페이지에 표시될 미리보기 이미지
+	List<BoardImg> imgList(int boardNo);
+
 	
 
 }

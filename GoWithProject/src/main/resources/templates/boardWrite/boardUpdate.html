@@ -16,7 +16,7 @@
 
       <!-- 게시판 제목-->
       <h2 class="boardTitle">
-        <input type="text" name="boardTitle" placeholder="제목을 입력하세요" th:value="${}">
+        <input type="text" name="boardTitle" placeholder="제목을 입력하세요" th:value="${updateBoard.boardTitle}">
       </h2>
 
       <!-- 업로드 이미지 -->
@@ -83,7 +83,7 @@
         </select>
 
       <div>
-        <textarea name="boardContent" cols="30" rows="10"></textarea>
+        <textarea name="boardContent" cols="30" rows="10" th:text="${updateBoard.boardContent}"></textarea>
       </div>
 
       <!-- 버튼 영역 -->
@@ -98,6 +98,18 @@
     </form>
   </section>
 
-  <script src="/js/boardWrite/boardWrite.js"></script>
+  <script th:inline="javascript">
+    const imgList =/*[[${imgList}]]*/[];
+    const previesList = document.querySelectorAll('img.preview');
+
+    //기존에 존재하던 이미지 순서 기록
+    const orderList = [];
+
+    
+
+
+  </script>
+
+  <script src="/js/board/boardDetail.js"></script>
 </body>
 </html>

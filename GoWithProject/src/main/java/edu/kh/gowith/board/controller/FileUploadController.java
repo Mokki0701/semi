@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.gowith.board.model.dto.Board;
+import edu.kh.gowith.board.model.dto.BoardImg;
 import edu.kh.gowith.board.model.dto.BottomMenu;
 import edu.kh.gowith.board.model.dto.TopMenu;
 import edu.kh.gowith.board.model.service.BoardWriteService;
@@ -149,7 +150,15 @@ public class FileUploadController {
 
 		// 게시글 제목, 내용 조회하기
 		Board updateBoard = service.searchBoard(boardNo);
+		
+		// 게시판 이름
 		String boardTitle = service.selectTitle(topMenuCode);
+		
+		//이미지 조회해 오기
+		
+		List<BoardImg> imgList = service.imgList(boardNo);
+		
+		
 		String message = null;
 		String path = null;
 		
@@ -165,10 +174,14 @@ public class FileUploadController {
 			path = "boardWrite/boardUpdate";
 			model.addAttribute("updateBoard",updateBoard);
 			model.addAttribute("boardTitle",boardTitle);
+			model.addAttribute("imgList",imgList);
 		}
 		
 		return path;
 	}
+	
+	
+	
 	
 	
 	
