@@ -23,4 +23,10 @@ public class CommentServiceImpl implements CommentService {
 		return mapper2.commentList(paramMap);
 	}
 	
+	@Override
+	public int enrollComment(Comment comment) {
+		
+		return mapper.enrollComment(comment);
+	}
+	
 }
