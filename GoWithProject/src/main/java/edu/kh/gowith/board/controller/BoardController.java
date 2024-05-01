@@ -137,6 +137,9 @@ public class BoardController {
 			@PathVariable("boardNo") int boardNo,
 			@PathVariable("topMenuCode") int topMenuCode,
 			@PathVariable("bottomMenuCode") int bottomMenuCode,
+			@RequestParam("limit") int limit,
+			@RequestParam("cp") int cp,
+			
 			@SessionAttribute(value="loginMember", required = false) Member loginMember,
 			// @RequestParam("queryStringDetail") String queryStringDetail,
 			HttpServletResponse resp,
@@ -239,7 +242,8 @@ public class BoardController {
 		String bottomMenuName = service.bottomMenuName(bottomMenuCode);
 		
 		model.addAttribute("bottomMenuName", bottomMenuName);
-		
+		model.addAttribute("limit", limit);
+		model.addAttribute("cp", cp);
 		
 		return path;
 	}

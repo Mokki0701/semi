@@ -23,7 +23,7 @@
             <th:block th:if="${board.preBoardNo != null}">
 
                 <a  
-                    th:href="|@{/board/{topMenuCode}/{bottomMenuCode}/{boardNo} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode},boardNo=${board.preBoardNo})}?${queryStringDetail}|" >이전글
+                    th:href="|@{/board/{topMenuCode}/{bottomMenuCode}/{boardNo} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode},boardNo=${board.preBoardNo})}?limit=${limit}&cp=${cp}|" >이전글
                 </a>
 
             </th:block>
@@ -33,12 +33,14 @@
             <th:block th:if="${board.nextBoardNo != null}">
                 
                 <a  
-                    th:href="|@{/board/{topMenuCode}/{bottomMenuCode}/{boardNo} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode},boardNo=${board.nextBoardNo})}?${queryStringDetail}|" >다음글
+                    th:href="|@{/board/{topMenuCode}/{bottomMenuCode}/{boardNo} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode},boardNo=${board.nextBoardNo})}?limit=${limit}&cp=${cp}|" >다음글
                 </a>
 
             </th:block>
 
-            <button>목록으로</button>
+            <br>
+
+            <a th:href="|@{/board/{topMenuCode}/{bottomMenuCode} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode})}?limit=${limit}&cp=${cp}|">목록으로</a>
 
             <div>
                 <div>
@@ -172,6 +174,8 @@
     <script th:inline="javascript">
 
         const boardNo = /*[[${board.boardNo}]]*/ "게시판 번호";
+
+        const loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원 번호";
 
     </script>
 

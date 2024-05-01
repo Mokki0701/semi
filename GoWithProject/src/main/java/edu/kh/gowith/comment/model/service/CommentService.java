@@ -9,4 +9,6 @@ public interface CommentService {
 
 	List<Comment> selectComment(Map<String, Object> paramMap);
 
+	int enrollComment(Comment comment);
+
 }

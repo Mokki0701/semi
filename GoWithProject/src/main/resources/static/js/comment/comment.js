@@ -73,11 +73,100 @@ commentDesc.addEventListener("click", e=>{
 })
 
 
+const addContent = document.querySelector("#addComment"); 
+const commentContent = document.querySelector("#commentContent"); 
+
+addContent.addEventListener("click", e => {
+
+    if (loginMemberNo == null) {
+        alert("로그인 후 이용해");
+        return;
+    }
+
+    if (commentContent.value.trim().length == 0) {
+        alert("댓글 입력이나 하고 등록해!");
+        commentContent.focus();
+        return;
+    }
+
+    const data = {
+        "commentContent": commentContent.value,
+        "boardNo": boardNo,
+        "memberNo": loginMemberNo 
+    }
+
+    fetch("/comment/enroll", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+        .then(resp => resp.text())
+        .then(result => {
+
+            if (result > 0) {
+                alert("댓글이 등록 되었습니다.");
+                commentContent.value = ""; // 작성한 댓글 내용 지우기
+
+                selectComment(1); // 댓글 목록을 다시 조회해서 화면에 출력
+            } else {
+                alert("댓글 등록 실패");
+            }
+
+
+        })
+        .catch(err => console.log(err));
+
+
+})
+
+const showInsertComment = (parentCommentNo, btn) => {
+
+    // ** 답글 작성 textarea가 한 개만 열릴 수 있도록 만들기 **
+    const temp = document.getElementsByClassName("commentInsertContent");
+
+    if (temp.length > 0) { // 답글 작성 textara가 이미 화면에 존재하는 경우
+
+        if (confirm("다른 답글을 작성 중입니다. 현재 댓글에 답글을 작성 하시겠습니까?")) {
+            temp[0].nextElementSibling.remove(); // 버튼 영역부터 삭제
+            temp[0].remove(); // textara 삭제 (기준점은 마지막에 삭제해야 된다!)
+
+        } else {
+            return; // 함수를 종료시켜 답글이 생성되지 않게함.
+        }
+    }
+
+    // 답글을 작성할 textarea 요소 생성
+    const textarea = document.createElement("textarea");
+    textarea.classList.add("commentInsertContent");
+
+    // 답글 버튼의 부모의 뒤쪽에 textarea 추가
+    // after(요소) : 뒤쪽에 추가
+    btn.parentElement.after(textarea);
+
+
+    // 답글 버튼 영역 + 등록/취소 버튼 생성 및 추가
+    const commentBtnArea = document.createElement("div");
+    commentBtnArea.classList.add("comment-btn-area");
+
+
+    const insertBtn = document.createElement("button");
+    insertBtn.innerText = "등록";
+    insertBtn.setAttribute("onclick", "insertChildComment(" + parentCommentNo + ", this)");
+
+
+    const cancelBtn = document.createElement("button");
+    cancelBtn.innerText = "취소";
+    cancelBtn.setAttribute("onclick", "insertCancel(this)");
+
+    // 답글 버튼 영역의 자식으로 등록/취소 버튼 추가
+    commentBtnArea.append(insertBtn, cancelBtn);
+
+    // 답글 버튼 영역을 화면에 추가된 textarea 뒤쪽에 추가
+    textarea.after(commentBtnArea);
 
 
 
-
-
+}
 
 
 

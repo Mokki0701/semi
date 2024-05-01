@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN " "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.kh.gowith.comment.model.mapper.CommentMapper">
+	
+	
+	<insert id="enrollComment">
+		
+			INSERT INTO "COMMENT"
+			VALUES (SEQ_COMMENT_NO.NEXTVAL,#{commentContent},DEFAULT, DEFAULT,#{boardNo},#{memberNo},
+			
+				<if test="parentCommentNo != 0">
+				#{parentCommentNo}
+				</if>
+				
+				<if test="parentCommentNo == 0">
+				NULL
+				</if>
+				)
+
+	</insert>
+	
+	
+
+</mapper>
