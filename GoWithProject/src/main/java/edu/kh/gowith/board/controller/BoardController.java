@@ -137,8 +137,8 @@ public class BoardController {
 			@PathVariable("boardNo") int boardNo,
 			@PathVariable("topMenuCode") int topMenuCode,
 			@PathVariable("bottomMenuCode") int bottomMenuCode,
-			@RequestParam("limit") int limit,
-			@RequestParam("cp") int cp,
+			@RequestParam(value="limit", required = false, defaultValue="10") int limit,
+			@RequestParam(value="cp", required = false, defaultValue= "1") int cp,
 			
 			@SessionAttribute(value="loginMember", required = false) Member loginMember,
 			// @RequestParam("queryStringDetail") String queryStringDetail,
