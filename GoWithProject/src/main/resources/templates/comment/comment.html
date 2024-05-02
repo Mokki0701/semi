@@ -9,7 +9,7 @@
                 <button id="commentDesc">최신순</button>
           </div>
 
-            <li class="commentFirst" th:each="comment : ${board.commentList}" th:object="${comment}">
+            <li class="commentFirst" th:each="comment : ${board.commentList}" th:object="${comment}" th:classappend="*{parentCommentNo} != 0 ? child-comment">
                 
                 <th:block th:if="*{commentDelFl} == 'Y'">
                     삭제된 댓글 입니다.

@@ -161,12 +161,12 @@ li{
 	padding : 15px 0;
 }
 
-.child-comment:before {
+/* .child-comment:before {
 	content: "\f0a4";
 	font-family: "FontAwesome";
 	position : absolute;
 	left : 0px;
 	top : 35px;
-}
+} */
 
 
