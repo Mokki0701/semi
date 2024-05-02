@@ -4,8 +4,10 @@
         
         <ul id="commentList">
 
-            <button id="commentAsc">댓글 등록순</button>
-            <button id="commentDesc">최신순</button>
+          <div class="commentBtn">
+                <button id="commentAsc">댓글 등록순</button>
+                <button id="commentDesc">최신순</button>
+          </div>
 
             <li class="commentFirst" th:each="comment : ${board.commentList}" th:object="${comment}">
                 

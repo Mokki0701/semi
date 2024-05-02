@@ -71,6 +71,11 @@ public class MainServiceImpl implements MainService {
 		
 		return mapper.listWithThumbnail();
 	}
+	
+	@Override
+	public List<Board> notification() {
+		return mapper.notification();
+	}
 
 	
 

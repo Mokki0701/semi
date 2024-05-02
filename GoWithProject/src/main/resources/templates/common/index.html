@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GOWITH</title>
-  <link rel="stylesheet" href="/css/common/headerFooter.css">
+  <link rel="stylesheet" href="/css/fragments/frag.css">
   <link rel="stylesheet" href="/css/mainDemo.css">
 </head>
 
@@ -33,160 +33,10 @@
   <div class="all">
 
     <!-- 사이드 메뉴 -->
-    <!-- 로그인 전 로그인 입력칸, 로그인후 회원 정보 칸 -->
-    <!-- 로그인 여부는 loginMember session에 기록 -->
-    <div class="side">
 
-      <div>
-        <div class="profileBox">
-          <div>
-
-
-            <!-- 로그인이 되어있지 않은 경우 -->
-            <th:block th:if="${session.loginMember == null}" class="nonLogin">
-
-              <!-- 로그인 박스 -->
-              <form action="/member/login" method="POST" id="loginForm">
-
-                <div class="id-pw-area">
-
-                  <!-- 아이디/비밀번호 입력 -->
-                  <section>
-                    <input type="text" name="memberEmail" placeholder="이메일">
-                    <input type="password" name="memberPw" placeholder="비밀번호">
-                  </section>
-
-                  <!-- 로그인 버튼 -->
-                  <section>
-                    <button id="loginBtn">로그인</button>
-                  </section>
-                </div>
-
-                <label for="saveId" id="rememberId">
-                  <input type="checkbox" name="saveId" id="saveId">이메일 기억하기
-                </label>
-
-                <article class="signup-find-area">
-                  <a href="/member/join">회원가입</a>
-                  <span> / </span>
-                  <a href="#">ID/PW 찾기</a>
-                </article>
-
-              </form>
-
-            </th:block>
-
-
-            <!-- 로그인 되어있는 경우 -->
-            <th:block th:if="${session.loginMember != null}">
-
-              <table class="profileBox">
-
-                <div class="info">
-                  <a href="/myPage/update" class="infoChild"> <!-- 회원 정보 수정으로 -->
-                    <p>정보수정</p>
-                  </a>
-                </div>
-
-                <img th:src="${session.loginMember.profileImg}" id="profileImage" alt="프로필">
-                <tr>
-                  <th>E-mail</th>
-                  <td th:text="${session.loginMember.memberEmail}">현재 로그인한 회원 이메일</td>
-                </tr>
-                <tr>
-                  <th>가입일</th>
-                  <td th:text="${session.loginMember.enrollDate}">가입일</td>
-                </tr>
-                <tr>
-                  <th>Like</th>
-                  <td th:text="${session.loginMember.favorPlace}">선호여행지</td>
-                </tr>
-
-              </table>
-
-              <a class="logoutBtn" href="/member/logout">
-                <th:block>로그아웃 버튼</th:block>
-              </a>
-
-              <div class="loginInfo">
-                <table>
-                  <tr>
-                    <th>회원 등급</th>
-                    <td th:text="${session.loginMember.memberRank}"></td>
-                  </tr>
-                  <tr>
-                    <th>작성한 게시글 수</th>
-                    <td th:text="|${session.postCounter} 개|">000개</td>
-                  </tr>
-                  <tr>
-                    <th>댓글 수</th>
-                    <td th:text="|${session.commentCounter} 개|">000개</td>
-                  </tr>
-                </table>
-              </div>
-
-              <div class="contextHead">나의 관심게시판
-                <!-- <table>
-                  <tr>
-                    <th>게시판 :</th>
-                  </tr>
-                  <tr th:each="menu : ${favorBoard}">
-                    <td th:text="${menu.favorBoard.bottomMenuName}"></td>
-                  </tr>
-                </table> -->
-              </div>
-
-            </th:block>
-
-          </div>
-        </div>
-        <hr>
-
-
-
-
-        <!-- 각 링크 클릭 시 해당 게시판으로 이동하기 -->
-        <div>
-
-          <div class="menuList">
-            <div class="linkList">
-              <div class="contextHead">동행 구해요</div>
-              <a th:href="@{'/board/4/13'}">중국</a>
-              <a th:href="@{'/board/4/14'}">일본</a>
-              <a th:href="@{'/board/4/15'}">동남아</a>
-              <a th:href="@{'/board/4/16'}">유럽</a>
-              <a th:href="@{'/board/4/17'}">그외</a>
-            </div>
-          </div> <br>
-          <hr>
-          <div class="linkList">
-            <div class="contextHead">후기(추천/지역)</div>
-            <a th:href="@{'/board/5/18'}">중국</a>
-            <a th:href="@{'/board/5/19'}">일본</a>
-            <a th:href="@{'/board/5/20'}">동남아</a>
-            <a th:href="@{'/board/5/21'}">유럽</a>
-            <a th:href="@{'/board/5/22'}">그외</a>
-          </div> <br>
-          <hr>
-          <div class="linkList">
-            <div class="contextHead">광고(여행사, 숙박시설, 식당)</div>
-            <a th:href="@{'/board/6/23'}">중국</a>
-            <a th:href="@{'/board/6/24'}">일본</a>
-            <a th:href="@{'/board/6/25'}">동남아</a>
-            <a th:href="@{'/board/6/26'}">유럽</a>
-            <a th:href="@{'/board/6/27'}">그외</a>
-          </div> <br>
-          <hr>
-          <div class="contextHead"><a th:href="@{/board/7}">여행 꿀팁</a></div> <br>
-          <hr>
-          <div class="contextHead">키워드(가장많이쓴태그)</div><br>
-          <hr>
-
-        </div>
-
-      </div>
-
-    </div>
+    <!-- ↓↓ 이 사이에 사이드 메뉴를 넣으면 됩니다. ↓↓ -->
+    <th:block th:replace="~{common/lefter}">사이드메뉴</th:block>
+    <!-- ↑↑ 이 사이에 사이드 메뉴를 넣으면 됩니다. ↑↑ -->
 
     <!-- 홈 메뉴 -->
     <!-- 리스트 자동 생성 (몇개까지 할 것인지?) -->
@@ -198,12 +48,41 @@
         <button class="quickLogin">temp00@naver.com</button>
         <button class="quickLogin">temp01@naver.com</button>
         <button class="quickLogin">temp02@naver.com</button>
+        <button class="quickLogin">level999@naver.com</button>
       </div>
 
       <div class="room" id="room1">
 
+        <!-- 관리자(멤버랭크999(임시)) 만 공지사항 작성할 수 있게 하기 -->
         <div class="smallRoom">
-          <div class="mainTitle">공지사항</div>
+          <div class="mainTitle">공지사항
+          </div>
+
+          <!-- 공지사항 표시란 -->
+          <table class="repeatTable">
+            <thead class="tableTitleArea">
+              <th class="title">제목</th>
+              <th>작성자</th>
+              <th class="writeDate">작성일</th>
+              <th>조회수</th>
+            </thead>
+
+            <tbody th:each="board:${notification}">
+              <td>
+                <a th:href="@{'/board/' + ${board.topMenuCode} + '/' + 
+                ${board.bottomMenuCode} + '/' + ${board.boardNo}}">
+                  <span th:text="${board.boardTitle}"></span></a>
+              </td>
+              <td th:text="${board.memberNickname}"></td>
+              <td th:text="${board.boardWriteDate}"> </td>
+              <td th:text="${board.readCount}"></td>
+            </tbody>
+          </table>
+
+
+
+
+          <!-- 공지사항 끝 -->
         </div>
 
         <div class="smallRoom">
@@ -290,7 +169,8 @@
               <div>
                 <ul id="commentList">
                   <!-- 첫 번째 페이지에 대한 데이터만 표시 -->
-                  <li th:each="comment, iterStat : ${commentList}" th:text="${comment.commentContent}"></li>
+                  <li class="maxTextLength8" th:each="comment, iterStat : ${commentList}"
+                    th:text="${comment.commentContent}"></li>
                 </ul>
                 <button id="pirate">다음</button>
               </div>
@@ -325,6 +205,7 @@
 
             <!-- 태그 -->
             <div class="tinyRoom">
+              <th:block th:replace="~{/tagtest/tagtest}">헤더</th:block>
 
             </div>
 
@@ -339,8 +220,9 @@
 
 
   </div>
-
+  <!-- 이 사이에 푸터 추가 -->
   <th:block th:replace="~{/common/footer}" class="footer">푸터</th:block>
+  <!-- 이 사이에 푸터 추가 -->
 </body>
 
 

@@ -33,6 +33,9 @@ public interface MainService {
 	// 썸네일 리스트 6개 조회
 	List<Board> listWithThumbnail();
 
+	// 
+	List<Board> notification();
+
 
 	
 
