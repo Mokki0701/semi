@@ -53,7 +53,6 @@
 
       <div class="room" id="room1">
 
-        <!-- 관리자(멤버랭크999(임시)) 만 공지사항 작성할 수 있게 하기 -->
         <div class="smallRoom">
           <div class="mainTitle">공지사항
           </div>
@@ -100,7 +99,7 @@
                 <td>제목</td>
                 <td><a th:href="@{'/board/' + ${board.topMenuCode} + '/' + 
                   ${board.bottomMenuCode} + '/' + ${board.boardNo}}">
-                    <span class="tpTitle" th:text="${board.boardTitle}">최대8글자</span>
+                    <span class="tpTitle maxTextLength8" th:text="${board.boardTitle}">최대8글자</span>
                   </a></td>
               </tr>
               <tr>
