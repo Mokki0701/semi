@@ -32,7 +32,7 @@ public class MainController {
 		
 		// 최신글 조회
 		List<Board> listWithThumbnail = service.listWithThumbnail();
-		model.addAttribute("listWithThunbnail", listWithThumbnail);
+		model.addAttribute("listWithThumbnail", listWithThumbnail);
 		System.out.println("썸넬리스트 :" + listWithThumbnail);
 
 		// 인기글 조회

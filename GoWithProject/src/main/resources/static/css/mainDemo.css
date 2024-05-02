@@ -280,8 +280,7 @@ body {
 
 }
 /* 한 층에 방 3개 */
-.roomMetallicA {
-}
+
 
 .rooMetallicA div{
   width: 32.5%;
@@ -446,6 +445,8 @@ body {
   direction: row;
 }
 
+
+
 /* 내부 요소에 관계 없이 크기 고정 */
 .width20 {
   width: 25%;
@@ -472,24 +473,30 @@ input[type="radio"][name="rank"] {
 .thumbNailPost {
   width: 32.5%;
   height: 45%;
-
   min-width: 150px;
-
   border: 1px solid black;
-
   text-align: center;
   float: left;
   padding: 10px;
   box-sizing: border-box;
+  display: flex; /* 자식 요소를 가로로 정렬하기 위해 flex 사용 */
+  flex-direction: column; /* 세로로 정렬하기 위해 column 지정 */
+  justify-content: center; /* 수직 가운데 정렬 */
 }
 
-.thumbNail {
-  height: 63%;
+.thumbNailContainer{
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  justify-content: center;
 }
+.thumbNail {
+  margin-bottom: 20px;
+
+  width: 200px;
+  height: 175px;
+  align-self: center; /* 자식 요소를 가운데 정렬하기 위해 align-self 사용 */
+}
+
 
 /* *********** 메인페이지 최신글 조회 *********** */
 

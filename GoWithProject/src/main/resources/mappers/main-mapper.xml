@@ -1,145 +1,148 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN " "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="edu.kh.gowith.main.model.mapper.MainMapper">
-	
+
 	<select id="popLike" resultType="Board">
-	
-		SELECT BOARD_TITLE, MEMBER_NICKNAME, BOARD_WRITE_DATE, BOARD_LIKE_COUNT, BOTTOM_MENU_CODE,
-        TOP_MENU_CODE,
-        BOARD_NO
-			FROM (
-			    SELECT BOARD_TITLE, MEMBER_NICKNAME, BOARD_WRITE_DATE, BOARD_LIKE_COUNT, b.BOTTOM_MENU_CODE,
-			           b.TOP_MENU_CODE,
-			           b.BOARD_NO
-			    FROM "BOARD" b
-			    JOIN "MEMBER" m ON b.MEMBER_NO = m.MEMBER_NO
-			    ORDER BY BOARD_LIKE_COUNT DESC
-			)
-			WHERE ROWNUM BETWEEN 1 AND 15
 
-
-
-		
-	</select>
-	
-	<select id="popComment" resultType = "Board">
-		
-		SELECT * FROM (
-		    SELECT 
-		        BOARD_TITLE, 
-		        MEMBER_NICKNAME, 
-		        BOARD_WRITE_DATE, 
-		        COMMENT_COUNT, 
-		        BOTTOM_MENU_CODE,
-		        TOP_MENU_CODE,
-		        BOARD_NO
-		    FROM (
-		        SELECT 
-		            b.BOARD_TITLE, 
-		            m.MEMBER_NICKNAME, 
-		            b.BOARD_WRITE_DATE, 
-		            b.BOTTOM_MENU_CODE,
-		            b.TOP_MENU_CODE,
-		            b.BOARD_NO,
-		            COUNT(*) AS COMMENT_COUNT
-		        FROM "COMMENT" c 
-		        JOIN "BOARD" b ON b.BOARD_NO = c.BOARD_NO 
-		        JOIN "MEMBER" m ON m.MEMBER_NO = c.MEMBER_NO
-		        GROUP BY 
-		            b.BOARD_TITLE, 
-		            m.MEMBER_NICKNAME, 
-		            b.BOARD_WRITE_DATE,
-		            b.BOTTOM_MENU_CODE,
-		            b.TOP_MENU_CODE,
-		            b.BOARD_NO
-		    )
-		    ORDER BY COMMENT_COUNT DESC -- GROUP BY 후 정렬
+		SELECT BOARD_TITLE, MEMBER_NICKNAME, BOARD_WRITE_DATE, BOARD_LIKE_COUNT,
+		BOTTOM_MENU_CODE,
+		TOP_MENU_CODE,
+		BOARD_NO
+		FROM (
+		SELECT BOARD_TITLE, MEMBER_NICKNAME, BOARD_WRITE_DATE, BOARD_LIKE_COUNT,
+		b.BOTTOM_MENU_CODE,
+		b.TOP_MENU_CODE,
+		b.BOARD_NO
+		FROM "BOARD" b
+		JOIN "MEMBER" m ON b.MEMBER_NO = m.MEMBER_NO
+		ORDER BY BOARD_LIKE_COUNT DESC
 		)
 		WHERE ROWNUM BETWEEN 1 AND 15
 
 
 
-				
-	
-	</select>
-	
-	<select id="popDefault" resultType = "Board">
-	
-		SELECT * FROM (
-	    SELECT 
-	        BOARD_TITLE, 
-	        MEMBER_NICKNAME, 
-	        BOARD_WRITE_DATE,
-	        COMMENT_COUNT + BOARD_LIKE_COUNT AS TOTAL_COUNT, 
-	        TOP_MENU_CODE, 
-	        BOTTOM_MENU_CODE, 
-	        BOARD_NO,
-	        BOARD_LIKE_COUNT
-	    FROM (
-	        SELECT 
-	            b.BOARD_TITLE, 
-	            m.MEMBER_NICKNAME, 
-	            b.BOARD_WRITE_DATE,
-	            COUNT(*) AS COMMENT_COUNT, 
-	            b.BOARD_LIKE_COUNT, 
-	            b.TOP_MENU_CODE, 
-	            b.BOTTOM_MENU_CODE, 
-	            b.BOARD_NO
-	        FROM "COMMENT" c 
-	        JOIN "BOARD" b ON b.BOARD_NO = c.BOARD_NO 
-	        JOIN "MEMBER" m ON m.MEMBER_NO = c.MEMBER_NO
-	        GROUP BY 
-	            b.BOARD_TITLE, 
-	            m.MEMBER_NICKNAME, 
-	            b.BOARD_WRITE_DATE, 
-	            b.BOARD_LIKE_COUNT,
-	            b.TOP_MENU_CODE, 
-	            b.BOTTOM_MENU_CODE, 
-	            b.BOARD_NO
-	    )
-	    ORDER BY TOTAL_COUNT DESC 
-	)
-	WHERE ROWNUM BETWEEN 1 AND 10
 
 	</select>
-	
-	<select id="commentList" resultType='Comment'>
-			
-	    SELECT COMMENT_CONTENT
-	    FROM "COMMENT" c
-	    ORDER BY COMMENT_WRITE_DATE DESC
-	    FETCH FIRST 10 ROWS ONLY
-	
+
+	<select id="popComment" resultType="Board">
+
+		SELECT * FROM (
+		SELECT
+		BOARD_TITLE,
+		MEMBER_NICKNAME,
+		BOARD_WRITE_DATE,
+		COMMENT_COUNT,
+		BOTTOM_MENU_CODE,
+		TOP_MENU_CODE,
+		BOARD_NO
+		FROM (
+		SELECT
+		b.BOARD_TITLE,
+		m.MEMBER_NICKNAME,
+		b.BOARD_WRITE_DATE,
+		b.BOTTOM_MENU_CODE,
+		b.TOP_MENU_CODE,
+		b.BOARD_NO,
+		COUNT(*) AS COMMENT_COUNT
+		FROM "COMMENT" c
+		JOIN "BOARD" b ON b.BOARD_NO = c.BOARD_NO
+		JOIN "MEMBER" m ON m.MEMBER_NO = c.MEMBER_NO
+		GROUP BY
+		b.BOARD_TITLE,
+		m.MEMBER_NICKNAME,
+		b.BOARD_WRITE_DATE,
+		b.BOTTOM_MENU_CODE,
+		b.TOP_MENU_CODE,
+		b.BOARD_NO
+		)
+		ORDER BY COMMENT_COUNT DESC -- GROUP BY 후 정렬
+		)
+		WHERE ROWNUM BETWEEN 1 AND 15
+
+
+
+
+
 	</select>
-	
+
+	<select id="popDefault" resultType="Board">
+
+		SELECT * FROM (
+		SELECT
+		BOARD_TITLE,
+		MEMBER_NICKNAME,
+		BOARD_WRITE_DATE,
+		COMMENT_COUNT + BOARD_LIKE_COUNT AS TOTAL_COUNT,
+		TOP_MENU_CODE,
+		BOTTOM_MENU_CODE,
+		BOARD_NO,
+		BOARD_LIKE_COUNT
+		FROM (
+		SELECT
+		b.BOARD_TITLE,
+		m.MEMBER_NICKNAME,
+		b.BOARD_WRITE_DATE,
+		COUNT(*) AS COMMENT_COUNT,
+		b.BOARD_LIKE_COUNT,
+		b.TOP_MENU_CODE,
+		b.BOTTOM_MENU_CODE,
+		b.BOARD_NO
+		FROM "COMMENT" c
+		JOIN "BOARD" b ON b.BOARD_NO = c.BOARD_NO
+		JOIN "MEMBER" m ON m.MEMBER_NO = c.MEMBER_NO
+		GROUP BY
+		b.BOARD_TITLE,
+		m.MEMBER_NICKNAME,
+		b.BOARD_WRITE_DATE,
+		b.BOARD_LIKE_COUNT,
+		b.TOP_MENU_CODE,
+		b.BOTTOM_MENU_CODE,
+		b.BOARD_NO
+		)
+		ORDER BY TOTAL_COUNT DESC
+		)
+		WHERE ROWNUM BETWEEN 1 AND 10
+
+	</select>
+
+	<select id="commentList" resultType='Comment'>
+
+		SELECT COMMENT_CONTENT
+		FROM "COMMENT" c
+		ORDER BY COMMENT_WRITE_DATE DESC
+		FETCH FIRST 10 ROWS ONLY
+
+	</select>
+
 	<!-- 멤버랭킹 댓글 (기본) -->
 	<select id="memDefault">
 		SELECT M.MEMBER_NICKNAME
-        FROM "MEMBER" M
-        JOIN (
-            SELECT MEMBER_NO, COUNT(*) AS COMMENT_COUNT
-            FROM "COMMENT"
-            GROUP BY MEMBER_NO
-        ) C ON M.MEMBER_NO = C.MEMBER_NO
-        ORDER BY C.COMMENT_COUNT DESC
-        FETCH FIRST 10 ROWS ONLY
+		FROM "MEMBER" M
+		JOIN (
+		SELECT MEMBER_NO, COUNT(*) AS COMMENT_COUNT
+		FROM "COMMENT"
+		GROUP BY MEMBER_NO
+		) C ON M.MEMBER_NO = C.MEMBER_NO
+		ORDER BY C.COMMENT_COUNT DESC
+		FETCH FIRST 10 ROWS ONLY
 	</select>
-	
+
 	<!-- 멤버랭킹 게시글 -->
 	<select id="memBoard">
-	
+
 		SELECT M.MEMBER_NICKNAME
 		FROM "MEMBER" M
 		JOIN (
-		    SELECT MEMBER_NO, COUNT(*) AS BOARD_COUNT
-		    FROM "BOARD" B
-		    GROUP BY MEMBER_NO
+		SELECT MEMBER_NO, COUNT(*) AS BOARD_COUNT
+		FROM "BOARD" B
+		GROUP BY MEMBER_NO
 		) B ON M.MEMBER_NO = B.MEMBER_NO
-		ORDER BY B.BOARD_COUNT DESC
+		ORDER BY B.BOARD_COUNT
+		DESC
 		FETCH FIRST 10 ROWS ONLY
-	
+
 	</select>
-	
+
 	<!-- 멤버랭킹 방문 -->
 	<select id="memVisit">
 		SELECT MEMBER_NICKNAME
@@ -148,16 +151,26 @@
 		FETCH FIRST 5 ROWS ONLY
 	</select>
 
-	<!-- 썸네일 리스트 6개 조회 --> 
+	<!-- 썸네일 리스트 6개 조회 -->
 	<select id="listWithThumbnail">
-		SELECT bi.IMG_RENAME, b.BOARD_TITLE, b.BOARD_WRITE_DATE, m.MEMBER_NICKNAME
+		SELECT bi.IMG_PATH || '/' || bi.IMG_RENAME AS
+		IMG_RENAME,
+		b.BOARD_TITLE,
+		b.BOARD_WRITE_DATE,
+		m.MEMBER_NICKNAME,
+		b.TOP_MENU_CODE,
+		b.BOTTOM_MENU_CODE,
+		b.BOARD_NO
 		FROM BOARD b
 		JOIN BOARD_IMG bi ON b.BOARD_NO = bi.BOARD_NO
-		JOIN MEMBER m ON b.MEMBER_NO = m.MEMBER_NO
-		ORDER BY b.BOARD_WRITE_DATE DESC
+		JOIN MEMBER m ON
+		b.MEMBER_NO = m.MEMBER_NO
+		WHERE bi.IMG_ORDER = 0
+		ORDER BY
+		b.BOARD_WRITE_DATE DESC
 		FETCH FIRST 6 ROWS ONLY
 	</select>
-	
-	
-	
+
+
+
 </mapper>
