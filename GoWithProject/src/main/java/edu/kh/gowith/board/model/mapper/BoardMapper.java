@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
 import edu.kh.gowith.board.model.dto.Board;
+import edu.kh.gowith.board.model.dto.BoardImg;
 import edu.kh.gowith.board.model.dto.BottomMenu;
 import edu.kh.gowith.board.model.dto.Comment;
 import edu.kh.gowith.board.model.dto.TopMenu;
@@ -48,5 +49,7 @@ public interface BoardMapper {
 	String bottomMenuName(int bottomMenuCode);
 	
 	List<Comment> commentList(Map<String, Object> paramMap);
+
+
 
 }

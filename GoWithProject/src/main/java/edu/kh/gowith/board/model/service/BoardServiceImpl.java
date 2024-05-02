@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.kh.gowith.board.model.dto.Board;
+import edu.kh.gowith.board.model.dto.BoardImg;
 import edu.kh.gowith.board.model.dto.BottomMenu;
 import edu.kh.gowith.board.model.dto.Comment;
 import edu.kh.gowith.board.model.dto.Pagination;
@@ -188,8 +189,7 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.bottomMenuName(bottomMenuCode);
 	}
 	
-	
-	
+
 	
 	
 	
