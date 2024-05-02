@@ -78,5 +78,52 @@
 	</select>
 	
 
+	<!-- 수정 페이지에 표시될 미리보기 이미지 -->
+	<select id="imgList">
+		SELECT * FROM BOARD_IMG 
+		WHERE BOARD_NO = #{boardNo}
+	</select>
+	
+	<update id="notiUpdate">
+	
+	UPDATE "BOARD" SET 
+  	BOARD_TITLE = #{boardTitle},
+  	BOARD_CONTENT = #{boardContent}
+	WHERE TOP_MENU_CODE = #{topMenuCode}
+	AND BOARD_NO = #{boardNo}
+	AND MEMBER_NO = #{memberNo}
+	AND BOTTOM_MENU_CODE = #{bottomBoardCode}
+	
+	</update>
+	
+	<!-- 이미지 삭제 -->
+	<delete id="deleteImg">
+	
+		DELETE FROM "BOARD_IMG"
+		WHERE IMG_ORDER IN (${deleteOrder})
+		AND BOARD_NO = #{boardNo}
+	
+	</delete>
+	
+	<!-- 게시글 이미지 수정 -->
+	<update id="updateImg">
+	
+		UPDATE "BOARD_IMG" SET
+		IMG_ORIGINAL_NAME = #{imgOriginalName},
+		IMG_RENAME = #{imgRename}
+		WHERE BOARD_NO = #{boardNo}
+		AND IMG_ORDER = #{imgOrder}
+	
+	</update>
+	
+	<!-- 게시글 이미지 1행 삽입 -->
+	<insert id="insertimage">
+		INSERT INTO "BOARD_IMG"
+		VALUES(
+		NEXT_IMG_NO(),#{imgPath},#{imgOriginalName},
+		#{imgRename},#{imgOrder},#{boardNo})
+	
+	</insert>
+
 
 </mapper>
