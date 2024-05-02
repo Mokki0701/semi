@@ -3,14 +3,14 @@ li{
 }
 
 
-.comment-list-area{
+/* .comment-list-area{
   border: 1px solid #000;
 }
 
 #commentList{
   display: flex;
   flex-direction: column;
-}
+}*/
 
 .commentBtn{
   display: flex;
@@ -19,5 +19,154 @@ li{
 
 .commentBtn button{
   margin: 0 10px;
+} 
+
+.userInfo span{
+  font-weight: bold;
+  font-size: 17px;
 }
+
+.commentFirst{
+  border-top: 1px solid #9b33a8;
+  border-bottom: 1px solid #9b33a8;
+  margin: 10px;
+  padding: 5px;
+}
+
+#commentLast li{
+  border-top: 1px solid #9b33a8;
+  border-bottom: 1px solid #9b33a8;
+  margin: 10px;
+  padding: 5px;
+}
+
+#commentLast li p span{
+  font-weight: bold;
+  font-size: 17px;
+}
+
+/* 답글 수정 삭제 버튼 */
+#commentLast li div{
+  display: flex;
+  justify-content: flex-end;
+}
+
+#commentLast li div button{
+  margin: 0 10px;
+  width: 50px;
+  height: 30px;
+  margin-left: 10px;
+  font-weight: bold;
+  border: 0;
+  background-color: #9b33a8;
+  color: white;
+  cursor: pointer;
+}
+
+#commentLast li div button:hover{
+  background-color: #455ba8;
+  color : whitesmoke;
+  border: 2px solid #455ba8;
+}
+
+#commentLast h1{
+  font-weight: normal;
+  font-size: 16px;
+}
+
+#commentLast>li>p>span:nth-of-type(1){
+  margin-right: 10px;
+}
+
+/*댓글*/
+.comment-write-area {
+	display: flex;
+	min-height: 85px;
+	justify-content: center;
+	
+	margin: 30px 0;
+}
+
+.comment-write-area > textarea{
+	flex-basis: 75%;
+  margin-right: 10px;
+	resize: none;
+}
+
+.comment-write-area > button{
+	flex-basis: 7%;
+  height: 85px;
+	font-weight: bold;
+    border: 0;
+    background-color: #9b33a8;
+    color: white;
+    cursor: pointer;
+}
+
+
+.comment-btn-area { 
+	display: flex;
+	justify-content: flex-end;
+}
+
+/* 버튼 */
+.comment-btn-area button{
+    width: 50px;
+    height: 30px;
+	margin-left: 10px;
+
+    font-weight: bold;
+    border: 0;
+    background-color: #9b33a8;
+    color : white;
+
+    cursor: pointer;
+}
+
+.comment-btn-area button:hover{
+    background-color: #455ba8;
+    color : whitesmoke;
+    border: 2px solid #455ba8;
+}
+
+.child-comment{
+	padding-left : 50px;
+	position: relative;
+}
+
+/* 답글 */
+.commentInsertContent{
+	  width: 100%;
+    height: 90px;
+    resize: none;
+    margin-top : 20px;
+}
+
+
+
+/* 댓글 내용 */
+.comment-content{
+	white-space: pre-wrap; /* 작성된 문자열 모양 그대로(공백 유지) */
+}
+
+
+.update-textarea{
+	width: 100%;
+    height: 90px;
+    resize: none;
+}
+
+.comment-row{
+	border-top : 1px solid #ccc;
+	padding : 15px 0;
+}
+
+.child-comment:before {
+	content: "\f0a4";
+	font-family: "FontAwesome";
+	position : absolute;
+	left : 0px;
+	top : 35px;
+}
+
 
