@@ -296,8 +296,16 @@ memLabels.forEach(label => {
   });
 });
 
+// 최대 글자 수 8자로 제한
+const maxTextLength8Elements = document.querySelectorAll(".maxTextLength8");
 
-
+maxTextLength8Elements.forEach(element => {
+    const text = element.innerText.trim(); // 텍스트 가져오기
+    if (text.length > 8) {
+        const truncatedText = text.substring(0, 8) + "..."; // 글자 수 제한
+        element.innerText = truncatedText; // 제한된 텍스트로 설정
+    }
+});
 
 
 

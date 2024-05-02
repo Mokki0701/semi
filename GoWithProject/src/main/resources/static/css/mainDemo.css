@@ -492,8 +492,8 @@ input[type="radio"][name="rank"] {
 .thumbNail {
   margin-bottom: 20px;
 
-  width: 200px;
-  height: 175px;
+  width: 170px;
+  height: 147px;
   align-self: center; /* 자식 요소를 가운데 정렬하기 위해 align-self 사용 */
 }
 

@@ -13,7 +13,8 @@
   <th:block th:replace="~{/common/header}">헤더</th:block>
 
   <!-- 임시 네비게이터 시작 -->
-  <nav>
+  <!-- 왜 만들어 놓은거지? -->
+  <!-- <nav>
     <ul>
 
       <th:block th:each="boardType : ${application.boardTypeList}">
@@ -24,7 +25,7 @@
       </th:block>
 
     </ul>
-  </nav>
+  </nav> -->
 
   <!-- 임시 네비게이터 끝 -->
 
@@ -221,7 +222,7 @@
                 <td>제목</td>
                 <td><a th:href="@{'/board/' + ${board.topMenuCode} + '/' + 
                   ${board.bottomMenuCode} + '/' + ${board.boardNo}}">
-                    <span class="tpTitle" th:text="${board.boardTitle}">최대8글자</span>
+                    <span class="tpTitle maxTextLength8" th:text="${board.boardTitle}">최대8글자</span>
                   </a></td>
               </tr>
               <tr>
@@ -290,7 +291,7 @@
               <div>
                 <ul id="commentList">
                   <!-- 첫 번째 페이지에 대한 데이터만 표시 -->
-                  <li th:each="comment, iterStat : ${commentList}" th:text="${comment.commentContent}"></li>
+                  <li class="maxTextLength8" th:each="comment, iterStat : ${commentList}" th:text="${comment.commentContent}"></li>
                 </ul>
                 <button id="pirate">다음</button>
               </div>
