@@ -47,6 +47,27 @@
   width: 97.3vw;
 }
 
+/* 기본 스타일 설정 */
+.header-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-top: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  transform: translateX(100%);
+}
+
+/* 체크박스가 체크되었을 때, 헤더 메뉴를 화면으로 이동 */
+#headerMenuToggle:checked + .header-menu {
+  transform: translateX(0);
+}
+
+
+
 /* HHHHHHHHHHHHHHHHHHHHHHHH 헤더 끝 HHHHHHHHHHHHHHHHHHHHHHHH */
 
 
