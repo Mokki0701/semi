@@ -68,6 +68,7 @@ public class MemberController {
 
 			// 콘솔로 확인
 			System.out.println("favorBoard: " + favorBoardAsString);
+			System.out.println("memberRank : " + loginMember.getMemberRank());
 
 			model.addAttribute("loginMember", loginMember);
 			model.addAttribute("postCounter", postCounter);

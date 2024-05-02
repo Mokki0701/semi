@@ -35,6 +35,9 @@ public interface MainMapper {
 
 	// 썸네일 리스트 6개 조회
 	List<Board> listWithThumbnail();
+
+	// 공지 조회
+	List<Board> notification();
 	
 	
 	

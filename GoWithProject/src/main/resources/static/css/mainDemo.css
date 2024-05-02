@@ -20,52 +20,7 @@ body {
 
 
 /* 헤더 시작 */
-/* 메인페이지, 로그인 버튼 */
-.highest {
-  width: 97.3vw;
-  height: 25px;
-  background-color: gray;
-  display: flex;
-  flex-direction: row-reverse;
-
-  /* 포지션 최상단에 고정 */
-  position: fixed;
-  top: 0;
-  left: 0.3vw;
-  right: 0;
-  padding: 5px;
-  z-index: 1000;
-}
-
-.highest div {
-  display: flex;
-  align-items: center;
-}
-
-.highest div a {
-  text-decoration: none;
-  color: rgb(61, 60, 60);
-  margin: 0 10px 0 10px;
-  transition: color 0.4s;
-}
-
-.highest div a:hover {
-  color: orange;
-}
-
-/* 임시 로고 */
-.header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#mainLogo {
-  background-color: black;
-  height: 200px;
-  width: 97.3vw;
-}
-
+/* 헤더가 있던 자리.. */
 /* 헤더 끝 */
 
 .side {
