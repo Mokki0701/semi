@@ -94,9 +94,9 @@ if (loginBtn != null) {
 }
 
 
-// 테스트용
 
-/* ++ 메뉴 체크박스 테스트중.. */
+
+/* ++ 메뉴 체크박스 */
 
 const likeBtn = document.getElementById('likeBtn');
 const commentBtn = document.getElementById('commentBtn');
@@ -306,6 +306,11 @@ maxTextLength8Elements.forEach(element => {
         element.innerText = truncatedText; // 제한된 텍스트로 설정
     }
 });
+
+
+
+
+
 
 
 

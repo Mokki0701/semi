@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.gowith.board.model.dto.Board;
 import edu.kh.gowith.board.model.dto.Comment;
@@ -30,6 +31,10 @@ public class MainController {
 	@RequestMapping("") // "/" 요청 매핑, 모든 메서드 요청 받아내기(get post 구분 x)
 	public String mainPage(Model model) {
 		
+		// 공지사항 조회
+		List<Board> notification = service.notification();
+		model.addAttribute("notification", notification);
+		
 		// 최신글 조회
 		List<Board> listWithThumbnail = service.listWithThumbnail();
 		model.addAttribute("listWithThumbnail", listWithThumbnail);
@@ -49,6 +54,8 @@ public class MainController {
 		String memberRankValue ="memDefault";
 		List<Member> memRank = service.memDefault(value);
 		model.addAttribute("value", value);
+		
+		
 		
 		
 		
@@ -110,6 +117,12 @@ public class MainController {
 		
 		return memRank;
 		
+	}
+	
+	@GetMapping("loginError")
+	public String loginError(RedirectAttributes ra) {
+		ra.addFlashAttribute("message", "로그인 후 이용해 주세요");
+		return "redirect:/";
 	}
 	
 	
