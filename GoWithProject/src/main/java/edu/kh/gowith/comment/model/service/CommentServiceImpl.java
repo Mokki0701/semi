@@ -34,7 +34,7 @@ public class CommentServiceImpl implements CommentService {
 		
 		// 태그 등록 기능
 		String commentContent = comment.getCommentContent();
-		Pattern pattern = Pattern.compile("#\\w+");
+		Pattern pattern = Pattern.compile("#[\\w\\dㄱ-힣]+");
 		Matcher matcher = pattern.matcher(commentContent);
 
 		List<String> tagWords = new ArrayList<>();

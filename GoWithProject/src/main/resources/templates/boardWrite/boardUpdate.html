@@ -12,6 +12,8 @@
 
     <form th:action="@{update}" method="POST" class="boardWrite" enctype="multipart/form-data" id="boardFrm">
 
+      <input type="hidden" name="boardNo" th:value="${updateBoard.boardNo}">
+
       <h1 th:text="${boardTitle}">게시판 이름</h1>
 
       <!-- 게시판 제목-->
@@ -95,6 +97,7 @@
       <input type="hidden" name="deleteOrder" value="">
       <input type="hidden" name="querystring" value="">
       
+
       
     </form>
   </section>

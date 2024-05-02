@@ -52,8 +52,15 @@
 		WHERE COMMENT_NO = #{commentNo}
 	</update>
 	
+	<insert id="insertBoardTag">
+		INSERT INTO "BOARD_TAG"
+		VALUES(#{tagNo}, SEQ_BOARD_NO.CURRVAL)
+	</insert>
 	
-	
+	<insert id="insertBoardTaggg">
+		INSERT INTO "BOARD_TAG"
+		VALUES(#{tagNo}, #{boardNo})
+	</insert>
 	
 	
 	
