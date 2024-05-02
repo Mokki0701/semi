@@ -16,12 +16,16 @@ function selectComment(value){
     .then(res => res.json())
     .then(commentList => {
 
+        
         const arr = ['commentNo', 'commentContent', 'commentWriteDate', 'commentDelFl', 'memberNickname'];
-
-
         for(let comment of commentList){
-
             const li = document.createElement("li");
+            li.classList.add("comment-row");
+            
+            // 대댓글(자식댓글)인 경우
+            if(comment['parentCommentNo'] != 0){
+                li.classList.add("child-comment");
+            }
 
  
             

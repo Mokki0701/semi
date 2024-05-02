@@ -16,13 +16,13 @@
                 </th:block>
                 
                 <th:block th:if="*{commentDelFl} == 'N'">
-                    <p>
-                        <!-- 프로필 이미지 없을 경우
-                        <img th:unless="*{profileImg}" th:src="#{user.default.image}">
-                         프로필 이미지 있을 경우
-                        <img th:if="*{profileImg}" th:src="*{profileImg}"> 
-                        현재 회원의 프로필 이미지가 형성되어있지 않다.
-                        -->
+                    <p class="userInfo">
+                        <!-- 프로필 이미지 없을 경우 -->
+                        <!-- <img th:unless="*{profileImg}" th:src="#{user.default.image}"> -->
+                         <!-- 프로필 이미지 있을 경우 -->
+                        <!-- <img th:if="*{profileImg}" th:src="*{profileImg}"> 
+                        현재 회원의 프로필 이미지가 형성되어있지 않다. -->
+                       
     
                         <span th:text="*{memberNickname}">닉네임</span>
                         <span th:text="*{memberRank}">등급</span>
