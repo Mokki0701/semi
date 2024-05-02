@@ -319,6 +319,13 @@ footer span {
   flex-direction: column;
 }
 
+
+
+
+.linkList :first-child div{
+  background-color: rgba(216, 153, 97, 0.3);;
+}
+
 .linkList a {
   font-size: 20px;
   margin: 7px 0px;
@@ -354,23 +361,23 @@ footer span {
 }
 
 .linkList .esa:hover{
-  border-right: 50px solid red;
-  color: orange;
-  background-color: red;
+  border-right: 50px solid rgb(60, 60, 238);
+  color: rgb(235, 191, 110);
+  background-color: rgb(146, 1, 1);
   transition: all 0.4s;
 }
 
 .linkList .eu:hover{
-  border-right: 50px solid red;
-  color: orange;
-  background-color: red;
+  border-right: 50px solid #03318C;
+  color: #F2CB05;
+  background-color: #0A7ABF;
   transition: all 0.4s;
 }
 
 .linkList .etc:hover{
-  border-right: 50px solid red;
-  color: orange;
-  background-color: red;
+  border-right: 50px solid #0528F2;
+  color: #6E65A6;
+  background-color: #D98FB1;
   transition: all 0.4s;
 }
 
