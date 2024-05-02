@@ -45,6 +45,11 @@
 		VALUES(#{tagNo}, SEQ_COMMENT_NO.CURRVAL)
 	</insert>
 	
+	<insert id="insertCommentTaggg">
+		INSERT INTO "COMMENT_TAG"
+		VALUES(#{tagNo}, #{commentNo})
+	</insert>
+	
 	
 	<update id="updateComment">
 		UPDATE "COMMENT" SET
@@ -62,7 +67,9 @@
 		VALUES(#{tagNo}, #{boardNo})
 	</insert>
 	
-	
+	<delete id="deleteCommentTag">
+		DELETE FROM COMMENT_TAG WHERE COMMENT_NO = #{commentNo}
+	</delete>
 	
 	
 

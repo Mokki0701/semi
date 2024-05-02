@@ -77,6 +77,36 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public int updateComment(Comment comment) {
 		
+		// 태그 수정 기능
+		mapper.deleteCommentTag(comment.getCommentNo());
+		
+		String commentContent = comment.getCommentContent();
+		Pattern pattern = Pattern.compile("#[\\w\\dㄱ-힣]+");
+		Matcher matcher = pattern.matcher(commentContent);
+
+		List<String> tagWords = new ArrayList<>();
+		while (matcher.find()) {
+		    tagWords.add(matcher.group());
+		}
+		
+		// 태그가 있는지 조회
+		for(String tagWord : tagWords) {
+					
+			int result2 = mapper.checkTag(tagWord);
+			
+			if(result2 == 0) mapper.insertTag(tagWord);
+			
+			int tagNo = mapper.selectTagNo(tagWord);
+			
+			Map<String, Object> paramMap = new HashMap<>();
+			
+			paramMap.put("commentNo", comment.getCommentNo());
+			paramMap.put("tagNo", tagNo);
+			
+			mapper.insertCommentTaggg(paramMap);
+			}
+		
+		
 		return mapper.updateComment(comment);
 	}
 	
