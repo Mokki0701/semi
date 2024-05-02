@@ -30,5 +30,9 @@ public interface CommentMapper {
 
 	void insertBoardTaggg(Map<String, Object> paramMap);
 
+	void deleteCommentTag(int commentNo);
+
+	void insertCommentTaggg(Map<String, Object> paramMap);
+
 
 }

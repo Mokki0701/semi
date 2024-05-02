@@ -12,7 +12,7 @@ function selectComment(value){
 
     commentLi.innerText="";
 
-    fetch("/comment/selectComment?boardNo=" + boardNo + "&checkComment=" + value)
+    fetch("/comment/selectComment?boardNo=" + boardNo + "&checkComment=" + value + "&commentNo")
     .then(res => res.json())
     .then(commentList => {
 
@@ -293,6 +293,8 @@ const showUpdateComment = (commentNo, btn) =>{
 
     updateBtn.innerText="수정";
     cancelBtn.innerText="취소";
+
+    console.log(commentNo);
 
     updateBtn.setAttribute("onclick", `updateComment(${commentNo}, this)`);
     cancelBtn.setAttribute("onclick", "updateCancel(this)");

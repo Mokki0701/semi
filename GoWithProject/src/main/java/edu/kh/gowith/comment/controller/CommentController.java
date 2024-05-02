@@ -31,7 +31,6 @@ public class CommentController {
 	
 	@GetMapping("selectComment")
 	@ResponseBody
-	
 	private List<Comment> selectComment(
 			@RequestParam("boardNo") int boardNo,
 			@RequestParam("checkComment") int checkComment
