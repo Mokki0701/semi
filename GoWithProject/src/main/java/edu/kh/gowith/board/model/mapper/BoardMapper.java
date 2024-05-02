@@ -50,6 +50,12 @@ public interface BoardMapper {
 	
 	List<Comment> commentList(Map<String, Object> paramMap);
 
+	int deleteBoardLike(Map<String, Integer> paramMap);
+
+	int insertBoardLike(Map<String, Integer> paramMap);
+
+	int selectLikeCount(Map<String, Integer> paramMap);
+
 
 
 }

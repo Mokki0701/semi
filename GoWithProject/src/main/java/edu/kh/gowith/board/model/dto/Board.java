@@ -33,7 +33,7 @@ public class Board {
 	
 	private String bottomMenuName;
 	private int commentCount;
-		
+		 
 	private List<BoardImg> imgList;
 	private List<Comment> commentList;
 	
@@ -45,6 +45,8 @@ public class Board {
 	private int preBoardNo;
 	
 	private int checkCommentDate;
+	
+	private int likeCheck;
 	
 	// 메인페이지 인기 게시글 상세 조회용
 	private int bottomMenuCode;

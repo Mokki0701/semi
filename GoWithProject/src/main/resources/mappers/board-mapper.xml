@@ -268,7 +268,13 @@
 			(SELECT COUNT(*)
 			FROM "COMMENT"
 			WHERE BOARD_NO = #{boardNo}
+			AND COMMENT_DEL_FL = 'N'
 			) COMMENT_COUNT,
+			
+			(SELECT COUNT(*) 
+			  FROM "BOARD_LIKE"
+			  WHERE MEMBER_NO = #{memberNo}
+			  AND BOARD_NO = #{boardNo}) LIKE_CHECK,
 			
 			<![CDATA[  
 			(SELECT COUNT(*) FROM "COMMENT"
@@ -331,6 +337,21 @@
 		WHERE BOTTOM_MENU_CODE = #{bottomMenuCode}
 	</select>
 	
+	<delete id="deleteBoardLike">
+		DELETE FROM "BOARD_LIKE"
+		WHERE MEMBER_NO = #{memberNo}
+		AND   BOARD_NO  = #{boardNo}
+	</delete>
+	
+	<insert id="insertBoardLike">
+		INSERT INTO "BOARD_LIKE"
+		VALUES (#{memberNo}, #{boardNo})
+	</insert>
+	
+	<select id="selectLikeCount" resultType="_int">
+		SELECT COUNT(*) FROM "BOARD_LIKE"
+		WHERE BOARD_NO = #{boardNo}
+	</select>
 	
 
 	

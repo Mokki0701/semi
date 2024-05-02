@@ -264,7 +264,14 @@ public class BoardController {
 	}
 	
 	
-	
+	@PostMapping("like")
+	@ResponseBody
+	public int boardLike(
+			@RequestBody Map<String, Integer> paramMap
+			) {
+		
+		return service.boardLike(paramMap);
+	}
 	
 	
 	

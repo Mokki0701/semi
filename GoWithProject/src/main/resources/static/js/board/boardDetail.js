@@ -158,6 +158,45 @@ if(form != null){
   
 }
 
+const boardLike = document.querySelector("#boardLike").addEventListener("click", e=>{
+
+  if(loginMemberNo == null){
+    alert("로그인 후 이용해 주세요");
+    return;
+  }
+
+  const obj = {
+    "memberNo" : loginMemberNo,
+    "boardNo"  : boardNo,
+    "likeCheck": likeCheck
+  };
+
+  console.log(obj);
+
+  fetch("/board/like",{
+    method : "POST",
+    headers : {"Content-Type" : "application/json"},
+    body : JSON.stringify(obj)
+  })
+  .then(resp => resp.text()) 
+  .then(count => {
+
+      if(count == -1){
+          console.log("좋아요 처리 실패");
+          return; 
+      }
+
+      likeCheck = likeCheck == 0 ? 1 : 0;
+
+      e.target.classList.toggle("fa-regular");
+      e.target.classList.toggle("fa-solid");
+
+      e.target.nextElementSibling.innerText = count;
+
+  });
+
+})
+
 
 
 
