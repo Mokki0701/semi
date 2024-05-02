@@ -5,7 +5,7 @@ import java.util.Map;
 
 
 import edu.kh.gowith.board.model.dto.Board;
-
+import edu.kh.gowith.board.model.dto.BoardImg;
 import edu.kh.gowith.board.model.dto.BottomMenu;
 
 
@@ -27,5 +27,6 @@ public interface BoardService {
 	int updateReadCount(int boardNo);
 
 	String bottomMenuName(int bottomMenuCode);
+
 
 }

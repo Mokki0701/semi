@@ -124,7 +124,7 @@ for(let i=0; i< inputImageList.length; i++){
       }
     previewsList[i].src ="";
     inputImageList[i].value ="";
-    backupInputList[i].value= "";
+    backupInputList[i].value= undefined;
   })
 }
 

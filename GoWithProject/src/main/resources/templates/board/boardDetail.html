@@ -90,10 +90,10 @@
         <section th:object="${board}">
 
 <!--             ====================== 이미지가 있을 경우 출력하는 구문 ====================== -->
-           <!-- <th:block th:if="${#lists.size(board.imgList) > 0 }"> -->
+           <th:block th:if="${#lists.size(board.imgList) > 0 }"> 
 
                 <!-- 썸네일이 있을 경우 -->
-<!--                <th:block th:if="${thumbnail}">
+                <!-- <th:block th:if="${thumbnail}">
                    <h5>썸네일</h5>
                     <div class="img-box">
                         <div class="boardImg thumbnail">
@@ -101,24 +101,41 @@
                             <a th:href="|${thumbnail.imgPath}${thumbnail.imgRename}|" th:download="|${thumbnail.imgPath}${thumbnail.imaOriginalName}|">다운로드</a>         
                         </div>
                     </div>
-               </th:block>
+               </th:block>  -->
                 
                 
-                <th:block th:if="${#lists.size(board.imgList) > start}">
+                <!-- <th:block th:if="${#lists.size(board.imgList) > start}">
                     <h5>업로드 이미지</h5>
-                    <th:bloc th:each="i : ${#numbers.sequence(start, #lists.size(board.imgList) - 1)}">
+                    <th:block th:each="i : ${#numbers.sequence(start, #lists.size(board.imgList)-1)}">
                         <div class="img-box">
                             <div class="boardImg">
                                 <img th:src="|${board.imgList[i].imgPath}${board.imgList[i].imgRename}|">   
                                 <a th:href="|${board.imgList[i].imgPath}${board.imgList[i].imgRename}|"
-                                    th:download="${board.imgList[i].imaOriginalName}"
+                                    th:download="${board.imgList[i].imgOriginalName}"
                                 >다운로드</a>                
                             </div>
                         </div>
-                    </th:bloc>
-                </th:block>
+                    </th:block>
+                </th:block> -->
 
-           </th:block> -->
+                
+                    <h5>업로드 이미지</h5>
+                    <th:block th:each="i : ${#numbers.sequence(0,board.imgList.size()-1)}">
+                        <div class="img-box">
+                            <div class="boardImg">
+                                <img th:src="|${board.imgList[i].imgPath}${board.imgList[i].imgRename}|">   
+                                <a th:href="|${board.imgList[i].imgPath}${board.imgList[i].imgRename}|"
+                                    th:download="${board.imgList[i].imgOriginalName}"
+                                >다운로드</a>                
+                            </div>
+                        </div>
+                    </th:block>
+                
+
+
+
+
+           </th:block> 
             <!-- ====================== 이미지가 있을 경우 출력하는 구문 ====================== -->
             
             <!-- 내용 -->
@@ -181,6 +198,9 @@
 
         const topMenuCode = /*[[${topMenuCode}]]*/"topMenuCode"
         
+        const test = /*[[${board.imgList}]]*/"imgList"
+
+        console.log(test);
 
     </script>
 
