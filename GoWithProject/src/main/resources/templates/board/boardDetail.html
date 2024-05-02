@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/boardList/boardDetail.css">
-    <title>Document</title>
+    <script src="https://kit.fontawesome.com/6601cff6e5.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/comment/comment.css">
+    <title>게시판 상세조회</title>
 </head>
 <body>
 
@@ -21,32 +23,32 @@
 
             <h1>  게시글 제목  </h1>
             
-    <div class="list-wrapper">
-            <th:block th:if="${board.preBoardNo != null}">
+            <div class="list-wrapper">
+                <th:block th:if="${board.preBoardNo != null}">
 
-                <a  
-                    th:href="|@{/board/{topMenuCode}/{bottomMenuCode}/{boardNo} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode},boardNo=${board.preBoardNo})}?limit=${limit}&cp=${cp}|" >이전글
-                </a>
+                    <a  
+                        th:href="|@{/board/{topMenuCode}/{bottomMenuCode}/{boardNo} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode},boardNo=${board.preBoardNo})}?limit=${limit}&cp=${cp}|" >이전글
+                    </a>
 
-            </th:block>
+                </th:block>
 
-            <br>
+                <br>
 
-            <th:block th:if="${board.nextBoardNo != null}">
-                
-                <a  
-                    th:href="|@{/board/{topMenuCode}/{bottomMenuCode}/{boardNo} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode},boardNo=${board.nextBoardNo})}?limit=${limit}&cp=${cp}|" >다음글
-                </a>
+                <th:block th:if="${board.nextBoardNo != null}">
+                    
+                    <a  
+                        th:href="|@{/board/{topMenuCode}/{bottomMenuCode}/{boardNo} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode},boardNo=${board.nextBoardNo})}?limit=${limit}&cp=${cp}|" >다음글
+                    </a>
 
-            </th:block>
+                </th:block>
 
-            <br>
+                <br>
 
-            <a th:href="|@{/board/{topMenuCode}/{bottomMenuCode} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode})}?limit=${limit}&cp=${cp}|">목록으로</a>
-    </div>
+                <a th:href="|@{/board/{topMenuCode}/{bottomMenuCode} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode})}?limit=${limit}&cp=${cp}|">목록으로</a>
+            </div>
 
-            <div>
-                <div>
+            <div class="profile">
+                <div class="profile-info">
     
                     <img th:unless="*{profileImg}" 
                          th:src="#{user.default.image}">
@@ -87,42 +89,16 @@
                 </div>
             </div>
         </section>
-
         
 
         <section th:object="${board}">
 
-<!--             ====================== 이미지가 있을 경우 출력하는 구문 ====================== -->
-           <th:block th:if="${#lists.size(board.imgList) > 0 }"> 
-
-                <!-- 썸네일이 있을 경우 -->
-                <!-- <th:block th:if="${thumbnail}">
-                   <h5>썸네일</h5>
-                    <div class="img-box">
-                        <div class="boardImg thumbnail">
-                            <img th:src="|${thumbnail.imgPath}${thumbnail.imgRename}|">                     
-                            <a th:href="|${thumbnail.imgPath}${thumbnail.imgRename}|" th:download="|${thumbnail.imgPath}${thumbnail.imaOriginalName}|">다운로드</a>         
-                        </div>
-                    </div>
-               </th:block>  -->
-                
-                
-                <!-- <th:block th:if="${#lists.size(board.imgList) > start}">
-                    <h5>업로드 이미지</h5>
-                    <th:block th:each="i : ${#numbers.sequence(start, #lists.size(board.imgList)-1)}">
-                        <div class="img-box">
-                            <div class="boardImg">
-                                <img th:src="|${board.imgList[i].imgPath}${board.imgList[i].imgRename}|">   
-                                <a th:href="|${board.imgList[i].imgPath}${board.imgList[i].imgRename}|"
-                                    th:download="${board.imgList[i].imgOriginalName}"
-                                >다운로드</a>                
-                            </div>
-                        </div>
-                    </th:block>
-                </th:block> -->
-
-                
-                    <h5>업로드 이미지</h5>
+        <!--             ====================== 이미지가 있을 경우 출력하는 구문 ====================== -->
+            <div class="img-container">
+                <h5>업로드 이미지</h5>
+                <th:block th:if="${#lists.size(board.imgList) > 0 }" class="img-wrapper"> 
+                    
+                <div class="boardImg-wrapper">
                     <th:block th:each="i : ${#numbers.sequence(0,board.imgList.size()-1)}">
                         <div class="img-box">
                             <div class="boardImg">
@@ -133,41 +109,40 @@
                             </div>
                         </div>
                     </th:block>
+                </div>
+                </th:block>
+            </div> 
+                <!-- ====================== 이미지가 있을 경우 출력하는 구문 ====================== -->
                 
-
-
-
-
-           </th:block> 
-            <!-- ====================== 이미지가 있을 경우 출력하는 구문 ====================== -->
-            
-            <!-- 내용 -->
+                <!-- 내용 -->
             <div class="board-content" th:text="*{boardContent}">내용</div>
 
-           <!-- 시간이 된다면, Board 컨트롤러에서 메서드 하나 더 만들어서 top, bottom code가 주가 아닌 memberNo가 주인 게시글 홈페이지 만들면 좋을듯 -->
+            <!-- 시간이 된다면, Board 컨트롤러에서 메서드 하나 더 만들어서 top, bottom code가 주가 아닌 memberNo가 주인 게시글 홈페이지 만들면 좋을듯 -->
 
-           <!-- 좋아요 -->
-           <td th:text="*{boardLikeCount}">3</td>
-           
-           <br>
-           
-           <!-- 댓글이 하루 안에 쓰인 경우 -->
-           <th:block th:if="*{checkCommentDate} > 0">
-               
-                <h1 th:text="*{commentCount}">3</h1>
+            <div class="icon-wrapper">
+                <!-- 좋아요 -->
+                <i class="fa-solid fa-heart" id="boardLike"></i>
+                <td th:text="*{boardLikeCount}">3</td>
+                
+                <br>
+                    
+                <!-- 댓글이 하루 안에 쓰인 경우 -->
+                <!--  -->
+                <th:block th:if="*{checkCommentDate} > 0">
+                    
+                    <i class="fa-solid fa-comment"></i>
+                    <span th:text="*{commentCount}">3</ㄴ>
 
-           </th:block>
+                </th:block>
 
-           <!-- 댓글이 하룻동안 쓰이지 않은 경우 -->
-           <th:block th:if="*{checkCommentDate} == 0">
-               
-                <h5 th:text="*{commentCount}">3</h5>
+                <!-- 댓글이 하룻동안 쓰이지 않은 경우 -->
+                <th:block th:if="*{checkCommentDate} == 0">
+                    
+                    <i class="fa-solid fa-comment"></i>
+                    <span th:text="*{commentCount}">3</span>
 
-           </th:block>
-           
-
-            <div></div>
-
+                </th:block>
+            </div>
 
             <!-- 버튼 영역-->
             <div class="board-btn-area">
@@ -187,7 +162,7 @@
 
 
         <!-- 댓글 영역-->
-         <th:block th:replace="~{comment/comment}"></th:block>
+        <th:block th:replace="~{comment/comment}"></th:block>
 
     </main>
 
