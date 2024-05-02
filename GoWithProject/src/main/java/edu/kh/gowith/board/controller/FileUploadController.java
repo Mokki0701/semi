@@ -171,6 +171,8 @@ public class FileUploadController {
 			path = String.format("redirect:/board/%d/%d/%d", topMenuCode, bottomMenuCode, boardNo );
 			ra.addFlashAttribute("message",message);
 		}else {
+			updateBoard.setBoardNo(boardNo);
+
 			path = "boardWrite/boardUpdate";
 			model.addAttribute("updateBoard",updateBoard);
 			model.addAttribute("boardTitle",boardTitle);
@@ -192,7 +194,8 @@ public class FileUploadController {
 			RedirectAttributes ra,
 			@RequestParam(value="managerCheck",required= false) String agree,
 			@RequestParam(value="deleteOrder",required=false, defaultValue="") String deleteOrder ,
-			@RequestParam(value="querystring",required=false, defaultValue="") String querystring
+			@RequestParam(value="cp", required = false, defaultValue= "1") int cp,
+			@RequestParam(value="limit", required = false, defaultValue="10") int limit
 			
 			) throws IllegalStateException, IOException {
 		
@@ -207,7 +210,7 @@ public class FileUploadController {
 		
 		if(result >0) {
 			message = "게시글이 수정 되었습니다";
-			path = String.format("/board/%d/%d/%d%s", topMenuCode,bottomMenuCode,boardNo,querystring);
+			path = String.format("/board/%d/%d/%d?limit=%d&cp=%d", topMenuCode,bottomMenuCode,boardNo,limit,cp);
 		} else {
 			message = "수정 실패";
 			path = "update"; //수정 화면 전환 상대 경로

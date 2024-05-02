@@ -49,6 +49,10 @@ public interface BoardWriteMapper {
 	// 게시글 이미지 삽입 (1행 삽입)
 	int insertimage(BoardImg img);
 
+	int deleteTag(int boardNo);
+
+	int deleteBoardTag(int boardNo);
+
 	
 
 }

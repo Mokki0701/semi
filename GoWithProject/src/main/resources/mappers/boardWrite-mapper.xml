@@ -124,6 +124,18 @@
 		#{imgRename},#{imgOrder},#{boardNo})
 	
 	</insert>
+	
+	<delete id="deleteTag">
+		DELETE FROM BOARD_TAG WHERE BOARD_NO = #{boardNo}
+	</delete>
+	
+	<delete id="deleteBoardTag">
+		DELETE FROM "TAG" WHERE BOARD_NO = #{boardNo}
+	</delete>
+
+
+
+
 
 
 </mapper>

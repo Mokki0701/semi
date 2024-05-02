@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -19,7 +21,9 @@ import edu.kh.gowith.board.model.dto.TopMenu;
 import edu.kh.gowith.board.model.exception.BoardInsertException;
 import edu.kh.gowith.board.model.exception.ImageDeleteException;
 import edu.kh.gowith.board.model.exception.ImageUpdateException;
+import edu.kh.gowith.board.model.mapper.BoardMapper;
 import edu.kh.gowith.board.model.mapper.BoardWriteMapper;
+import edu.kh.gowith.comment.model.mapper.CommentMapper;
 import edu.kh.gowith.common.config.Utility;
 import lombok.RequiredArgsConstructor;
 
@@ -29,6 +33,9 @@ import lombok.RequiredArgsConstructor;
 public class BoardWriteServiceImpl implements BoardWriteService{
 
 	public final BoardWriteMapper mapper;
+	
+	// 태그 검사용 매퍼
+	public final CommentMapper mapper2;
 	
 	@Value("${my.board.web-path}")
 	private String webPath;
@@ -43,6 +50,33 @@ public class BoardWriteServiceImpl implements BoardWriteService{
 		
 		// 1. INSERT 결과로 작성된 게시글 번호(생성된 시퀀스 번호) 반환 받기
 		int result = mapper.boardInsert(inputBoard);
+		
+		
+		// ************************************
+		// 태그 검사 기능
+		String boardContent = inputBoard.getBoardContent();
+		Pattern pattern = Pattern.compile("#[\\w\\dㄱ-힣]+");
+		Matcher matcher = pattern.matcher(boardContent);
+		
+		List<String> tagWords = new ArrayList<>();
+		while (matcher.find()) {
+		    tagWords.add(matcher.group());
+		}
+		
+		for(String tagWord : tagWords) {
+			
+			int result2 = mapper2.checkTag(tagWord);
+			
+			if(result2 == 0) mapper2.insertTag(tagWord);
+			
+			int tagNo = mapper2.selectTagNo(tagWord);
+			
+			mapper2.insertBoardTag(tagNo);
+		}
+
+		
+		// ************************************
+		
 		
         
 		// 삽입 실패시
@@ -195,6 +229,42 @@ public class BoardWriteServiceImpl implements BoardWriteService{
 	public int notiUpdate(Board inputBoard, List<MultipartFile> images,String deleteOrder) throws IllegalStateException, IOException {
 		
 		int result = mapper.notiUpdate(inputBoard);
+		
+		
+		// ************************************
+		// 태그 검사 기능
+		mapper.deleteTag(inputBoard.getBoardNo());
+		
+		String boardContent = inputBoard.getBoardContent();
+		Pattern pattern = Pattern.compile("#[\\w\\dㄱ-힣]+");
+		Matcher matcher = pattern.matcher(boardContent);
+		
+		List<String> tagWords = new ArrayList<>();
+		while (matcher.find()) {
+		    tagWords.add(matcher.group());
+		}
+		
+		
+		
+		for(String tagWord : tagWords) {
+			
+			int result2 = mapper2.checkTag(tagWord);
+			
+			if(result2 == 0) mapper2.insertTag(tagWord);
+			
+			int tagNo = mapper2.selectTagNo(tagWord);
+			
+			Map<String, Object> paramMap = new HashMap<>();
+			
+			paramMap.put("boardNo", inputBoard.getBoardNo());
+			paramMap.put("tagNo", tagNo);
+			
+			mapper2.insertBoardTaggg(paramMap);
+			}
+
+		
+		// ************************************
+		
 		
 		if(result == 0) {
 			return 0;

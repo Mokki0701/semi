@@ -1,6 +1,8 @@
 package edu.kh.gowith.comment.model.mapper;
 
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import edu.kh.gowith.board.model.dto.Comment;
@@ -23,6 +25,10 @@ public interface CommentMapper {
 	int selectTagNo(String tagWord);
 
 	int updateComment(Comment comment);
+
+	void insertBoardTag(int tagNo);
+
+	void insertBoardTaggg(Map<String, Object> paramMap);
 
 
 }
