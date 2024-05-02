@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/tagtest.css">
-  <title>Document</title>
-</head>
-<body>
-  <div class="word-list">
-    <!-- 'th:each'를 사용하여 데이터를 반복하여 렌더링 -->
-    <span th:each="word, stat : ${words}" th:text="${word}"></span>
+
+<div class="word-list">
+  <h1>키워드 순위</h1>
+  <!-- 'th:each'를 사용하여 데이터를 반복하여 렌더링 -->
+  <span id="tagRankField"></span>
 </div>
-</body>
-</html>
+
+<script src="/js/tagRank.js"></script>
