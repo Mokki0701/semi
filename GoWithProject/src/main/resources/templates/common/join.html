@@ -5,17 +5,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>회원가입 페이지</title>
+  <link rel="stylesheet" href="/css/fragments/frag.css">
   <link rel="stylesheet" href="/css/join.css">
 </head>
 
 <body>
 
+<th:block th:if="@{session.loginMember != null}">
+  
+</th:block>
+
   <main>
-    <!-- 헤더 추가 -->
-    <div></div>
-    <!-- <th:block th:replace="~{common/header}"></th:block> -->
+ <!-- 테스트용 사이더 추가 추후 삭제 예정 -->
+ <th:block th:replace="~{common/lefter}">사이드메뉴</th:block>
+ <!-- 테스트용 사이더 추가 추후 삭제 예정 -->
+    
 
     <section class="signup-content">
+     
 
       <form action="/member/join" method="POST" name="signupForm" id="signupForm">
 
@@ -136,7 +143,7 @@
   </main>
 
   <!-- 푸터 추가 -->
-  <!-- <th:block th:replace="~{common/footer}"></th:block> -->
+  <th:block th:replace="~{common/footer}"></th:block>
 
   <!-- 다음 주소 API -->
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
