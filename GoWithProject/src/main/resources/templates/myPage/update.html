@@ -15,7 +15,7 @@
   <main>
 
     <!-- 헤더 추가 -->
-     <th:block th:replace="~{common/header}"></th:block>  
+     <!-- <th:block th:replace="~{common/header}"></th:block>   -->
   
 
 
@@ -77,7 +77,7 @@
             placeholder="우편번호" id="postcode"
             th:value="${postcode}">
 
-          <button type="button" id="searchAddress">검색</button>
+          <button type="button">검색</button>
         </div>
 
         <div class="myPage-row info-address">
@@ -128,14 +128,10 @@
 
   
   <!-- 푸터 추가 -->
-  <th:block th:replace="~{common/footer}"></th:block>
+  <!-- <th:block th:replace="~{common/footer}"></th:block> -->
 
 
   <script src="/js/update.js"></script>
-
-  <!-- 다음 주소 API 추가 -->
-  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
 
 </body>
 </html>

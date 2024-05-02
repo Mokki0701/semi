@@ -147,11 +147,5 @@ public class MyPageController {
 	} 
 	
 
-	
-	//비밀번호확인
-	@GetMapping("pw")
-	public String pw() {
-		return "myPage/pw";
-	}
 
 }
