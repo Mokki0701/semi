@@ -1,0 +1,12 @@
+.word-list span {
+  display: inline;
+}
+
+.word-list span::after {
+  content: "/";
+  margin: 0 5px;
+}
+
+.word-list span:last-of-type::after {
+  content: ""; /* 마지막 단어 뒤에 슬래시가 표시되지 않게 함 */
+}

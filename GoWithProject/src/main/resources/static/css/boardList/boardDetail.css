@@ -1,0 +1,27 @@
+.detail-wrapper{
+  width: 900px;
+  height: 900px;
+  border: 1px solid #000;
+}
+
+.detail-wrapper > section:first-of-type>a:first-of-type{
+  color: #9b33a8;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.detail-wrapper h1{
+  font-size: 30px;
+  border-bottom: 4px solid #9b33a8;
+  padding: 10px;
+}
+
+.list-wrapper{
+  display: flex;
+  justify-content: space-around;
+}
+
+.list-wrapper a {
+  
+}
