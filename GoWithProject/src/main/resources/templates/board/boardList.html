@@ -96,7 +96,7 @@
                                     <td>공지</td>
                                     <td>
                                         <a  
-                                        th:href="|@{/board/{topMenuCode}/{bottomMenuCode}/{boardNo} (bottomMenuCode=${bottomMenuCode},boardNo=*{boardNo})}?${queryStringDetail}|" 
+                                        th:href="|@{/board/{topMenuCode}/{bottomMenuCode}/{boardNo} (topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode},boardNo=*{boardNo})}?${queryStringDetail}|" 
                                             th:text="*{boardTitle}">게시글 제목
                                         </a>
                                         
