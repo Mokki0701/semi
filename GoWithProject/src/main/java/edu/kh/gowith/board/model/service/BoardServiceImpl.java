@@ -130,15 +130,20 @@ public class BoardServiceImpl implements BoardService {
 		
 		String topMenuName = null;
 		
-		for(int i = 0; i < topMenuList.size(); i++) {
+		if(paramMap.get("bottomMenuKey") != null) {
 			
-
-			if(mapper.getBottomName(Integer.parseInt(String.valueOf(paramMap.get("bottomMenuKey")))) == topMenuList.get(i).getTopMenuCode()) {
-				topMenuName = topMenuList.get(i).getTopMenuName();
-				break;
-
+			for(int i = 0; i < topMenuList.size(); i++) {
+				
+				
+				if(mapper.getBottomName(Integer.parseInt(String.valueOf(paramMap.get("bottomMenuKey")))) == topMenuList.get(i).getTopMenuCode()) {
+					topMenuName = topMenuList.get(i).getTopMenuName();
+					break;
+					
+				}
 			}
+			
 		}
+		
 		
 		mapList.put("topMenuName", topMenuName);
 		mapList.put("pagination", pagination);
