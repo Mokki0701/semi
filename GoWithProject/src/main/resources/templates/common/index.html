@@ -88,7 +88,7 @@
                   </a>
                 </div>
 
-                <a href="/myPage/update" id="profileImage">profile Image</a>
+                <img th:src="${session.loginMember.profileImg}" id="profileImage" alt="프로필">
                 <tr>
                   <th>E-mail</th>
                   <td th:text="${session.loginMember.memberEmail}">현재 로그인한 회원 이메일</td>
@@ -126,14 +126,14 @@
               </div>
 
               <div class="contextHead">나의 관심게시판
-                <table>
+                <!-- <table>
                   <tr>
                     <th>게시판 :</th>
                   </tr>
                   <tr th:each="menu : ${favorBoard}">
                     <td th:text="${menu.favorBoard.bottomMenuName}"></td>
                   </tr>
-                </table>
+                </table> -->
               </div>
 
             </th:block>
@@ -208,21 +208,36 @@
 
         <div class="smallRoom">
           <div>
-              <a href="#" class="smallRoom mainTitle">전체글(6개 조회)</a>
+            <a href="#" class="smallRoom mainTitle">전체글(6개 조회)</a>
           </div> <br>
-      
-          <div class="thumbNailPost" th:each="board : ${listWithThumbnail}">
-            <div class="thumbNail" th:text="${board.imgList[0].imgRename}"> 썸넬 </div>
-              <span class="tpTitle" th:text="${board.boardTitle}">최대8글자</span>
-              <span class="tbLike" th:text="[${board.commentCount}]">[댓글수]</span> <br>
-              <span class="tbWriter" th:text="${board.memberNickname}">작성자</span>
-              <span>|</span>
-              <span class="tbWriteDay" th:text="${board.boardWriteDate}">작성일</span>
-      
-              <span></span>
+
+          <div th:each="board : ${listWithThumbnail}" class="thumbNailPost">
+            <a class="thumbNailContainer" th:href="@{'/board/' + ${board.topMenuCode} + '/' + 
+            ${board.bottomMenuCode} + '/' + ${board.boardNo}}">
+              <img class="thumbNail" th:src="@{${board.imgRename}}" alt="썸네일 이미지">
+            </a>
+            <table>
+              <tr>
+                <td>제목</td>
+                <td><a th:href="@{'/board/' + ${board.topMenuCode} + '/' + 
+                  ${board.bottomMenuCode} + '/' + ${board.boardNo}}">
+                    <span class="tpTitle" th:text="${board.boardTitle}">최대8글자</span>
+                  </a></td>
+              </tr>
+              <tr>
+                <td>작성자</td>
+                <td class="tbWriter" th:text="${board.memberNickname}">작성자</td>
+              </tr>
+              <tr>
+                <td>작성일</td>
+                <td class="tbWriteDay" th:text="${board.boardWriteDate}">작성일</td>
+              </tr>
+            </table>
+            <span></span>
           </div>
-      
-      </div>
+
+
+        </div>
 
         </p>
 
@@ -265,7 +280,7 @@
         <!-- 동기식 최신글 -->
         <div class="smallRoom">
           <!-- 제목부분 -->
-          <div class="mainTitle">최신글</div>
+          <div class="mainTitle">회원활동</div>
 
           <!-- 층 부분 -->
           <div class="room">
@@ -275,8 +290,7 @@
               <div>
                 <ul id="commentList">
                   <!-- 첫 번째 페이지에 대한 데이터만 표시 -->
-                  <li th:each="comment, iterStat : ${commentList}" 
-                    th:text="${comment.commentContent}"></li>
+                  <li th:each="comment, iterStat : ${commentList}" th:text="${comment.commentContent}"></li>
                 </ul>
                 <button id="pirate">다음</button>
               </div>
@@ -297,13 +311,11 @@
                 </span>
 
                 <span>
-                  <input type="radio" name="rank" value="visit" id="visitRank" class="memRank" >
+                  <input type="radio" name="rank" value="visit" id="visitRank" class="memRank">
                   <label for="visitRank" class="rankBtn width20">방문</label>
                 </span>
-
               </div>
               <hr>
-              
               <div id="mrList"></div>
 
             </div>
@@ -311,7 +323,7 @@
 
 
 
-
+            <!-- 태그 -->
             <div class="tinyRoom">
 
             </div>

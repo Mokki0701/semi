@@ -49,6 +49,7 @@ public class Board {
 	// 메인페이지 인기 게시글 상세 조회용
 	private int bottomMenuCode;
 	
+	private String imgRename;
 	
 	
 }
