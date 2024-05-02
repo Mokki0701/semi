@@ -81,14 +81,29 @@ public class BoardController {
 			
 			boardMap = service.searchBoardList(paramMap, cp, limit, inputMap);
 			
-			model.addAttribute("queryStringLimit", "?cp="+cp + "&topMenuKey="+searchTopMenu+"&bottomMenuKey="
-					+searchBottomMenu+"&periodKey="+searchDate+"&searchKey="+searchformKey +"&query="+searchQuery);
+			if(searchBottomMenu == null) {
+				
+				model.addAttribute("queryStringLimit", "?cp="+cp + "&topMenuKey="+searchTopMenu+"&bottomMenuKey="+"&periodKey="+searchDate+"&searchKey="+searchformKey +"&query="+searchQuery);
+				
+				model.addAttribute("queryStringCp", "limit=" + limit + "&topMenuKey="+searchTopMenu+"&bottomMenuKey="+"&periodKey="+searchDate+"&searchKey="+searchformKey +"&query="+searchQuery);
+				
+				model.addAttribute("queryStringDetail", "limit=" + limit + "&topMenuKey="+searchTopMenu+"&bottomMenuKey="+"&periodKey="+searchDate+"&searchKey="+searchformKey +"&query="+searchQuery + "&cp=" + cp);
+				
+			}
 			
-			model.addAttribute("queryStringCp", "limit=" + limit + "&topMenuKey="+searchTopMenu+"&bottomMenuKey="
-					+searchBottomMenu+"&periodKey="+searchDate+"&searchKey="+searchformKey +"&query="+searchQuery);
+			else {
+				
+				model.addAttribute("queryStringLimit", "?cp="+cp + "&topMenuKey="+searchTopMenu+"&bottomMenuKey="
+						+searchBottomMenu+"&periodKey="+searchDate+"&searchKey="+searchformKey +"&query="+searchQuery);
+				
+				model.addAttribute("queryStringCp", "limit=" + limit + "&topMenuKey="+searchTopMenu+"&bottomMenuKey="
+						+searchBottomMenu+"&periodKey="+searchDate+"&searchKey="+searchformKey +"&query="+searchQuery);
+				
+				model.addAttribute("queryStringDetail", "limit=" + limit + "&topMenuKey="+searchTopMenu+"&bottomMenuKey="
+						+searchBottomMenu+"&periodKey="+searchDate+"&searchKey="+searchformKey +"&query="+searchQuery + "&cp=" + cp);
+				
+			}
 			
-			model.addAttribute("queryStringDetail", "limit=" + limit + "&topMenuKey="+searchTopMenu+"&bottomMenuKey="
-					+searchBottomMenu+"&periodKey="+searchDate+"&searchKey="+searchformKey +"&query="+searchQuery + "&cp=" + cp);
 			
 		}
 		
