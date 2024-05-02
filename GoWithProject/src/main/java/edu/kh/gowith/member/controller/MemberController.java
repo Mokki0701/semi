@@ -198,4 +198,19 @@ public class MemberController {
 		return service.checkNickname(memberNickname);
 	}
 
+	// 직접 입력했을 때.
+	@GetMapping("/member/join")
+	public String joinPage(HttpSession session) {
+		// 세션에서 로그인된 회원 정보를 가져옵니다.
+		Member loginMember = (Member) session.getAttribute("loginMember");
+
+		// 로그인된 회원이 있으면 메인 페이지로 리다이렉트합니다.
+		if (loginMember != null) {
+			return "redirect:/"; // 메인 페이지로 리다이렉트
+		}
+
+		// 로그인된 회원이 없으면 회원가입 페이지로 이동합니다.
+		return "member/join";
+	}
+
 }

@@ -12,21 +12,6 @@
 <body>
   <th:block th:replace="~{/common/header}">헤더</th:block>
 
-  <!-- 임시 네비게이터 시작 -->
-  <nav>
-    <ul>
-
-      <th:block th:each="boardType : ${application.boardTypeList}">
-        <li>
-          <a th:href="@{/board/{boardCode}(boardCode = ${boardType.boardCode})}"
-            th:text="${boardType.boardName}">게시판이름</a>
-        </li>
-      </th:block>
-
-    </ul>
-  </nav>
-
-  <!-- 임시 네비게이터 끝 -->
 
 
 
@@ -66,15 +51,15 @@
               <th>조회수</th>
             </thead>
 
-            <tbody th:each="board:${notification}">
-              <td>
-                <a th:href="@{'/board/' + ${board.topMenuCode} + '/' + 
+            <tbody th:each="board:${notification}" >
+              <td class="textCenter" >
+                <a class="tagStyleOut" th:href="@{'/board/' + ${board.topMenuCode} + '/' + 
                 ${board.bottomMenuCode} + '/' + ${board.boardNo}}">
-                  <span th:text="${board.boardTitle}"></span></a>
+                  <span  th:text="${board.boardTitle}"></span></a>
               </td>
-              <td th:text="${board.memberNickname}"></td>
-              <td th:text="${board.boardWriteDate}"> </td>
-              <td th:text="${board.readCount}"></td>
+              <td class="textCenter" th:text="${board.memberNickname}"></td>
+              <td class="textCenter" th:text="${board.boardWriteDate}"> </td>
+              <td class="textCenter" th:text="${board.readCount}"></td>
             </tbody>
           </table>
 
@@ -92,7 +77,9 @@
           <div th:each="board : ${listWithThumbnail}" class="thumbNailPost">
             <a class="thumbNailContainer" th:href="@{'/board/' + ${board.topMenuCode} + '/' + 
             ${board.bottomMenuCode} + '/' + ${board.boardNo}}">
-              <img class="thumbNail" th:src="@{${board.imgRename}}" alt="썸네일 이미지">
+            <img class="thumbNail" 
+            th:src="${board.imgRename != null} ? @{${board.imgRename}} : '/imgFolder3/noImg.png'" 
+            alt="썸네일 이미지">
             </a>
             <table>
               <tr>
