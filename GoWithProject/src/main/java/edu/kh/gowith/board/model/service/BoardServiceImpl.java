@@ -190,7 +190,24 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 
-	
+	@Override
+	public int boardLike(Map<String, Integer> paramMap) {
+		
+		int result = 0;
+		
+		if(paramMap.get("likeCheck") == 1) {
+			result = mapper.deleteBoardLike(paramMap);
+		}
+		else {
+			result = mapper.insertBoardLike(paramMap);
+		}
+		
+		if(result > 0) {
+			return mapper.selectLikeCount(paramMap);
+		}
+		
+		return -1;
+	}
 	
 	
 	

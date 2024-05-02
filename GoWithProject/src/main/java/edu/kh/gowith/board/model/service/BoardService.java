@@ -28,5 +28,7 @@ public interface BoardService {
 
 	String bottomMenuName(int bottomMenuCode);
 
+	int boardLike(Map<String, Integer> paramMap);
+
 
 }

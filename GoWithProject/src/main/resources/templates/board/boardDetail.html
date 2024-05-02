@@ -67,7 +67,7 @@
                         
     
                         <i class="fa-heart" id="boardLike"
-                            th:classappend="*{boardLikeCount != 1} ? fa-solid : fa-regular"></i>
+                            th:classappend="*{likeCheck != 0} ? fa-solid : fa-regular"></i>
     
 
                         <span th:text="*{boardLikeCount}">0</span>
@@ -172,11 +172,13 @@
 
         const loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원 번호";
 
-        const bottomMenuCode = /*[[${bottomMenuCode}]]*/"bottomMenuCode"
+        const bottomMenuCode = /*[[${bottomMenuCode}]]*/"bottomMenuCode";
 
-        const topMenuCode = /*[[${topMenuCode}]]*/"topMenuCode"
+        const topMenuCode = /*[[${topMenuCode}]]*/"topMenuCode";
         
-        const test = /*[[${board.imgList}]]*/"imgList"
+        const test = /*[[${board.imgList}]]*/"imgList";
+        
+        let likeCheck = /*[[${board.likeCheck}]]*/ "0이면 X 1이면 O";
 
         console.log(test);
 

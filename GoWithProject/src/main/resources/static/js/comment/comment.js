@@ -23,53 +23,59 @@ function selectComment(value){
 
             const li = document.createElement("li");
 
+ 
+            
             if(comment['commentDelFl'] == 'Y'){
                 const h1 = document.createElement("h1");
                 h1.innerText="삭제된 댓글 입니다.";
                 commentLi.appendChild(h1);
-                continue;
             }
 
-            const p = document.createElement("p");
-            const span1 = document.createElement("span");
-            const span2 = document.createElement("span");
-            const span3 = document.createElement("span");
+            else{
 
-            span1.innerText=comment['memberNickname'];
-            span2.innerText=comment['memberRank'];
-            span3.innerText=comment['commentWriteDate'];
+                const p = document.createElement("p");
+                const span1 = document.createElement("span");
+                const span2 = document.createElement("span");
+                const span3 = document.createElement("span");
+    
+                span1.innerText=comment['memberNickname'];
+                span2.innerText=comment['memberRank'];
+                span3.innerText=comment['commentWriteDate'];
+    
+                const p2 = document.createElement("p");
+                p2.innerHTML=comment['commentContent'];
+    
+                const div = document.createElement("div");
+                const button = document.createElement("button");
+                button.innerText="답글";
+                button.setAttribute("onclick", `showInsertComment(${comment.commentNo}, this)`);
+    
+                
+                p.appendChild(span1);
+                p.appendChild(span2);
+                p.appendChild(span3);
+                
+                div.appendChild(button);
+    
+                if (loginMemberNo != null && loginMemberNo == comment.memberNo) {
+                    const deleteBtn = document.createElement("button");
+                    const updateBtn = document.createElement("button");
+    
+                    deleteBtn.innerText = "삭제!";
+                    updateBtn.innerText = "수정!";
+    
+                    deleteBtn.setAttribute("onclick", `deleteComment(${comment.commentNo})`);
+                    updateBtn.setAttribute("onclick", `showUpdateComment(${comment.commentNo}, this)`);
+    
+                    div.append(updateBtn, deleteBtn);
+                }
+    
+                li.appendChild(p);
+                li.appendChild(p2);
+                li.appendChild(div);
 
-            const p2 = document.createElement("p");
-            p2.innerHTML=comment['commentContent'];
-
-            const div = document.createElement("div");
-            const button = document.createElement("button");
-            button.innerText="답글";
-            button.setAttribute("onclick", `showInsertComment(${comment.commentNo}, this)`);
-
-            
-            p.appendChild(span1);
-            p.appendChild(span2);
-            p.appendChild(span3);
-            
-            div.appendChild(button);
-
-            if (loginMemberNo != null && loginMemberNo == comment.memberNo) {
-                const deleteBtn = document.createElement("button");
-                const updateBtn = document.createElement("button");
-
-                deleteBtn.innerText = "삭제!";
-                updateBtn.innerText = "수정!";
-
-                deleteBtn.setAttribute("onclick", `deleteComment(${comment.commentNo})`);
-                updateBtn.setAttribute("onclick", `showUpdateComment(${comment.commentNo}, this)`);
-
-                div.append(updateBtn, deleteBtn);
             }
 
-            li.appendChild(p);
-            li.appendChild(p2);
-            li.appendChild(div);
 
             commentLi.appendChild(li);
         }
