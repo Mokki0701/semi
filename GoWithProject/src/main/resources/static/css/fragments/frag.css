@@ -131,7 +131,7 @@ footer span {
 /* LLLLLLLLLLLLLLLL 레프터 시작 LLLLLLLLLLLLLLLLLLLLLLL */
 .side {
   border: 1px solid black;
-  width: 400px;
+  width: 15%;
   margin: 5px;
   padding: 5px;
 
@@ -315,9 +315,16 @@ footer span {
 }
 
 .linkList{
+width: 80%;
+margin-left: 30px;
+
   display: flex;
   flex-direction: column;
+  background-color: rgba(216, 153, 97, 0.3)
 }
+
+
+
 
 .linkList a {
   font-size: 20px;
@@ -354,23 +361,23 @@ footer span {
 }
 
 .linkList .esa:hover{
-  border-right: 50px solid red;
-  color: orange;
-  background-color: red;
+  border-right: 50px solid rgb(60, 60, 238);
+  color: rgb(235, 191, 110);
+  background-color: rgb(146, 1, 1);
   transition: all 0.4s;
 }
 
 .linkList .eu:hover{
-  border-right: 50px solid red;
-  color: orange;
-  background-color: red;
+  border-right: 50px solid #03318C;
+  color: #F2CB05;
+  background-color: #0A7ABF;
   transition: all 0.4s;
 }
 
 .linkList .etc:hover{
-  border-right: 50px solid red;
-  color: orange;
-  background-color: red;
+  border-right: 50px solid #0528F2;
+  color: #6E65A6;
+  background-color: #D98FB1;
   transition: all 0.4s;
 }
 
