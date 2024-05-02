@@ -123,6 +123,12 @@
   margin-left: 10px;
 }
 
+.fa-circle-plus{
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
 .icon-wrapper{
   display: flex;
   justify-content: flex-end;
