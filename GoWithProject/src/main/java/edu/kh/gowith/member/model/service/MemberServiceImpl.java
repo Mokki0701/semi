@@ -38,9 +38,12 @@ public class MemberServiceImpl implements MemberService {
 		// 암호화
 		// bcrypt.encode(문자열) : 문자열을 암호화하여 반환해줌
 		String bcryptPassword = bcrypt.encode(member.getMemberPw());
-
+		
+		
+		member.setMemberNo(mapper.getMemberNo(member.getMemberEmail()));
+		
 		// 이메일이 일차하며, 탈퇴하지 않은 회원 조회
-		Member loginMember = mapper.loginMember(member.getMemberEmail());
+		Member loginMember = mapper.loginMember2(member);
 
 		if (loginMember == null)
 			return null;
