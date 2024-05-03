@@ -166,7 +166,15 @@
   const findId = document.querySelector("#findId");
   const findPw = document.querySelector("#findPw");
 
+
   if(findId != null ){
+    findId.addEventListener("click", e=> {
+      window.open("findId.html", "_blank", "popup");
+      return;
+    });
+  }
+
+  if(findPw != null ){
     findPw.addEventListener("click", e=> {
       window.open("findPw.html", "_blank", "popup");
       return;
