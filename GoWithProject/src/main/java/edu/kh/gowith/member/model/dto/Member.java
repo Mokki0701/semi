@@ -27,5 +27,5 @@ public class Member {
 	private int memberRank;
 	private String favorPlace;
 	
-	
+	private int membmerLikeCount;
 }
