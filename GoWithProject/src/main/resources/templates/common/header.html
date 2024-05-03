@@ -16,7 +16,8 @@
     <div class="highest">
       <label for="headerMenuToggle">
         [[${session.loginMember.memberNickname}]] 님 반갑습니다!
-        <span>🔽</span>
+        <span id="headerToggle1">⏪</span>
+        <span id="headerToggle2">⏩</span>
       </label>
       <input type="checkbox" id="headerMenuToggle">
       <div class="header-menu">
@@ -27,9 +28,25 @@
 
   </th:block>
 
-  <a href="/" method="GET">
+  <a href="/" id="logoBox">
     <div id="mainLogo">
+      🌏🌍🌎 G o W i t h 
     </div>
   </a>
 
 </div>
+
+<script>
+   function toggleHeader() {
+    var toggle1 = document.getElementById("headerToggle1");
+    var toggle2 = document.getElementById("headerToggle2");
+
+    if (toggle1.style.display === "none") {
+      toggle1.style.display = "inline";
+      toggle2.style.display = "none";
+    } else {
+      toggle1.style.display = "none";
+      toggle2.style.display = "inline";
+    }
+  }
+</script>
