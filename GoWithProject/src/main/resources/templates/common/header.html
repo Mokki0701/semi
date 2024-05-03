@@ -14,10 +14,10 @@
   <th:block th:unless="${session.loginMember == null}">
 
     <div class="highest">
-      <label for="headerMenuToggle">
+      <label for="headerMenuToggle" id="toggler" onclick="toggleHeader()">
         [[${session.loginMember.memberNickname}]] 님 반갑습니다!
         <span id="headerToggle1">⏪</span>
-        <span id="headerToggle2">⏩</span>
+        <span id="headerToggle2" style="display:none;">⏩</span>
       </label>
       <input type="checkbox" id="headerMenuToggle">
       <div class="header-menu">

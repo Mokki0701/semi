@@ -83,7 +83,7 @@ memberEmail.addEventListener("input", e => {
 
   // 4) 입력된 이메일이 있을 경우 정규식 검사
   //	(알맞은 형태로 작성 했는지 검사)
-  const regExp = /^(?:[a-zA-Z0-9._%+-]+@(?:naver\.com|gmail\.com|daum\.net))$/;
+  const regExp = /^(?:[a-zA-Z0-9._%+-]+@(?:naver\.com|gmail\.com|hanmail\.net))$/;
 
 
   // 입력 받은 이메일이 정규식과 일치하지 않는 경우

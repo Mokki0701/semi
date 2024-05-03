@@ -44,8 +44,21 @@
   z-index: 1000;
 }
 
-.highestMessage {
+#toggler:hover{
+  cursor: pointer;
 }
+
+.highestMessage {
+  font-family: 'D2Coding';
+  font-weight: normal;
+  font-style: normal;
+  transition: color 0.3s ease; /* 색상 변화를 자연스럽게 하는 transition 추가 */
+}
+
+.highestMessage:hover {
+  color: blue; /* 호버 시에 변경될 색상 설정 */
+}
+
 
 /* 로그인 안되었을 때 id pw 찾기 버튼 */
 .signup-find-area > a{
@@ -125,7 +138,7 @@
   right: 0;
   background-color: white;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 3px solid #000000;
   border-top: none;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease;
@@ -146,6 +159,11 @@
 #headerMenuToggle:checked+.header-menu {
   transform: translateX(0);
 }
+
+#headerToggle2 {
+  display: none;
+}
+
 
 
 
