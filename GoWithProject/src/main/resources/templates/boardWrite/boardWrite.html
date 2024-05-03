@@ -5,10 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>boardWrite</title>
   <link rel="stylesheet" href="/css/boardWrite/boardWrite.css">
+  <link rel="stylesheet" href="/css/fragments/frag.css">
+
 </head>
 
 <body>
-  <section>
+  <th:block th:replace="~{/common/header}">헤더</th:block>
+  <section class="boardwrite-wrapper" >
 
     <form th:action="@{insert}" method="POST" class="boardWrite" enctype="multipart/form-data" id="boardFrm">
 
@@ -97,7 +100,7 @@
 
     </form>
   </section>
-
+  <th:block th:replace="~{/common/footer}" class="footer">푸터</th:block>
   <script src="/js/boardWrite/boardWrite.js"></script>
 </body>
 </html>

@@ -1,3 +1,7 @@
+.boardwrite-wrapper{
+  display: flex;
+}
+
 .boardWrite{
   width: 1000px;
   min-height: 800px;
