@@ -7,7 +7,7 @@ const findBtn = document.querySelector("#findBtn").addEventListener("click", e=>
         "findTel" : findTel.value
     }
 
-    fetch("member/findId", {
+    fetch("/member/findId", {
 
         method : "POST",
         headers : {"Content-Type":"application/json"},
@@ -16,6 +16,7 @@ const findBtn = document.querySelector("#findBtn").addEventListener("click", e=>
     })
     .then(resp => resp.text())
     .then(result=>{
+
         alert(result);
 
         window.close();

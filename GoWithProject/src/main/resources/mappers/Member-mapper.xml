@@ -112,7 +112,7 @@
 	<update id="resetPw">
 		UPDATE "MEMBER" SET
 		MEMBER_PW = #{newPw}
-		WHERE EMAIL = #{memberEmail}
+		WHERE MEMBER_EMAIL = #{memberEmail}
 		
 	</update>
 	
