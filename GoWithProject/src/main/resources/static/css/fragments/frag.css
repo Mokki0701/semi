@@ -5,6 +5,14 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'D2Coding';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/D2Coding.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 
 
 * {
@@ -36,17 +44,33 @@
   z-index: 1000;
 }
 
-/* 로그인 안되었을 때 id pw 찾기 버튼 */
-.signup-find-area a{
-  text-decoration: none;
-  
+.highestMessage {
 }
 
-.signup-find-area a :hover{
+/* 로그인 안되었을 때 id pw 찾기 버튼 */
+.signup-find-area > a{
+  text-decoration: none;
+  color: black;
+}
+.signup-find-area > a:hover{
   color: #F2CB05;
   cursor: pointer;
   transition: all 0.4s;
 }
+
+#findId:hover {
+  color: #F2CB05;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+
+#findPw:hover {
+  color: #F2CB05;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+
+
 .highest div {
   display: flex;
   align-items: center;
@@ -70,11 +94,29 @@
   align-items: center;
 }
 
+#logoBox{
+  text-decoration: none;
+  font-family: 'D2Coding';
+}
+
 #mainLogo {
-  background-color: black;
+  background-color: #7b99d4;
   height: 200px;
   width: 97.3vw;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  font-size: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 그림자 추가 */
+  letter-spacing: 2px; /* 글자 사이 간격 조정 */
+  text-transform: uppercase; /* 대문자 변환 */
+  font-weight: bold; /* 글꼴 굵기 설정 */
+  font-family: 'D2Coding'; /* 글꼴 변경 */
 }
+
+
 
 /* 기본 스타일 설정 */
 .header-menu {
@@ -88,6 +130,10 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease;
   transform: translateX(100%);
+}
+
+#headerToggle2 {
+  display: none;
 }
 
 #headerMenuToggle {
@@ -145,11 +191,12 @@ footer span {
 /* LLLLLLLLLLLLLLLL 레프터 시작 LLLLLLLLLLLLLLLLLLLLLLL */
 .side {
   border: 1px solid rgba(216, 153, 97, 0.3);
-  width: 15%;
+  width: 250px;
   margin: 5px;
   padding: 5px;
 
   height: 102.8%;
+  margin-left: 10px;
 }
 
 
@@ -260,6 +307,8 @@ footer span {
 
 #rememberId {
   user-select: none;
+
+  margin: 15px 0px;
 }
 
 .profileBox {
@@ -346,7 +395,12 @@ footer span {
 
 }
 
-.menuList * {
+.what > *{
+  margin-top: 10px;
+}
+
+.menuList > * {
+
   margin-left: 5px;
   display: flex;
   flex-direction: column;
