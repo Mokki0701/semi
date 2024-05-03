@@ -270,11 +270,22 @@ a.tagStyleOut:hover {
 
 }
 
+#tinyRoom > div:first-child {
+
+  margin-top: 20px;
+
+}
+
+
 .smallRoom {
   width: 49.5%;
 
   justify-content: center;
 
+}
+
+#mrList{
+  padding-left: 50px;
 }
 
 
