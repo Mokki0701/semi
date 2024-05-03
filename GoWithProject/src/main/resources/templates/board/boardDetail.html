@@ -28,7 +28,7 @@
                     <a th:href="@{/board/{topMenuCode}/{bottomMenuCode}(topMenuCode=${topMenuCode},bottomMenuCode=${bottomMenuCode})}"
                         th:text="|${bottomMenuName} 게시판으로 >|"></a>
     
-                    <h1> 게시글 제목 </h1>
+                    <h1 th:text="*{boardTitle}"> 게시글 제목 </h1>
     
                     <div class="list-wrapper">
                         <th:block th:if="${board.preBoardNo != null}">
