@@ -1,6 +1,7 @@
 package edu.kh.gowith.member.controller;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -212,5 +213,42 @@ public class MemberController {
 		// 로그인된 회원이 없으면 회원가입 페이지로 이동합니다.
 		return "member/join";
 	}
+	
+	
+	@PostMapping("findId")
+	@ResponseBody
+	public String findId(@RequestBody Map<String, String> map,
+			RedirectAttributes ra) {
+
+		return service.findId(map);
+	}
+	
+	
+	@PostMapping("findPw")
+	@ResponseBody
+	public int findPw(
+			@RequestBody String email
+			) {
+		String authKey = service.sendEmail("findPw", email);
+
+		if (authKey != null)
+			return 1;
+
+		return 0;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
