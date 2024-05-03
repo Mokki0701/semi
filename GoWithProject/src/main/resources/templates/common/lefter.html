@@ -34,8 +34,10 @@
 
             <article class="signup-find-area">
               <a href="/member/join">회원가입</a>
-              <!-- <span> / </span> -->
-              <!-- <a href="#">ID/PW 찾기</a> -->
+              <span> / </span>
+              <span id="findId">ID 찾기</span>
+              <span> / </span>
+              <span id="findPw"> PW 찾기 </span>
             </article>
 
           </form>
@@ -114,6 +116,12 @@
     <!-- 각 링크 클릭 시 해당 게시판으로 이동하기 -->
     <div>
 
+      <div class="menuList">
+        <div class="linkList">전체 글 보기</div>
+      </div>
+      <br>
+      <hr>
+
       <div class="menuList ">
         <div class="linkList">
           <div class="contextHead">동행 구해요</div>
@@ -150,3 +158,19 @@
   </div>
 
 </div>
+
+<script th:inline="javascript">
+  const message =  /*[[${message}]]*/ "전달 받은 message";
+  if(message != null) alert(message);
+
+  const findId = document.querySelector("#findId");
+  const findPw = document.querySelector("#findPw");
+
+  if(findId != null ){
+    findPw.addEventListener("click", e=> {
+      window.open("findPw.html", "_blank", "popup");
+      return;
+    });
+  }
+
+</script>
