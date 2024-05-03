@@ -56,7 +56,9 @@
               </a>
             </div>
 
-            <img th:src="${session.loginMember.profileImg}" id="profileImage" alt="프로필">
+            <img th:with="user=#{user.default.image}" th:src="${session.loginMember.profileImg ?: user }"
+               alt="프로필 이미지" id="profileImage" >
+
             <tr class="loginMemberInfo">
               <th >E-mail</th>
               <td th:text="${session.loginMember.memberEmail}">현재 로그인한 회원 이메일</td>

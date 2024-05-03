@@ -136,7 +136,7 @@ public class MemberController {
 	// 회원가입
 	@PostMapping("join")
 	public String signUp(Member inputMember, @RequestParam("memberAddress") String[] memberAddress,
-			RedirectAttributes ra) {
+			RedirectAttributes ra, Model model) {
 
 		int result = service.signup(inputMember, memberAddress);
 		String path = null;
