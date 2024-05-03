@@ -87,6 +87,7 @@ for(let i=0; i< inputImageList.length; i++){
 
 /**유효성 검사 -------------------------------------------- */
 const form = document.querySelector("#boardFrm");
+const topMenu = document.querySelector("#topMenu");
 
 form.addEventListener("submit",e=>{
 
@@ -105,12 +106,17 @@ form.addEventListener("submit",e=>{
     e.preventDefault();
     return;
   }
+
+  if(topMenu.value === "선택"){
+    alert('옵션의 게시글을 선택해주세요.');
+    e.preventDefault(); 
+  }
 })
 
 // select 태그 게시판에 맞춰 보이게 하기 ---------------------------------------------------------
 
 
-const topMenu = document.querySelector("#topMenu");
+
 const bottomMenu2 = document.querySelector("#bottomMenu2");
 
 // bottomMenu.disabled = true;
