@@ -11,6 +11,7 @@
 		AND MEMBER_DEL_FL = 'N'
 	</select>
 	
+	<!-- 일반 로그인 -->
 	<select id="loginMember2">
 		SELECT M.* , (
 						SELECT COUNT(BL.MEMBER_NO)

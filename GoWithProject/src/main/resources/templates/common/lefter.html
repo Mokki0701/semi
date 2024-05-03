@@ -66,8 +66,12 @@
               <td th:text="${session.loginMember.enrollDate}">가입일</td>
             </tr>
             <tr class="loginMemberInfo">
-              <th>Like</th>
+              <th>LikePlace</th>
               <td th:text="${session.loginMember.favorPlace}">선호여행지</td>
+            </tr>
+            <tr class="loginMemberInfo">
+              <td>MyLike</td>
+              <td th:text="${session.loginMember.memberLikeCount}"></td>
             </tr>
 
           </table>

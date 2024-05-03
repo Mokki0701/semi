@@ -100,9 +100,9 @@ public class MemberController {
 
 		if (loginMember != null) { // 로그인 성공
 			int postCounter = service.postCounter(loginMember.getMemberNo());
-			model.addAttribute("loginMember", loginMember);
 			int postCounter2 = service.postCounter(loginMember.getMemberNo());
 			int commentCounter = service.commentCounter(loginMember.getMemberNo());
+			int memberLikeCount = service.memberLikeCount(loginMember.getMemberNo());
 
 			// 아이디 저장용 쿠키
 			Cookie cookie = new Cookie("saveId", loginMember.getMemberEmail());
@@ -116,6 +116,9 @@ public class MemberController {
 
 			resp.addCookie(cookie);
 
+			System.out.println("로그인 멤버 :" + loginMember.getMemberLikeCount());
+			
+			model.addAttribute("loginMember", loginMember);
 			model.addAttribute("postCounter", postCounter2);
 			model.addAttribute("commentCounter", commentCounter);
 		}
