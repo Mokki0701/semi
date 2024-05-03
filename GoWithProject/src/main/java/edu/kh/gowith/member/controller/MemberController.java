@@ -214,6 +214,12 @@ public class MemberController {
 		return "member/join";
 	}
 	
+	@GetMapping("findId")
+	public String findId() {
+		
+		return "findIDPW/findId";
+	}
+	
 	
 	@PostMapping("findId")
 	@ResponseBody
@@ -223,19 +229,13 @@ public class MemberController {
 		return service.findId(map);
 	}
 	
-	
-	@PostMapping("findPw")
-	@ResponseBody
-	public int findPw(
-			@RequestBody String email
-			) {
-		String authKey = service.sendEmail("findPw", email);
-
-		if (authKey != null)
-			return 1;
-
-		return 0;
+	@GetMapping("findPw")
+	public String findPw() {
+		
+		return "findIDPW/findPw";
 	}
+	
+	
 	
 	@PostMapping("resetPw")
 	@ResponseBody

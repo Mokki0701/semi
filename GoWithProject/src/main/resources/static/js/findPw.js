@@ -41,10 +41,10 @@ checkAuthKeyBtn.addEventListener("click", e=>{
     // 이거 fetch 비동기로 보낼때 param값으로 authKey말고도 이메일도 보내야 되겠네
     const param = {
         "authKey" : authKey.value,
-        "memberEmail" : findEmail.value
+        "email" : findEmail.value
     }
 
-    fetch("/member/matchAuthKey",{
+    fetch("/member/checkAuthKey",{
         method : "POST",
         headers : {"Content-Type":"application/json"},
         body : JSON.stringify(param)
@@ -52,11 +52,14 @@ checkAuthKeyBtn.addEventListener("click", e=>{
     .then(resp => resp.text())
     .then(result => {
         if(result > 0){
+
+            alert("인증 성공!!");
             
             const div = document.createElement("div");
 
             const input = document.createElement("input");
             const button = document.createElement("button");
+            button.innerText = "비밀번호 재설정";
 
             div.appendChild(input);
             div.appendChild(button);
@@ -65,12 +68,15 @@ checkAuthKeyBtn.addEventListener("click", e=>{
 
             button.addEventListener("click", e=>{
 
+                console.log(findEmail.value);
+                console.log(input.value);
+
                 const param = {
                     "memberEmail" : findEmail.value,
                     "password" : input.value
                 }
 
-                fetch("member/resetPw",{
+                fetch("/member/resetPw",{
 
                     method : "POST",
                     headers : {"Content-Type":"application/json"},
