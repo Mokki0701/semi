@@ -81,9 +81,9 @@
           <option value="">선택</option>
           <option th:each="bottomMenu : ${bottomMenuList}" th:value="${bottomMenu.bottomMenuCode}" th:text="${bottomMenu.bottomMenuName}" th:selected="${bottomMenu.bottomMenuCode} == ${bottomMenuCode} "></option>
         </select>
-
+        
       <div>
-        <textarea name="boardContent" cols="30" rows="10"></textarea>
+        <textarea placeholder="해시태그를 입력하면 해당 키워드로 자동 등록됩니다. #태그" name="boardContent" cols="30" rows="10"></textarea>
       </div>
 
       <!-- 버튼 영역 -->

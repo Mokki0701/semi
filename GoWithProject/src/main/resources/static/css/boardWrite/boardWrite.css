@@ -73,6 +73,7 @@
   height: 400px;
   resize: none;
   outline: none;
+  padding: 10px;
 }
 
 .boardWrite select{
