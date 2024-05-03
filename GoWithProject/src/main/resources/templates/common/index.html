@@ -28,13 +28,13 @@
     <div class="main">
 
       <!-- 임시계정 로그인 버튼 -->
-      <p>임시계정은 홈로그인 불가(암호화), 버튼으로만 가능</p>
+      <!-- <p>임시계정은 홈로그인 불가(암호화), 버튼으로만 가능</p>
       <div>
         <button class="quickLogin">temp00@naver.com</button>
         <button class="quickLogin">temp01@naver.com</button>
         <button class="quickLogin">temp02@naver.com</button>
         <button class="quickLogin">level999@naver.com</button>
-      </div>
+      </div> -->
 
       <div class="room" id="room1">
 
@@ -76,7 +76,7 @@
               ${board.bottomMenuCode} + '/' + ${board.boardNo}}">
               <div class="thumbNailBox">
                 <img class="thumbNail" 
-                th:src="${board.imgRename != null} ? @{${board.imgRename}} : '/imgFolder3/noImg.png'" 
+                th:src="${board.imgRename != null} ? @{${board.imgRename}} : '/images/noImg.png'" 
                 alt="이미지가 없습니다.">
               </div> 
               </a>
