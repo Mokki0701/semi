@@ -39,6 +39,8 @@ public interface MemberService {
 	// 닉네임 체크
 	int checkNickname(String memberNickname);
 
+	String findId(Map<String, String> map);
+
 	
 
 	

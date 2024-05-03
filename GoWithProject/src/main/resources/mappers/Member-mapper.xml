@@ -101,5 +101,18 @@
 	</select>
 	
 	<!-- ↑ 이메일 인증번호 ↑ -->
+	
+	<select id="fidId" resultType="string">
+		SELECT MEMBER_EMAIL
+		FROM "MEMBER"
+		WHERE MEMBER_NICKNAME = #{findNickname}
+		AND MEMBER_TEL = #{findTel}
+	</select>
+	
+	
+	
+	
+	
+	
 
 </mapper>

@@ -41,6 +41,9 @@ public interface MemberMapper {
 	// 닉네임 중복체크
 	int checkNickname(String memberNickname);
 
+	// 아이디 찾기
+	String fidId(Map<String, String> map);
+
 	
 	
 }

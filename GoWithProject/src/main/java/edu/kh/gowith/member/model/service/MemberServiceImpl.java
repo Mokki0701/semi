@@ -231,5 +231,29 @@ public class MemberServiceImpl implements MemberService {
 		
 		return mapper.checkNickname(memberNickname);
 	}
+	
+	
+	@Override
+	public String findId(Map<String, String> map) {
+		String email = mapper.fidId(map);
+		
+		if(email == null) {
+			return null;
+		}
+		
+		return email;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
