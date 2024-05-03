@@ -47,6 +47,10 @@ public interface MemberMapper {
 	// 비밀번호 찾기
 	int resetPw(Map<String, String> paramMap);
 
+	int getMemberNo(String memberEmail);
+
+	Member loginMember2(Member member);
+
 	
 	
 }

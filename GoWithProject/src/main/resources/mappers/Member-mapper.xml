@@ -4,13 +4,21 @@
 	namespace="edu.kh.gowith.member.model.mapper.MemberMapper">
 
 	<select id="loginMember">
-		SELECT * , (
+		SELECT *
+		FROM "MEMBER" 
+		WHERE MEMBER_EMAIL =
+		#{memberEmail}
+		AND MEMBER_DEL_FL = 'N'
+	</select>
+	
+	<select id="loginMember2">
+		SELECT M.* , (
 						SELECT COUNT(BL.MEMBER_NO)
 						FROM "MEMBER" M
 						LEFT JOIN BOARD_LIKE BL ON M.MEMBER_NO = BL.MEMBER_NO
-						WHERE M.MEMBER_NO = 1
+						WHERE M.MEMBER_NO = #{memberNo}
 					) MEMBER_LIKE_COUNT
-		FROM "MEMBER"
+		FROM "MEMBER" M
 		WHERE MEMBER_EMAIL =
 		#{memberEmail}
 		AND MEMBER_DEL_FL = 'N'
@@ -121,6 +129,12 @@
 		WHERE MEMBER_EMAIL = #{memberEmail}
 		
 	</update>
+	
+	<select id="getMemberNo">
+		SELECT MEMBER_NO
+		FROM "MEMBER"
+		WHERE MEMBER_EMAIL = #{memberEmail}
+	</select>
 	
 	
 	
