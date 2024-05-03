@@ -37,16 +37,29 @@
 }
 
 /* 로그인 안되었을 때 id pw 찾기 버튼 */
-.signup-find-area a{
+.signup-find-area > a{
   text-decoration: none;
-  
+  color: black;
 }
-
-.signup-find-area a :hover{
+.signup-find-area > a:hover{
   color: #F2CB05;
   cursor: pointer;
   transition: all 0.4s;
 }
+
+#findId:hover {
+  color: #F2CB05;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+
+#findPw:hover {
+  color: #F2CB05;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+
+
 .highest div {
   display: flex;
   align-items: center;
@@ -260,6 +273,8 @@ footer span {
 
 #rememberId {
   user-select: none;
+
+  margin: 15px 0px;
 }
 
 .profileBox {
