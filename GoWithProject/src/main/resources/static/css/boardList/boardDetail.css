@@ -1,6 +1,13 @@
 *{
   box-sizing: border-box;
-  border: 1px dotted violet;
+}
+
+.board-wrapper{
+  display: flex;
+}
+
+.boardDetail-wrapper{
+  margin-left: 30px;
 }
 
 .temp{
