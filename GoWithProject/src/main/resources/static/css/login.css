@@ -172,7 +172,12 @@ main .logo-area {
   display: flex;
 
   background-color: gray;
+
+  margin-bottom: 200px;
   
   border-radius: 25px;
+
+  text-decoration: none;
+  cursor: pointer;
 }
 

@@ -3,10 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/fragments/frag.css">
     <link rel="stylesheet" href="/css/boardList/boardList.css">
     <title>게시판 목록 조회</title>
 </head>
 <body>
+    <th:block th:replace="~{/common/header}">헤더</th:block>
+
+    <div class="all">
+        <th:block th:replace="~{common/lefter}">사이드메뉴</th:block>
+
+    
 
     <!-- 지금 하위 메뉴 가 request scope로 왔다는 가정 -->
     <!-- 근데 BOARD_NOTIFICATION 이 'Y' 인건 로 보낸 리스트와 'N' 인 리스트를 따로 보내야함 -->
@@ -254,7 +261,9 @@
             </form>
         </section>
     </main>
+</div>
 
+    <th:block th:replace="~{/common/footer}" class="footer">푸터</th:block>
     <script th:inline="javascript">
 
         const loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원 이메일";

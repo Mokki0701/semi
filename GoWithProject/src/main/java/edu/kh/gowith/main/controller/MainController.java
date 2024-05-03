@@ -28,7 +28,7 @@ public class MainController {
 
 	private final MainService service;
 
-	@RequestMapping("") // "/" 요청 매핑, 모든 메서드 요청 받아내기(get post 구분 x)
+	@RequestMapping("")
 	public String mainPage(Model model) {
 		
 		// 공지사항 조회
