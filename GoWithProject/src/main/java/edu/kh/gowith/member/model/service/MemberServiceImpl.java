@@ -244,7 +244,15 @@ public class MemberServiceImpl implements MemberService {
 		return email;
 	}
 	
-	
+	@Override
+	public int resetPw(Map<String, String> paramMap) {
+		
+		String pw = bcrypt.encode(paramMap.get("password"));
+		
+		paramMap.put("newPw", pw);
+		
+		return mapper.resetPw(paramMap);
+	}
 	
 	
 	
