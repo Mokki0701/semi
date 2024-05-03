@@ -109,6 +109,12 @@
 		AND MEMBER_TEL = #{findTel}
 	</select>
 	
+	<update id="resetPw">
+		UPDATE "MEMBER" SET
+		MEMBER_PW = #{newPw}
+		WHERE EMAIL = #{memberEmail}
+		
+	</update>
 	
 	
 	

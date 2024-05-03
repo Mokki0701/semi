@@ -2,6 +2,7 @@ const findEmail = document.querySelector("#findEmail");
 const sendAuthKeyBtn = document.querySelector("#sendAuthKeyBtn");
 const authKey = document.querySelector("#authKey");
 const checkAuthKeyBtn = document.querySelector("#checkAuthKeyBtn");
+const resetPw = document.querySelector("#resetPw");
 
 let checkAuthKey = false;
 
@@ -10,7 +11,7 @@ sendAuthKeyBtn.addEventListener("click", ()=>{
 
     checkAuthKey = false;
 
-    fetch("/member/findPw",{
+    fetch("/member/authMailSend",{
         method : "POST",
         headers : {"Content-Type":"application/json"},
         body : findEmail.value
@@ -51,8 +52,51 @@ checkAuthKeyBtn.addEventListener("click", e=>{
     .then(resp => resp.text())
     .then(result => {
         if(result > 0){
-            alert("인증 성공!!!");
-            checkAuthKey = true;
+            
+            const div = document.createElement("div");
+
+            const input = document.createElement("input");
+            const button = document.createElement("button");
+
+            div.appendChild(input);
+            div.appendChild(button);
+
+            resetPw.appendChild(div);
+
+            button.addEventListener("click", e=>{
+
+                const param = {
+                    "memberEmail" : findEmail.value,
+                    "password" : input.value
+                }
+
+                fetch("member/resetPw",{
+
+                    method : "POST",
+                    headers : {"Content-Type":"application/json"},
+                    body : JSON.stringify(param)
+
+                })
+                .then(resp=> resp.text())
+                .then(result=>{
+
+                    if(result > 0){
+                        alert("비밀번호 재설정 성공!!!");
+                        window.close();
+                    }
+                    else{
+                        alert("비밀번호 재설정 실패...");
+                        window.close();
+                    }
+
+
+                })
+
+            })
+
+
+
+
             return;
         }
         alert("인증 실패...");
@@ -63,22 +107,7 @@ checkAuthKeyBtn.addEventListener("click", e=>{
 
 // ------------------------------------------------------------------------------------------------------
 
-// 인증 성공하면 checkAuthKey 버튼 true인지 체크하고 true면 팝업 창 닫고, 비밀번호 재설정 칸으로 가기
 
-const searchPw = document.querySelector("#searchPw");
-
-searchPw.addEventListener("click", e=>{
-
-    if(checkAuthKey == true){
-
-        location.href = `member/resetPw?memberEmail` + findEmail.value; // 이거 동기로 Post로 어떻게 보냈지?
-
-        // 기존 팝업창은 끄고 싶은데
-    }
-
-    checkAuthKey = false;
-
-})
 
 
 
