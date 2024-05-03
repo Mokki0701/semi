@@ -8,6 +8,16 @@
 
 body{
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main{
+  display: flex;
+  justify-content: center;
+
+  margin-top: 50px;
+  margin-left: 50px;
 }
 
 

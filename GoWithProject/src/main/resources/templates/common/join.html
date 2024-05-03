@@ -14,10 +14,10 @@
 <th:block th:if="@{session.loginMember != null}">
   
 </th:block>
-
+  <th:block th:replace="~{/common/header}">헤더</th:block>
   <main>
  <!-- 테스트용 사이더 추가 추후 삭제 예정 -->
- <th:block th:replace="~{common/lefter}">사이드메뉴</th:block>
+ <!-- <th:block th:replace="~{common/lefter}">사이드메뉴</th:block> -->
  <!-- 테스트용 사이더 추가 추후 삭제 예정 -->
     
 

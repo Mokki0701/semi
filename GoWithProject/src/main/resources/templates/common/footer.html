@@ -11,3 +11,9 @@
     <a href="#">고객센터</a>
   </article>
 </footer>
+
+<script th:inline="javascript">
+  const message =  /*[[${message}]]*/ "전달 받은 message";
+
+  if (message != null) alert(message);
+</script>

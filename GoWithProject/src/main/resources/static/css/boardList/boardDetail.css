@@ -1,5 +1,10 @@
 *{
   box-sizing: border-box;
+  border: 1px dotted violet;
+}
+
+.temp{
+  display: inline-block;
 }
 
 .detail-wrapper{

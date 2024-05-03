@@ -25,7 +25,7 @@
 
     <!-- 홈 메뉴 -->
     <!-- 리스트 자동 생성 (몇개까지 할 것인지?) -->
-    <div>
+    <div class="main">
 
       <!-- 임시계정 로그인 버튼 -->
       <p>임시계정은 홈로그인 불가(암호화), 버튼으로만 가능</p>
@@ -39,68 +39,65 @@
       <div class="room" id="room1">
 
         <div class="smallRoom">
-          <div class="mainTitle">공지사항
-          </div>
+          <div class="mainTitle">공지사항</div>
 
           <!-- 공지사항 표시란 -->
-          <table class="repeatTable">
-            <thead class="tableTitleArea">
-              <th class="title">제목</th>
-              <th>작성자</th>
-              <th class="writeDate">작성일</th>
-              <th>조회수</th>
-            </thead>
-
-            <tbody th:each="board:${notification}" >
-              <td class="textCenter" >
-                <a class="tagStyleOut" th:href="@{'/board/' + ${board.topMenuCode} + '/' + 
-                ${board.bottomMenuCode} + '/' + ${board.boardNo}}">
-                  <span  th:text="${board.boardTitle}"></span></a>
-              </td>
-              <td class="textCenter" th:text="${board.memberNickname}"></td>
-              <td class="textCenter" th:text="${board.boardWriteDate}"> </td>
-              <td class="textCenter" th:text="${board.readCount}"></td>
-            </tbody>
-          </table>
-
-
-
-
-          <!-- 공지사항 끝 -->
-        </div>
-
-        <div class="smallRoom">
-          <div>
-            <a href="#" class="smallRoom mainTitle">전체글(6개 조회)</a>
-          </div> <br>
-
-          <div th:each="board : ${listWithThumbnail}" class="thumbNailPost">
-            <a class="thumbNailContainer" th:href="@{'/board/' + ${board.topMenuCode} + '/' + 
-            ${board.bottomMenuCode} + '/' + ${board.boardNo}}">
-            <img class="thumbNail" 
-            th:src="${board.imgRename != null} ? @{${board.imgRename}} : '/imgFolder3/noImg.png'" 
-            alt="썸네일 이미지">
-            </a>
-            <table>
-              <tr>
-                <td>제목</td>
-                <td><a th:href="@{'/board/' + ${board.topMenuCode} + '/' + 
+          <div class="why">
+            <table class="repeatTable">
+              <thead class="tableTitleArea">
+                <th class="title">제목</th>
+                <th>작성자</th>
+                <th class="writeDate">작성일</th>
+                <th>조회수</th>
+              </thead>
+  
+              <tbody th:each="board:${notification}" class="repeatContent">
+                <td class="textCenter mb10px" >
+                  <a class="tagStyleOut" th:href="@{'/board/' + ${board.topMenuCode} + '/' + 
                   ${board.bottomMenuCode} + '/' + ${board.boardNo}}">
-                    <span class="tpTitle maxTextLength8" th:text="${board.boardTitle}">최대8글자</span>
-                  </a></td>
-              </tr>
-              <tr>
-                <td>작성자</td>
-                <td class="tbWriter" th:text="${board.memberNickname}">작성자</td>
-              </tr>
-              <tr>
-                <td>작성일</td>
-                <td class="tbWriteDay" th:text="${board.boardWriteDate}">작성일</td>
-              </tr>
+                    <span  th:text="${board.boardTitle}"></span></a>
+                </td>
+                <td class="textCenter" th:text="${board.memberNickname}"></td>
+                <td class="textCenter" th:text="${board.boardWriteDate}"> </td>
+                <td class="textCenter" th:text="${board.readCount}"></td>
+              </tbody>
             </table>
-            <span></span>
           </div>
 
+        </div>
+
+        <!-- 공지사항 끝 -->
+
+        <div class="smallRoom">
+          <div class="mainTitle">최신 게시글</div> <br>
+
+            <div th:each="board : ${listWithThumbnail}" class="thumbNailPost">
+              <a class="thumbNailContainer" th:href="@{'/board/' + ${board.topMenuCode} + '/' + 
+              ${board.bottomMenuCode} + '/' + ${board.boardNo}}">
+              <div class="thumbNailBox">
+                <img class="thumbNail" 
+                th:src="${board.imgRename != null} ? @{${board.imgRename}} : '/imgFolder3/noImg.png'" 
+                alt="이미지가 없습니다.">
+              </div> 
+              </a>
+              <table>
+                <tr>
+                  <td>제목</td>
+                  <td><a th:href="@{'/board/' + ${board.topMenuCode} + '/' + 
+                    ${board.bottomMenuCode} + '/' + ${board.boardNo}}">
+                      <span class="tpTitle maxTextLength8" th:text="${board.boardTitle}">최대8글자</span>
+                    </a></td>
+                </tr>
+                <tr>
+                  <td>작성자</td>
+                  <td class="tbWriter maxTextLength8" th:text="${board.memberNickname}">작성자</td>
+                </tr>
+                <tr>
+                  <td>작성일</td>
+                  <td class="tbWriteDay" th:text="${board.boardWriteDate}">작성일</td>
+                </tr>
+              </table>
+          </div>
 
         </div>
 
@@ -126,17 +123,19 @@
           <label for="commentBtn" id="commentLabel" class="btnCommon popWriteBtn">댓글 Top</label>
         </div>
 
-        <table class="repeatTable">
-          <thead class="tableTitleArea">
-            <th class="title">제목</th>
-            <th>작성자</th>
-            <th class="writeDate">작성일</th>
-            <th>조회수</th>
-          </thead>
-
-          <tbody id="PbList">
-          </tbody>
-        </table>
+        <div class="why">
+          <table class="repeatTable">
+            <thead class="tableTitleArea">
+              <th class="title">제목</th>
+              <th>작성자</th>
+              <th class="writeDate">작성일</th>
+              <th>조회수</th>
+            </thead>
+  
+            <tbody class="repeatContent" id="PbList">
+            </tbody>
+          </table>
+        </div>
 
       </div>
 
@@ -152,7 +151,7 @@
 
             <div class="tinyRoom">
               <div>최근 댓글, 답글</div>
-              <div>
+              <div id="recentCommentContainer">
                 <ul id="commentList">
                   <!-- 첫 번째 페이지에 대한 데이터만 표시 -->
                   <li class="maxTextLength8" th:each="comment, iterStat : ${commentList}"
@@ -212,11 +211,7 @@
 </body>
 
 
-<script th:inline="javascript">
-  const message =  /*[[${message}]]*/ "전달 받은 message";
 
-  if (message != null) alert(message);
-</script>
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

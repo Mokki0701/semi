@@ -6,7 +6,6 @@
 
 
 
-
 /* ↓ 메인페이지에서 사용합니다 ↓ */
 
 // 빠른 로그인
@@ -283,18 +282,24 @@ rankBtns.forEach(btn => {
 
 // 색깔변경
 // 인기글 클릭시 버튼 색 변경
-const memLabels = document.querySelectorAll(".rankBtn label");
+const memLabels = document.querySelectorAll(".memRank");
 
 memLabels.forEach(label => {
   label.addEventListener("click", () => {
-    // label이 클릭되면 다른 label들의 checkedBtn 클래스 제거
+    // 다른 버튼들의 클래스에서 textRed를 지우기
     memLabels.forEach(otherLabel => {
-      otherLabel.classList.remove('textRed');
-      otherLabel.classList.add('textRed')
+      if (otherLabel !== label) {
+        otherLabel.nextElementSibling.classList.remove("textRed"); // 다음 형제 요소에 클래스를 적용
+      }
     });
-    label.classList.add('textRed');
+
+    // 클릭된 버튼의 클래스에 textRed를 추가하기
+    label.nextElementSibling.classList.add("textRed"); // 다음 형제 요소에 클래스를 적용
   });
 });
+
+
+
 
 // 최대 글자 수 8자로 제한
 const maxTextLength8Elements = document.querySelectorAll(".maxTextLength8");

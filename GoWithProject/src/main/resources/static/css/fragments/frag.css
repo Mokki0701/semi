@@ -5,12 +5,15 @@
   font-style: normal;
 }
 
+
+
 * {
   /* border: 1px dotted orchid; */
   font-family: Freesentation-9Black;
   font-weight: 200;
-}
 
+
+}
 
 
 /* HHHHHHHHHHHHHHHHHHHHHHHH 헤더 시작 HHHHHHHHHHHHHHHHHHHHHHHH */
@@ -76,14 +79,14 @@
   transform: translateX(100%);
 }
 
-#headerMenuToggle{
+#headerMenuToggle {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 }
 
 /* 체크박스가 체크되었을 때, 헤더 메뉴를 화면으로 이동 */
-#headerMenuToggle:checked + .header-menu {
+#headerMenuToggle:checked+.header-menu {
   transform: translateX(0);
 }
 
@@ -130,12 +133,12 @@ footer span {
 
 /* LLLLLLLLLLLLLLLL 레프터 시작 LLLLLLLLLLLLLLLLLLLLLLL */
 .side {
-  border: 1px solid black;
+  border: 1px solid rgba(216, 153, 97, 0.3);
   width: 15%;
   margin: 5px;
   padding: 5px;
 
-  height: 103.5%;
+  height: 102.8%;
 }
 
 
@@ -149,11 +152,23 @@ footer span {
 .info {
   display: flex;
   justify-content: center;
+  margin: 20px 0px;
+
+  
 }
 
 .infoChild {
   width: 80%;
-  height: 30px;
+  height: 50px;
+  font-size: 20px;
+
+  background-color: rgba(126, 0, 0, 0.3);
+
+  border-radius: 10px;
+}
+
+.infoChild:hover{
+  box-shadow: 0 0 10px 0 rgba(216, 153, 97, 0.3) inset, 0 0 10px 4px rgba(80, 56, 35, 0.658);
 }
 
 
@@ -263,7 +278,7 @@ footer span {
   border-bottom: 1px solid black;
 }
 
-.loginMemberInfo > *{
+.loginMemberInfo>* {
   border-bottom: 1px solid black;
 }
 
@@ -293,19 +308,31 @@ footer span {
   justify-content: center;
   align-items: center;
 
-  font-size: 25px;
+  font-size: 20px;
 
   text-decoration: none;
 
   margin: 5px auto;
 }
 
+.logoutBtn {
+  border-color: rgba(80, 56, 35, 0.658);
+  color: #fff;
+  box-shadow: 0 0 40px 40px rgba(216, 153, 97, 0.3) inset, 0 0 0 0 #da1b54;
+  transition: all 150ms ease-in-out;
+}
+
+.logoutBtn:hover {
+  box-shadow: 0 0 10px 0 rgba(216, 153, 97, 0.3) inset, 0 0 10px 4px rgba(126, 0, 0, 0.3);
+}
 
 
 
 .contextHead {
+  margin-top: 10px;
   margin-left: 5px;
   font-size: 25px;
+
 }
 
 .menuList * {
@@ -314,13 +341,19 @@ footer span {
   flex-direction: column;
 }
 
-.linkList{
-width: 80%;
-margin-left: 30px;
+.linkList {
+
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 90%;
+  margin: auto;
 
   display: flex;
   flex-direction: column;
-  background-color: rgba(216, 153, 97, 0.3)
+  background-color: rgba(216, 153, 97, 0.3);
+  border-radius: 10px;
+
+  
 }
 
 
@@ -346,35 +379,35 @@ margin-left: 30px;
   transition: all 0.4s;
 } */
 
-.linkList .china:hover{
+.linkList .china:hover {
   border-right: 50px solid gold;
   color: orange;
   background-color: red;
   transition: all 0.4s;
 }
 
-.linkList .japan:hover{
+.linkList .japan:hover {
   border-right: 50px solid red;
   color: red;
   background-color: white;
   transition: all 0.4s;
 }
 
-.linkList .esa:hover{
+.linkList .esa:hover {
   border-right: 50px solid rgb(60, 60, 238);
   color: rgb(235, 191, 110);
   background-color: rgb(146, 1, 1);
   transition: all 0.4s;
 }
 
-.linkList .eu:hover{
+.linkList .eu:hover {
   border-right: 50px solid #03318C;
   color: #F2CB05;
   background-color: #0A7ABF;
   transition: all 0.4s;
 }
 
-.linkList .etc:hover{
+.linkList .etc:hover {
   border-right: 50px solid #0528F2;
   color: #6E65A6;
   background-color: #D98FB1;
