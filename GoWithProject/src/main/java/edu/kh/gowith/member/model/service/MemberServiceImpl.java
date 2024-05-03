@@ -106,6 +106,8 @@ public class MemberServiceImpl implements MemberService {
 
 		return mapper.favorBoard(memberNo);
 	}
+	
+	
 
 	// 회원가입
 	@Override
@@ -259,7 +261,11 @@ public class MemberServiceImpl implements MemberService {
 	
 	
 	
-	
+	@Override
+	public int memberLikeCount(int memberNo) {
+		
+		return 0;
+	}
 	
 	
 	

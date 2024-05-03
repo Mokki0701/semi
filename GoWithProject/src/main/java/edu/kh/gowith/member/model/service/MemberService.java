@@ -18,6 +18,9 @@ public interface MemberService {
 	// 댓글 수
 	int commentCounter(int memberNo);
 	
+	// 좋아요 누른 갯수
+	int memberLikeCount(int memberNo);
+	
 	// 빠른 로그인
 	Member quickLogin(String memberEmail);
 
@@ -42,6 +45,9 @@ public interface MemberService {
 	String findId(Map<String, String> map);
 
 	int resetPw(Map<String,String> paramMap);
+
+	
+
 
 	
 
