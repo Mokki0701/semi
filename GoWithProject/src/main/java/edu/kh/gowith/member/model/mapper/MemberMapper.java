@@ -44,6 +44,9 @@ public interface MemberMapper {
 	// 아이디 찾기
 	String fidId(Map<String, String> map);
 
+	// 비밀번호 찾기
+	int resetPw(Map<String, String> paramMap);
+
 	
 	
 }

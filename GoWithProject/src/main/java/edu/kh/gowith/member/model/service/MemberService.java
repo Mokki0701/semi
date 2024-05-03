@@ -41,6 +41,8 @@ public interface MemberService {
 
 	String findId(Map<String, String> map);
 
+	int resetPw(Map<String,String> paramMap);
+
 	
 
 	

@@ -237,6 +237,15 @@ public class MemberController {
 		return 0;
 	}
 	
+	@PostMapping("resetPw")
+	@ResponseBody
+	public int resetPw(
+			@RequestBody Map<String, String> paramMap
+			) {
+		
+		return service.resetPw(paramMap);
+	}
+	
 	
 	
 	
