@@ -175,14 +175,21 @@
 
   if(findId != null ){
     findId.addEventListener("click", e=> {
-      window.open("/member/findId", "_blank", "popup");
+      
+      const width = 600;
+      const height = 400;
+
+      window.open("/member/findId", "_blank", `width=${width}, height=${height}`);
       return;
     });
   }
 
   if(findPw != null ){
     findPw.addEventListener("click", e=> {
-      window.open("/member/findPw", "_blank", "popup");
+      const width = 600;
+      const height = 400;
+
+      window.open("/member/findPw", "_blank", `width=${width}, height=${height}`);
       return;
     });
   }
